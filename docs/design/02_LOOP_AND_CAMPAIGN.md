@@ -1,6 +1,7 @@
 # 02 — GAMEPLAY LOOPS, EMOTIONAL RHYTHM, AND CAMPAIGN STRUCTURE
 
 **Status:** LOCKED at structural level. Numeric tuning values are placeholders for the systems stage; structure and phase names are canon.
+**Prompt-2 note (D-040):** the loop and time system are now specified in detail in **11** (loop hierarchy, time rules, resource cadence, work orders) and **12** (phase/session flow); the first session in **13**; the seven-day plan and its executable evidence in **14/15**. Phases carry plain-language labels in UI ("DAY SHIFT — Swelter" etc.); durations cited here are superseded by 12 §2's model-validated table. This document remains the structural canon for the campaign loop, emotional rhythm, and acts.
 
 ---
 

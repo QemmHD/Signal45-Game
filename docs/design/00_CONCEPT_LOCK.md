@@ -50,7 +50,7 @@ The station's one salvaged receiver has limited **listening capacity** each nigh
 
 This is not story garnish; it drives ordinary play:
 
-- **Unmonitored weather** means cinderfall storms arrive with short or no warning, endangering nightruns and forcing emergency seals.
+- **Unmonitored weather** means cinderfall storms arrive with *short warning only* — every storm carries a free, diegetic telegraph (ash ticking in the intake, pressure-drop audio) roughly one phase before landfall, enough to seal but not to pre-stage repairs or reschedule a nightrun. A monitored storm band buys the days-ahead forecast that makes preparation cheap and nightruns safe. (Two-tier warning canon: decision D-022.)
 - **Intel unlocks and mutates expedition maps** — a monitored trader frequency reveals a cache location; ignored distress calls resolve without you, and you may meet the consequences later at your gate.
 - **Signal 45 verification is cumulative** — each act of the campaign, invested listening converts rumor into checkable fact, and the endings you can *knowingly* choose depend on what you actually verified.
 - **People petition for radio time** — granting or refusing a survivor's personal signal is a relationship decision with delayed consequences.
@@ -65,12 +65,12 @@ Players who enjoy thoughtful survival management and character-driven consequenc
 
 - **Primary:** iOS and Android, landscape orientation, touch-first.
 - **Secondary (deferred):** PC after mobile ships; mobile interaction remains the design constraint.
-- **Session:** a complete, useful 5–12 minute session (one to two day-phases plus decisions); optional 3–6 minute active nightrun. Safe stopping points at every phase boundary. Time advances only during play — absence is never punished.
-- **Campaign:** 35–50 in-game days for the full game; the vertical slice is a complete 7-day mini-campaign ("The First Count").
+- **Session:** a complete, useful 5–12 minute session (one to two day-phases plus decisions); optional 3–6 minute active nightrun. A typical day with a delegated run fits ~12 minutes; an active-run day may reach ~16. Safe stopping points at every phase boundary. Time advances only during play — absence is never punished.
+- **Campaign:** approximately 45 in-game days nominal, with the finale window at Days 40–50 (within the 35–50 input target; the act structure and the Signal 45 fiction anchor to ~45 — decision D-029). The vertical slice is a complete 7-day mini-campaign ("The First Count").
 
 ## 12. Campaign objective
 
-Survive and hold the community together until the Signal 45 question is *answered* — and then live with the answer. Concretely: reach Day 45 (full game) with the station functional and the community intact enough to execute one of the endings — evacuation, federation, rail control, permanence, or the emergent dissolution ending — as a *choice made knowingly*, not a default fallen into. The vertical slice compresses this to Day 7: survive to Relay Night, when Signal 45 first re-broadcasts verifiable details, and make the first great commitment: prepare to leave, or dig in.
+Survive and hold the community together until the Signal 45 question is *answered* — and then live with the answer. Concretely: reach Day 45 (full game) with the station functional and the community intact enough to execute one of the endings — evacuation, federation, rail control, permanence, or the emergent dissolution ending — as a *choice made knowingly*, not a default fallen into. **Truth model (D-023):** Signal 45's truth is authored per campaign seed from a small variant set (a real train, a stale automated loop, or bait), fixed independently of player belief; verification changes what the player *knows and can knowingly choose*, never what is true. The vertical slice compresses this to Day 7: survive to Relay Night, when Signal 45 first re-broadcasts verifiable details, and make the first great commitment: prepare to leave, or dig in.
 
 ## 13. Success states
 
@@ -89,10 +89,10 @@ Two mirrored collapse axes — the two networks failing:
 ## 15. Original differentiators
 
 1. **The Listening Post** — scheduled, zero-sum radio intelligence as a core nightly mechanic that reshapes weather warning, expedition content, trade, relationships, and ending eligibility. No shelter-management comparison title makes *choosing what to know* the signature verb.
-2. **Two-ledger consequence** — physical costs are quoted up front; human costs are discovered later. The game systematically separates *what a decision costs the station* from *what it costs the people*, and the second ledger is the one that determines what your survival was worth.
+2. **Two-ledger consequence with an up-front contract and an embodied return** — every decision quotes its *physical* price before commit, while its *human* price is discovered later — and discovered consequences return **embodied and external** (strangers at the gate, a faction's demand, a trader's changed manifest), not only as internal mood states. Delayed psychological consequence alone has a clear genre antecedent (acknowledged in 04 §2); the up-front physical quote and the external, physical return channel are the transformation.
 3. **A railway station as a living machine** — rooms built into stranded railcars, a flywheel bay fed by a rebuilt regenerative-brake system, a tunnel network (not an overworld) as expedition topology, and an ending framework centered on a *train line* rather than a door, a war's end, or a generator. Setting, terminology, and topology are railway-native throughout.
 4. **Hope on a schedule** — a diegetic 45-day countdown whose *truth value is a player-investigated variable*, structuring the campaign into verify-then-commit acts instead of escalating catastrophe alone.
-5. **Small-cast consequence at mobile scale** — 4 (slice) to ~12 (full) named survivors with values, bonds, grudges, and trauma marks that mechanically alter work, refusals, and endings — deliberately *not* an interchangeable-population shelter game and *not* a city-scale society game.
+5. **Borrowed authority over autonomous people** — the player is not a puppeteer of survivors but an *entrusted decision-maker whose verbs can be refused*: residents act on orders through their own values and states, refusals are systemic, Accord gates what the player is even allowed to command (D-018), and Marks are durable mechanical state that gates behavior and endings — all at 5–12-minute mobile session scale. This is the specific claim against the closest character-driven comparison (where survivors are directly puppeted and consequence is chiefly mood): here the *relationship between player and cast* is the simulated thing.
 
 ## 16. Final concept decision
 

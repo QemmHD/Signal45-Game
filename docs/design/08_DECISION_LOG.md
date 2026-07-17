@@ -1,6 +1,6 @@
 # 08 — DECISION LOG
 
-**Status:** LIVE DOCUMENT. Every stage appends; nothing is deleted. Entries D-001–D-020 record the concept-lock stage's initial pass; entries from D-021 record changes made during the red-team pass (see the section marker).
+**Status:** LIVE DOCUMENT. Every stage appends; nothing is deleted. D-001–D-020: concept-lock initial pass. D-021: research-integration amendment. D-022+: red-team pass amendments.
 
 Format per entry: **Decision · Reason · Alternatives rejected · Consequences · Assumptions · Revisit trigger.**
 
@@ -19,7 +19,7 @@ Format per entry: **Decision · Reason · Alternatives rejected · Consequences 
 *Decision:* Nightly zero-sum radio scheduling with expiry, off-screen resolution of the unheard, and a verification track for Signal 45.
 *Reason:* Grows directly from the seed ("information is a strategic resource"); touches ordinary play daily (quality gate); no comparison title owns this verb.
 *Alternatives rejected:* Hook = day/night expedition contrast (too close to an inspiration's signature identity to carry the game alone); hook = base-building depth (undifferentiated within the genre).
-*Consequences:* Requires ~14 authored signals in the slice; radio UI is a first-class screen; weather telegraphing runs through intel.
+*Consequences:* Requires a body of authored signals in the slice *(superseded by D-026: 15 signals × 2 branches on the canon board)*; radio UI is a first-class screen; weather telegraphing runs through intel *(refined by D-022's two-tier warning)*.
 *Assumptions:* Players enjoy allocating attention as much as allocating goods. *Revisit trigger:* playtesters treat radio night as a chore or always pick the same schedule.
 
 **D-003 — Four named day-phases, decision-driven time, zero offline simulation.**
@@ -50,12 +50,12 @@ Format per entry: **Decision · Reason · Alternatives rejected · Consequences 
 *Consequences:* Danger design must be environmental/social; some market expectation friction accepted and owned in store messaging.
 *Assumptions:* Standoff scenes can carry threat convincingly. *Revisit trigger:* none for adding combat; revisit only how *threat* is staged if playtests find nights toothless.
 
-**D-007 — Expeditions optional and 100% delegable; active mode built last.**
-*Decision:* Delegated resolution is a first-class path with equivalent expected outcomes, richer than a stat roll (uses preparation, aptitude, intel, priorities).
+**D-007 — Expeditions optional and 100% delegable; active mode built last.** *(Amended by D-024 — the original "presentation over the same resolution data" phrasing was internally incoherent and is retired.)*
+*Decision:* Delegated resolution is a first-class path richer than a stat roll (uses preparation, aptitude, intel, priorities) and suspends at authored choice nodes as gate calls; both modes draw from the same authored outcome tables, with competent active play's expected material yield held within a declared ±10% band of the delegated expectation for identical preparation — variance, time cost, and route knowledge are the explicit trade.
 *Reason:* Pillar 4, accessibility baseline, session flexibility, and the R-01/R-06 descope ladder (slice survives even if active mode slips).
-*Alternatives rejected:* Mandatory active runs (accessibility failure, second-game risk); no active mode at all (loses the 3–6 minute intensity option the seed asks for).
-*Consequences:* Outcome model must be shared between modes; active mode is presentation over the same resolution data.
-*Assumptions:* Players won't perceive delegation as "the lesser game." *Revisit trigger:* playtest delegation-shaming or outcome divergence between modes.
+*Alternatives rejected:* Mandatory active runs (accessibility failure, second-game risk); no active mode at all (loses the 3–6 minute intensity option); "pre-rolled outcomes merely presented" (a placebo that breaks trust — retired).
+*Consequences:* Shared node graphs and outcome tables between modes; paired-simulation equivalence test in 07 §10; gate calls documented in 02 §4.
+*Assumptions:* Players won't perceive delegation as "the lesser game." *Revisit trigger:* playtest delegation-shaming (measured in 07 §20) or band violation in the paired simulation.
 
 **D-008 — Rooms are restored, not built; no free-form base layout.**
 *Decision:* The station's spaces are authored; players choose what to restore, when, and how to configure function.
@@ -163,4 +163,51 @@ Format per entry: **Decision · Reason · Alternatives rejected · Consequences 
 
 ## Red-team pass amendments
 
-*(Entries D-021+ are appended after the adversarial review workflow; see the stage summary for the change list.)*
+*A 13-lens adversarial review (independent reviewers per red-team question, plus consistency and quality-gate auditors) returned "holds with weaknesses" on every lens — no outright failures — with ~29 high-severity findings. All were accepted and applied except where noted. The entries below record the resulting decisions; smaller wording/consistency corrections were applied directly to the documents.*
+
+**D-022 — Two-tier storm warning.**
+*Decision:* Every storm carries a free diegetic telegraph (~1 phase: enough to seal, not to pre-stage or reschedule); the monitored storm band buys the days-ahead forecast. *Reason:* The original "short or no warning" contradicted the scheduler-enforced telegraph law — the weather slot was either a fake choice or an unfair one. *Alternatives rejected:* Always-full telegraph (guts the forecast channel); true no-warning (breaks the fairness gate). *Consequences:* 00 §9 amended; both tiers tested in 07 §4. *Revisit trigger:* forecast slot chosen by ~100% or ~0% of testers.
+
+**D-023 — Signal 45 truth model.**
+*Decision:* The truth is authored per campaign seed from a small variant set (real / stale loop / bait), fixed independently of belief; verification changes knowledge and knowing-choice eligibility, never fact. *Reason:* The ontology was undecided; the ending-1 phrasing read as belief-determines-fact, and a single fixed truth invites spoiler decay (now R-20). *Consequences:* 00 §12, 02 §7 amended; R-20 added. *Revisit trigger:* narrative stage finds the variant set too thin.
+
+**D-024 — Active nightrun is "on the wire": directed calls, not steered movement.**
+*Decision:* The runner traverses the node graph; the player makes route, verb, and exit/carry calls against the air/heat clock. Delegation resolves the same graph and surfaces authored choice nodes as gate calls. Equivalence = ±10% expected-yield band, paired-simulation tested. The run report is the single canonical knowledge artifact for both modes. *Reason:* The steered mode's only recorded justification was inherited from the seed; it broke the stationmaster fiction (00 §6–7), sat on the project's top similarity risk (O2) and top scope risk (R-06), and delegation would otherwise auto-resolve moral choices. *Alternatives rejected:* Steered embodiment (all of the above); cutting active mode entirely (loses the intensity option — remains the descope rung). *Consequences:* 01 Pillar 4, 02 §1/§4, 03 §1/§3.3, 07 §10/§10b/§11/§14/§16 amended; unified hazard-node + standoff-template rule added. *Revisit trigger:* playtesters find calls-only runs passive.
+
+**D-025 — The clinic is a Listening Post consequence.**
+*Decision:* Marrow Street is radio-entangled: the squatters' weak distress call sits on the board Nights 3–5; monitored → answered call (Tidemill kin named in-scene, aid strengthened); unmonitored → cold discovery. Four resolutions: aid/barter/take/leave, everywhere. *Reason:* As authored, the encounter was structurally the genre's most famous moral-scenario class and violated 04 §6.2's own rule; re-deriving it from the signature system makes it premise-native and surfaces the divergence inside the scene. *Consequences:* 01 Pillar 4 example, 03 §3.1/§3.2 (events 9/13), 07 §11/§13/§14 amended; 4-branch count reconciled everywhere. *Revisit trigger:* narrative stage.
+
+**D-026 — Radio slots locked at 2; five slice categories; the signal board is canon.**
+*Decision:* 2 slots/night (storm night: 1); 5 of 6 categories in the slice (faction chatter full-game); ~15 authored signals × 2 branches on the persistent offer board (03 §3.1a), guaranteeing ≥ slots+1 offers nightly and cross-category tension ≥4 nights. Magpie's first broadcast moves to Day 1–2 as an unavoidable framing beat, with the verification board visible (locked) from Day 1. *Reason:* The "2–3 slots / ~14 signals" math didn't close — at 3 slots the hook died of surplus; the differentiating content otherwise arrived after the free chapter's funnel mouth. *Consequences:* True signal budget ~30 units, priced in 03 §3.3; 07 §10b added. *Revisit trigger:* board playtests show a dominant schedule (07 §10b diversity check).
+
+**D-027 — Standing systemic scarcity verbs; honest loop-density claim.**
+*Decision:* Two standing Swelter generators — the charge load-priority board and labor over-subscription (orders exceed person-phases by ≥25%; deferrals listed in the day report) — plus a revised claim of 2–4 loops/phase, 8–14 decisions/day with authored per-day budgets. Crafting scarcity binds (salvage supports ~60–70% of the catalog; the splice chain demonstrably competes with survival crafts). *Reason:* The non-event base day reduced to confirmations — maintenance, not decisions; the old 3–6/phase claim was unsupported by any documented generator. *Consequences:* 02 §2/§4, 03 §3.3, 07 §3/§4/§9 amended. *Revisit trigger:* R-08's "always the same fix order" warning signs.
+
+**D-028 — Hope is enforced, not intended.**
+*Decision:* Events and scenes carry register tags (pressure/recovery/hope/neutral); the scheduler enforces the 3-day hope window, sealed-storm recovery, and Relay/storm exclusion; an unconditional hope floor (four named free beats in the slice) underlies the earned tier, which alone is Accord-withheld. The warm-beat class is separately enumerated and budgeted (03 §3.1); event 16 gains a genuinely warm branch; failure telegraphs are mapped onto existing events with two failure cards as non-event content. *Reason:* The pressure half of the rhythm was scheduler-enforced while the hope half was editorial habit — and the slice's event table was ~19/20 grim, contradicting the tone promise exactly where the free chapter forms impressions. *Consequences:* 02 §6, 03 §3.1/§3.2, 07 §13/§20 amended; R-17 added. *Revisit trigger:* tone probe failure in 07 §20.
+
+**D-029 — Campaign is ~45 days nominal, finale window Days 40–50.**
+*Decision:* As stated; act structure and the broadcast fiction anchor to ~45; shrinking below the window requires re-dating Signal 45 in fiction. *Reason:* "35–50 days" was arithmetically incompatible with the locked act structure (Acts sum past Day 45) and the "reach Day 45" objective. *Consequences:* 00 §11, 02 §5, 03 §4, R-02 amended. *Revisit trigger:* full-campaign pacing tests.
+
+**D-030 — Crafting derived from the premise; implemented as fabrication orders.**
+*Decision:* Crafting exists because the station must manufacture its own breath — the Fitters' Shop is the mint of the filter barter standard and the source of Listening Post capability — and it is implemented as fabrication orders inside the one work-order system, not a parallel subsystem. Generic items re-themed (coupler bar, flywheel cell); every recipe chains to a documented week problem. *Reason:* Crafting was the only spine system with no decision entry, defended circularly by genre precedent; it also duplicated the work-order pattern. *Consequences:* 03 §3.1/§3.3 amended. *Revisit trigger:* none — identity-level.
+
+**D-031 — Cast completion: everyone is mechanically someone.**
+*Decision:* All four residents carry value lines mapped to crossing events; Teo and Maren gain overlapping secondary aptitudes (rough Fitter; untrained Medic) creating genuine assignment dilemmas; Maren becomes event 6's discoverer with a "Cooked Ledger" Mark branch and her Accord-anchor role is defined mechanically; Ash's clinic Mark gains concrete effects (triage penalty, hardened refusal); Strain gains three named effects; every Mark carries ≥1 mechanical field; the R-04 animation contingency is rewritten to a pillar-compatible floor (posture pose-layers are untouchable). *Reason:* The mechanical load was concentrated in Teo; Maren was a stat block inside the canon cast; the 1:1 aptitude mapping pre-solved assignment; Strain "modified everything" and nothing. *Consequences:* 01 Pillar 2, 03 §3.1/§3.2/§3.3, 06 R-04/R-09, 07 §5/§6/§7/§20 amended. *Revisit trigger:* 07 §20 personhood probe.
+
+**D-032 — Honest slice cost; the descope ladder is the plan's load-bearing member.**
+*Decision:* R-14 restated from the scope matrix's own arithmetic: the full-table slice is ≈ 8–12+ solo months; "4–6 months" describes the pre-committed descoped slice (delegated-only runs with gate calls, events trimmed to ~14 keeping all 5 chains). Hidden content classes are now priced rows (barks ~110 lines, onboarding, report blocks ~30, epilogue ~13 slotted blocks, NPC cast with art tiers, readability blockout, test harness); 07 gains the severable "Delegated-Only Slice Acceptance" set so firing the ladder is a sanctioned acceptance state, not a failure. *Reason:* The register's flagship honesty claim failed its own table's arithmetic; a dozen content classes and test rigs were mandated by acceptance criteria but priced nowhere. *Consequences:* 03 §3.3 (+6 rows), 06 R-14, 07 preamble amended. *Revisit trigger:* slice midpoint review.
+
+**D-033 — The unlock may not touch Relay Night.**
+*Decision:* The Relay Night choice, epilogue card, and safe-stop exhale are delivered in full before any store surface may appear; the purchase ask never appears inside the scene or choice flow; a playtest probe checks the ending doesn't read as a sales pitch. *Reason:* The unlock sits on the campaign's first engineered hope beat; the assertion that this is honest needed enforcement, not assertion. *Consequences:* 03 §4, 07 §15 amended. *Revisit trigger:* store-stage design.
+
+**D-034 — Mobile reconciliation: session math, crew strip, badges, scheduler exception.**
+*Decision:* Session claims reconciled (typical delegated day ~12 min, active-run day ~16, sittings 5–8 min, new-player Day 1 ≤15 min with an authored decision budget); the persistent 4-portrait crew strip joins the HUD (amending D-017 — it is not a resource indicator; the ≤6 gate holds); alert/need badges render ≥44 pt anchored at overview; the radio scheduler is the named exception to one-decision-at-a-time; one-thumb claims rescoped to reach zones. *Reason:* The locked claims contradicted each other and physical reality on a 6.1" screen; the ledger page had no thumb-legal path. *Consequences:* 02 §2/§3, 07 §1/§17, 09 A.2/A.9 amended. *Revisit trigger:* UI-stage layout audit.
+
+**D-035 — Visual identity de-collided and made survivable.**
+*Decision:* Channel separation (restoration owns color temperature; Accord owns occupancy/lamp count/domestic props — ambient Accord tint removed; Accord scene-lighting only in scripted scenes); the engineer's overlay is canon as the overview redundant channel with zoom-dependent badge rules replacing the blanket no-floating-icons rule; a pre-approved lighting perf-degradation ladder joins R-05/R-15; "readability blockout" is a defined tier; the keystone scene + texture standards guard solo style drift (R-18); art pace is measured with a fallback ladder that descopes technique, never identity (R-19); the dog pack is staged threat (no creature rig); R-16's overview readability descope ladder is pre-agreed. *Reason:* Two state dimensions shared one visual variable in the same rooms; the identity's central mechanism had no perf plan; the biggest drift source (one human, many months) was unregistered; the readability gate was built on an undefined tier. *Consequences:* 09 B.4/B.7/B.11, 03 §3.1/§3.3, 06 R-04/R-05/R-15/R-16/R-18/R-19, 07 §2/§6/§17/§19 amended. *Revisit trigger:* blockout readability test.
+
+**D-036 — Metro-series adjacency is named and bounded.**
+*Decision:* A Metro row joins the 04 §2 transformation matrix (Medium residual, honestly rated); Metro-fiction forbidden similarities added to 04 §3 (no munition-adjacent currency, no mutant tunnel fauna, no station-ideology faction pattern, no mask-timer horror staging); O7 assigns the review; the TWoM-anchored cast row and the two-ledger antecedent row join the matrix with honest Medium ratings; differentiators 2 and 5 rewritten around what is actually new; the 07 §20 differentiation probe operationalizes R-13's warning sign. *Reason:* The originality audit omitted the nearest fiction-space neighbor entirely, argued two differentiators against the wrong comparator, and D-004's revisit trigger pointed at a 04 §7 entry that didn't exist. *Consequences:* 00 §15, 04 §2/§3/§7, 06 R-13, 07 §20 amended. *Revisit trigger:* O7 professional review.
+
+**Red-team findings noted but deliberately not applied:** none — every high- and medium-severity finding was accepted in substance. Low-severity wording suggestions were applied selectively where they did not conflict with the amendments above.

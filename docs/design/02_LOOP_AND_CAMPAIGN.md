@@ -8,7 +8,7 @@
 
 - The in-game day advances through **four named phases**: **Swelter → Slack → Nightrun → Graymorn**. Phases advance when the player completes their decisions and confirms, not on a wall clock. Within a phase, station activity plays out in gently animated simulated time that the player can pause freely; nothing in the base game requires reaction speed.
 - **Time never advances while the app is closed.** There is no offline decay and no offline yield (Anti-pillar 1; offline-safety quality gate). Reopening the game resumes exactly at the last confirmed state.
-- Every phase boundary is an **autosave and a marked safe stop**. The active nightrun is the only real-time segment (3–6 min); it pauses on interruption and can always be abandoned-in-place to delegate resolution.
+- Every phase boundary is an **autosave and a marked safe stop**. The active nightrun is the only real-time segment (3–6 min); it pauses on interruption and can always be converted to delegated resolution. Conversion resolves from a **finite checkpoint set** — location entry plus completed node boundaries — never from continuous mid-node state: interruption mid-node rewinds to the last completed node, which bounds both the delegated resolver's input schema and the save-state surface (R-10).
 
 ## 2. The 30-second interaction loop
 
@@ -20,7 +20,7 @@ The atomic unit of play — **Notice → Inspect → Decide → Commit → Feedb
 4. **Commit** with a confirming tap; the order posts to the day's work plan.
 5. **Feedback** within seconds: the assigned survivor walks to the job, audio acknowledges, the gauge trajectory updates — and the consequence itself may land minutes or days later.
 
-Feeds upward: 3–6 of these loops constitute one phase's decision set.
+Feeds upward: **2–4 of these loops constitute one phase's decision set — 8–14 meaningful decisions per day** (revised from an earlier 3–6/phase claim; D-027). The decision supply is enumerable, not aspirational: ~3 authored events/day, the nightly radio schedule, run planning and its gate calls (1–3), triage choices, and — critically — two *standing systemic generators* live every Swelter: the **charge load-priority board** (scrubbers / pump / hotplate / tools / radio charging, each off/low/full with visible downstream consequences) and **labor over-subscription** (each day's available work and fabrication orders exceed available person-phases by ≥25%, so deferral is a daily choice and the day report lists what was deferred). Ambient observation honestly fills the remaining phase time.
 
 ## 3. The 5–12 minute mobile-session loop
 
@@ -30,20 +30,20 @@ A session is designed to cover **one to two phases comfortably**, or a full day 
 2. **Work the phase (3–8 min):** the phase's decision set — Swelter's work orders and visitor calls, or Slack's radio schedule and run planning, or a Nightrun (active or delegated), or Graymorn's triage and report.
 3. **Close at a safe stop (30–60 s):** confirm the phase; autosave; the log entry writes itself; a "safe to stop" marker appears. The next phase's headline is previewed so the player leaves with an intention, not a cliffhanger anxiety.
 
-A player with 5 minutes completes one phase; with 12, a full day. The active nightrun option fits the session budget (3–6 min) and is always substitutable by delegation.
+A player with 5–8 minutes completes one to two phases; a typical day with a delegated run fits ~12 minutes, and an active-run day may reach ~16 (session math reconciled per D-034: Swelter 2–5 + Slack 2–3 + Nightrun 0–6 + Graymorn 2–3, plus ≤2 min session overhead). Each day carries an **authored decision budget** (Day 1: ~8 loops with delegation pre-selected; steady-state: 8–14) so the ranges describe designed content, not hope. The active nightrun option fits the session budget (3–6 min) and is always substitutable by delegation.
 
 ## 4. The in-game day loop
 
 | Phase | Fiction | Player activity | Dominant ledger | Typical length |
 |---|---|---|---|---|
-| **Swelter** | Surface lethal; heat load peaks; station works | Work orders, construction/repair, crafting queue, visitor negotiations, conflict arbitration | Physical, with human interrupts | 3–6 min |
-| **Slack** | Dusk; heat falls; the day's one true planning window | Radio schedule (the signature decision), nightrun planning and provisioning, tomorrow's priorities | Information | 2–4 min |
-| **Nightrun** | Cool dark; the door opens | Active run (3–6 min) or delegate-and-advance; meanwhile the station runs its quiet shift | Expedition | 0–6 min |
-| **Graymorn** | Pre-dawn return; the accounting | Return and triage, arrivals at the gate, event consequences land, stationmaster's log | Human | 2–4 min |
+| **Swelter** | Surface lethal; heat load peaks; station works | Charge load-priority board, over-subscribed work/fabrication orders (deferral is a choice), restoration projects, visitor negotiations, conflict arbitration | Physical, with human interrupts | 2–5 min |
+| **Slack** | Dusk; heat falls; the day's one true planning window | Radio schedule (the signature decision), nightrun planning and provisioning, tomorrow's priorities | Information | 2–3 min |
+| **Nightrun** | Cool dark; the door opens | Active "on the wire" run (3–6 min) or delegate-and-advance — delegated runs surface authored choice nodes as **gate calls** (radio decision cards), so moral decisions are never made for the player; meanwhile the station runs its quiet shift | Expedition | 0–6 min |
+| **Graymorn** | Pre-dawn return; the accounting | Return and triage, arrivals at the gate, event consequences land, stationmaster's log | Human | 2–3 min |
 
 Feeds upward: each day writes deltas to stockpiles, utility states, needs, bonds/Marks, intel confidence, and faction posture — the campaign's working memory.
 
-## 5. The campaign loop (35–50 days; slice: 7)
+## 5. The campaign loop (~45 days nominal, finale window Days 40–50; slice: 7)
 
 The repeating multi-day cycle that gives weeks their shape:
 
@@ -51,7 +51,7 @@ The repeating multi-day cycle that gives weeks their shape:
 2. **Relay cycle (weekly):** Signal 45 re-broadcasts on Relay Nights with progressively verifiable content — the campaign's hope metronome and the verification track's checkpoints.
 3. **Restoration ladder:** each act, a major station capability can be restored (Level-3 lighting, second cistern, antenna mast…), changing daily play and delivering scheduled hope beats.
 4. **Faction and visitor arcs:** contacts made through radio and runs mature into arrivals, trades, demands, and act turning points.
-5. **Commitment gates:** at act boundaries, the player makes a standing commitment (what to prepare for) that re-weights events, trades, and available endings — revisable, at a cost, until Act 3 locks it.
+5. **Commitment gates:** at act boundaries, the player makes a standing commitment (what to prepare for) that re-weights events, trades, and available endings — revisable, at a cost, until Act 3 locks it. **Commitments change what the player builds, not just event weighting (D-024/red-team):** each commitment opens its own project track — the Count opens a *railworthiness ladder* (clear the Cinderline cut, restore a handcar, cache trail provisions, drill the household for departure); Hold/Deepline opens the *deep-station ladder* (second cistern, Level-3 grid); Concord opens shared-line infrastructure and envoy hosting; Junction opens chokepoint works with explicit human-ledger costs. Act 2/3 restoration options are partially gated by the standing commitment, so the middle 30 days play differently by intent.
 
 ## 6. Emotional rhythm
 
@@ -65,7 +65,7 @@ The seven registers and where the design deliberately places them:
 - **Recovery** — post-storm days, restoration beats, the canteen scene class of content; mechanically real (Strain relief, Accord gain).
 - **Hope** — Relay Nights, restorations, arrivals who are what they claimed, the endings themselves.
 
-**Anti-monotony rules:** never two sealed-storm days without a recovery day following; never a Relay Night and a storm on the same day; a hope beat within every 3-day window, weighted toward earned (state-conditional) rather than free; despair states (fractured Accord) *withhold* warm content rather than adding punishment content — the absence is the message.
+**Anti-monotony rules — scheduler-enforced, not editorial (D-028):** the event scheduler structurally enforces, and 07 §13 tests: (a) never two sealed-storm days without a recovery day following; (b) never a Relay Night and a storm on the same day; (c) a hope- or recovery-register beat within every rolling 3-day window. To make (c) enforceable, every event and scene carries a **register tag** (pressure / recovery / hope / neutral) in its schema. **The hope floor is unconditional:** at least one beat per 3-day window is free (non-state-gated) — in the slice: the first hot meal (Day 1–2), Sable's arrival (Day 2–3), the storm's-end light return (Day 5), the wire-splice light-up (Day 6) — with *earned* beats (the Accord-gated canteen scene and its kin) layered above the floor. Despair states (fractured Accord) *withhold the earned tier only*, never the floor — the absence of the earned warmth is the message, and the struggling player is never handed a pure doom spiral.
 
 ## 7. Three-act campaign framework
 
@@ -85,7 +85,7 @@ The seven registers and where the design deliberately places them:
 - **New pressures:** storm seasons lengthen; the Tidemill's needs sharpen into politics; a rival signal (the Junction voice) claims the rail network; internal factions of opinion form around the Count.
 - **New systems:** faction reputation and standing agreements; antenna restoration (capacity growth); multi-runner nightruns; commitment re-weighting.
 - **Character/faction escalation:** bonds and grudges mature into alliance and rupture arcs; each named survivor's personal signal resolves (found, lost, or answered differently than hoped).
-- **Turning point:** **The Junction Event** — physical contact with the wider line (a handcar reaches Kestrel Cross, or a run reaches Terminus' outer yards): the first *material* evidence about Signal 45, contradicting or confirming the radio in a way listening alone never could. The commitment gate here prunes the ending set.
+- **Turning point:** **The Junction Event** — physical contact with the wider line, and **player-initiated**: from mid-Act 2 the player can mount an explicit high-cost, multi-phase expedition toward Terminus' outer yards (earlier attempts cost and risk more), returning the first *material* evidence about Signal 45 — confirming or contradicting the radio in a way listening alone never could. An authored fallback version (a handcar reaches Kestrel Cross) fires only if the player never attempts it, so pursuit buys tempo, not just confidence. Additionally, 2+ verified facts unlock an early-commitment option (begin a project track before the act gate, at a discount — or dismiss the count early, with Accord consequences). The commitment gate here prunes the ending set. The radio itself gains an *active inquiry* apex on the antenna ladder: restored transmission (Act 2/3) lets the player broadcast a query — hail Magpie, challenge the Signal 45 carrier, call the Tidemill — and human sources (Sable, the envoy) are askable about the line, priced in trade goods or Accord, feeding the verification track as an alternative to slots.
 
 ### Act 3 — "Terminus" (Days 31–45+)
 
@@ -93,7 +93,7 @@ The seven registers and where the design deliberately places them:
 - **New pressures:** the largest cinderfall event; convergence of every unpaid consequence (ignored distress calls, faction debts, unresolved grudges); the count itself reaching zero.
 - **New systems:** none — Act 3 deliberately introduces no new mechanics; it composes existing ones at full intensity (Pillar 5: the finale is an exam, not a new course).
 - **Turning point → endings:** Day 45 window. Ending reached is a function of (a) standing commitment, (b) station capability, (c) Accord and key survivor states, (d) verified knowledge. The five ending frames:
-  1. **The Last Departure** — evacuation attempted; its truth and its passenger manifest depend on verification and Accord.
+  1. **The Last Departure** — evacuation attempted; *its outcome depends on what is true* (the seed-authored truth variant, D-023), while *its manifest and the player's foreknowledge* depend on verification and Accord — walking into the yards knowing is a different ending from walking in hoping.
   2. **The Concord of Stations** — federation with the Tidemill and the line's other holdouts.
   3. **Junction** — seize the rail network's chokepoint; survival as power, with the human ledger paying.
   4. **Deepline** — the permanent home; the count dismissed, the station completed.

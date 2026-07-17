@@ -13,14 +13,14 @@
 | **People** | 4 named survivors; needs ×4; aptitudes ×4; 1 scripted conflict pair; Marks | 8–12 named survivors; arrival arcs; full bond/grudge web; personal-signal arcs for all | New survivor arcs; "storyteller" pacing variants | Procedurally generated cast as the core cast; population beyond ~12 (Anti-pillar 2) |
 | **Resources & crafting** | 5 primary resources; 12 craftables; single crafting queue | ~30–40 craftables; recipe discovery; workshop upgrades | Recipe variants, scenario-specific chains | Item quality tiers; per-item durability micromanagement |
 | **Utilities** | Abstract network: charge, water, air, heat, seals; 3 damage states; 1 cascade crisis | Full network incl. antenna ladder, second cistern, Level-3 grid; storm-season load model | — | Physical routing sim (pipe/wire placement puzzles — see cut C3) |
-| **Listening Post** | 2–3 slots/night; 6 signal categories; verification track for Signal 45 (slice-length) | Capacity ladder via antenna restoration; faction chatter; jamming/interference events; full verification arc | Community "frequency archive" (lore collection) | Signal-tuning dexterity minigame (rejected, 01 §D) |
-| **Nightruns** | 3 hand-authored locations; active mode + full delegation; 1 scripted scavenging mission | 18–24 locations across 3 tunnel branches; multi-runner teams; location states that evolve with acts | Endless "deep line" survey mode | Procedural location generation (C2); any combat system (C5) |
+| **Listening Post** | **2 slots/night locked** (storm night: 1); **5 signal categories** (faction chatter deferred); ~15 authored signals × 2 branches (heard payoff + unheard resolution) on a persistent offer board; slice-length verification track | Slot-capacity ladder via antenna mast restoration; 6th category (faction chatter); transmission/active inquiry apex; jamming events; full verification arc | Community "frequency archive" (lore collection) | Signal-tuning dexterity minigame (rejected, 01 §D) |
+| **Nightruns** | 3 hand-authored locations; **"on the wire" active mode (directed calls, no steering) + full delegation with gate calls**; one shared hazard-node system and one standoff template — **no per-location bespoke mechanics**; 1 scripted scavenging mission | Location count target 18–24 across 3 tunnel branches, **gated on cost-per-location measured during the slice** (fallback: 10–14 with deeper state evolution); multi-runner teams; act-evolving location states | Endless "deep line" survey mode | Procedural location generation (C2); any combat system (C5); steered-avatar traversal (D-024) |
 | **Outside world** | 1 trader (Linewalker Sable); 1 faction (the Tidemill); gate arrivals | 3 factions + independent holdouts; standing agreements; Junction Event | Faction epilogue variations | Overworld map with movable units (rejected, 01 §D) |
 | **Events** | 20 authored events incl. ≥5 delayed-consequence chains; max 2 concurrent crises | 120–180 events; act-gated pools; anti-repetition scheduler | Seasonal event packs | Random no-telegraph disasters (Anti-pillar 5) |
-| **Campaign** | 7-day mini-campaign "The First Count"; 1 ending (state-reactive epilogue) | 35–50 days; 3 acts; 5 ending frames + 2 failure states; commitment gates | New-game+ modifiers; scenario seeds | Branching mid-campaign map/route choice (one station, one line) |
+| **Campaign** | 7-day mini-campaign "The First Count"; 1 ending (state-reactive epilogue) | ~45 days nominal (finale window 40–50); 3 acts; per-commitment project tracks; 5 ending frames + 2 failure states; commitment gates | New-game+ modifiers; scenario seeds | Branching mid-campaign map/route choice (one station, one line) |
 | **Platform** | iOS/Android landscape; touch controls; save/reload; perf on mid-tier devices | Cloud save; device-tier scaling; notification opt-in (player-scheduled only) | PC/Steam port; controller support; tablet layouts | Portrait mode; always-online anything; real-time offline simulation |
 | **A/V** | Blockout-quality modular art, final art direction; basic SFX + 2 music states; captions | Full modular set, character animation library, adaptive score, full VO-free audio identity | Marketing cinematics (Higgsfield pipeline); OST release | Voice acting (text + barks only); photorealism |
-| **Accessibility** | Scalable text, color-safe palette + icon shapes, no reflex requirement in base loop, delegation path, captions | + screen-reader labels on ledgers, reduced-motion mode, left/right-hand layouts | + full audio-description pass | — |
+| **Accessibility** | Scalable text (200% reading / 130% HUD), color-safe palette + icon shapes, reduced-motion mode, no reflex requirement in base loop, delegation path, captions | + screen-reader labels on ledgers, left/right-hand layouts | + full audio-description pass | — |
 | **Business** | No store; slice is chapter-1-shaped by design | Free Chapter One (Days 1–7) + single permanent unlock; no consumables ever | Cosmetic-free by policy; paid *scenario* expansions only | All monetization listed in restrictions (loot boxes, energy, ads, paid relief) — **cut permanently** |
 
 ## 2. The five-plus deliberate cuts (appealing but dangerous)
@@ -40,18 +40,19 @@
 
 **Fixed frame:** Days 1–7. Begins the morning after Signal 45 is first heard; ends on **Relay Night** with the Hold-or-Count commitment choice and a state-reactive epilogue card. Playable start to finish with blockout art, and must be *fun and legible* in that state (quality gate).
 
-**Note A (adjustment):** "Twenty meaningful events" includes the scripted finale (Relay Night) as event #20 — documented so later prompts don't add a 21st silently.
-**Note B (adjustment):** "One ending" is implemented as one ending *frame* (Hold the Cross / Begin the Count epilogue card) with state-reactive text variants — the variants share one structure and one presentation, so this remains a single ending for scope purposes.
+**Note A (adjustment):** "Twenty meaningful events" includes the scripted finale (Relay Night) as event #20 — documented so later prompts don't add a 21st silently. The **warm-beat class (§3.1d)** is a separate, separately-budgeted content class of non-event scenes and is *not* a loophole for adding events.
+**Note B (adjustment):** "One ending" is implemented as one ending *frame* (Hold the Cross / Begin the Count epilogue card) built as **slotted assembly**: one fixed frame + four independent fact-slots (verification count, Accord band, losses/Marks, clinic outcome) with ~3 variants each — **~13 authored text blocks total**, not a 27+-variant cross-product. Acceptance tests in 07 §15 are slot-level.
+**Note C (red-team adjustment, D-026):** The Listening Post ships **2 slots/night** (1 on the storm night) and **5 of the 6 signal categories** (faction chatter is full-game); the ~15 authored signals each require *two* authored branches (heard payoff, unheard off-screen resolution) — the true signal content budget is ~30 units and is priced as such in §3.3.
 
 ### 3.1 Slice content enumerations (canon)
 
-**Survivors (4):**
-| Name | Aptitude | Sketch | Slice function |
-|---|---|---|---|
-| Imka Vasser | Fitter | Ex-line engineer, 50s; value: *the station outlives us all* | Utility/repair backbone; conflict pole A |
-| Ash Okonkwo | Medic | Former street-clinic nurse; value: *no one turned away* | Triage; carries the clinic decision's Mark |
-| Teo Brandt | Runner | Restless courier, 20s; brother missing since the Char | Nightruns; conflict pole B (radio-time petition) |
-| Maren Hale | Steward | Ran the station kiosk before; keeps the ledger | Accord anchor; canteen scenes; trade handling |
+**Survivors (4)** *(every resident carries a value line mapped to ≥1 event that can cross it; two overlapping secondary aptitudes create genuine assignment dilemmas — D-031):*
+| Name | Aptitude (primary / secondary) | Sketch | Value (hard line) → crossing event | Slice function |
+|---|---|---|---|---|
+| Imka Vasser | Fitter / — | Ex-line engineer, 50s | *"The station outlives us all"* → event 5 (radio time "wasted" on people) | Utility/repair backbone; conflict pole A; overwork arc (event 8) |
+| Ash Okonkwo | Medic / — | Former street-clinic nurse | *"No one turned away"* → events 9/13 (gate refusals) | Triage; carries the clinic Mark — mechanical effect: triage speed/quality penalty while unaddressed, and a hardened refusal on any turn-away order |
+| Teo Brandt | Runner / Fitter (rough: fast, accident-prone) | Restless courier, 20s; brother missing since the Char | *"Family comes first, always"* → event 5 refusal branch | Nightruns; conflict pole B (radio-time petition); tempting off-aptitude fitter when Imka is spent |
+| Maren Hale | Steward / Medic (untrained: slow, careful) | Ran the station kiosk; keeps the ledger | *"The ledger doesn't lie"* → event 6 (ordered to suppress the skim → Mark: "Cooked Ledger") | **Accord anchor (defined):** canteen-scene Accord/Strain recovery requires Maren functional; her incapacity or grudge halves it. Discoverer in event 6; trade handling; second-choice triage |
 
 **Rooms (8):** Flywheel Room (charge) · Cistern (water) · Canteen (rations, Accord scenes) · Sleeper Car (rest — a stranded railcar) · Aid Car (medical — second railcar) · Fitters' Shop (crafting) · Listening Post (radio) · Scrubber Gate (air, decon, expedition door).
 
@@ -59,12 +60,42 @@
 
 **Needs (4):** Hunger · Fatigue · Condition · Strain.
 
-**Craftables (12):** mask filter cartridge · cool-vest · patch kit · purifier cartridge · trail rations · battery cell · storm lantern · pry bar · splint & dressing kit · ember tea (Strain relief) · spare-parts bundle · antenna wire spool.
+**Craftables (12)** *(crafting is implemented as **fabrication orders** inside the one work-order system — no parallel subsystem (D-030); every recipe chains to a documented week problem, and the Fitters' Shop is the mint of the filter barter standard):* mask filter cartridge · cool-vest · patch kit · purifier cartridge · trail rations · flywheel cell (portable charge, charged in the Flywheel Room) · storm lantern · coupler bar (railwayman's pry/coupling tool) · splint & dressing kit · ember tea (Strain relief) · spare-parts bundle · antenna wire spool.
 
-**Nightrun locations (3):**
-1. **Fenwick Parade Arcade** — flooded shopping arcade. Yields water/rations; hazards: deep water, unstable glass canopy. Low threat; teaches the run verbs.
-2. **Depot 9 (Foundry Line)** — rail maintenance depot. Yields salvage/parts (incl. antenna wire); hazards: collapse, a feral dog pack (avoid/deter — no combat). Site of the scripted scavenging mission.
-3. **Marrow Street Clinic** — meds; occupied by squatters (Tidemill kin). The slice's moral encounter and delayed-consequence flagship.
+**Restoration projects (2, slice):** the **antenna wire splice** (salvaged wire → splice work → Relay Night reception quality; never slot count) and the **Level-1 seal** (storm defense; reduces storm-night intake load). Each requires resources + assigned labor + elapsed phases and visibly changes its space.
+
+**Nightrun locations (3)** *(one shared hazard-node system — water, canopy, collapse are one node type with different dressing — and one standoff template with a nonverbal and a verbal variant; no per-location bespoke mechanics — D-024):*
+1. **Fenwick Parade Arcade** — flooded shopping arcade. Yields water/rations; hazard nodes: deep water, unstable glass canopy. Low threat; teaches the run verbs.
+2. **Depot 9 (Foundry Line)** — rail maintenance depot. Yields salvage/parts (incl. antenna wire); hazard nodes: collapse; a feral dog pack as **staged threat** (audio, eye-shine outside the lantern radius, a route-blocking presence; the deter verb spends an item or noise — no creature rig, no combat; standoff template, nonverbal variant). Site of the scripted scavenging mission.
+3. **Marrow Street Clinic** — meds; occupied by squatters nursing a sick child on the clinic's cold-stored medicine. **Radio-entangled (D-025):** their weak distress call sits on the offer board Nights 3–5; monitored, the run opens as an answered call (squatters name their Tidemill kin; aid strengthened) — unmonitored, a cold discovery in mutual fear. Four resolutions: **aid / barter / take / leave** (standoff template, verbal variant). The slice's moral flagship and delayed-consequence chain.
+
+**Visitor & NPC cast (enumerated, with art tiers — no hidden bodies):** Sable (full character: portrait, walk, trade pose) · Tidemill envoy (portrait + 2 poses) · two distress-call strangers (silhouette tier + 2 poses) · clinic squatters ×2 + child (silhouette tier, standoff poses; child never depicted in danger — R-12) · dog pack (audio + eye-shine only, no rig). Hard cap: ≤6 NPC visual identities in the slice (R-04 extended).
+
+**Warm-beat class (§3.1d — separately budgeted, non-event scenes; register-tagged `hope`/`recovery`):** first hot meal (Day 1–2, unconditional) · Sable's arrival staging (Day 2–3, unconditional) · storm's-end light return (Day 5, unconditional) · wire-splice light-up (Day 6, unconditional) · canteen scene, warm and withheld variants (Day 5, Accord-gated, earned tier) · Relay Night gathering staging (Day 7). The unconditional four are the slice's **hope floor** (02 §6).
+
+### 3.1a The signal board, Nights 1–7 (canon — proves the hook's nightly scarcity)
+
+Slots: **2/night; Night 4 (storm) drops to 1.** Signals persist on the board until expiry; every night offers **at least slots + 1** competing signals. Categories: W = weather, V = Signal 45 verification, T = trade, D = distress, P = personal. Every signal has two authored branches (heard / unheard) and a payoff touching at least one ledger mechanically.
+
+| Signal | Category | On board | Heard payoff (mechanical) | Unheard resolution |
+|---|---|---|---|---|
+| W1 first ash front | W | N1–N2 | Day-2 prep discount on seals | Short-warning tier only |
+| W2 storm band: front forming | W | N2–N3 | Days-ahead forecast of the Day 4–5 storm (pre-stage seals, safe run scheduling) | Storm arrives on the free one-phase telegraph only |
+| W3 storm tail | W | N4–N5 | End-time known; Day-5 recovery planned cheaply | Extra sealed phase wasted |
+| W4 clear window | W | N6–N7 | Final-prep window confirmed for Relay Night | Conservative (costlier) final day |
+| V1 Signal 45 carrier check | V | N1–N7 | Verification stage progress | Rumor stays rumor |
+| V2 Magpie's counter-schedule | V | N3–N5 | Cross-check yields a Depot 9 frequency detail → reduces antenna-wire run risk | Magpie's doubt lands unanswered (Accord friction at Relay) |
+| V3 carrier anomaly | V | N5–N6 | Feeds event 17; **proof shared at the canteen grants Accord; alters Sable's Relay-eve prices** | Anomaly unexamined; Relay options unannotated |
+| V4 pre-relay calibration | V | N7 | Best reception posture (stacks with wire splice) | Static-degraded relay text |
+| T1 Sable's approach beacon | T | N1–N3 | Known manifest + fair prices at first arrival (event 10) | Blind trade; counterfeit-filter check harder (event 14) |
+| T2 manifest beacon | T | N3–N4 | Event 11 manifest shift in player's favor | Standard manifest |
+| T3 Sable return beacon | T | N5–N6 | Relay-eve visit with requested goods | No second visit |
+| D1 Foundry Line distress | D | N2–N3 | Day-6 arrivals come guided: healthier, **one provisionable as a second runner** | They arrive anyway — worse off, one fewer (event 9) |
+| D2 Marrow Street call (weak) | D | N3–N5 | Clinic run opens as *answered call* (see location 3) | Cold discovery framing |
+| P1 missing-persons band (Teo) | P | N2–N6 | Event 16 payoff; Teo's Strain/reliability arc; **warm branch reachable** | Teo's Mark risk; conflict escalation |
+| P2 brother follow-up thread | P | N7 | Relay-eve resolution beat for Teo's arc | Thread left open (epilogue slot) |
+
+*(15 authored signals + the scripted Relay broadcast itself. Board totals per night — N1: 3 offers/2 slots · N2: 5/2 · N3: 6/2 · N4: 4/1 · N5: 5/2 · N6: 4/2 · N7: 3/1 + scripted relay. The scarcity requirement holds every night, and on ≥4 nights the top offers force a cross-category tradeoff.)*
 
 **Trader (1):** Linewalker Sable — walks the tunnels between holdouts; manifest and prices react to monitored beacon intel.
 **Faction (1):** The Tidemill — harbor commune around a tidal generator; appears via envoy visit and the clinic consequence chain.
@@ -81,21 +112,23 @@
 | 3 | Brownout night (if #1 unaddressed) | Utility | ⛓ from 1 |
 | 4 | Cistern contamination scare (boil order decision) | Utility | |
 | 5 | Teo's radio-time petition | Human | ⛓ → 16 |
-| 6 | Ration skim discovery (arbitration: accuse, watch, or let lie) | Human | |
-| 7 | Ash's nightmares (Mark aftermath of clinic choice) | Human | ⛓ from 13 |
+| 6 | Ration skim discovery — **Maren is the discoverer** (arbitration: accuse, watch, or let lie; ordering her to suppress it crosses her value → "Cooked Ledger" Mark) | Human | ⛓ Toll Gate telegraph |
+| 7 | Ash's nightmares (Mark aftermath of clinic choice; her clinic Mark's triage penalty active while unaddressed) | Human | ⛓ from 13 |
 | 8 | Imka's overwork collapse telegraph (fatigue warning → collapse if ignored) | Human | ⛓ |
-| 9 | First gate arrival: two strangers from the distress call you did/didn't monitor | Visitor | ⛓ from radio choice |
+| 9 | First gate arrival: the Foundry Line distress resolves — guided arrivals (D1 heard: healthier, one provisionable as a second runner) or unguided (unheard: worse off, one fewer) | Visitor | ⛓ from D1 radio choice |
 | 10 | Sable's first arrival (trade tutorial) | Visitor/trade | |
 | 11 | Sable's manifest shift (reacts to beacon intel; scam-filter check if unmonitored) | Visitor/trade | |
 | 12 | Tidemill envoy visit (introduction + a request) | Faction | ⛓ → 13 |
-| 13 | Clinic bill: squatters at the gate (consequence of Marrow Street choice) | Faction | ⛓ from run |
+| 13 | Clinic bill: the Tidemill at the gate — scene differs across **all four** clinic resolutions (aid/barter/take/leave), and its temperature reflects whether D2 was ever heard | Faction | ⛓ from run + D2; Toll Gate telegraph on the take-then-refuse path |
 | 14 | Counterfeit filter cartridges in a trade lot | Trade | |
-| 15 | Magpie's broadcast (doubt event; verification fork) | Radio | |
-| 16 | Missing-persons band hit (Teo thread payoff — ambiguous) | Radio | ⛓ from 5 |
+| 15 | **Magpie's first broadcast — moved to Day 1–2 as an unavoidable beat (D-026):** the doubt frames the whole week; the Listening Post's verification board is visible (and mostly locked) from Day 1 | Radio | |
+| 16 | Missing-persons band hit (Teo thread payoff — **a genuinely warm branch is reachable**: the brother alive at a named holdout, with reachability the open question) | Radio | ⛓ from 5 |
 | 17 | Signal 45 carrier anomaly (verification clue) | Radio | |
 | 18 | Storm-band forecast event (the telegraph for #2) | Radio | |
 | 19 | Depot 9 aftermath: injury triage / dog-bitten runner | Expedition | |
-| 20 | **Relay Night** (finale: reception quality + verified facts + Accord shape the choice scene) | Finale | closes 5, 15, 17 |
+| 20 | **Relay Night** (finale: reception quality + verified facts + Accord shape the choice scene; at 2+ verified facts the choice gains a third, knowledge-annotated option, and a key resident visibly advocates or objects in-scene) | Finale | closes 5, 15, 17 |
+
+**Failure-telegraph mapping (non-event content, D-028):** the *surface-exodus* axis telegraphs through the events 1 → 3 → brownout chain plus storm damage states; the *Toll Gate* axis telegraphs through event 6's suppression path and event 13's take-then-refuse path, each stamping an explicit Accord warning card. The two failure epilogue cards are enumerated non-event content (like the warm-beat class), inside the locked event count of 20.
 
 ### 3.3 Vertical-slice feature table
 
@@ -105,22 +138,27 @@
 |---|---|---|---|---|---|
 | Four-phase day loop & time model | The rhythm; safe stops; no offline anxiety | Save system | M | Phase transition presentation ×4 | A full day playable in ≤12 min; autosave at each boundary; kill-app-anywhere resumes correctly |
 | Station cutaway view & navigation | Pillar 1 readability | Camera/zoom framework | M | 3-level blockout, 8 rooms | All 8 rooms + all utility states readable at overview zoom on a 6.1" phone |
-| Utility network (abstract) | Cascade drama, forecasting | Cutaway view | L | 5 subsystem states ×3 damage stages | Scripted Day-4 cascade passes through visible intermediate states; player can avert it 3 ways |
-| Resource production/consumption | Scarcity that forces prioritization | Utilities, assignments | M | 5 resources, per-room rates | Stockpile trajectories visible; a deliberate 2-day water deficit is survivable via 2+ distinct plans |
+| Utility network (abstract) + charge load-priority board | Cascade drama, forecasting, a standing daily allocation verb | Cutaway view | L | 5 subsystem states ×3 damage stages; load-priority UI | Scripted Day-4 cascade passes through visible intermediate states; player can avert it 3 ways, **each optimal under at least one reachable Day-4 state (documented in the tuning sheet); no single response chosen by >70% of testers** |
+| Resource production/consumption | Scarcity that forces prioritization | Utilities, assignments | M | 5 resources, per-room rates | Stockpile trajectories visible; a deliberate 2-day water deficit is survivable via 2+ distinct plans; **at least two further deficit windows (Meds post-Depot-9, Charge pre-storm) occur in normal play; telemetry shows the player never banks >X days of buffer in all five resources at once (X set at systems stage); the R-11 safety valve fires at most once per slice and never erases an active deficit** |
 | Survivor sim (needs ×4, aptitudes ×4) | Pillar 2 | — | L | 4 survivors, animation set, ledger pages | Swapping any two survivors' assignments produces measurably different outcomes and at least one different bark/event |
 | Assignment & work orders | The core verb | Survivor sim, rooms | M | Order UI, acknowledgment barks | Any order issued in ≤3 taps from overview; refusal states function |
-| Strain & Marks | Human ledger memory | Survivor sim | M | Mark definitions ×6 min. | Ash's clinic Mark and Teo's refusal Mark both alter later behavior observably |
+| Strain & Marks | Human ledger memory | Survivor sim | M | Mark definitions ×6 min., **each carrying ≥1 mechanical field (work / refusal / radio / ending hook) — never text alone** | Ash's clinic Mark (triage penalty + hardened refusal) and Teo's refusal Mark (run reliability) both alter later behavior observably; **Strain's three named effects (accident odds, delegated reliability, refusal likelihood) each verified in logs** |
 | Accord (community meter) | Two-ledger stakes | Strain/Marks, events | M | Threshold scenes ×2 (warm/fractured) | Accord passes a threshold in normal play at least once; the withheld/granted canteen scene triggers correctly |
-| Crafting (12 items, queue) | Preparation agency | Resources, Fitters' Shop | M | 12 recipes, icons | Craft-to-use chain (wire → antenna repair → reception) completable by Day 6 |
-| Listening Post (slots, 6 categories, expiry) | **Signature hook** | Charge, events | L | ~14 authored signals across 7 days | Every night ≥1 more worthwhile signal than slots; ≥2 ignored signals visibly resolve off-screen later |
-| Signal 45 verification track (slice-length) | Hook payoff; ending texture | Listening Post | M | 3 verification stages of content | Relay Night scene text provably differs across 0/1/2+ verified facts |
+| Crafting (12 fabrication orders in the work-order system) | Preparation agency **under input scarcity** | Resources, Fitters' Shop | M | 12 recipes, icons | Craft-to-use chain (wire → splice → reception) completable by Day 6, and completing it **demonstrably requires deferring/skipping ≥1 survival craft in the same window**; slice-total salvage income supports at most ~60–70% of the worthwhile catalog by Day 7 |
+| Listening Post (2 slots, 5 categories, offer-board persistence, expiry) | **Signature hook** | Charge, events | L | **15 authored signals × 2 branches (~30 payoff units) per the §3.1a board** | The §3.1a board holds: every night offers ≥ slots+1; ≥4 of 7 nights force a cross-category tradeoff; ≥2 ignored signals visibly resolve off-screen later; every category's payoff touches a ledger mechanically |
+| Signal 45 verification track (slice-length) | Hook payoff; ending texture **and near-term currency** | Listening Post | M | 3 verification stages of content | Relay Night scene provably differs across 0/1/2+ verified facts **including a third choice option at 2+**; ≥1 verified fact produces a mechanical (non-textual) effect before Relay Night (V2's run intel or V3's Accord/prices) |
 | Nightrun planning & provisioning | Pillar 4 ritual | Crafting, survivors | M | Planning UI, risk preview | Preparation measurably changes both active difficulty and delegated outcomes |
-| Active nightrun (3 locations) | Optional intensity | Planning; location art | L | 3 authored locations, run verb set | Each location completable in 3–6 min; interruption-safe; no reflex-mandatory segment |
-| Delegated nightrun resolution | Accessibility; session flexibility | Planning | M | Outcome-report templates | Delegating every run still yields a completable, coherent 7 days |
+| Active nightrun — "on the wire" (shared node graphs) | Optional intensity, judgment-under-time | Planning; location art | L *(split for tracking: traversal/node framework M · hazard-node set M · standoff template M · run-save M)* | 3 authored locations on one hazard-node system + one standoff template (verbal/nonverbal variants); run verb set | Each location completable in 3–6 min; interruption-safe (node-checkpoint convert); no reflex-mandatory segment (≥1.5 s floor); no per-location bespoke mechanics |
+| Delegated nightrun resolution + gate calls | Accessibility; session flexibility; moral agency preserved | Planning | M | Outcome-report templates: **per location ~3 outcome tiers × prep/priority variants ≈ 9–12 report blocks (~30 slice total)**, clinic's 4 resolutions each represented; gate-call decision cards | Delegating every run still yields a completable, coherent 7 days **in which the player still makes the clinic choice via gate call**; paired simulation (delegated resolver vs. scripted-bot active play, n≥100 per location/prep tier) shows expected yields and injury rates within the declared ±10% band |
 | Return & triage | Consequence ritual | Aid Car, needs | S | Triage scene staging | Injuries from run choices arrive, are treatable, and cost Meds/time believably |
 | Trader (Sable) | Economy relief valve | Intel, resources | M | Manifest tables ×3 states | Manifest provably differs with/without beacon monitoring; counterfeit event functions |
-| Faction (Tidemill) & gate visitors | Outside pressure | Events, Accord | M | Envoy + clinic-bill scenes | The clinic decision changes the Day-6 gate scene in all three choice branches |
-| Event system (20 events, 2-crisis cap, telegraphs) | The week's drama | Most systems | L | 20 authored events | All 20 firable; cap never exceeded; every crisis shows its telegraph first |
+| Faction (Tidemill) & gate visitors | Outside pressure | Events, Accord | M | Envoy + clinic-bill scenes (4 variants) + NPC cast per §3.1 art tiers | The clinic decision changes the Day-6 gate scene in all four resolutions (aid/barter/take/leave), with temperature reflecting D2 monitoring |
+| Event system (20 events, 2-crisis cap, telegraphs, register tags) | The week's drama | Most systems | L | 20 authored events + register tags + warm-beat class + 2 failure cards | All 20 firable; cap never exceeded; every crisis shows its telegraph first; **scheduler-enforced hope/recovery rules verified (a hope-register beat in every rolling 3-day window on both Accord tracks; sealed-storm days followed by recovery; Relay Night never coincides with a storm)** |
+| Restoration projects (wire splice, Level-1 seal) | Building agency; hope beats | Resources, labor, phases | M | 2 project definitions + staged visuals | Both completable; each requires resources + labor + elapsed phases; completion visibly changes room and function (07 §8) |
+| Bark system & budget | Personhood texture; refusal legibility | Survivor sim, events | S–M | Per resident: ~10 work acks, ~8 need/Strain lines, ~6 event-referencing, ~4 Mark/refusal-conditional (**~110 lines total**) + condition-tag selection | Swap test (07 §5) has a known content basis; refusals self-explain in one screen |
+| In-fiction onboarding (Days 1–2) | New-player path with no tutorial screens | All slice systems | M | ~8–10 scripted guidance beats + gated hint layer + restart skip | 07 §1's new-player gate is testing authored content, not hope |
+| Readability blockout tier | Testable identity before final art | Art direction (09) | M | Proxy geometry + final lighting rig + ≤3 identifying props/signage per room + character color keys (**"blockout" defined**; final textures excluded) | 07 §2's room-identification gate runs against this tier |
+| Test harness & telemetry | Acceptance criteria are runnable | Engine selection | M–L | Sim-swap rig, 500-day scheduler test, save-kill-restore automation, n≥100 delegation sims, UI/touch audit, text-scaling screenshot audit, color-blind pass, monkey test, resource telemetry | Every automated criterion in 07 has a named rig; anything not automatable for the slice is downgraded in 07 to a written manual protocol |
 | Relationship conflict (Teo/Imka) | Pillar 2 proof | Events, radio | M | 5-beat arc content | Arc reaches distinct outcomes from ≥3 different player approaches |
 | 7-day mini-campaign & epilogue | Complete arc; slice proof | Everything | M | Epilogue card, variant text | New player reaches Relay Night in 60–100 min total; epilogue reflects ≥4 tracked state facts |
 | Save/reload | Trust | All state | M | — | Save-kill-restore at 20 random points produces no observable divergence |
@@ -130,7 +168,7 @@
 
 ## 4. Full base game (delta from slice — summary)
 
-Act structure ×3 (35–50 days); survivors to 8–12 with arrival arcs; rooms to ~16 via restoration ladder; craftables to ~30–40; locations to 18–24 across three tunnel branches; factions to 3 (Tidemill, the Junction voice's crews, the Linewalkers as a network); events to 120–180 with act-gated pools; the five ending frames + two failure states; antenna/capacity ladder; storm seasons; commitment gates; cloud save; notification opt-in; full audio identity; store with single unlock at the Chapter One boundary (Day 7 — the slice *is* the free chapter's shape, by design).
+Act structure ×3 (~45 days nominal, finale window 40–50); survivors to 8–12 with arrival arcs; rooms to ~16 via restoration ladder; craftables to ~30–40; locations targeted at 18–24 across three tunnel branches **gated on slice-measured cost-per-location** (fallback 10–14 with deeper state evolution); factions to 3 (Tidemill, the Junction voice's crews, the Linewalkers as a network); events to 120–180 with act-gated pools under the same register-tag/hope-floor scheduler; per-commitment project tracks (railworthiness / deep-station / shared-line / chokepoint); the five ending frames + two failure states; antenna mast capacity ladder and the transmission/active-inquiry apex; storm seasons; commitment gates; cloud save; notification opt-in; full audio identity; store with single unlock at the Chapter One boundary (Day 7 — the slice *is* the free chapter's shape, by design, with the D-033 enforcement clause: the Relay Night choice, epilogue, and safe-stop exhale are delivered in full before any store surface may appear).
 
 ## 5. Post-launch possibilities (unpromised)
 

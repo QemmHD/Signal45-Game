@@ -1,7 +1,7 @@
 # 02 — GAMEPLAY LOOPS, EMOTIONAL RHYTHM, AND CAMPAIGN STRUCTURE
 
 **Status:** LOCKED at structural level. Numeric tuning values are placeholders for the systems stage; structure and phase names are canon.
-**Prompt-2 note (D-040):** the loop and time system are now specified in detail in **11** (loop hierarchy, time rules, resource cadence, work orders) and **12** (phase/session flow); the first session in **13**; the seven-day plan and its executable evidence in **14/15**. Phases carry plain-language labels in UI ("DAY SHIFT — Swelter" etc.); durations cited here are superseded by 12 §2's model-validated table. This document remains the structural canon for the campaign loop, emotional rhythm, and acts.
+**Prompt-2 note (D-040):** the loop and time system are now specified in detail in **11** (loop hierarchy, time rules, resource cadence, work orders) and **12** (phase/session flow); the first session in **13**; the seven-day plan and its executable evidence in **14/15**. Phases carry plain-language labels in UI ("DAY SHIFT — Swelter" etc.); phase durations and session math here are superseded by 12 §1–2's model-validated figures. This document remains the structural canon for the campaign loop, emotional rhythm, and acts.
 
 ---
 
@@ -37,10 +37,10 @@ A player with 5–8 minutes completes one to two phases; a typical day with a de
 
 | Phase | Fiction | Player activity | Dominant ledger | Typical length |
 |---|---|---|---|---|
-| **Swelter** | Surface lethal; heat load peaks; station works | Charge load-priority board, over-subscribed work/fabrication/**works** orders (deferral is a choice), **construction and expansion decisions (survey, clear, build, upgrade, repurpose — 10 §3–4)**, visitor negotiations, conflict arbitration | Physical, with human interrupts | 2–5 min |
-| **Slack** | Dusk; heat falls; the day's one true planning window | Radio schedule (the signature decision), nightrun planning and provisioning, tomorrow's priorities | Information | 2–3 min |
+| **Swelter** | Surface lethal; heat load peaks; station works | Charge load-priority board, over-subscribed work/fabrication/**works** orders (deferral is a choice), **construction and expansion decisions (survey, clear, build, upgrade, repurpose — 10 §3–4)**, visitor negotiations, conflict arbitration | Physical, with human interrupts | 4–7 min (12 §1) |
+| **Slack** | Dusk; heat falls; the day's one true planning window | Radio schedule (the signature decision), nightrun planning and provisioning, tomorrow's priorities | Information | 1–3 min (12 §1) |
 | **Nightrun** | Cool dark; the door opens | Active "on the wire" run (3–6 min) or delegate-and-advance — delegated runs surface authored choice nodes as **gate calls** (radio decision cards), so moral decisions are never made for the player; meanwhile the station runs its quiet shift | Expedition | 0–6 min |
-| **Graymorn** | Pre-dawn return; the accounting | Return and triage, arrivals at the gate, event consequences land, stationmaster's log | Human | 2–3 min |
+| **Graymorn** | Pre-dawn return; the accounting | Return and triage, arrivals at the gate, event consequences land, stationmaster's log | Human | 2–4 min (12 §1) |
 
 Feeds upward: each day writes deltas to stockpiles, utility states, needs, bonds/Marks, intel confidence, and faction posture — the campaign's working memory.
 

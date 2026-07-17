@@ -35,7 +35,7 @@ Reviewed in one sentence: *arrive, fix or build one real thing, leave at an exha
 
 ### 2.4 The in-game day loop
 
-Four phases (plain labels + canon names, D-040): **DAY SHIFT — Swelter → EVENING WINDOW — Slack → NIGHT OPERATION — Nightrun → RETURN & REPORT — Graymorn.** Full definitions in 12. Model-validated durations: delegated day **8–12 min** (model: ~10.4–11.6), active-run day **11–16 min** (model: ~14.9), Day 1 ~12 min at guided pace.
+Four phases (plain labels + canon names, D-040): **DAY SHIFT — Swelter → EVENING WINDOW — Slack → NIGHT OPERATION — Nightrun → RETURN & REPORT — Graymorn.** Full definitions in 12. Model-validated durations: delegated day **8–12 min** (model: 10.6–11.6), active-run day **11–16 min** (model: 14.9), Day 1 ≈ 11 min at guided pace, the relay finale ≈ 13 min.
 
 ### 2.5 The campaign loop
 
@@ -60,7 +60,9 @@ One clock, one rule: **simulated time advances only while the app is active and 
 | **Normal** | 1× | Default; residents visibly work |
 | **Fast** | 3× | Letting queued work run when no decision is pending |
 
-**No "very fast" tier in the slice.** Two active speeds cover the need; a 10× tier would blur the visible-work identity (Pillar 6) and invite skipping telegraphs. Revisit only with playtest evidence of dead waiting (R-07/bored-player watch item). Fast automatically drops to Normal when any warning state activates.
+**No "very fast" tier in the slice.** Two active speeds cover the need; a 10× tier would blur the visible-work identity (Pillar 6) and invite skipping telegraphs. Revisit only with playtest evidence of dead waiting. Fast drops to Normal **once per warning onset** (not continuously while a warning persists — Fast stays usable during a long grind with a standing warning).
+
+**Sim rate and end-shift semantics (D-042):** at Normal, **1 real second ≈ 1 simulated minute** (a 4–7-minute Swelter ≈ 4–7 simulated hours of station activity; Fast = 3×). **Ending a shift resolves remaining queued work at accelerated resolution** — banner/modal interrupts still fire, and the shift report itemizes what completed — so the WU economy never depends on real-time watching, an impatient player never silently under-produces, and the no-detached-timer contract holds (the work is still resident-performed and visible while it runs). The safe-stop rhythm is measurable: 07 §1 gains a max-interval criterion (≤5 min between consecutive safe-stop markers in a recorded playthrough).
 
 ### 3.2 Interruption tiers (what pauses, what waits)
 
@@ -71,7 +73,9 @@ One clock, one rule: **simulated time advances only while the app is active and 
 | **Queue** (badge) | Joins the ≤3-badge queue for the player's convenience | Completions, arrivals at the gate not demanding immediate answer, minor need thresholds |
 | **Phase report** | Held for the next report (Graymorn log or phase close) | Routine production tallies, minor mood shifts, background flavor |
 
-Routine completions never modal-interrupt. The event scheduler's caps stand: ≤1 major crisis demanding immediate attention, ≤3 urgent decisions live, ≤2 active crises overall.
+Routine completions never modal-interrupt. **If an auto-pause-tier event fires while the build lens is open, the simulation pauses immediately even though the card queues** (pause chip: "Paused — urgent card waiting"); the card presents on lens exit. Banner/queue-tier events queue without pausing.
+
+**Attention caps (D-042 — new caps, now with an owner):** ≤2 active crises (the pre-existing D-019 scheduler cap) · **≤1 major crisis demanding immediate modal attention** · **≤3 urgent (banner-tier) decisions live** — these two are introduced here as scheduler rules, tested alongside the 2-crisis cap in 07 §13's rig. Mapping to 09 A.9's badge budget: urgent banners and queued badges are distinct surfaces; worst-case legal attention load is 1 modal + 3 banners + 3 queued badges, and the modal always fronts alone.
 
 ## 4. Resource cadence (LOCKED structure)
 
@@ -88,7 +92,7 @@ Three categories, three change-rhythms — no hidden formulas:
 | Salvage | **Reserved when a project is confirmed, consumed in visible stages** | Clearing/draining yields, nightruns, trade |
 | Charge | Continuous drain by powered loads (visible on the board) | Flywheel duty cycles, flywheel cells |
 
-**HUD forecast contract (each stock, one tap):** current amount · net trend arrow · "≈ N days to shortage at current use" · top consumer · top idle/underperforming producer. Shortage diagnosis is a read, never a hunt.
+**HUD forecast contract (each stock, one tap):** *steady stocks* (Water, Rations, Charge): current amount · net trend arrow · "≈ N days to shortage at current use" · top consumer · top idle/underperforming producer. *Lumpy stocks* (Meds, Salvage — consumed in commitments, not rates): **free vs. reserved** shown on the HUD chip itself ("8 (2 free)"), the list of known upcoming draws (booked treatments, confirmed project stages, queued crafts), and the earliest committed draw that would fail. Shortage diagnosis is a read, never a hunt — including "can I afford to start this project right now?" (07 §3 tests it).
 
 ### 4.2 Flow / capacity systems (never collectible currencies)
 Electricity, ventilation, heat, water pressure, sanitation, structural support = **production vs. demand vs. capacity vs. priority** on the trunk/node network (10 §8). They update continuously while simulation runs, hold state while paused, and telegraph before failing (Pillar 1). The load-priority board (≤8 load-class rows) is the standing control; per-room shutoffs live on room panels.
@@ -119,13 +123,17 @@ Construction, clearing, draining, reinforcement, repair, crafting (fabrication),
 
 **Visible-work contract:** materials are carried to site; workers start, and the environment shows stages (rubble shrinks, framing rises, waterline falls); work pauses visibly for fatigue, hazard, missing supplies, or utility loss with a banner naming the reason; a second qualified worker accelerates projects up to the max-useful cap; completion changes the room physically and functionally. **"Press build and wait" cannot occur** — there is no detached timer anywhere in the model.
 
-**Work units:** 1 WU ≈ 45 simulated minutes of focused work. A resident's day yields ~7.5 WU gross; the model applies an 0.85 efficiency factor (travel, switching). Full arithmetic and validation: 15.
+**Cancellation and reservation policy (D-042):** materials consumed at completed stages are non-refundable; the unconsumed reserve refunds 100%; cancellation's price is the sunk labor plus a visible-disruption echo (mirroring the two-sided repurpose rule). Events and bills draw on total holdings, taking reserved stock **last** and pausing the affected order with a named banner — reservation is never a shield, and scarcity telemetry counts reserved stock as held. Cancel/reissue churn yields zero net gain (07 §9 tests it).
+
+**Task class is authored, not computed:** an order's class (placement / short install / project / major reclamation) is set per order type at definition time, never derived from remaining WU at runtime; player-scoped sub-orders inherit the parent's class, and no player action can decompose a project into short installs (anti-cheese, 15 §1).
+
+**Work units:** 1 WU ≈ 45 simulated minutes of focused work — **design vocabulary only; never shown on screen** (players see plain effort language: "about half a shift"). A resident's day yields ~7.5 WU gross **at matched aptitude** — the aptitude modifier band (matched 1.0× / secondary ~0.8× / off-aptitude ~0.6–0.7×, per D-031 and 07 §5) is a systems-stage layer the feasibility model declares as a limitation. The model applies an 0.85 efficiency factor (travel, switching). Full arithmetic and validation: 15.
 
 ## 6. Resident time, priorities, and refusal
 
 **A resident's day:** wake → morning meal → Swelter work blocks (the main labor supply) → evening meal → night (sleep, or run, or quiet-shift watch) → rest recovery. Treatment, personal needs, and scenes claim blocks visibly.
 
-**Priorities:** five tiers — **Emergency · High · Normal · Low · Suspended** — set per works order (and per load-class on the power board), not per footstep. Standing orders absorb anything done three times (Anti-pillar 4).
+**Priorities:** five tiers — **Emergency · High · Normal · Low · Suspended** — set per works order (and per load-class on the power board), not per footstep. Standing orders absorb anything done three times (Anti-pillar 4). **Essential duties have a floor (D-042):** cooking, water duty, and cleaning can be *reduced* (rationing — a real emergency lever with its own costs) but **suspending one starts a telegraphed consequence chain** on the six-step ladder (cleanliness → accident-odds multiplier on works, infection risk at treatment starts, Strain drift) whose price exceeds the labor saved — modeled and verified net-negative in 15 §3's neglect run.
 
 **Task selection:** residents pick their next task by role fit → skill → distance → urgency → risk → fatigue → traits → existing reservation → player priority. **Commitment rule (anti-thrash):** a resident finishing a task's current stage will not abandon it for a merely higher-scored task; tasks ≥70% complete are abandoned only for Emergency-tier interrupts. Reservations persist across interruptions.
 
@@ -137,7 +145,7 @@ The signal-board loop stands as specified (01 Pillar 3, 03 §3.1a): signals appe
 
 ## 8. Nightrun integration (support role, restated)
 
-The runner's absence is real: no construction, repair, guarding, treatment, production, scenes, or emergency response from them that night, and a −3 WU morning-after cost (model-validated). Equipment taken is unavailable inside. Everything comes home: injuries, fatigue, intel, rescued people, goods, promises, faction consequences. Active mode is "on the wire" decision-making (route, timing, continue/withdraw, tools, noise, contact, enter/bypass, help/ignore, reveal/conceal, carry risk, radio contact, abandon objective) — never steered movement. Delegated mode resolves the same node graph with gate calls preserving every moral choice; it trades detail for speed and leans on preparation and trust — **it is not a punishment mode** (±10% equivalence band, 07 §10). Active runs occupy ≤ ~30% of a week's playtime by construction (model: 19.8 of 99.9 minutes = 20%).
+The runner's absence is real: no construction, repair, guarding, treatment, production, scenes, or emergency response from them that night, and a −3 WU morning-after cost (model-validated). Equipment taken is unavailable inside. Everything comes home: injuries, fatigue, intel, rescued people, goods, promises, faction consequences. Active mode is "on the wire" decision-making (route, timing, continue/withdraw, tools, noise, contact, enter/bypass, help/ignore, reveal/conceal, carry risk, radio contact, abandon objective) — never steered movement. **Node-quantized run accounting (D-042):** the air/heat clock and consumables checkpoint at each node entry; interruption rewinds to the checkpoint exactly (being interrupted is free), and node re-entry is deterministic under a persisted seed (same hazards, same offers, same outcomes for the same calls) — kill-and-retry yields nothing. Delegated mode resolves the same node graph with gate calls preserving every moral choice; it trades detail for speed and leans on preparation and trust — **it is not a punishment mode** (±10% equivalence band, 07 §10). Active runs occupy ≤ ~1/3 of a week's playtime by construction (model: three scripted runs = 13.5 of 90.1 minutes = **15%**).
 
 ## 9. Failure and recovery (process, never surprise)
 

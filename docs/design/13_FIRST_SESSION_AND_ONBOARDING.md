@@ -1,7 +1,7 @@
 # 13 — FIRST SESSION AND ONBOARDING
 
 **Stage:** Prompt 2. **Status:** LOCKED at beat level; exact copy is the narrative stage's work.
-**Contract:** the first session teaches through real play — no encyclopedia screen, no forced tour, no system introduced before it is needed. Timing targets are acceptance criteria (07 §1 and the D-040 additions): first meaningful decision ≤ 60 s · first worker assignment ≤ 90 s · first visible repair/construction activity ≤ 2 min · first completed improvement ≈ 4–6 min · first evidence that layout affects people within the session or immediately after · safe autosaved stop by ≈ 8–12 min.
+**Contract:** the first session teaches through real play — no encyclopedia screen, no forced tour, no system introduced before it is needed. Timing targets are acceptance criteria — **now actually encoded in 07 §1 (D-042)**, with the measurement protocol defined there (median across the first-time cohort; clock starts at first player input, so the 30-second cold open does not eat the 60-second budget): first meaningful decision ≤ 60 s · first worker assignment ≤ 90 s · first visible repair/construction activity ≤ 2 min · first completed improvement ≈ 4–6 min · first evidence that layout affects people within the session or immediately after · safe autosaved stop by ≈ 8–12 min.
 
 ---
 
@@ -11,13 +11,13 @@
 
 **0:30 — Notice and inspect (teach: tap = inspect; pause chip).** The Scrubber Gate's chalk plate pulses (the one live badge). Tapping opens its panel: *"Intake damaged — Air margin 2 days. Repairable."* The pause chip is pointed out once: the world waits while you read.
 
-**0:50 — First meaningful decision (≤ 60 s ✓).** The panel offers the repair works order — cost quoted (2 salvage, ~4 WU), two staffing options (Imka alone / Imka + Teo faster). One tap to choose, one to confirm.
+**0:50 — First meaningful decision (≤ 60 s ✓).** The panel offers the repair works order — cost quoted in plain language (**2 salvage, about half a shift's work** — WU is design vocabulary and never appears on screen, D-042), two staffing options (Imka alone / Imka + Teo faster). One tap to choose, one to confirm.
 
 **1:20 — First assignment (≤ 90 s ✓).** Confirmation bark ("On it."); Imka walks to the Gate, toolbag visible. The works queue chip appears — one entry, progress ring.
 
 **1:50 — Visible work (≤ 2 min ✓).** Sparks, a removed panel, the first stage tick. The player is prompted to try **Fast** once, and sees it drop back to Normal when the next beat arrives.
 
-**2:10 — Second thread: water (teach: HUD forecast).** Maren flags the tank: tapping Water shows the forecast contract — amount, trend, *"≈ 3 days"*, top consumer. The fix offered is a **short install** (purifier cartridge at the tank — 1 WU): teaches that not everything is a project.
+**2:10 — Second thread: water (teach: HUD forecast).** Maren flags the tank: tapping Water shows the forecast contract — amount, trend, *"≈ 3 days"*, top consumer. The fix offered is a **short install** (purifier cartridge at the tank — a few minutes' work): teaches that not everything is a project. *(A third guided thread — stabilizing the Flywheel — fills the shift's remaining hands: Day 1 is fully productive, per the model.)*
 
 **3:00 — The camp's need (teach: placement class).** Ash asks where the injured stranger cot should go *(placement, 0 WU, undoable)*: two spots — near the warm Flywheel wall (rest bonus, noise) or by the stair (quiet, colder). **First layout-affects-people evidence** — whichever is chosen, a one-line reaction lands that evening.
 

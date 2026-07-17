@@ -13,7 +13,7 @@
 - **Entry:** from Graymorn's report confirmation (or campaign start). Autosave on entry.
 - **Purpose:** shelter management — construction/reclamation, repair, production, treatment, assignments, utility management (load board), visitor handling, internal events.
 - **Available actions:** works orders (all five workflows — see §4), load-priority board, room/ledger inspection, event cards, visitor negotiations, arbitration, crafting (fabrication orders), speed control.
-- **Auto-pause:** modal cards per the tier table (11 §3.2); build lens open = cards queue; inspection = 25% slow.
+- **Auto-pause:** modal cards per the tier table (11 §3.2); build lens open = cards queue **but auto-pause-tier events still pause the simulation immediately** (the card waits at the lens exit); inspection = 25% slow.
 - **Safe stops:** after every confirmed decision (2–5 min rhythm); explicit safe-stop marker after each completed works stage and each resolved card.
 - **Exit:** player confirms "end shift" (prompted when the works queue is set and no modal is open) → autosave.
 - **Duration:** **4–7 min** ordinary play (model day: total 10.4–11.6 with all phases; Swelter is the largest share). Unlimited paused time.
@@ -54,12 +54,14 @@
 
 | Day type | Target | Model result |
 |---|---|---|
-| Delegated full day | 8–12 min | ~10.4–11.6 min (week avg 11.4) |
-| Active-run day | 11–16 min | ~14.9 min |
-| Storm day (no run) | — | ~10.4 min |
-| Day 1 (guided) | ≤15 min (07 §1) | ~12.0 min |
-| Seven-day totals | 60–100 min | 80.1 delegated / 99.9 all-active |
-| Safe-stop spacing | every 2–5 min | structural (per decision/stage/phase) |
+| Delegated full day | 8–12 min | 10.6–11.6 min (week avg 11.5) |
+| Active-run day (nights 2/3/5) | 11–16 min | 14.9 min |
+| Storm day (no run) | — | 11.0 min |
+| Day 1 (guided) | ≤15 min (07 §1) | 11.1 min |
+| Day 7 (relay finale, +3 min scene) | — | 13.0 min |
+| Seven-day totals | 60–100 min | **80.2 delegated / 90.1 all-active** |
+| Active share of playtime | ≤ ~1/3 | 15.0% (3 runs × 4.5 min) |
+| Safe-stop spacing | every 2–5 min | structural + measured (07 §1's ≤5-min max-interval criterion) |
 
 ## 3. Mobile stopping points and interruption matrix
 
@@ -72,7 +74,8 @@ Every cell below is a hard rule; 07 §16's save-kill-restore rig tests them.
 | Closed during construction | Snapshot incl. works stage progress | Work resumes at the same stage | No | — | Stage completions are single-commit |
 | Closed during phase transition | Transition is atomic: pre- or post-state only | Whichever side committed | No | — | Transition commit is one write |
 | Closed during radio selection | Snapshot with board open, slots un-committed | Board reopens, same offers | No | Yes — nothing heard until commit | Schedule commits once, atomically |
-| Closed during active-run decision | Last completed node + open call serialized | Call re-presented; or convert to delegated | No | Yes | Node outcomes commit exactly once (D-024) |
+| Closed during active-run decision | Last completed node + open call serialized (clock/consumables checkpointed per node) | Call re-presented; or convert to delegated; node re-entry deterministic (persisted seed — no kill-scum) | No | Yes | Node outcomes commit exactly once (D-024) |
+| Closed during **delegated** resolution | Last streamed node + any open gate call serialized | Stream continues from that node (persisted seed); answered calls never re-presented | No | Yes (open call only) | Node outcomes and gate answers serialize incrementally, exactly once; dawn commit finalizes |
 | Return after days/weeks | Last snapshot | Identical world; log recaps | **Never** | Preserved | — |
 | OS kills the app | Last snapshot (≤ seconds old) | Same as backgrounded | No | Preserved | Snapshot write is atomic (temp + rename) |
 
@@ -105,7 +108,7 @@ flowchart TD
     CONT --> DRES2["…to exit node"]
     ARES -->|interrupt/abandon| CONV["Convert: rewind to last\ncompleted node → delegated"]
     CONV --> DRES
-    DRES2 --> COMMIT["Dawn commit:\noutcomes serialized once"]
+    DRES2 --> COMMIT["Dawn commit finalizes\n(node outcomes + gate answers\nserialized incrementally, once)"]
     COMMIT --> GRAY["Graymorn: return, triage,\nstore, consequences, report"]
 ```
 

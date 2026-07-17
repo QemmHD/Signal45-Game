@@ -8,6 +8,9 @@
 
 ## 1. Complete day loop
 - [ ] A new player completes Day 1 (all four phases) in ≤ 15 minutes without external instruction, guided only by the in-fiction onboarding content budgeted in 03 §3.3 (Day 1's authored decision budget: ~8 loops, delegation pre-selected). A returning player completes a typical delegated-run day in ≤ 12 minutes.
+- [ ] **First-session micro-targets (D-042; median across the 5-tester first-time cohort, clock starting at first player input, verified from session recordings):** first meaningful decision ≤ 60 s · first worker assignment ≤ 90 s · first visible repair/construction activity ≤ 2 min · first completed shelter improvement within 4–6 min · a safe autosaved stop reached by 8–12 min.
+- [ ] **Safe-stop spacing:** across a recorded competent playthrough, the maximum interval between consecutive safe-stop markers (decision confirm, works-stage completion, or phase boundary) is ≤ 5 minutes of real session time.
+- [ ] Player-facing copy never shows internal design units: labor is quoted in plain effort language (no "WU" on any screen), per the D-040 terminology rule.
 - [ ] All four phases (Swelter, Slack, Nightrun, Graymorn) are visited in order; each phase boundary shows the safe-stop marker and autosaves (verified by file timestamp/state hash).
 - [ ] Time provably does not advance while the app is closed: state hash before backgrounding equals state hash on resume, after 1 minute and after 24 hours.
 
@@ -20,7 +23,9 @@
 - [ ] All 5 resources (Water, Rations, Charge, Salvage, Meds) have visible per-day trajectory indicators; a tester asked "will water last through Day 3?" answers correctly from the UI alone in ≥ 4 of 5 trials.
 - [ ] A scripted 2-day water deficit (Day 2–3 tuning) is survivable by at least 2 mechanically distinct plans (e.g. purifier cartridge craft vs. arcade nightrun vs. Sable trade), each verified in playthrough — and no single plan is chosen by more than 70% of the exit-test cohort.
 - [ ] At least two further deficit windows on different resources (Meds after Depot 9; Charge before the storm) occur in a normal playthrough, each with 2+ distinct answers.
-- [ ] Scarcity telemetry: across playtests, the player never simultaneously holds more than X days of buffer in all five resources after Day 1 (X set at systems stage); the R-11 safety valve fires at most once per playthrough and never erases an active deficit.
+- [ ] Scarcity telemetry: across playtests, the player never simultaneously holds more than X days of buffer in all five resources after Day 1 (X set at systems stage); the R-11 safety valve fires at most once per playthrough, never erases an active deficit, covers **material** deficits only, and its trigger (a Graymorn Day 4–5 deficit forecast crossing a named threshold, at premium prices, excluding scarcity self-inflicted by trade within the previous 48 in-game hours) cannot be farmed.
+- [ ] Lumpy-stock affordability is a read: a tester asked "can you afford to start the Aid Car conversion right now?" answers correctly from the UI alone (free-vs-reserved on the HUD chip, upcoming-draws list) in ≥ 4 of 5 trials.
+- [ ] Suspending an essential duty (cooking, water, cleaning) produces its telegraphed warning within one in-game day, and its consequence chain prices the neglect at more than the labor saved (verified against the model's neglect scenario, 15 §3).
 - [ ] Labor over-subscription holds: on every slice day, available work + fabrication orders exceed available person-phases by ≥ 25%, and the day report lists what was deferred.
 - [ ] No resource can silently go negative; hitting zero always triggers its authored consequence event, never a stalled simulation.
 
@@ -109,13 +114,14 @@
 - [ ] The epilogue card states consequences honestly (no false promises about the unbuilt full campaign).
 
 ## 16. Save and reload
-- [ ] Save-kill-restore at 20 randomized points (including mid-phase, mid-run, mid-event) produces no observable divergence from an uninterrupted control run (automated) — including the save-kill-**convert** case: killing mid-run and choosing delegation on resume resolves correctly from the last completed node.
+- [ ] Save-kill-restore at 20 randomized points (including mid-phase, mid-run, mid-event) produces no observable divergence from an uninterrupted control run (automated) — including the save-kill-**convert** case (killing mid-run and choosing delegation on resume resolves from the last completed node), a kill **between a delegated gate-call answer and dawn commit** (the answer is never re-presented, never double-committed), and a repeated kill-resume-kill loop at one active-run node (deterministic node re-entry: no outcome change across retries).
 - [ ] One save slot + autosave rotation survives forced app kill, device restart, and out-of-storage write failure (graceful error, no corrupt state).
 - [ ] A Day-7 save from build N loads in build N+1 within the slice period (migration policy exists).
 
 ## 17. Mobile controls
 - [ ] All primary touch targets ≥ 48 dp/pt with ≥ 8 dp spacing (unified spec satisfying both Apple's 44 pt and Android's 48 dp minimums); secondary chrome ≥ 28 pt; verified by automated UI audit — **including alert badges at both zoom levels** (badges render ≥ 44 pt anchored to rooms at overview, docking to chalk plates at room zoom) **and all build-lens targets (sections, bays, ghost confirms, verb-card buttons, the "all works…" expander) at every zoom where they are tappable** — overview build interaction is section-granularity only (10 §16).
-- [ ] Build-mode legibility: the lens shows its mode frame/tint and fixed exit affordance; decision cards queue while the lens is open; the monkey test cannot issue a construction order from normal mode; testers can state which mode they are in without prompting. Construction works orders commit in ≤ 6 taps including lens entry and confirm (auto-assignment default verified); Repurpose and Deconstruct are reachable on any built room in ≤ 2 taps from its verb card.
+- [ ] Build-mode legibility: the lens shows its mode frame/tint and fixed exit affordance; decision cards queue while the lens is open (with auto-pause-tier events still pausing the simulation immediately — 11 §3.2); the monkey test cannot issue a construction order from normal mode; testers can state which mode they are in without prompting. Construction works orders commit in ≤ 6 taps including lens entry and confirm (auto-assignment default verified); Repurpose and Deconstruct are reachable on any built room in ≤ 2 taps from its verb card.
+- [ ] Construction surfaces as **at most five player-facing workflows** (RECLAIM / CONNECT / BUILD / OPERATE / ADAPT, 12 §4); a UI audit confirms the sixteen internal verbs are never exposed as a flat vocabulary anywhere.
 - [ ] Reach: no interaction requires simultaneous multi-touch except pinch (button alternative exists); all primary actions (confirm, back, crew strip, alerts) sit within a one-thumb reach zone; far-side world taps are reachable by pan or via the crew strip / room list without grip change.
 - [ ] The persistent crew strip (4 portraits, thumb-reach corner — D-034) opens any resident's ledger page in ≤ 2 taps and doubles as the tap-tap assignment source; direct sprite-tap is a bonus affordance, never the required path.
 - [ ] No accidental-tap catastrophe: all irreversible choices use confirm steps; a 200-tap monkey test on any screen causes no unintended irreversible action.

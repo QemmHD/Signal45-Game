@@ -150,6 +150,17 @@ Format per entry: **Decision · Reason · Alternatives rejected · Consequences 
 
 ---
 
+## Research-integration amendments
+
+**D-021 — Platform-guidance refinements adopted from research (05, Track 7).**
+*Decision:* (a) Unified touch spec: primary targets ≥ 48 dp/pt with ≥ 8 dp spacing, secondary chrome ≥ 28 pt. (b) Text scaling: reading surfaces to 200%, dense HUD floors at 130%, body-text contrast ≥ 4.5:1. (c) Notification permission requested only when the player first schedules a reminder, framed diegetically at the Listening Post; denial costs nothing.
+*Reason:* Verified Apple HIG and Android quality guidance (05, Track 7) set stricter or more specific bars than the draft's "platform minimums" phrasing; adopting the stricter bar as one spec removes per-platform ambiguity for later stages.
+*Alternatives rejected:* Per-platform dual specs (double the audit surface); deferring to the UI stage (would let screens be designed against the looser bar).
+*Consequences:* 07 §17/§19 and 09 A.6/A.7 updated; density budgets in 09 A.9 must be validated against 200% reading-text scaling at the UI stage.
+*Assumptions:* 200% scaling is achievable on reading surfaces given the one-decision-at-a-time card design. *Revisit trigger:* UI-stage layout audit.
+
+---
+
 ## Red-team pass amendments
 
 *(Entries D-021+ are appended after the adversarial review workflow; see the stage summary for the change list.)*

@@ -86,7 +86,7 @@
 - [ ] A Day-7 save from build N loads in build N+1 within the slice period (migration policy exists).
 
 ## 17. Mobile controls
-- [ ] All touch targets ≥ 44 pt / platform minimum; verified by automated UI audit.
+- [ ] All primary touch targets ≥ 48 dp/pt with ≥ 8 dp spacing (unified spec satisfying both Apple's 44 pt and Android's 48 dp minimums); secondary chrome ≥ 28 pt; verified by automated UI audit.
 - [ ] Every base-mode interaction operable with one thumb in landscape except pinch-zoom (which has a button alternative).
 - [ ] No accidental-tap catastrophe: all irreversible choices use confirm steps; a 200-tap monkey test on any screen causes no unintended irreversible action.
 
@@ -97,7 +97,7 @@
 - [ ] Peak memory within platform comfort (no OS kills during a 30-minute soak with 5 background/resume cycles).
 
 ## 19. Accessibility baseline
-- [ ] Text scaling to 130% breaks no screen (automated screenshot audit).
+- [ ] Reading surfaces (stationmaster's log, signal texts, event cards, ledger pages) scale to 200% without loss; dense HUD elements scale to at least 130%; no screen breaks at either setting (automated screenshot audit). Body text contrast ≥ 4.5:1 against its background.
 - [ ] All color-coded states carry a redundant shape/icon channel; verified with a color-blind simulation pass (protanopia/deuteranopia/tritanopia).
 - [ ] Every audio signal (alarms, radio, barks) has a caption or visible equivalent; the game is fully playable muted.
 - [ ] No reflex requirement in base mode; active runs meet the 1.5 s floor (see §11) and delegation covers 100% of run content.

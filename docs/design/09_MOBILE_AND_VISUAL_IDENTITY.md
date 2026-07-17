@@ -22,7 +22,7 @@ The base game is pause-native: nothing in Swelter/Slack/Graymorn advances withou
 **None, in either direction.** No offline decay, no offline yield, no catch-up mechanics, no real-time appointments. Absence is consequence-free by design (Anti-pillar 1; quality gate). The fiction supports it: the stationmaster's log resumes where it left off.
 
 ### A.6 Touch interaction philosophy
-- **Tap to inspect, tap to commit; drag only for assignment** (survivor → room), with a tap-tap alternative for every drag.
+- **Tap to inspect, tap to commit; drag only for assignment** (survivor → room) **and for footprint positioning inside the build lens** (10 §16) — with a tap-tap alternative for every drag.
 - One-thumb operable in base mode; pinch-zoom has a button alternative (07 §17).
 - Touch targets ≥ 48 dp/pt for primary controls with ≥ 8 dp spacing (the stricter of the two platforms' minimums, adopted as the single spec); secondary chrome ≥ 28 pt; primary actions live in thumb-reach corners; destructive/irreversible actions always confirm.
 - No gesture vocabulary beyond tap / drag / pinch — nothing hidden behind long-press-only or multi-finger input.
@@ -36,9 +36,10 @@ Opt-in only, player-scheduled only ("remind me tomorrow evening"), and never gen
 Reading surfaces scale to 200%, dense HUD to 130% minimum, body-text contrast ≥ 4.5:1 (D-021); color-safe palette with redundant shape/icon channels (the engineer's overlay is the canonical redundant channel at overview zoom); captions for all audio including alarm identities; fully playable muted, including intermediate warning states; no reflex requirement in base mode and a 1.5 s reaction floor plus full delegation path (with gate calls) for runs; reduced-motion mode (slice scope); left/right-handed layout mirroring in the full game.
 
 ### A.9 Information-density limits
-- HUD: **5 resource indicators + day/phase clock** (within the ≤ 6 resource-indicator gate) **+ the persistent crew strip** (4 resident portraits in a thumb-reach corner, paged in the full game — D-034). Portraits double as need/Strain glance state and as the tap-tap assignment source; the strip is the guaranteed thumb-legal path to any ledger page (direct sprite-tap is a bonus affordance). Utility states live in the station picture, not the HUD.
+- HUD: **5 resource indicators + day/phase clock** (within the ≤ 6 resource-indicator gate) **+ the persistent crew strip** (4 resident portraits, +1 on Juna's arrival, in a thumb-reach corner; paged in the full game — D-034/D-039). Portraits double as need/Strain glance state and as the tap-tap assignment source; the strip is the guaranteed thumb-legal path to any ledger page (direct sprite-tap is a bonus affordance). Utility states live in the station picture, not the HUD.
+- **Enumerated chrome budget (D-039):** the complete persistent-control set is: resource HUD + clock (top edge), crew strip (left thumb corner), build-lens toggle + engineer's-overlay toggle + zoom button (right thumb corner cluster), alert badges (in-world, anchored), confirm/back (context corners). Nothing else is persistent; **full-screen allocation views (radio scheduler, section survey report, load-priority board) suppress the crew strip and resource HUD** — "persistent" means persistent in world/overview contexts.
 - Max **3 alert badges** visible simultaneously; the event scheduler queues the rest (and may never exceed 2 active crises). Badge behavior per zoom: ≥ 44 pt anchored to (not inside) rooms at overview; docked to the chalk plate at room zoom.
-- Decision cards present **one decision at a time**, with 2–4 options each. **Named exception:** the radio scheduler is a single *allocation* decision and presents all candidate signals and slots on one screen (07 §10b).
+- Decision cards present **one decision at a time**, with 2–4 options each. **Named allocation-view exceptions (three, closed list):** the radio scheduler (07 §10b), the section survey report (10 §16), and the charge load-priority board (≤ 8 load-class rows; 07 §4 usability criterion) — each a single allocation decision presented whole.
 - Any single screen answers one question; anything needing two screens of explanation gets redesigned or cut (readability gate T1).
 
 ---

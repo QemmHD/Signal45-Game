@@ -41,7 +41,7 @@
 **Fixed frame:** Days 1–7. Begins the morning after Signal 45 is first heard, with the community camped on **one damaged central platform holding four functional areas**; ends on **Relay Night** with the Hold-or-Count commitment choice, a state-reactive epilogue card, and a station **visibly grown to 8–10 functional areas** (Stage 1 → early Stage 2). The full slice construction canon — starting condition, the east/west exclusive breakthrough, the Deep Service lift, required building beats — lives in **10 §15** and is tested in **07 §21**. Playable start to finish with blockout art, and must be *fun and legible* in that state (quality gate).
 
 **Note A (adjustment):** "Twenty meaningful events" includes the scripted finale (Relay Night) as event #20 — documented so later prompts don't add a 21st silently. The **warm-beat class (§3.1d)** is a separate, separately-budgeted content class of non-event scenes and is *not* a loophole for adding events.
-**Note B (adjustment):** "One ending" is implemented as one ending *frame* (Hold the Cross / Begin the Count epilogue card) built as **slotted assembly**: one fixed frame + four independent fact-slots (verification count, Accord band, losses/Marks, clinic outcome) with ~3 variants each — **~13 authored text blocks total**, not a 27+-variant cross-product. Acceptance tests in 07 §15 are slot-level.
+**Note B (adjustment):** "One ending" is implemented as one ending *frame* (Hold the Cross / Begin the Count epilogue card) built as **slotted assembly**: one fixed frame + four independent fact-slots (verification count, Accord band, losses/Marks-and-the-Juna-outcome, clinic outcome) with ~3 variants each — **~13 authored text blocks total**, not a 27+-variant cross-product. Acceptance tests in 07 §15 are slot-level.
 **Note C (red-team adjustment, D-026):** The Listening Post ships **2 slots/night** (1 on the storm night) and **5 of the 6 signal categories** (faction chatter is full-game); the ~15 authored signals each require *two* authored branches (heard payoff, unheard off-screen resolution) — the true signal content budget is ~30 units and is priced as such in §3.3.
 
 ### 3.1 Slice content enumerations (canon)
@@ -69,9 +69,9 @@
 2. **Depot 9 (Foundry Line)** — rail maintenance depot. Yields salvage/parts (incl. antenna wire); hazard nodes: collapse; a feral dog pack as **staged threat** (audio, eye-shine outside the lantern radius, a route-blocking presence; the deter verb spends an item or noise — no creature rig, no combat; standoff template, nonverbal variant). Site of the scripted scavenging mission.
 3. **Marrow Street Clinic** — meds; occupied by squatters nursing a sick child on the clinic's cold-stored medicine. **Radio-entangled (D-025):** their weak distress call sits on the offer board Nights 3–5; monitored, the run opens as an answered call (squatters name their Tidemill kin; aid strengthened) — unmonitored, a cold discovery in mutual fear. Four resolutions: **aid / barter / take / leave** (standoff template, verbal variant). The slice's moral flagship and delayed-consequence chain.
 
-**Visitor & NPC cast (enumerated, with art tiers — no hidden bodies):** Sable (full character: portrait, walk, trade pose) · Tidemill envoy (portrait + 2 poses) · two distress-call strangers (silhouette tier + 2 poses) · clinic squatters ×2 + child (silhouette tier, standoff poses; child never depicted in danger — R-12) · dog pack (audio + eye-shine only, no rig). Hard cap: ≤6 NPC visual identities in the slice (R-04 extended).
+**Visitor & NPC cast (enumerated, with art tiers — no hidden bodies):** Sable (full character: portrait, walk, trade pose) · Tidemill envoy (portrait + 2 poses) · **Juna Malek** (the distress-call arrival and fifth-resident candidate, D-039: portrait tier, one-line history, value line, ~6 barks, crew-strip seat if she stays) · one further distress-call stranger (silhouette tier + 2 poses) · clinic squatters ×2 + child (silhouette tier, standoff poses; child never depicted in danger — R-12) · dog pack (audio + eye-shine only, no rig). Hard cap: ≤6 NPC visual identities in the slice (R-04 extended).
 
-**Warm-beat class (§3.1d — separately budgeted, non-event scenes; register-tagged `hope`/`recovery`):** first hot meal (Day 1–2, unconditional) · Sable's arrival staging (Day 2–3, unconditional) · storm's-end light return (Day 5, unconditional) · wire-splice light-up (Day 6, unconditional) · canteen scene, warm and withheld variants (Day 5, Accord-gated, earned tier) · Relay Night gathering staging (Day 7). The unconditional four are the slice's **hope floor** (02 §6).
+**Warm-beat class (§3.1d — separately budgeted, non-event scenes; register-tagged `hope`/`recovery`):** first hot meal (Day 1–2, unconditional) · Sable's arrival staging (Day 2–3, unconditional) · **the Breakthrough** (east and west staging variants — the wing opens, dark bays light for the first time; staging parity with the canteen scene, +Strain/Accord recovery; unconditional on whichever route is taken) · storm's-end light return (Day 5, unconditional) · wire-splice light-up (Day 6, unconditional) · gathering scene, warm and withheld variants (Day 5, Accord-gated, earned tier — staged in the Canteen east or the cook-ring "canteen corner" west) · the three section story-reveals (kiosk stall, silt line, shift log — 10 §15) · Relay Night gathering staging (Day 7). The unconditional beats are the slice's **hope floor** (02 §6).
 
 ### 3.1a The signal board, Nights 1–7 (canon — proves the hook's nightly scarcity)
 
@@ -84,10 +84,10 @@ Slots: **2/night; Night 4 (storm) drops to 1.** Signals persist on the board unt
 | W3 storm tail | W | N4–N5 | End-time known; Day-5 recovery planned cheaply | Extra sealed phase wasted |
 | W4 clear window | W | N6–N7 | Final-prep window confirmed for Relay Night | Conservative (costlier) final day |
 | V1 Signal 45 carrier check | V | N1–N7 | Verification stage progress | Rumor stays rumor |
-| V2 Magpie's counter-schedule | V | N3–N5 | Cross-check yields a Depot 9 frequency detail → reduces antenna-wire run risk | Magpie's doubt lands unanswered (Accord friction at Relay) |
+| V2 Magpie's counter-schedule | V | N3–N5 | Cross-check yields a Depot 9 frequency detail → reduces antenna-wire run risk **and returns freight-lift schematics that cheapen the lift project (radio reaches into construction, D-039)** | Magpie's doubt lands unanswered (Accord friction at Relay) |
 | V3 carrier anomaly | V | N5–N6 | Feeds event 17; **proof shared at the canteen grants Accord; alters Sable's Relay-eve prices** | Anomaly unexamined; Relay options unannotated |
 | V4 pre-relay calibration | V | N7 | Best reception posture (stacks with wire splice) | Static-degraded relay text |
-| T1 Sable's approach beacon | T | N1–N3 | Known manifest + fair prices at first arrival (event 10) | Blind trade; counterfeit-filter check harder (event 14) |
+| T1 Sable's approach beacon | T | N1–N3 | Known manifest + fair prices at first arrival (event 10); **Sable's tunnel gossip includes west-gallery pump-state intel that discounts the drain survey/works (D-039)** | Blind trade; counterfeit-filter check harder (event 14) |
 | T2 manifest beacon | T | N3–N4 | Event 11 manifest shift in player's favor | Standard manifest |
 | T3 Sable return beacon | T | N5–N6 | Relay-eve visit with requested goods | No second visit |
 | D1 Foundry Line distress | D | N2–N3 | Day-6 arrivals come guided: healthier, **one provisionable as a second runner** | They arrive anyway — worse off, one fewer (event 9) |
@@ -95,7 +95,7 @@ Slots: **2/night; Night 4 (storm) drops to 1.** Signals persist on the board unt
 | P1 missing-persons band (Teo) | P | N2–N6 | Event 16 payoff; Teo's Strain/reliability arc; **warm branch reachable** | Teo's Mark risk; conflict escalation |
 | P2 brother follow-up thread | P | N7 | Relay-eve resolution beat for Teo's arc | Thread left open (epilogue slot) |
 
-*(15 authored signals + the scripted Relay broadcast itself. Board totals per night — N1: 3 offers/2 slots · N2: 5/2 · N3: 6/2 · N4: 4/1 · N5: 5/2 · N6: 4/2 · N7: 3/1 + scripted relay. The scarcity requirement holds every night, and on ≥4 nights the top offers force a cross-category tradeoff.)*
+*(15 authored signals + the scripted Relay broadcast itself. **Board rule: a signal leaves the board once heard; unheard signals persist to their expiry.** Maximum on-board counts if nothing were ever heard — N1: 3 · N2: 6 · N3: 8 · N4: 6 · N5: 7 · N6: 5 · N7: 4; live counts run lower as the player listens. The tested invariant (07 §10b) is offers ≥ slots + 1 every night on every listening path, including maximal listening — verified: the worst case bottoms at 3 offers vs. 2 slots (N1) and 3 vs. 1 (N7). On ≥4 nights the top offers force a cross-category tradeoff.)*
 
 **Trader (1):** Linewalker Sable — walks the tunnels between holdouts; manifest and prices react to monitored beacon intel.
 **Faction (1):** The Tidemill — harbor commune around a tidal generator; appears via envoy visit and the clinic consequence chain.
@@ -115,7 +115,7 @@ Slots: **2/night; Night 4 (storm) drops to 1.** Signals persist on the board unt
 | 6 | Ration skim discovery — **Maren is the discoverer** (arbitration: accuse, watch, or let lie; ordering her to suppress it crosses her value → "Cooked Ledger" Mark) | Human | ⛓ Toll Gate telegraph |
 | 7 | Ash's nightmares (Mark aftermath of clinic choice; her clinic Mark's triage penalty active while unaddressed) | Human | ⛓ from 13 |
 | 8 | Imka's overwork collapse telegraph (fatigue warning → collapse if ignored) | Human | ⛓ |
-| 9 | First gate arrival: the Foundry Line distress resolves — guided arrivals (D1 heard: healthier, one provisionable as a second runner) or unguided (unheard: worse off, one fewer) | Visitor | ⛓ from D1 radio choice |
+| 9 | First gate arrival: the Foundry Line distress resolves — guided arrivals (D1 heard: healthier, and Juna Malek arrives runner-capable) or unguided (unheard: worse off, one fewer) | Visitor | ⛓ from D1 radio choice; → Juna berth arc (D-039) |
 | 10 | Sable's first arrival (trade tutorial) | Visitor/trade | |
 | 11 | Sable's manifest shift (reacts to beacon intel; scam-filter check if unmonitored) | Visitor/trade | |
 | 12 | Tidemill envoy visit (introduction + a request) | Faction | ⛓ → 13 |

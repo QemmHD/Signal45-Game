@@ -29,14 +29,14 @@ Format per entry: **Decision · Reason · Alternatives rejected · Consequences 
 *Consequences:* All tension must come from in-play scarcity and scheduling, not real-world timers; event scheduler works in phases, not minutes.
 *Assumptions:* Decision-driven time still feels alive with ambient animation. *Revisit trigger:* playtests read the station as static/board-gamey.
 
-**D-004 — Railway-native world: Kestrel Cross, Harwick, the Char, the Cinderline, filter-standard barter.**
+**D-004 — Railway-native world: Kestrel Cross, Harwick, the Char, the coastal freight line, filter-standard barter.** *(The freight line, originally named "the Cinderline," is renamed **the Char Line** by D-037.)*
 *Decision:* All terminology, topology, and economy derive from the transit setting (04 §4 canon table).
 *Reason:* Originality boundary compliance and thematic unity; the rail line doubles as campaign objective topology.
 *Alternatives rejected:* Generic bunker/metro naming (adjacency risk to existing metro-fiction IP and genericism).
 *Consequences:* Content writers are bound to the terminology table; tunnel topology replaces overworld maps.
 *Assumptions:* Transit setting reads globally (stations are universal architecture). *Revisit trigger:* IP review flags metro-fiction adjacency (04 §7).
 
-**D-005 — Small named cast; hard ceiling ~12; four in the slice.**
+**D-005 — Small named cast; hard ceiling ~12; four in the slice.** *(Ceiling amended by D-038: 12–20 named residents, test-gated.)*
 *Decision:* Anti-pillar 2 made structural: no anonymous population, ever.
 *Reason:* The human ledger requires memory and specificity; content and animation budgets require a cap; mobile readability requires few agents.
 *Alternatives rejected:* Growable population with named "key" residents atop a crowd (splits the design's heart); 8+ in the slice (content cost without proof value).
@@ -57,7 +57,7 @@ Format per entry: **Decision · Reason · Alternatives rejected · Consequences 
 *Consequences:* Shared node graphs and outcome tables between modes; paired-simulation equivalence test in 07 §10; gate calls documented in 02 §4.
 *Assumptions:* Players won't perceive delegation as "the lesser game." *Revisit trigger:* playtest delegation-shaming (measured in 07 §20) or band violation in the paired simulation.
 
-**D-008 — Rooms are restored, not built; no free-form base layout.**
+**D-008 — Rooms are restored, not built; no free-form base layout.** ***(RETIRED by D-038: this was an originality overcorrection. Base building, expansion, and layout freedom are restored as Pillar 6; the surviving cut is unlimited blank-grid excavation only.)***
 *Decision:* The station's spaces are authored; players choose what to restore, when, and how to configure function.
 *Reason:* Readability (Pillar 1), modular art budget (C6), and originality (restoration-of-light identity vs. build-a-base genre default).
 *Alternatives rejected:* Grid building (art/perf cost, vault-grammar adjacency); dig-out expansion (scope).
@@ -100,10 +100,10 @@ Format per entry: **Decision · Reason · Alternatives rejected · Consequences 
 *Assumptions:* Mainstream engines can hit the perf gate. *Revisit trigger:* R-15 deadline.
 
 **D-014 — "Signal 45" is canon as the broadcast; commercial title decision deferred.**
-*Decision:* Repository name (`Signal45-Game`) is honored by making Signal 45 the in-fiction broadcast; *Cinderline* remains the codename; title candidates (*Cinderline*, *Signal 45*) go to marketing stage with trademark search (04 §7 O3).
+*Decision:* Repository name (`Signal45-Game`) is honored by making Signal 45 the in-fiction broadcast; *Cinderline* remains the codename; title candidates (*Cinderline*, *Signal 45*) go to marketing stage with trademark search (04 §7 O3). ***Superseded by D-037: the title is locked as SIGNAL 45.***
 *Reason:* Alignment without premature branding commitment.
 *Alternatives rejected:* Renaming the project now (no search done; out of stage scope).
-*Consequences:* Docs use Cinderline; fiction uses Signal 45.
+*Consequences:* Docs used the Cinderline codename; fiction used Signal 45. (Both superseded by D-037.)
 *Assumptions:* Either name survives search. *Revisit trigger:* marketing stage. **[Non-blocking question noted in summary.]**
 
 **D-015 — Higgsfield is reference-only; production assets are rebuilt with provenance records.**
@@ -142,7 +142,7 @@ Format per entry: **Decision · Reason · Alternatives rejected · Consequences 
 *Assumptions:* Caps don't flatten drama (chains supply compound tension within the cap). *Revisit trigger:* slice playtests feel under-pressured at Act-1 tuning.
 
 **D-020 — Research/inference separation policy.**
-*Decision:* 05 tags every line as verified/likely/unverified vs. design inference vs. Cinderline decision; unverified claims never justify a locked decision alone.
+*Decision:* 05 tags every line as verified/likely/unverified vs. design inference vs. Signal 45 decision; unverified claims never justify a locked decision alone.
 *Reason:* Stage rules; honest inputs for later prompts.
 *Alternatives rejected:* —
 *Consequences:* 05's confidence labels bind later prompts citing it.
@@ -211,3 +211,22 @@ Format per entry: **Decision · Reason · Alternatives rejected · Consequences 
 *Decision:* A Metro row joins the 04 §2 transformation matrix (Medium residual, honestly rated); Metro-fiction forbidden similarities added to 04 §3 (no munition-adjacent currency, no mutant tunnel fauna, no station-ideology faction pattern, no mask-timer horror staging); O7 assigns the review; the TWoM-anchored cast row and the two-ledger antecedent row join the matrix with honest Medium ratings; differentiators 2 and 5 rewritten around what is actually new; the 07 §20 differentiation probe operationalizes R-13's warning sign. *Reason:* The originality audit omitted the nearest fiction-space neighbor entirely, argued two differentiators against the wrong comparator, and D-004's revisit trigger pointed at a 04 §7 entry that didn't exist. *Consequences:* 00 §15, 04 §2/§3/§7, 06 R-13, 07 §20 amended. *Revisit trigger:* O7 professional review.
 
 **Red-team findings noted but deliberately not applied:** none — every high- and medium-severity finding was accepted in substance. Low-severity wording suggestions were applied selectively where they did not conflict with the amendments above.
+
+---
+
+## Base-building revision pass (owner directive)
+
+**D-037 — Title locked: SIGNAL 45. Codename Cinderline archived. The freight line renamed the Char Line.**
+*Decision:* The commercial and working title is **SIGNAL 45**, replacing the codename throughout the design documents. *Cinderline* survives only here, as the archived former codename. Because the directive reserves the name to this archive, the in-fiction coastal freight line (formerly "the Cinderline") is renamed **the Char Line** — it runs the burned cut through the Char, and it is the line the evacuation train would use.
+*Reason:* Owner directive in the revision pass; also resolves D-014's deferred choice and aligns title, repository, and signature fiction (the broadcast *is* the game).
+*Alternatives rejected:* Keeping Cinderline as fiction-only line name (directive reserves the word to the log's archive); dual-title ambiguity into marketing (search costs and brand split).
+*Consequences:* All documents renamed; 04 §7 O3 now searches one title; the title's meaning is carried by the hook itself.
+*Assumptions:* "Signal 45" clears trademark search (O3 — unverified until searched). *Revisit trigger:* O3 search results.
+
+**D-038 — Base building restored as a primary pillar (Pillar 6); D-008 retired as an overcorrection.**
+*Decision:* Signal 45 includes deep, satisfying base building and physical shelter expansion, specified in **10_BASE_BUILDING_DIRECTION.md** (the authority): reclamation of an authored complex of sections and structural bays; the 10-step reclamation loop; 16 construction verbs; footprint classes with module attachment and **no adjacent-identical merging**; trunk/node utility capacity with causal offline-inspection; layout tension axes (noise, travel, cascade, storm isolation) with recovery guarantees; controlled named-population growth to **12–20 residents (test-gated)**; four visual development stages with a binding screenshot test; a revised slice that starts at 4 functional areas and must end at 8–10 with an exclusive pre-storm breakthrough choice. New **Anti-pillar 6: "No meaningless room spam"** replaces the retired "no free-form building" rule; new gate **T6 (built meaning)**; the surviving cut narrows to *unlimited blank-grid excavation*.
+*Reason:* Owner correction: the originality pass removed a core intended mechanic instead of demanding an original implementation of it. Originality is an implementation standard, not a subtraction rule — the retained genre mechanics (cutaway overview, construction, expansion, upgrades, assignment, production, capacity, incidents, crafting, expeditions, traits, visible activity) differentiate through railway-native reclamation, the two ledgers, information scarcity, consent/refusal, and named memory.
+*Alternatives rejected:* Building as a light subsystem bolted to the old fixed layout (fails the fantasy and the directive); blank-grid building (abandons the found-architecture identity that carries both originality and art budget); population growth via anonymous pools (Anti-pillar 2).
+*Consequences:* 00/01/02/03/04/06/07/09 revised; new risks R-21 (construction scope) and R-22 (layout meaningfulness); R-14 re-costed (full-table slice ≈ 10–14 solo months, descoped ≈ 6–8); the descope ladder now protects the building core (07 §21 survives every rung); D-005's ceiling amended; D-008 retired.
+*Assumptions:* 12–20 named residents and the four-stage art delta survive technical/perf/pace testing (R-04, R-05, R-19 gates); the reclamation model reads as "real base building" to genre players (07 §21 building-fantasy probe is the test).
+*Revisit trigger:* R-21/R-22 warning signs; the §21 playtest probes; population-ceiling test results at systems stage.

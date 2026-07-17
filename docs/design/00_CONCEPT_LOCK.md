@@ -1,9 +1,9 @@
 # 00 — CONCEPT LOCK
 
-**Project codename:** Cinderline
-**Stage:** Concept lock and vertical-slice definition (Prompt 1 of chained workflow)
+**Title:** SIGNAL 45 (locked, D-037; the former codename is archived in the decision log)
+**Stage:** Concept lock and vertical-slice definition (Prompt 1, revised by the base-building revision pass)
 **Status:** LOCKED — this document is authoritative input for all later stages.
-**Date:** 2026-07-17
+**Date:** 2026-07-17 (revision pass same date)
 
 ---
 
@@ -21,11 +21,11 @@
 
 ## 4. Genre
 
-Mobile-first survival management and community simulation, with light base building, narrative strategy, and short optional active expeditions. Single-player, premium-structured (no consumable monetization).
+Mobile-first survival management and community simulation with **deep base building and physical shelter expansion**, narrative strategy, and short optional active expeditions. Single-player, premium-structured (no consumable monetization).
 
 ## 5. Setting
 
-- **Where:** Kestrel Cross, an abandoned underground railway interchange beneath Harwick, a damaged mid-size coastal city. Three lines meet here: the Harbour Line (toward the sea and the Tidemill commune), the Foundry Line (toward the industrial belt), and the coastal freight line survivors call the **Cinderline**, because its burned cut through the char zone carries embers on the wind — and because it is the only line an evacuation train could use.
+- **Where:** Kestrel Cross, an abandoned underground railway interchange beneath Harwick, a damaged mid-size coastal city. Three lines meet here: the Harbour Line (toward the sea and the Tidemill commune), the Foundry Line (toward the industrial belt), and the coastal freight line survivors call the **Char Line**, because its burned cut through the Char carries embers on the wind — and because it is the only line an evacuation train could use.
 - **When:** A near-future aftermath. Several years after cascading climate disasters — heat collapse, grid failure, a permanent inland burn zone ("the Char") — made the surface uninhabitable by day. Recurring **cinderfall storms** blanket the city in hot airborne ash for days at a time.
 - **The rhythm:** Daytime surface heat is lethal ("the swelter"). After sunset, temperatures and particulate levels drop enough for short protected surface runs ("nightruns").
 - **The promise:** A looping automated broadcast — **Signal 45** — claims a Relief Rail Service will run one final evacuation train from Terminus Yards in 45 days. A second broadcaster, call sign "Magpie," insists the loop is years old and the yards are gone. Both cannot be right.
@@ -36,11 +36,11 @@ The **Stationmaster** — not a character on screen, but the community's entrust
 
 ## 7. Player fantasy
 
-*"I am the person a small community trusts to hold everything together — the machinery and the people — and both depend on my judgment, not my reflexes."* The fantasy is competent stewardship under pressure: reading a failing system before it fails, matching the right person to the right job, making the call nobody else wants to make, and earning the quiet moment when the lights hold, the kettle boils, and someone laughs in the canteen.
+*"I am the person a small community trusts to hold everything together — the machinery and the people — and both depend on my judgment, not my reflexes."* The fantasy is competent stewardship under pressure, and its twin (10 §1): ***"I found a dead railway station and slowly turned it into a living underground town."*** Reading a failing system before it fails; matching the right person to the right job; deciding which dark section to win back next, and watching rubble become rooms and rooms become a neighborhood; making the call nobody else wants to make — and earning the quiet moment when the lights hold, the kettle boils, and someone laughs in a canteen that was a collapsed kiosk row a week ago.
 
 ## 8. Emotional promise
 
-Cinderline promises **earned warmth inside managed dread**. The game will make the player feel: the low hum of pressure (heat above, gauges falling), the relief of a repaired pump and a hot meal, the sting of a consequence arriving days after its cause, and — deliberately, on schedule — hope: a verified broadcast, a returning runner's footsteps on the stairs, a stranger who turns out to be exactly who they said they were. It is not a misery simulator. Despair is a weather system, not the climate.
+Signal 45 promises **earned warmth inside managed dread**. The game will make the player feel: the low hum of pressure (heat above, gauges falling), the relief of a repaired pump and a hot meal, the sting of a consequence arriving days after its cause, and — deliberately, on schedule — hope: a verified broadcast, a returning runner's footsteps on the stairs, a stranger who turns out to be exactly who they said they were. It is not a misery simulator. Despair is a weather system, not the climate.
 
 ## 9. Signature hook
 
@@ -76,7 +76,7 @@ Survive and hold the community together until the Signal 45 question is *answere
 
 - **Systemic success (ongoing):** utilities stable through a storm cycle; no unmet critical needs; Accord above the fracture threshold.
 - **Campaign success (full game):** reaching one of the five endings deliberately, with the community's condition and the player's verified knowledge shaping its epilogue. There is no single "good" ending; success is *arriving somewhere on purpose, together*.
-- **Slice success:** completing the 7-day First Count with the station sealed through the first storm, at least three of four survivors alive and functional, and the Relay Night choice made with at least one verified fact in hand.
+- **Slice success:** completing the 7-day First Count with the station sealed through the first storm, at least three of four survivors alive and functional, the Relay Night choice made with at least one verified fact in hand — and the station visibly grown from four functional areas to eight-to-ten (10 §15): the slice must prove the building fantasy, not just survival.
 
 ## 14. Failure states
 
@@ -90,14 +90,14 @@ Two mirrored collapse axes — the two networks failing:
 
 1. **The Listening Post** — scheduled, zero-sum radio intelligence as a core nightly mechanic that reshapes weather warning, expedition content, trade, relationships, and ending eligibility. No shelter-management comparison title makes *choosing what to know* the signature verb.
 2. **Two-ledger consequence with an up-front contract and an embodied return** — every decision quotes its *physical* price before commit, while its *human* price is discovered later — and discovered consequences return **embodied and external** (strangers at the gate, a faction's demand, a trader's changed manifest), not only as internal mood states. Delayed psychological consequence alone has a clear genre antecedent (acknowledged in 04 §2); the up-front physical quote and the external, physical return channel are the transformation.
-3. **A railway station as a living machine** — rooms built into stranded railcars, a flywheel bay fed by a rebuilt regenerative-brake system, a tunnel network (not an overworld) as expedition topology, and an ending framework centered on a *train line* rather than a door, a war's end, or a generator. Setting, terminology, and topology are railway-native throughout.
+3. **Railway-native reclamation building** — base building as *winning back a real place*: an authored interchange of sections and structural bays (platforms, concourses, railcars, shafts) that the player surveys, clears, drains, reinforces, connects, constructs within, and repurposes — with genuine layout freedom inside found architecture, no blank grid, no adjacent-identical room merging, and a station whose four visual stages (refuge → shelter → settlement → underground home) tell the community's story at a glance. Rooms live in stranded railcars and kiosk rows; the flywheel bay is a rebuilt regenerative-brake rig; the tunnel network (not an overworld) is the expedition topology; the ending framework centers on a *train line*. Setting, terminology, topology — and now construction — are railway-native throughout (10).
 4. **Hope on a schedule** — a diegetic 45-day countdown whose *truth value is a player-investigated variable*, structuring the campaign into verify-then-commit acts instead of escalating catastrophe alone.
 5. **Borrowed authority over autonomous people** — the player is not a puppeteer of survivors but an *entrusted decision-maker whose verbs can be refused*: residents act on orders through their own values and states, refusals are systemic, Accord gates what the player is even allowed to command (D-018), and Marks are durable mechanical state that gates behavior and endings — all at 5–12-minute mobile session scale. This is the specific claim against the closest character-driven comparison (where survivors are directly puppeted and consequence is chiefly mood): here the *relationship between player and cast* is the simulated thing.
 
 ## 16. Final concept decision
 
-**LOCKED.** Cinderline is a landscape mobile survival-management game about running Kestrel Cross station through a 45-day question. The base simulation is the primary game; nightruns and the Listening Post exist to feed it with matter and meaning. The two-network promise — *keep the station functioning without allowing the people inside it to lose their humanity* — is preserved verbatim from the seed and is now enforced by the two-ledger structure, the twin failure axes, and the Accord system.
+**LOCKED.** Signal 45 is a landscape mobile survival-management and base-building game about running — and *rebuilding* — Kestrel Cross station through a 45-day question. The base simulation and the station's physical growth are the primary game; nightruns and the Listening Post exist to feed them with matter and meaning. The two-network promise — *keep the station functioning without allowing the people inside it to lose their humanity* — is preserved verbatim from the seed and is enforced by the two-ledger structure, the twin failure axes, and the Accord system; construction posts to both ledgers like every other decision (10 §12).
 
-**Naming note:** the repository is `Signal45-Game`; "Signal 45" is hereby canon as the in-fiction broadcast and a candidate commercial title (*Signal 45* or *Cinderline*) — final title selection is deferred to marketing stage; all design documents use the codename Cinderline. (Decision log D-014.)
+**Naming note (D-037):** the commercial title is locked as **SIGNAL 45**, matching the repository (`Signal45-Game`) and the in-fiction broadcast. The former codename is archived in the decision log; the in-fiction coastal freight line is named **the Char Line**. Trademark search before announcement remains required (04 §7 O3).
 
 **Engine:** deliberately undecided this stage, per inputs; requirements that will drive selection are recorded in the risk register and scope matrix.

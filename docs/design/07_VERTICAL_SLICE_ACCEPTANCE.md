@@ -1,6 +1,6 @@
 # 07 — VERTICAL-SLICE ACCEPTANCE CRITERIA
 
-**Status:** LOCKED. The slice ("The First Count", Days 1–7) is accepted only when every criterion below passes — with one sanctioned exception: **if the R-01/R-06 descope ladder fires its first rung (delegated-only runs), the named reduced set "Delegated-Only Slice Acceptance" becomes authoritative** — it comprises every section below except §11 and the active-mode halves of §10 and §12, with §14's fully-delegated criteria promoted to primary. No other subsetting is legitimate.
+**Status:** LOCKED. The slice ("The First Count", Days 1–7) is accepted only when every criterion below passes — with one sanctioned exception: **if the R-01/R-06 descope ladder fires its first rung (delegated-only runs), the named reduced set "Delegated-Only Slice Acceptance" becomes authoritative** — it comprises every section below except §11 and the active-mode halves of §10 and §12, with §14's fully-delegated criteria promoted to primary. No other subsetting is legitimate. **§21 (base building) survives every descope rung** — the slice's construction proof is non-negotiable (D-038 completion gate); ladder rung 4 (one reclaim arc fully instead of both) adjusts §21's exclusive-choice test to a single-route verification, nothing else.
 **Test device baseline:** one 2022 mid-tier Android (e.g. 4 GB RAM class) and one iPhone of similar vintage; 6.1" screen assumed for readability checks. "Blockout" throughout means the **readability blockout tier** defined in 03 §3.3 (proxy geometry + final lighting rig + ≤3 identifying props/signage per room + character color keys).
 **Automation note:** every criterion marked "automated" maps to a rig in 03 §3.3's test-harness row; any rig not built for the slice downgrades its criterion to a written manual protocol, recorded here.
 
@@ -12,7 +12,7 @@
 - [ ] Time provably does not advance while the app is closed: state hash before backgrounding equals state hash on resume, after 1 minute and after 24 hours.
 
 ## 2. Shelter interaction
-- [ ] From overview zoom, every one of the 8 rooms can be identified by silhouette/lighting alone (5 of 5 first-time testers name each room's function correctly within 10 seconds of inspection).
+- [ ] From overview zoom, every functional area — in both the Day-1 state (4 areas) and a Day-7 state (8–10 areas) — can be identified by silhouette/lighting alone (5 of 5 first-time testers name each area's function correctly within 10 seconds of inspection), and every *blocked* section reads as blocked-and-different (rubble vs. flood vs. jammed lift distinguishable at a glance).
 - [ ] Any room panel opens in 1 tap from overview; any work order issues in ≤ 3 taps total.
 - [ ] Zoom levels (overview ↔ room) transition at ≥ 30 fps with no state desync.
 
@@ -137,4 +137,21 @@
 - [ ] **Personhood (Pillar 2):** ≥ 4 of 5 testers can, unprompted, name all four residents and recount one specific thing that happened to each; ≥ 3 of 5 report at least one assignment or radio decision made because of *who a resident is* (value, Mark, conflict, petition) rather than their aptitude.
 - [ ] **Tone (Pillar 5):** from a balanced descriptor card (tense / warm / bleak / hopeful / punishing / fair / exhausting), ≥ 3 of 5 include a warmth-family descriptor, ≤ 1 of 5 selects "punishing" or "exhausting" as dominant, and ≥ 4 of 5 can name one moment that felt good, unprompted.
 - [ ] **Differentiation (R-13):** asked to "describe this game to a friend," ≤ 2 of 5 describe it primarily as a two-game hybrid without unprompted mention of the radio/listening choice; failure flags a concept-stage differentiation review.
+- [ ] **Building fantasy (Pillar 6):** ≥ 4 of 5 testers agree, unprompted or on a neutral probe, that they "turned a ruin into a home this week"; ≥ 3 of 5 can name one layout decision they made and why (east vs. west, where the beds went, what they repurposed); ≥ 3 of 5 cite a construction moment (a breakthrough, a first-lit room) among the week's best moments.
 - [ ] ≥ 3 of 5 express desire to continue past Day 7 ("would you play Day 8?") — the slice's emotional proof, meaningful even with placeholder art.
+
+## 21. Base building and expansion (Pillar 6 — the slice must prove the building fantasy)
+- [ ] **Start state verified:** Day 1 presents exactly 4 functional areas (Scrubber Gate, Flywheel Room, Camp, Listening Post), 2 blocked horizontal paths (east rubble, west flood), 1 blocked level (Deep Service lift), and visible unusable station space beyond them.
+- [ ] **Survey:** both blocked paths (and the lift) are surveyable; each survey costs stated labor/intel and returns a one-screen section report naming contents, hazards, and requirements.
+- [ ] **Clear:** at least one section is cleared in normal play, in visible stages (rubble shrinks / waterline falls) performed by assigned residents — never a bare progress bar.
+- [ ] **Build:** ≥ 3 functional rooms are constructed or converted during the week (shell/conversion → furnish → staff), each drawing real utility load and generating work.
+- [ ] **Upgrade:** ≥ 1 room upgrade completes (e.g., Listening Post improvised → wired; Flywheel partial → stable) with visible and mechanical change.
+- [ ] **Utilities:** ≥ 1 trunk extension connects a new section's service node; the node's capacity is inspectable; at least one moment of insufficient capacity produces the causal "why is this room offline" panel with ≥ 2 viable responses.
+- [ ] **Repair:** the Scrubber Gate intake repair (storm crisis) completes as a works order through the same construction framework.
+- [ ] **Repurpose/rearrange:** ≥ 1 room is repurposed or rearranged (canonically: the Camp → Staging Room after beds move to the Sleeper Car) with fair refund mechanics verified (no punitive loss).
+- [ ] **Capacity:** sleeping capacity increases during the week, and a berth for a fifth resident can be prepared by Day 6; if prepared, the arrival candidate can stay (and does not if no berth exists — both branches verified).
+- [ ] **Exclusive choice:** the east/west breakthrough is genuinely exclusive before the storm (labor/material math verified); the unchosen path remains reachable late-week at documented higher cost; both routes produce a completable, coherent week (full playthrough each).
+- [ ] **Layout consequence:** at least one layout-caused consequence fires in normal play (noise adjacency Strain effect, or an overdrawn node brownout) and self-explains causally.
+- [ ] **Visible growth (screenshot test):** shown unlabeled Day-1 and Day-7 screenshots of the same station, 5 of 5 first-time viewers correctly identify which is later *and* name ≥ 2 visible differences — with all resource numbers and HUD hidden.
+- [ ] **End state:** a normal playthrough ends with 8–10 functional areas; the day report and epilogue reference what was built ("the week the east wing lit up").
+- [ ] **No spam check (Anti-pillar 6):** a code/data audit confirms every slice room type interacts with ≥ 2 of: utility load, access/travel, resident behavior, structural state, human ledger. No room is a pure timer box.

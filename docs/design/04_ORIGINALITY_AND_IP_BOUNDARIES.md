@@ -6,12 +6,12 @@
 
 ## 1. Inspiration-principle matrix
 
-Broad, unprotectable genre principles studied, and how Cinderline expresses each originally:
+Broad, unprotectable genre principles studied, and how Signal 45 expresses each originally:
 
-| Reference principle (genre-level) | Commonly seen in | Cinderline's independent expression |
+| Reference principle (genre-level) | Commonly seen in | Signal 45's independent expression |
 |---|---|---|
 | Readable side-cutaway base | Shelter-management genre broadly | A *railway interchange* cutaway: platforms, stranded railcars-as-rooms, service vaults; visible cable/pipe dependency runs (Pillar 1) |
-| Specialized functional rooms | Shelter & colony sims | Restoration of authored station spaces (no free-form building); railway-native room identities (Flywheel Room, Scrubber Gate, Listening Post) |
+| Specialized functional rooms & base building | Shelter & colony sims | Reclamation construction (D-038): survey/clear/drain/reinforce/construct within an authored complex of sections and bays; footprint shells and module attachment instead of identical-room merging; railway-native room identities (Flywheel Room, Scrubber Gate, Listening Post, Sleeper Car) |
 | Visible inhabitants doing believable work | Shelter & colony sims | 4–12 *named* people with values/Marks; posture-as-telemetry; refusal as a system |
 | Matching people to responsibilities | Genre-wide | Aptitude *fit* + relationship pairing effects + values as hard lines — assignment is a personnel decision, not slot arithmetic |
 | Internal incidents + external expeditions | Genre-wide | Incidents obey telegraph + 2-crisis cap; expeditions are short "door" sorties feeding the base, with full delegation path |
@@ -25,9 +25,10 @@ Broad, unprotectable genre principles studied, and how Cinderline expresses each
 
 ## 2. Originality audit — original transformation matrix
 
-| Familiar genre pattern | Why players understand it instantly | Cinderline's transformation | Visual distinction | Mechanical distinction | Narrative distinction | Remaining similarity risk |
+| Familiar genre pattern | Why players understand it instantly | Signal 45's transformation | Visual distinction | Mechanical distinction | Narrative distinction | Remaining similarity risk |
 |---|---|---|---|---|---|---|
-| Side-cutaway underground shelter | Shelter-management convention since ant-farm views | A dead transit interchange being *re-lit* room by room; verticality = concourse/platform/service, not stacked identical cells | Railway architecture, railcar rooms, warm tungsten vs. ash exterior; no numbered vault door, no mascot | Rooms restored, not built; utility network with cascades; no room-merge rules | The station is a character with a past (timetables, lost-property, a stopped clock) | **Low-medium** — cutaway + underground shelter reads adjacent to vault games at thumbnail level; mitigated by architecture/palette rules (§5). Flag for art-stage review. |
+| Side-cutaway underground shelter | Shelter-management convention since ant-farm views | A dead transit interchange being *re-lit* room by room; verticality = concourse/platform/service, not stacked identical cells | Railway architecture, railcar rooms, warm tungsten vs. ash exterior; no numbered vault door, no mascot | Reclamation of found architecture; utility trunk/node network with cascades; no adjacent-identical merge rules | The station is a character with a past (timetables, lost-property, a stopped clock) | **Low-medium** — cutaway + underground shelter reads adjacent to vault games at thumbnail level; mitigated by architecture/palette rules (§5). Flag for art-stage review. |
+| Base building & expansion (construct, upgrade, expand, grow population) | The genre's core pleasure since the earliest shelter sims — deliberately retained (D-038: originality is an implementation standard, not a reason to remove satisfying genre mechanics) | **Reclamation, not stamping:** expansion wins back authored sections with surveyed histories, hazards, and stories; layout freedom lives *inside* found architecture; larger rooms come from bigger shells or attached modules, never adjacent-identical merging; construction posts to both ledgers (a memorial converted to storage has witnesses); the station's four visual stages narrate the community | Found-space irregularity vs. uniform grid cells; growth reads as light and domestic detail returning, not as tile-count | Bay/section structure; 16 named verbs incl. repurpose/deconstruct with fair refunds; utility capacity + noise + travel + storm isolation as layout tensions; berth-gated named arrivals instead of a population faucet | Expansion *reveals* narrative (sealed sections hold evidence, belongings, occupants) rather than unlocking floors | **Medium** — building + cutaway is the genre's most recognizable surface; mitigated by the reclamation model, no-merge rule, and §5 visual laws. Squint-test board must include building-mode screenshots (O1). |
 | Assign workers to production rooms | Core genre verb | Small named cast; fit + bonds + values + refusal; swapping people changes outcomes | Faces and body language readable at assignment range | No fungible dwellers, no breeding, no rush-gamble verb | Assignments generate story (who resented what, who healed whom) | **Low** |
 | Day management / night scavenging split | Popularized by civilian-war survival | Four decision-driven phases; night is *optional* and delegable; the planning phase's core verb is radio scheduling, which no comparison title has | Runs use the same cutaway language as home; lantern-and-mask visual clock | Delegation path; risk priced before departure; no real-time base clock | Scavenging sites are neighbors with claims (the clinic's squatters), not loot rooms | **Medium** — the split itself is strongly associated with This War of Mine; mitigated by phase structure, optionality, delegation, and radio-centric planning. Revisit at systems stage to keep divergence visible in play, not just on paper. |
 | Doom-clock campaign (the storm is coming / the train in 45 days) | Deadline campaigns are a strategy staple | The deadline's *truth is the mystery*: verification is a player-driven track; the clock may be a lie, and knowing is a resource sink | Countdown lives in the diegetic radio log, not a HUD doom meter | Verification track gates *knowing* endings; commitment gates re-weight play | Hope itself is interrogated: believing well is the theme | **Low** |
@@ -45,7 +46,7 @@ Never use or imitate: Vault-Tec or any corporate-vault fiction; nuclear-vault re
 
 ## 4. Terminology table — original replacements (canon)
 
-| Generic/adjacent term (do not ship) | Cinderline canon term |
+| Generic/adjacent term (do not ship) | Signal 45 canon term |
 |---|---|
 | Vault / bunker / shelter | **Kestrel Cross** / "the Cross" / "the station" |
 | Dwellers / colonists / workers | **Residents** / "the household" (individually: by name) |
@@ -56,6 +57,8 @@ Never use or imitate: Vault-Tec or any corporate-vault fiction; nuclear-vault re
 | Radiation / rads | **Cinderfall**, particulate load, heat load |
 | Wasteland | **The Char** (burn zone), **the surface**, **Harwick** (the city) |
 | Quest / mission log | **Stationmaster's log**; **work orders**; **signals** |
+| Build grid / room slots / room merging | **Sections** and **structural bays** of the authored complex; **works orders**; **shells** and **attached modules** (no merge rule) |
+| Wasteland-facing recruitment radio | *(the Listening Post is never a population faucet; arrivals are authored people through seven channels — 10 §11)* |
 | Scavenging run (generic) | **Nightrun** |
 | Storm event (generic) | **Cinderfall storm**; forecast via the **storm band** |
 | Trader (generic) | **Linewalkers** (tunnel-walking traders) |
@@ -73,7 +76,7 @@ Never use or imitate: Vault-Tec or any corporate-vault fiction; nuclear-vault re
 ## 6. Narrative-distinction rules (binding on the narrative stage)
 
 1. No real war, city, or disaster re-created under thin renaming; Harwick and the Char are composites of *climate-era* imagery, not a specific historical event.
-2. No moral encounter may be a renamed version of a known scenario from another game; each must grow from Cinderline's own systems (radio triage, gate arrivals, filter economy, rail politics).
+2. No moral encounter may be a renamed version of a known scenario from another game; each must grow from Signal 45's own systems (radio triage, gate arrivals, filter economy, rail politics).
 3. Factions must have economic logic native to this world (tidal power, tunnel trade, rail control) — no raider/paladin/cult stock trio.
 4. The tone contract: catastrophe is climate-era and systemic, never gleeful post-apocalypse kitsch; humor exists but is human-scale (canteen banter, kiosk pedantry), never fourth-wall mascot humor.
 5. Character voices, names, and biographies are original creations; no likeness of real persons.
@@ -84,7 +87,7 @@ Never use or imitate: Vault-Tec or any corporate-vault fiction; nuclear-vault re
 |---|---|---|
 | O1 | Thumbnail-level adjacency of any underground cutaway base to vault-game trade dress | Art direction stage: run a "squint test" board vs. major shelter games; adjust palette/composition if confusable |
 | O2 | Day-management/night-scavenge association with This War of Mine | Systems stage: verify the played experience (phases, delegation, radio-first planning) diverges, not just documentation |
-| O3 | Title/branding: "Signal 45" and "Cinderline" need trademark search in game class before announcement | Marketing stage; professional search |
+| O3 | Title/branding: the locked title **SIGNAL 45** (D-037) needs trademark search in game class before announcement | Marketing stage; professional search |
 | O4 | AI-generation provenance: Higgsfield outputs' training-data and licensing posture must be reviewed for commercial shipping; policy of reference-only mitigates but does not eliminate | Production stage; legal review of tool terms |
 | O5 | Music/audio: alarm timbres and any radio-voice content must be original recordings/compositions with clear chain of title | Audio stage |
 | O6 | Store-listing language must avoid comparison-title name-dropping (also a platform policy risk) | Marketing stage |

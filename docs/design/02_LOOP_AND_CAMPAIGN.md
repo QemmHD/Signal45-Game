@@ -20,7 +20,7 @@ The atomic unit of play — **Notice → Inspect → Decide → Commit → Feedb
 4. **Commit** with a confirming tap; the order posts to the day's work plan.
 5. **Feedback** within seconds: the assigned survivor walks to the job, audio acknowledges, the gauge trajectory updates — and the consequence itself may land minutes or days later.
 
-Feeds upward: **2–4 of these loops constitute one phase's decision set — 8–14 meaningful decisions per day** (revised from an earlier 3–6/phase claim; D-027). The decision supply is enumerable, not aspirational: ~3 authored events/day, the nightly radio schedule, run planning and its gate calls (1–3), triage choices, and — critically — two *standing systemic generators* live every Swelter: the **charge load-priority board** (scrubbers / pump / hotplate / tools / radio charging, each off/low/full with visible downstream consequences) and **labor over-subscription** (each day's available work and fabrication orders exceed available person-phases by ≥25%, so deferral is a daily choice and the day report lists what was deferred). Ambient observation honestly fills the remaining phase time.
+Feeds upward: **2–4 of these loops constitute one phase's decision set — 8–14 meaningful decisions per day** (revised from an earlier 3–6/phase claim; D-027). The decision supply is enumerable, not aspirational: ~3 authored events/day, the nightly radio schedule, run planning and its gate calls (1–3), triage choices, and — critically — three *standing systemic generators* live every Swelter: the **charge load-priority board** (scrubbers / pump / hotplate / tools / radio charging, each off/low/full with visible downstream consequences), **labor over-subscription** (each day's available work, fabrication, and works orders exceed available person-phases by ≥25%, so deferral is a daily choice and the day report lists what was deferred), and the **construction queue** (survey/clear/build/upgrade/repurpose decisions from the reclamation loop, 10 §3 — expansion is part of the normal daily loop, not a separate mode the player visits). Ambient observation honestly fills the remaining phase time.
 
 ## 3. The 5–12 minute mobile-session loop
 
@@ -36,7 +36,7 @@ A player with 5–8 minutes completes one to two phases; a typical day with a de
 
 | Phase | Fiction | Player activity | Dominant ledger | Typical length |
 |---|---|---|---|---|
-| **Swelter** | Surface lethal; heat load peaks; station works | Charge load-priority board, over-subscribed work/fabrication orders (deferral is a choice), restoration projects, visitor negotiations, conflict arbitration | Physical, with human interrupts | 2–5 min |
+| **Swelter** | Surface lethal; heat load peaks; station works | Charge load-priority board, over-subscribed work/fabrication/**works** orders (deferral is a choice), **construction and expansion decisions (survey, clear, build, upgrade, repurpose — 10 §3–4)**, visitor negotiations, conflict arbitration | Physical, with human interrupts | 2–5 min |
 | **Slack** | Dusk; heat falls; the day's one true planning window | Radio schedule (the signature decision), nightrun planning and provisioning, tomorrow's priorities | Information | 2–3 min |
 | **Nightrun** | Cool dark; the door opens | Active "on the wire" run (3–6 min) or delegate-and-advance — delegated runs surface authored choice nodes as **gate calls** (radio decision cards), so moral decisions are never made for the player; meanwhile the station runs its quiet shift | Expedition | 0–6 min |
 | **Graymorn** | Pre-dawn return; the accounting | Return and triage, arrivals at the gate, event consequences land, stationmaster's log | Human | 2–3 min |
@@ -49,9 +49,9 @@ The repeating multi-day cycle that gives weeks their shape:
 
 1. **Storm cycle (every 4–7 days):** forecastable cinderfall storms force preparation crescendos, sealed-in days (no nightrun; internal focus), and post-storm recovery/salvage windows. The rhythm section of the campaign.
 2. **Relay cycle (weekly):** Signal 45 re-broadcasts on Relay Nights with progressively verifiable content — the campaign's hope metronome and the verification track's checkpoints.
-3. **Restoration ladder:** each act, a major station capability can be restored (Level-3 lighting, second cistern, antenna mast…), changing daily play and delivering scheduled hope beats.
+3. **Expansion and restoration arc:** the station physically grows across the campaign — sections of the authored complex (10 §14) are surveyed, cleared, and reclaimed; major capabilities are restored (Level-3 lighting, second cistern, antenna mast…); the station climbs the four visual stages (refuge → shelter → settlement → underground home). Sealed storm days are building days: the surface locks, the hands stay busy. Expansion changes daily play (new rooms, new travel graph, new utility load) and delivers scheduled hope beats — every breakthrough is light returning.
 4. **Faction and visitor arcs:** contacts made through radio and runs mature into arrivals, trades, demands, and act turning points.
-5. **Commitment gates:** at act boundaries, the player makes a standing commitment (what to prepare for) that re-weights events, trades, and available endings — revisable, at a cost, until Act 3 locks it. **Commitments change what the player builds, not just event weighting (D-024/red-team):** each commitment opens its own project track — the Count opens a *railworthiness ladder* (clear the Cinderline cut, restore a handcar, cache trail provisions, drill the household for departure); Hold/Deepline opens the *deep-station ladder* (second cistern, Level-3 grid); Concord opens shared-line infrastructure and envoy hosting; Junction opens chokepoint works with explicit human-ledger costs. Act 2/3 restoration options are partially gated by the standing commitment, so the middle 30 days play differently by intent.
+5. **Commitment gates:** at act boundaries, the player makes a standing commitment (what to prepare for) that re-weights events, trades, and available endings — revisable, at a cost, until Act 3 locks it. **Commitments change what the player builds, not just event weighting (D-024/red-team):** each commitment opens its own project track — the Count opens a *railworthiness ladder* (clear the Char Line cut, restore a handcar, cache trail provisions, drill the household for departure); Hold/Deepline opens the *deep-station ladder* (second cistern, Level-3 grid); Concord opens shared-line infrastructure and envoy hosting; Junction opens chokepoint works with explicit human-ledger costs. Act 2/3 restoration options are partially gated by the standing commitment, so the middle 30 days play differently by intent.
 
 ## 6. Emotional rhythm
 
@@ -73,7 +73,7 @@ The seven registers and where the design deliberately places them:
 
 ### Act 1 — "Taking Stock" (Days 1–12)
 
-- **Objective:** stabilize the station through the first storm cycle; establish the Listening Post ritual; hear Signal 45 and meet the doubt (Magpie).
+- **Objective:** stabilize the camp and win back the first sections (the slice's east/west/lift arc is Act 1's opening shape); establish the Listening Post ritual; hear Signal 45 and meet the doubt (Magpie).
 - **New pressures:** first cinderfall storm; first gate arrivals; scarcity baseline.
 - **New systems introduced (tutorialized in fiction):** work orders → crafting → radio schedule → first nightrun → triage → first commitment gate.
 - **Character/faction escalation:** the four founders' values and one internal conflict surface; Linewalker Sable establishes trade; the Tidemill makes first contact.
@@ -81,7 +81,7 @@ The seven registers and where the design deliberately places them:
 
 ### Act 2 — "The Count" (Days 13–30)
 
-- **Objective:** convert rumor to knowledge; grow the station's reach (restorations, tunnel access, second wave of arrivals to ~8–12 named residents at full game).
+- **Objective:** convert rumor to knowledge; grow the station in earnest — the campaign's widest expansion window (concourse, platforms, substation, annex — seeded sections per 10 §14), the climb into visual Stage 3, and the second wave of arrivals toward the full-game cast of 12–20 named residents (ceiling test-gated, D-038).
 - **New pressures:** storm seasons lengthen; the Tidemill's needs sharpen into politics; a rival signal (the Junction voice) claims the rail network; internal factions of opinion form around the Count.
 - **New systems:** faction reputation and standing agreements; antenna restoration (capacity growth); multi-runner nightruns; commitment re-weighting.
 - **Character/faction escalation:** bonds and grudges mature into alliance and rupture arcs; each named survivor's personal signal resolves (found, lost, or answered differently than hoped).
@@ -113,7 +113,7 @@ The seven registers and where the design deliberately places them:
 flowchart TD
     subgraph PHYS["Physical network — the station ledger"]
         UTIL["Utilities\n(charge / water / air / heat / seals)"]
-        ROOMS["Rooms\n(8 slice types, in railcars & vaults)"]
+        ROOMS["Rooms & construction\n(sections • bays • works orders\nsurvey/clear/build/upgrade/repurpose)"]
         RES["Resources\n(Water • Rations • Charge • Salvage • Meds)"]
         CRAFT["Crafting\n(Fitters' Shop queue)"]
         STORM["Cinderfall storms\n& heat load"]
@@ -139,7 +139,7 @@ flowchart TD
     end
 
     EVENTS["Event scheduler\n(max 2 active crises; telegraph rule)"]
-    PROG["Progression\n(restoration ladder • commitment gates)"]
+    PROG["Progression\n(expansion & restoration arc\nvisual stages 1–4 • commitment gates)"]
     END["Endings\n(5 frames + 2 failure states)"]
 
     SURV -->|"work shifts"| ROOMS

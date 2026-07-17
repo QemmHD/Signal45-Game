@@ -1,10 +1,11 @@
 # 01 — DESIGN PILLARS AND ANTI-PILLARS
 
 **Status:** LOCKED. Every feature proposal in later prompts must pass the tests in this document.
+**Revision note (D-038):** the base-building revision added Pillar 6 and Anti-pillar 6. Pillars are co-equal — numbering is referential, not priority order.
 
 ---
 
-## Part A — The five design pillars
+## Part A — The six design pillars
 
 ### Pillar 1 — One station, every system connected
 
@@ -51,23 +52,32 @@
 - **Concrete example (slice):** Day 5, storm's end: the seals held. Graymorn's report notes the repaired scrubber, then — because Accord is above threshold — a small scripted scene: Maren reopens the canteen shutter and the survivors eat together under the newly-fixed platform lamps. +Strain recovery, +Accord. The scene exists *because* the player got them there; it is withheld in the fractured state.
 - **Rejection test:** *If a feature adds pressure without a paired recovery or telegraph — or if it could make the third consecutive simultaneous crisis — it violates this pillar. Any "hope" content with no mechanical weight is decoration, not a hope beat; rework it.* (Kills: random no-warning disasters, doom-stacking event rolls, purely cosmetic morale.)
 
+### Pillar 6 — Win the station back, bay by bay
+
+- **Meaning:** Base building is core play. Kestrel Cross is an authored complex of sections and structural bays that the player reclaims, connects, constructs within, upgrades, repurposes, and grows — from a camp on one damaged platform toward a living underground town. The station's physical transformation is both a strategy space and the visible biography of the community. (Authority: 10_BASE_BUILDING_DIRECTION.md.)
+- **Player-facing behavior:** Players plan expansion the way they plan the radio schedule — as a ritual of intent ("west first; water before comfort; the lift when we have the tools"). They describe their station possessively and spatially ("my clinic's too far from the gate"), argue with themselves about layout, and feel the difference between their Cross and another player's. Screenshots of progress get shared because progress is *visible*.
+- **Supporting mechanics:** The reclamation loop (survey → clear/drain → reinforce → connect → extend utilities → construct → furnish → staff → upgrade/specialize/repurpose); sixteen construction verbs with mechanical meaning (10 §4); room footprints from 1-bay utilities to platform-spanning halls, with module attachment instead of identical-room merging; trunk/node utility capacity with priority and shutoffs; layout tension axes (noise, travel, cascade risk, storm isolation); population capacity growth (berths gate arrivals); recovery guarantees (repurpose/deconstruct refund fairly — a bad layout costs time and comfort, never the campaign).
+- **Supporting presentation:** Construction is staged, worker-performed, and watchable — rubble shrinks, waterlines fall, framing rises; the four station stages (refuge → functioning shelter → settlement → underground home) read from a screenshot without numbers; residents decorate reclaimed spaces autonomously as Accord and tenure grow — the station warms because *they* believe in it.
+- **Concrete example (slice):** Before the Day 4–5 storm there is labor for one breakthrough: east (the stranded railcars and kiosk row — beds, an aid car, a canteen) or west (the flooded cistern gallery — water security and cheaper storms). Either choice visibly transforms one wing while the other stays dark, changes what the storm costs, and reshapes the whole week's schedule. The lift to the Deep Service level waits on tools from Depot 9 — expansion reaching through the nightrun door.
+- **Rejection test:** *If a construction feature reduces to "place box, wait, collect" — if it interacts with nothing (no utility load, no access shape, no resident behavior, no structural constraint, no human-ledger stake) — it violates this pillar. Any expansion mechanic that abandons the found-architecture identity for blank-grid stamping is likewise rejected.*
+
 ---
 
-## Part B — The five anti-pillars
+## Part B — The six anti-pillars
 
-What Cinderline refuses to become. Each names the feature type it forbids.
+What Signal 45 refuses to become. Each names the feature type it forbids.
 
 ### Anti-pillar 1 — Not an idle tap-collector
 
-Cinderline never generates value from the player's absence and never asks for a visit to *harvest* rather than *decide*. **Forbidden feature types:** offline resource accrual; tap-to-collect production bubbles; login streaks and daily gift calendars; timers whose only interaction is waiting or paying; notification hooks engineered to reopen the app ("your water is ready!"). Production runs only while the player plays; sessions exist to make decisions, not collect yield.
+Signal 45 never generates value from the player's absence and never asks for a visit to *harvest* rather than *decide*. **Forbidden feature types:** offline resource accrual; tap-to-collect production bubbles; login streaks and daily gift calendars; timers whose only interaction is waiting or paying; notification hooks engineered to reopen the app ("your water is ready!"). Production runs only while the player plays; sessions exist to make decisions, not collect yield.
 
 ### Anti-pillar 2 — Not a city, not a crowd
 
-Cinderline never zooms out past names and faces. **Forbidden feature types:** population growth beyond the named-cast ceiling (~12 full game); anonymous migrant/worker pools; district- or zone-level abstractions; statistical "population happiness" replacing individual Accord contributions; any system whose UI would need a spreadsheet of people. If a feature needs more people than the player can know by name and history, it is out of scope by identity, not by budget.
+Signal 45 never zooms out past names and faces. **Forbidden feature types:** population growth beyond the named-cast ceiling (12–20 full game, the exact ceiling gated on technical testing — D-038); anonymous migrant/worker pools; district- or zone-level abstractions; statistical "population happiness" replacing individual Accord contributions; any system whose UI would need a spreadsheet of people. Population *growth* is a core progression system (10 §11) — growth in named, authored people at a controlled rate, never population spam. If a feature needs more people than the player can know by name and history, it is out of scope by identity, not by budget.
 
 ### Anti-pillar 3 — Not a combat power fantasy
 
-Violence in Cinderline is rare, costly, avoidable, and never the reward loop. **Forbidden feature types:** weapon tiers and damage progression; kill-counting or combat XP; encounters that must be won by force; enemy factions that exist to be cleared; loot pinatas guarded by fights. The nightrun verb set is *reach, take, talk, avoid, flee* — a standoff is a dialogue with body language, and hurting someone is a Mark on the survivor who did it, every time.
+Violence in Signal 45 is rare, costly, avoidable, and never the reward loop. **Forbidden feature types:** weapon tiers and damage progression; kill-counting or combat XP; encounters that must be won by force; enemy factions that exist to be cleared; loot pinatas guarded by fights. The nightrun verb set is *reach, take, talk, avoid, flee* — a standoff is a dialogue with body language, and hurting someone is a Mark on the survivor who did it, every time.
 
 ### Anti-pillar 4 — Not a micromanagement treadmill
 
@@ -75,13 +85,19 @@ The player commands at the level of intent — shifts, priorities, work orders �
 
 ### Anti-pillar 5 — Not a misery slot machine, and never paid relief
 
-Suffering in Cinderline is always causal, telegraphed, and answerable — and never for sale. **Forbidden feature types:** unheralded random deaths or irreversible losses without a prior visible warning state; difficulty via dice rather than via dilemmas; and categorically — per the monetization restrictions — loot boxes, paid resources/medicine/food, energy gates, compulsory ads, paid revivals, or any purchasable relief from designed pressure. The business model is a free first chapter and one permanent unlock; monetization may never touch the simulation. (This anti-pillar also forbids *designing* pressure whose obvious relief valve would be a purchase, even before any store exists.)
+Suffering in Signal 45 is always causal, telegraphed, and answerable — and never for sale. **Forbidden feature types:** unheralded random deaths or irreversible losses without a prior visible warning state; difficulty via dice rather than via dilemmas; and categorically — per the monetization restrictions — loot boxes, paid resources/medicine/food, energy gates, compulsory ads, paid revivals, or any purchasable relief from designed pressure. The business model is a free first chapter and one permanent unlock; monetization may never touch the simulation. (This anti-pillar also forbids *designing* pressure whose obvious relief valve would be a purchase, even before any store exists.)
+
+### Anti-pillar 6 — No meaningless room spam
+
+*(Replaces the retired "no free-form building" rule — D-038. That rule was an overcorrection: it removed a core intended mechanic instead of demanding an original implementation of it.)*
+
+Signal 45 includes substantial construction and expansion — but every room must interact with utility capacity, access and travel, survivor behavior, structural constraints, and human consequences. **Forbidden feature types:** rooms that are interchangeable timer boxes with no relationship to the world or the people living in them; copy-paste production stacking as the dominant strategy (ten identical workshops); construction verbs that reduce to place-and-wait; rooms with no visible resident activity, no failure modes, and no neighbors they affect; expansion that adds floor area without adding decisions. The test is Pillar 6's rejection test, applied from the other side: *if deleting a room's connections to power, air, access, noise, staffing, and Accord would change nothing about it, the room is spam and does not ship.*
 
 ---
 
 ## Part C — Feature-decision tests (apply to every future proposal)
 
-A proposed feature must pass **all five gates**:
+A proposed feature must pass **all six gates**:
 
 | # | Gate | Question | Instant-fail examples |
 |---|------|----------|----------------------|
@@ -90,6 +106,7 @@ A proposed feature must pass **all five gates**:
 | T3 | Cost of knowing | If it delivers information, does that information displace other information or cost something real? | Free map reveals; omniscient alerts |
 | T4 | Station gravity | Does it feed or draw on the station? Would it still make sense if the station were deleted? (If yes → reject.) | Expedition-only progression; minigames |
 | T5 | Rhythm | Does it respect the pressure/recovery alternation and the two-crisis cap, and is any new pressure paired with telegraph + recovery? | Doom-stacking; no-warning disasters |
+| T6 | Built meaning | If it adds or changes a room/space, does it interact with utilities, access, resident behavior, structure, or the human ledger — and produce a visible result? | Interchangeable timer boxes; place-and-wait construction; copy-paste room stacking |
 
 Plus the standing constraints: no monetization contact with simulation (Anti-pillar 5), landscape one-screen readability, and a safe stop within 12 minutes of any point.
 
@@ -100,6 +117,7 @@ Plus the standing constraints: no monetization contact with simulation (Anti-pil
 1. **Antenna mast restoration raises Listening Post slot capacity** — readable (the mast is a visible surface structure with damage states), station-gravity (built by fitters from salvage), cost-of-knowing (capacity remains scarce, just less scarce), rhythm (a restoration hope beat). *Accepted for full game only; the slice's nightly slot count is fixed at 2. The slice's separate antenna project — the "wire splice" (wire → splice → reception) — affects Relay Night reception quality only, never slot count.*
 2. **Pair assignments with bond/grudge modifiers** — personhood (specific pairs matter), readability (bond lines on ledger pages), rhythm (reconciliation arcs are recovery content). *Accepted; slice ships one scripted conflict pair.*
 3. **Delegated nightrun resolution** — station-gravity (outcome derives from preparation the base produced), personhood (runner's aptitudes/Marks drive the roll and the report), readability (the return report explains outcomes causally). *Accepted; slice requires it (accessibility baseline).*
+4. **Module expansion (Expand verb: pantry onto kitchen, ward bay onto clinic)** — built meaning (changes capacity, staffing, utility draw, and adjacency), readability (the room visibly grows), station gravity, rhythm (expansions are hope-register beats). *Accepted; slice ships at least one instance.*
 
 **Rejected features (with the gate that killed them):**
 
@@ -108,3 +126,5 @@ Plus the standing constraints: no monetization contact with simulation (Anti-pil
 3. **Breeding/recruit-stream population growth** — fails T2/Anti-pillar 2 outright. New people arrive rarely, as authored arrivals with histories.
 4. **Offline generation ("the station keeps working while you're away")** — fails Anti-pillar 1 and the offline-safety quality gate (absence must be consequence-free in both directions).
 5. **Fog-of-war overworld map with scouting units** — fails T3 as designed (unit-scouting bypasses the Listening Post's zero-sum knowledge economy) and Anti-pillar 2 (map-scale play). The tunnel diagram + radio intel *is* the map.
+6. **Unlimited blank-grid excavation ("dig anywhere")** — fails Pillar 6's found-architecture identity and T6 (virgin grid cells carry no history, hazards, or story). Expansion is reclamation of the authored complex; the bounded Excavate verb (known collapsed passages only) is the sanctioned exception.
+7. **Adjacent-identical room merging (three kitchens fuse into a mega-kitchen)** — fails T6 and the 04 §3 originality boundary (another game's signature merge rule). Larger facilities come from larger shells or attached modules, which have different properties, not multiplied identical ones.

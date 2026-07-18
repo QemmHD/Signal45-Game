@@ -85,3 +85,19 @@ Force termination before and after every transaction in `15_FIRST_SESSION_AND_SA
 It does not prove enjoyment, balance, comprehension, tactile construction, emotional investment, camera comfort, readable 2.5D staging, animation quality, actual device performance, or final session pacing. It uses a travel allowance instead of pathfinding, four conditions instead of full resident behavior, bounded authored incidents instead of a complete weather architecture, and a graph abstraction instead of final nightrun presentation.
 
 Passing scenarios authorizes a prototype; it does not authorize production-scale content expansion.
+
+## Prompt 3 sensitivity amendment
+
+The original Prompt 2 percentages above remain historical evidence for the construction model. Prompt 3 adds fragility around outcome meaning, condition stacking, Medicine, Materials, Charge conversion, Relay response, incident reserve, and deterministic strain. Current baselines pass Full Proof, but prepared Day 5 leaves zero daily/phase slack and zero minimum hard-deadline days. Any geometry-derived travel increase must rerun all 176 cases.
+
+Additional retuning triggers:
+
+- a stock response creates value rather than trading Hunger, Stress, Materials, time, or opportunity;
+- East’s deliberate Water response overtakes West’s Water security;
+- a critical resident appears in productive capacity;
+- a forecast needs more than two taps to name the failing link;
+- two major incidents overlap or a cascade exceeds three systems;
+- a Highball candidate becomes mandatory, repeat-profitable, or medically applicable;
+- a save/reload changes treatment, incident, strain, promise, or outcome class.
+
+Required Prompt 4 measurements are horizontal/vertical travel, carrying, material trips, congestion, evacuation, isolation reachability, and path failure. Prompt 5 must measure promise/refusal consequences; neither may silently increase the 12-WU resident base.

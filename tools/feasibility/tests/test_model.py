@@ -39,9 +39,25 @@ class CoreModelTests(unittest.TestCase):
                 copy.deepcopy(item) for item in self.scenarios if item["id"] != "S64"
             ],
         }
+        replacement = copy.deepcopy(self.scenarios[-1])
+        replacement["id"] = "S177"
+        replacement["name"] = "validation-only replacement"
+        scenario_data["scenarios"].append(replacement)
         errors = validate_scenarios(scenario_data, self.config)
         self.assertEqual(len(errors), 1)
         self.assertIn("S64", errors[0])
+
+    def test_scenario_validation_rejects_label_only_duplicate(self) -> None:
+        changed = {"schema_version": 1, "scenarios": copy.deepcopy(self.scenarios)}
+        original = changed["scenarios"][0]
+        duplicate = changed["scenarios"][-1]
+        duplicate["route"] = original["route"]
+        duplicate["signal"] = original["signal"]
+        duplicate["options"] = copy.deepcopy(original["options"])
+        duplicate["options"]["prompt3_case"] = "label_only_duplicate"
+        errors = validate_scenarios(changed, self.config)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("exact input duplicate", errors[0])
 
     def test_repeated_run_is_deterministic(self) -> None:
         first = model.simulate_scenario(self.config, self.scenario("S01"))
@@ -60,15 +76,17 @@ class CoreModelTests(unittest.TestCase):
             {"health": "impaired", "hunger": "restricted", "fatigue": "tired", "stress": "high"},
         )
         self.assertLess(impaired, healthy)
-        self.assertGreater(impaired, self.config["work"]["minimum_emergency_capacity"])
+        self.assertGreater(impaired, 0.0)
 
-    def test_minimum_emergency_capacity_prevents_zero_work_spiral(self) -> None:
-        result = model.calculate_resident_capacity(
+    def test_critical_resident_has_zero_project_work(self) -> None:
+        profile = model.calculate_resident_work_profile(
             self.config,
             "Maren",
             {"health": "critical", "hunger": "prolonged", "fatigue": "collapse_risk", "stress": "acute"},
         )
-        self.assertEqual(result, self.config["work"]["minimum_emergency_capacity"])
+        self.assertEqual(profile["productive_capacity"], 0.0)
+        self.assertFalse(profile["assignment_eligible"])
+        self.assertTrue(profile["emergency_self_action_available"])
 
     def test_unavailable_resident_has_no_capacity(self) -> None:
         result = model.calculate_resident_capacity(self.config, "Teo", availability=0.0)
@@ -85,7 +103,7 @@ class CoreModelTests(unittest.TestCase):
         scenario["id"] = "TEST_DEPENDENCY"
         scenario["options"]["omit_project"] = "east_reclaim"
         result = model.simulate_scenario(self.config, scenario)
-        self.assertFalse(result["viable"])
+        self.assertFalse(result["slice_proof_complete"])
         self.assertIn("east_utility_connection", result["final"]["incomplete_required_projects"])
 
     def test_partial_project_progress_survives_interruption(self) -> None:

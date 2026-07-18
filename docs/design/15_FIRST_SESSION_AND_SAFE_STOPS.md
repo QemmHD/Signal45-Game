@@ -126,3 +126,7 @@ An application close after a committed mutation but before its animation restore
 ## Acceptance and prototype gate
 
 Prompt 2 accepts the first-session plan because the modeled choice, assignment, response, improvement, forecast, and safe stop fall within their requested bounds. A playable mobile build must measure each milestone. If large-text safe stop exceeds seven minutes or skip mode omits the assignment/completion transaction, the opening must be simplified before adding more teaching.
+
+## Prompt 3 transaction amendment
+
+The opening remains unchanged. Later safe boundaries now include Relay choice, Medicine/Water treatment reservation, treatment interruption/completion, incident warning/escalation/interruption/recovery, emergency action, isolation/evacuation, hope fallback, Highball strain, and promise state. Each saves before irreversible confirmation and after logical commitment. Repeating treatment completion, incident recovery, Charge discharge, refund, expedition reward, or Highball commitment cannot duplicate value. Phase/day output records active promises and available emergency actions; no closed-app time advances.

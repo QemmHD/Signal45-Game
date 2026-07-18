@@ -2,12 +2,12 @@
   "schema_version": 1,
   "metadata": {
     "title": "Signal 45",
-    "stage": "Prompt 2",
-    "model_name": "The First Count feasibility model",
+    "stage": "Prompt 3",
+    "model_name": "The First Count survival feasibility model",
     "provisional": true,
     "canonical_balance_source": "tools/feasibility/data/model.json",
-    "source_commit": "984ef74",
-    "notes": "This model tests internal consistency and can prove infeasibility. It cannot prove fun, comprehension, camera comfort, emotional impact, or measured runtime pacing."
+    "source_commit": "3243aff8f86baeffa32875d161a86354ce9ee42b",
+    "notes": "This model tests internal consistency, survival causality, schedule resilience, outcome classification, and save idempotency. It cannot prove fun, comprehension, camera comfort, emotional impact, forecast readability, or measured runtime pacing."
   },
   "time": {
     "interaction_seconds": {
@@ -124,12 +124,12 @@
     "player_facing": false,
     "base_capacity_per_resident_day": 12.0,
     "maximum_useful_continuous_work": 8.0,
-    "minimum_emergency_capacity": 2.0,
+    "minimum_emergency_shelter_capacity": 2.0,
     "personal_overhead_per_available_resident": 1.5,
-    "daily_essential_work": 10.0,
+    "daily_essential_work": 8.0,
+    "daily_incident_reserve": 2.0,
     "nightrun_preparation_work": 3.0,
     "visitor_processing_work": 2.0,
-    "teo_examination_work": 2.0,
     "setup_rate": 0.0,
     "hauling_rate": 0.04,
     "travel_profiles": {
@@ -137,11 +137,17 @@
       "typical": 0.10,
       "poor_valid": 0.16
     },
-    "condition_multipliers": {
-      "health": {"healthy": 1.0, "strained": 0.85, "impaired": 0.65, "critical": 0.40},
-      "hunger": {"fed": 1.0, "restricted": 0.95, "missed": 0.85, "prolonged": 0.65},
-      "fatigue": {"rested": 1.0, "tired": 0.85, "exhausted": 0.60, "collapse_risk": 0.40},
-      "stress": {"steady": 1.0, "elevated": 0.90, "high": 0.75, "acute": 0.55}
+    "condition_combination": {
+      "method": "dominant impairment plus capped secondary penalties",
+      "secondary_weight": 0.5,
+      "maximum_penalty": 0.75
+    },
+    "stress_point_bands": {"steady_below": 5, "elevated_below": 12, "high_below": 20},
+    "condition_penalties": {
+      "health": {"healthy": 0.0, "strained": 0.15, "impaired": 0.35, "critical": 1.0},
+      "hunger": {"fed": 0.0, "hungry": 0.08, "restricted": 0.15, "missed": 0.22, "prolonged": 0.35},
+      "fatigue": {"rested": 0.0, "tired": 0.15, "exhausted": 0.40, "collapse_risk": 1.0},
+      "stress": {"steady": 0.0, "elevated": 0.10, "high": 0.25, "acute": 0.45}
     },
     "aptitude_multipliers": {"strong": 1.15, "capable": 1.0, "poor": 0.75, "ineligible": 0.0},
     "project_classes": {
@@ -175,27 +181,64 @@
   },
   "stocks": {
     "Food": {
+      "internal_unit": "ration-equivalent",
+      "player_interpretation": "one ordinary adult meal issue",
       "start": 40.0,
       "capacity": 60.0,
       "normal_per_resident_day": 1.0,
       "restricted_per_resident_day": 0.75,
       "missed_per_resident_day": 0.0,
+      "emergency_per_resident_day": 0.5,
+      "packed_nightrun_ration": 1.0,
       "minimum_viable_reserve": 6.0,
       "comfortable_reserve": 12.0,
-      "warning_threshold": 10.0
+      "warning_threshold": 10.0,
+      "primary_sources": ["starting rations", "trader exchange", "Harbor Annex carry choice"],
+      "secondary_sources": ["clearly forecast preservation salvage"],
+      "primary_sinks": ["Graymorn meal issue", "packed nightrun ration", "Juna aid or admission"],
+      "emergency_sinks": ["shared recovery meal"],
+      "reservation_behavior": "packed rations reserve at expedition commitment",
+      "storage_behavior": "sealed dry stores share the Food capacity; a reservation remains visible but unavailable",
+      "loss_behavior": "no passive loss; spoilage only through a forecast incident",
+      "forecast_formula": "current minus committed meal and expedition issues plus confirmed gains at the next ledger",
+      "ordinary_responses": ["restrict one meal window", "trade", "choose Food on expedition"],
+      "emergency_responses": ["emergency portion", "defer shared meal"],
+      "critical_consequence": "repeated shortage advances Hunger and eventually strains Health",
+      "save_representation": "decimal amount, capacity, reservations by transaction ID, and consecutive ration count",
+      "slice_boundary": "stored rations, issues, trade, expedition choice, and transparent emergency portions; no agriculture",
+      "full_game_extension_boundary": "preservation and specialized Food rooms may extend supply without adding another primary stock"
     },
     "Clean Water": {
+      "internal_unit": "person-issue equivalent",
+      "player_interpretation": "stored clean water ready to drink or use in care",
       "start": 60.0,
       "capacity": 80.0,
       "normal_per_resident_day": 1.5,
       "restricted_per_resident_day": 1.1,
       "treatment_use": 1.0,
       "emergency_use": 2.0,
+      "packed_nightrun_water": 1.5,
       "minimum_viable_reserve": 8.0,
       "comfortable_reserve": 16.0,
-      "warning_threshold": 14.0
+      "warning_threshold": 14.0,
+      "primary_sources": ["clean storage at start", "West treatment throughput", "trader exchange"],
+      "secondary_sources": ["isolated emergency reserve"],
+      "primary_sinks": ["Graymorn water issue", "named treatment", "Juna stabilization"],
+      "emergency_sinks": ["manual filter service", "contamination cleanup"],
+      "reservation_behavior": "treatment and packed water reserve by transaction ID",
+      "storage_behavior": "only clean connected or isolated declared storage contributes to the stock",
+      "loss_behavior": "only named leakage, contamination isolation, or storm impairment",
+      "forecast_formula": "clean stock plus committed treated throughput minus resident, treatment, packed, and known incident issues",
+      "ordinary_responses": ["restrict issue", "use declared reserve", "trade", "repair a failing Water link"],
+      "emergency_responses": ["isolate storage", "manual operation", "spend Charge on connected pump"],
+      "critical_consequence": "safe issue or named treatment cannot continue",
+      "save_representation": "decimal clean stock, reservations, storage isolation, contamination state, and failing link",
+      "slice_boundary": "five-link Water utility and clean stock only; no individual pipes or fluid simulation",
+      "full_game_extension_boundary": "additional sources, tanks, and treatment specializations extend the same five-link chain"
     },
     "Medicine": {
+      "internal_unit": "treatment-use equivalent",
+      "player_interpretation": "general medical supplies consumed by named care",
       "start": 8.0,
       "capacity": 12.0,
       "examination_use": 1.0,
@@ -204,23 +247,69 @@
       "stabilization_use": 1.0,
       "minimum_viable_reserve": 2.0,
       "comfortable_reserve": 4.0,
-      "warning_threshold": 3.0
+      "warning_threshold": 3.0,
+      "primary_sources": ["starting medical locker", "medical trader"],
+      "secondary_sources": ["declared expedition cache"],
+      "primary_sinks": ["examination", "stabilization", "respiratory treatment", "injury treatment", "waterborne treatment"],
+      "emergency_sinks": ["serious stabilization"],
+      "reservation_behavior": "reserved once when a named treatment starts",
+      "storage_behavior": "one top-level medical locker capacity; named treatment reservations are unavailable to other care",
+      "loss_behavior": "no passive expiration in The First Count",
+      "forecast_formula": "available Medicine minus active named-treatment reservations plus confirmed trader or expedition gains",
+      "ordinary_responses": ["prioritize stabilization", "delay nonurgent follow-up", "trade"],
+      "emergency_responses": ["temporary room conversion", "stabilize then Recover First"],
+      "critical_consequence": "a known serious condition cannot be stabilized",
+      "save_representation": "decimal amount plus treatment reservation and completion transaction IDs",
+      "slice_boundary": "one Medicine stock consumed only by named examination, stabilization, and treatment transactions",
+      "full_game_extension_boundary": "specific items may become detailed inventory without adding a sixth HUD stock"
     },
     "Materials": {
+      "internal_unit": "common-build bundle",
+      "player_interpretation": "mixed common construction and repair stock",
       "start": 70.0,
       "capacity": 100.0,
       "minimum_viable_reserve": 5.0,
       "comfortable_reserve": 20.0,
-      "warning_threshold": 10.0
+      "warning_threshold": 10.0,
+      "primary_sources": ["starting stores", "route reclamation salvage", "Harbor Annex salvage"],
+      "secondary_sources": ["declared deconstruction salvage"],
+      "primary_sinks": ["project reservation", "repair", "trade"],
+      "emergency_sinks": ["temporary filter or bypass", "Highball wear"],
+      "reservation_behavior": "reserved at project activation and consumed by committed stage",
+      "storage_behavior": "common bundles share capacity; route-critical components remain separate named blockers",
+      "loss_behavior": "cancellation and deconstruction return only the class-defined fraction",
+      "forecast_formula": "available common bundles minus active project reservations and repair commitments plus confirmed salvage",
+      "ordinary_responses": ["defer optional project", "salvage", "cancel before delivery"],
+      "emergency_responses": ["inferior substitution with declared later repair"],
+      "critical_consequence": "required repair or construction stage is blocked",
+      "save_representation": "decimal common stock, per-project reservations, delivered stages, and component inventory",
+      "slice_boundary": "common Materials plus five representative component families; no large crafting inventory",
+      "full_game_extension_boundary": "more recipes consume detailed items behind the same Materials summary"
     },
     "Charge": {
+      "internal_unit": "delivered reserve-unit before conversion loss",
+      "player_interpretation": "stored electrical reserve in the flywheel and cells",
       "start": 24.0,
       "capacity": 30.0,
       "discharge_limit_per_stage": 3.0,
       "discharge_loss": 0.10,
       "minimum_viable_reserve": 3.0,
       "comfortable_reserve": 10.0,
-      "warning_threshold": 6.0
+      "warning_threshold": 6.0,
+      "primary_sources": ["starting charged reserve"],
+      "secondary_sources": ["no routine recharge during The First Count"],
+      "primary_sinks": ["named connected-load backup", "Relay Load Test", "storm deficit"],
+      "emergency_sinks": ["Highball machine strain", "medical or Air preservation"],
+      "reservation_behavior": "discharge names one connected consumer and commits atomically",
+      "storage_behavior": "flywheel and cells share capacity; stored reserve does not imply live Power connectivity",
+      "loss_behavior": "ten percent conversion loss on delivered reserve",
+      "forecast_formula": "stored reserve divided by named connected deficit and conversion loss, capped by per-stage discharge",
+      "ordinary_responses": ["shed optional load", "delay calibration", "repair live Power source"],
+      "emergency_responses": ["preserve one critical connected load for a forecast duration"],
+      "critical_consequence": "connected critical load cannot bridge the current Power deficit",
+      "save_representation": "decimal reserve, named consumer, stage limit, loss, and discharge transaction IDs",
+      "slice_boundary": "finite starting reserve with no routine recharge; Charge cannot repair or bridge a disconnected branch",
+      "full_game_extension_boundary": "later recharge equipment extends the same reserve model without merging it with Power"
     }
   },
   "components": {
@@ -244,7 +333,13 @@
         "task_lighting": 0.75,
         "comfort_lighting": 1.0
       },
-      "priority_order": ["air_filtration", "water_pumping", "medical_equipment", "relay_kiosk", "service_alcove", "task_lighting", "workshop", "comfort_lighting"]
+      "priority_tiers": {
+        "critical": ["air_filtration", "medical_equipment"],
+        "essential": ["water_pumping", "relay_kiosk", "service_alcove"],
+        "normal": ["workshop"],
+        "optional": ["task_lighting", "comfort_lighting"]
+      },
+      "shed_order": ["comfort_lighting", "task_lighting", "workshop", "service_alcove", "relay_kiosk", "water_pumping", "medical_equipment", "air_filtration"]
     },
     "air": {
       "nominal_capacity": 12.0,
@@ -252,7 +347,8 @@
       "resident_demand": 1.0,
       "room_process_demand": 2.0,
       "degradation_stages": ["stable", "loaded", "degraded", "exposure", "evacuate"],
-      "exposure_window_stages": 2
+      "exposure_window_stages": 2,
+      "responses": ["service filter", "replace filter media", "reduce process load", "restore Power", "isolate section", "evacuate", "use protection", "spend Charge"]
     },
     "water": {
       "east_source_capacity": 8.0,
@@ -260,15 +356,198 @@
       "pump_availability": 1.0,
       "treatment_efficiency": 0.90,
       "delivery_efficiency": 0.95,
-      "contamination_states": ["clean", "suspect", "contaminated", "isolated"]
+      "contamination_states": ["clean", "tight", "suspect", "contaminated", "isolated"],
+      "links": ["source", "pumping", "treatment", "delivery", "clean storage"]
     },
     "structure": {
       "states": ["safe", "strained", "unstable", "critical", "closed"],
       "warning_state": "unstable",
       "closure_state": "closed",
       "reinforcement_improvement_steps": 2,
-      "critical_repair_work": 8.0
+      "critical_repair_work": 8.0,
+      "maximum_adjacent_propagation": 1
     }
+  },
+  "outcome_classes": {
+    "FULL_PROOF": "Essential survival is viable, every mandatory slice proof completes, and Day 7 supports an ambitious future direction.",
+    "RECOVER_FIRST": "Essential survival is viable, but repair, treatment, or shortage makes the canonical Recover First direction the honest result.",
+    "PROOF_INCOMPLETE": "The shelter may remain alive, but a release-slice mechanic, route proof, tutorial, or acceptance condition was not demonstrated.",
+    "SHELTER_FAILURE": "Essential residents or systems cannot reach a recoverable Day 7 state.",
+    "INVARIANT_ERROR": "The simulation entered an impossible, duplicated, malformed, negative, or save-divergent state."
+  },
+  "forecast_framework": {
+    "classes": ["FACT", "PROJECTION", "ESTIMATE", "SIGNAL_INTELLIGENCE", "UNKNOWN"],
+    "confidence_labels": ["measured", "committed-ledger", "high", "medium", "low", "unknown"],
+    "maximum_overview_taps_to_diagnose": 2,
+    "card_fields": ["current state", "committed use", "expected gain", "projected next ledger", "confidence", "main source", "main drain", "failing link", "likely next consequence", "responses"],
+    "false_precision_rule": "Estimates, signal intelligence, and unknowns use ranges or plain-language horizons rather than invented decimals."
+  },
+  "condition_definitions": {
+    "health": {
+      "player_bands": ["stable", "strained", "impaired", "critical"],
+      "update_timing": ["incident stage", "treatment stage", "rest completion", "day ledger"],
+      "warning_band": "impaired",
+      "critical_restriction": "critical gives zero productive work and requires care",
+      "recovery": "named treatment plus observation or rest",
+      "ui": "one primary meter plus named contextual cause"
+    },
+    "hunger": {
+      "player_bands": ["fed", "hungry", "restricted", "prolonged shortage"],
+      "update_timing": ["meal issue", "day ledger"],
+      "warning_band": "restricted",
+      "critical_restriction": "prolonged shortage reduces work and may strain Health after warning",
+      "recovery": "normal meals over later issue boundaries",
+      "ui": "one primary meter with meal consequence text"
+    },
+    "fatigue": {
+      "player_bands": ["rested", "tired", "exhausted", "collapse risk"],
+      "update_timing": ["work block", "Highball commitment", "rest completion", "day ledger"],
+      "warning_band": "exhausted",
+      "critical_restriction": "collapse risk gives zero ordinary assignment",
+      "recovery": "protected rest block and promise repayment",
+      "ui": "one primary meter with next-rest forecast"
+    },
+    "stress": {
+      "player_bands": ["steady", "elevated", "high", "acute"],
+      "update_timing": ["incident", "ration decision", "promise result", "safe recovery scene"],
+      "warning_band": "high",
+      "critical_restriction": "acute pressure limits work but does not alone create medical incapacity",
+      "recovery": "safety, rest, kept promises, preferred recovery behavior",
+      "ui": "one primary meter with specific source labels"
+    }
+  },
+  "medical_restrictions": {
+    "none": {"productive_work_blocked": false, "emergency_self_action": true, "requires_assistance": false, "treatment_required": false, "evacuation_required": false},
+    "light_duty": {"productive_work_blocked": false, "emergency_self_action": true, "requires_assistance": false, "treatment_required": true, "evacuation_required": false},
+    "medically_incapacitated": {"productive_work_blocked": true, "emergency_self_action": true, "requires_assistance": true, "treatment_required": true, "evacuation_required": false},
+    "critical_untreated_injury": {"productive_work_blocked": true, "emergency_self_action": true, "requires_assistance": true, "treatment_required": true, "evacuation_required": true},
+    "collapse": {"productive_work_blocked": true, "emergency_self_action": true, "requires_assistance": true, "treatment_required": true, "evacuation_required": false},
+    "unconscious": {"productive_work_blocked": true, "emergency_self_action": false, "requires_assistance": true, "treatment_required": true, "evacuation_required": true},
+    "severe_respiratory": {"productive_work_blocked": true, "emergency_self_action": true, "requires_assistance": true, "treatment_required": true, "evacuation_required": true}
+  },
+  "medical_conditions": {
+    "respiratory_exposure": {
+      "cause": "cinder exposure or degraded Air in an occupied section",
+      "warning": "coughing, exposure icon, and Air-stage forecast before serious impairment",
+      "progression": ["warning", "limited", "severe", "evacuate"],
+      "possible_lasting_effect": "temporary respiratory sensitivity after sustained neglect",
+      "severities": {
+        "limited": {"medicine": 1.0, "clean_water": 1.0, "work": 2.0, "recovery_days": 1, "productive_work_blocked": false, "movement_restriction": "avoid dusty work", "room_requirement": "triage cot", "skilled_staff_required": true, "auto_pause_tier": "warning", "progression_if_delayed": "severe"},
+        "severe": {"medicine": 2.0, "clean_water": 2.0, "work": 4.0, "recovery_days": 2, "productive_work_blocked": true, "movement_restriction": "evacuate from exposure", "room_requirement": "stable treatment area", "skilled_staff_required": true, "auto_pause_tier": "critical", "progression_if_delayed": "evacuate"}
+      }
+    },
+    "minor_injury": {
+      "cause": "visible accepted construction risk or another forecast physical hazard",
+      "warning": "hazard card names protection, warning, stabilization, and likely injury",
+      "progression": ["warning", "minor", "impaired"],
+      "possible_lasting_effect": "none in the slice when treated",
+      "severities": {
+        "minor": {"medicine": 1.0, "clean_water": 1.0, "work": 4.0, "recovery_days": 1, "productive_work_blocked": false, "movement_restriction": "light duty", "room_requirement": "triage cot", "skilled_staff_required": true, "auto_pause_tier": "warning", "progression_if_delayed": "impaired"}
+      }
+    },
+    "serious_injury": {
+      "cause": "multiple visible risks knowingly accepted or a severe warned incident",
+      "warning": "critical hazard confirmation and response clock",
+      "progression": ["warning", "serious", "critical", "stabilized"],
+      "possible_lasting_effect": "temporary work restriction",
+      "severities": {
+        "serious": {"medicine": 2.0, "clean_water": 2.0, "work": 6.0, "recovery_days": 2, "productive_work_blocked": true, "movement_restriction": "assisted movement", "room_requirement": "stable treatment area", "skilled_staff_required": true, "auto_pause_tier": "critical", "progression_if_delayed": "critical"},
+        "critical": {"medicine": 2.0, "clean_water": 2.0, "work": 8.0, "recovery_days": 3, "productive_work_blocked": true, "movement_restriction": "evacuation assistance", "room_requirement": "stable treatment area", "skilled_staff_required": true, "auto_pause_tier": "critical", "progression_if_delayed": "slice remains recoverable only through immediate stabilization"}
+      }
+    },
+    "exhaustion": {
+      "cause": "Highball, broken rest, or sustained work at collapse risk",
+      "warning": "Fatigue reaches exhausted before collapse risk",
+      "progression": ["tired", "exhausted", "collapse risk", "resting"],
+      "possible_lasting_effect": "none after protected rest in the slice",
+      "severities": {
+        "severe": {"medicine": 0.0, "clean_water": 1.0, "work": 0.0, "recovery_days": 1, "productive_work_blocked": true, "movement_restriction": "self-evacuate to rest", "room_requirement": "rest space", "skilled_staff_required": false, "auto_pause_tier": "critical", "progression_if_delayed": "collapse"}
+      }
+    },
+    "waterborne_illness": {
+      "cause": "known contaminated or suspect Water used after warning",
+      "warning": "Water overlay names treatment or clean-storage failure",
+      "progression": ["exposed", "symptomatic", "impaired", "stabilized"],
+      "possible_lasting_effect": "temporary reduced capacity",
+      "severities": {
+        "moderate": {"medicine": 1.0, "clean_water": 2.0, "work": 4.0, "recovery_days": 1, "productive_work_blocked": false, "movement_restriction": "light duty", "room_requirement": "triage cot", "skilled_staff_required": true, "auto_pause_tier": "warning", "progression_if_delayed": "serious"},
+        "serious": {"medicine": 2.0, "clean_water": 2.0, "work": 6.0, "recovery_days": 2, "productive_work_blocked": true, "movement_restriction": "remain in treatment", "room_requirement": "stable treatment area", "skilled_staff_required": true, "auto_pause_tier": "critical", "progression_if_delayed": "critical dehydration context"}
+      }
+    }
+  },
+  "relay_load_test": {
+    "day": 4,
+    "context": "Relay Kiosk calibration before Forecast Board installation",
+    "ordinary_demand": 8.0,
+    "temporary_demand": 3.5,
+    "charge_delivery": 1.0,
+    "shed_load": "task_lighting",
+    "shed_amount": 0.75,
+    "responses": ["charge", "shed_lighting", "delay"],
+    "introduced_after_first_session": true,
+    "new_project_work": 0.0
+  },
+  "weather_states": {
+    "swelter_heat": {"forecast_source": "surface thermometers and civic heat bulletins", "confidence": "high", "lead_stages": 2, "shelter_effect": "surface access remains unsafe", "utility_effect": "Water demand estimate may rise", "resident_effect": "surface work is prohibited", "expedition_effect": "opens the later Nightrun window", "construction_effect": "no outdoor daytime delivery", "preparation": ["pack water", "wait for the night window"], "emergency_response": ["retreat underground"], "recovery": "none", "visual": "white-orange cinder glare at entrances", "audio": "distant metal expansion and weak wind", "accessibility": "heat icon plus plain-language surface closure"},
+    "cinder_front": {"forecast_source": "Listening Post burst plus filter readings", "confidence": "medium-to-high", "lead_stages": 2, "shelter_effect": "cinder pressure on occupied sections", "utility_effect": "Air then Power then Water only", "resident_effect": "respiratory warning before exposure", "expedition_effect": "no new surface departure", "construction_effect": "dusty projects suspend", "preparation": ["filter service", "load plan", "Water isolation"], "emergency_response": ["isolate", "evacuate", "discharge Charge", "shed load"], "recovery": "filter cleanup and visible repair", "visual": "cinder ingress, dimming, filter residue", "audio": "fan strain and exterior cinder impact", "accessibility": "stage label, direction cue, auto-pause at severe transition"},
+    "ash_wash_aftermath": {"forecast_source": "storm runoff and local inspection", "confidence": "measured", "lead_stages": 1, "shelter_effect": "drainage residue after the peak", "utility_effect": "one Water or storage warning, not a second major crisis", "resident_effect": "recovery and cleanup load", "expedition_effect": "site access remains closed until next window", "construction_effect": "recovery work takes priority", "preparation": ["isolate drain", "cover clean storage"], "emergency_response": ["manual cleanup", "temporary bypass"], "recovery": "physical residue remains until repaired", "visual": "gray water marks and bagged filter media", "audio": "drips and intermittent pump cycling", "accessibility": "queued minor-warning card"}
+  },
+  "emergency_actions": {
+    "ration_food": {"immediate_benefit": "lower next meal issue", "immediate_cost": "smaller visible meal", "delayed_cost": "Hunger and Stress escalate when repeated", "resident_impact": "named residents eat restricted portions", "utility_impact": "none", "resource_impact": "saves 0.25 Food per resident on a restricted issue", "reversible": "next meal", "save_boundary": "before and after meal-policy commitment", "abuse_prevention": "consecutive days escalate condition cost", "condition_effects": {"normal": {"hunger_steps": 0, "stress_points": 0}, "restricted": {"hunger_steps": 1, "stress_points": 2}, "missed": {"hunger_steps": 2, "stress_points": 5}, "emergency": {"hunger_steps": 1, "stress_points": 3}}},
+    "restrict_water": {"immediate_benefit": "saves 0.4 Clean Water per resident", "immediate_cost": "treatment and cleaning options tighten", "delayed_cost": "contextual dehydration and Stress if repeated", "resident_impact": "visible restricted issue", "utility_impact": "lowers demand", "resource_impact": "lower Clean Water issue", "reversible": "next issue", "save_boundary": "before and after Water policy", "abuse_prevention": "maximum two consecutive safe days", "maximum_consecutive_safe_days": 2, "stress_points_per_day": 3},
+    "shed_load": {"immediate_benefit": "reduces live Power demand", "immediate_cost": "named room or lamp shuts down", "delayed_cost": "work delay or Stress", "resident_impact": "work/comfort changes visibly", "utility_impact": "immediate Power headroom", "resource_impact": "may preserve Charge", "reversible": "when margin returns", "save_boundary": "load-priority transaction", "abuse_prevention": "function remains unavailable while shed"},
+    "discharge_charge": {"immediate_benefit": "preserves one named connected load", "immediate_cost": "finite Charge plus conversion loss", "delayed_cost": "less reserve for later stages", "resident_impact": "protects named occupants", "utility_impact": "bridges Power deficit only", "resource_impact": "Charge debit", "reversible": false, "save_boundary": "before and after discharge", "abuse_prevention": "per-stage limit and connection requirement"},
+    "isolate_section": {"immediate_benefit": "stops configured propagation", "immediate_cost": "section function suspended", "delayed_cost": "reconnection and inspection", "resident_impact": "occupants evacuate", "utility_impact": "branch disconnected", "resource_impact": "none unless bypass built", "reversible": "after inspection", "save_boundary": "isolation transaction", "abuse_prevention": "isolated rooms produce no benefit"},
+    "evacuate": {"immediate_benefit": "removes residents from exposure", "immediate_cost": "lost work and crowding", "delayed_cost": "Fatigue or Stress", "resident_impact": "movement to declared safe section", "utility_impact": "lower affected-section demand", "resource_impact": "possible temporary rest use", "reversible": "after clearance", "save_boundary": "evacuation destination commit", "abuse_prevention": "evacuated residents cannot work in the closed section"},
+    "temporary_filter_or_bypass": {"immediate_benefit": "reduces one incident stage", "immediate_cost": "Materials or a named component", "delayed_cost": "later permanent repair", "resident_impact": "reduces exposure", "utility_impact": "temporary capacity", "resource_impact": "declared debit", "reversible": false, "save_boundary": "installation transaction", "abuse_prevention": "adds deterministic later repair work"},
+    "defer_project": {"immediate_benefit": "releases future labor pressure", "immediate_cost": "proof or ambition delay", "delayed_cost": "carryover", "resident_impact": "workers reassigned", "utility_impact": "project benefit unavailable", "resource_impact": "reservation remains or cancellation rules apply", "reversible": "before hard deadline", "save_boundary": "priority/defer transaction", "abuse_prevention": "does not refund delivered value"},
+    "temporary_room_conversion": {"immediate_benefit": "creates treatment, rest, or storage capacity", "immediate_cost": "displaces existing function", "delayed_cost": "restoration work", "resident_impact": "crowding or reduced efficiency", "utility_impact": "uses existing branch", "resource_impact": "bounded Materials if fitted", "reversible": "after recovery", "save_boundary": "room-adaptation transaction", "abuse_prevention": "original room benefit is suspended"},
+    "highball_order": {"immediate_benefit": "pulls project work before a deadline", "immediate_cost": "Fatigue, Charge, wear, Stress, and strain", "delayed_cost": "rest promise and possible inspection", "resident_impact": "named worker obligation", "utility_impact": "named machine strain or load", "resource_impact": "Charge and Materials", "reversible": false, "save_boundary": "Highball confirmation", "abuse_prevention": "strain tiers, medical eligibility, escalating repayment"}
+  },
+  "incident_definitions": {
+    "power_instability": {"source": "overdraw or branch fault", "trigger": "negative Power margin", "affected_room_or_object": "connected branch", "initial_warning": "lights flicker and margin card turns negative", "confidence": "measured", "severity": "minor", "escalation_allowance": 2, "affected_stocks": ["Charge"], "affected_utilities": ["Power"], "access_effect": "none", "propagation_rule": "to one dependent utility only", "maximum_propagation_depth": 1, "auto_pause_tier": "warning", "immediate_responses": ["shed load", "discharge Charge", "delay operation"], "generated_work_orders": ["inspect branch"], "required_materials_or_components": {}, "required_equipment": ["breaker controls"], "evacuation_rule": "not normally required", "isolation_rule": "faulted branch may isolate", "recovery_work": 2.0, "physical_aftermath": "darkened lamp and tripped indicator", "human_consequence_placeholder": "work interrupted", "delayed_consequence": "inspection due", "completion_condition": "nonnegative margin or isolated fault", "failure_condition": "critical connected load remains unsupported"},
+    "air_contamination": {"source": "cinder ingress", "trigger": "filter load crosses stage", "affected_room_or_object": "occupied Air section", "initial_warning": "filter load and cough indicator", "confidence": "high", "severity": "major", "escalation_allowance": 2, "affected_stocks": ["Medicine"], "affected_utilities": ["Air", "Power"], "access_effect": "section may evacuate", "propagation_rule": "Air to Power only", "maximum_propagation_depth": 1, "auto_pause_tier": "critical", "immediate_responses": ["service filter", "isolate section", "evacuate"], "generated_work_orders": ["filter service"], "required_materials_or_components": {"filter_material": 1}, "required_equipment": ["filter mask"], "evacuation_rule": "Exposure stage requires evacuation option", "isolation_rule": "close affected Air section", "recovery_work": 4.0, "physical_aftermath": "cinder residue", "human_consequence_placeholder": "respiratory treatment", "delayed_consequence": "filter inspection", "completion_condition": "section returns to Loaded or better", "failure_condition": "extended Evacuate stage without safe destination"},
+    "water_contamination": {"source": "ash-wash or treatment failure", "trigger": "suspect storage used after warning", "affected_room_or_object": "clean storage", "initial_warning": "failing Water link named", "confidence": "measured", "severity": "major", "escalation_allowance": 2, "affected_stocks": ["Clean Water", "Medicine"], "affected_utilities": ["Water"], "access_effect": "storage isolated", "propagation_rule": "does not spread after isolation", "maximum_propagation_depth": 1, "auto_pause_tier": "critical", "immediate_responses": ["isolate storage", "use reserve", "repair treatment"], "generated_work_orders": ["flush and inspect"], "required_materials_or_components": {}, "required_equipment": ["clean containers"], "evacuation_rule": "none", "isolation_rule": "contaminated store cannot issue", "recovery_work": 4.0, "physical_aftermath": "marked sealed tank", "human_consequence_placeholder": "waterborne illness risk", "delayed_consequence": "reduced reserve", "completion_condition": "clean storage restored", "failure_condition": "no clean issue or treatment source remains"},
+    "structural_instability": {"source": "known local damage", "trigger": "storm or project load reaches Unstable", "affected_room_or_object": "authored section", "initial_warning": "crack, debris, and survey confidence", "confidence": "estimate", "severity": "major", "escalation_allowance": 2, "affected_stocks": ["Materials"], "affected_utilities": ["Structure"], "access_effect": "critical/closed blocks access", "propagation_rule": "at most one adjacent section warning", "maximum_propagation_depth": 1, "auto_pause_tier": "critical", "immediate_responses": ["reinforce", "evacuate", "remove load"], "generated_work_orders": ["shore section"], "required_materials_or_components": {"structural_brace": 1}, "required_equipment": ["bracing tools"], "evacuation_rule": "critical section evacuates", "isolation_rule": "close access", "recovery_work": 8.0, "physical_aftermath": "braces and closure marks", "human_consequence_placeholder": "lost room use", "delayed_consequence": "survey confidence reduced", "completion_condition": "section Strained or Safe", "failure_condition": "no safe path or recoverable essential utility"},
+    "equipment_breakdown": {"source": "wear or declared Highball strain", "trigger": "condition or strain threshold", "affected_room_or_object": "named machine", "initial_warning": "noise, heat, or inspection warning", "confidence": "measured", "severity": "minor", "escalation_allowance": 2, "affected_stocks": ["Materials"], "affected_utilities": ["Power"], "access_effect": "machine offline", "propagation_rule": "no propagation unless it is an essential utility source", "maximum_propagation_depth": 1, "auto_pause_tier": "warning", "immediate_responses": ["shut down", "bypass", "repair"], "generated_work_orders": ["inspect machine"], "required_materials_or_components": {}, "required_equipment": ["tools"], "evacuation_rule": "only if heat/smoke warning", "isolation_rule": "machine may isolate", "recovery_work": 3.0, "physical_aftermath": "open panel and wear marks", "human_consequence_placeholder": "work delay", "delayed_consequence": "maintenance due", "completion_condition": "machine stable or bypassed", "failure_condition": "essential function has no fallback"},
+    "medical_emergency": {"source": "known condition progression", "trigger": "critical restriction reached", "affected_room_or_object": "resident and treatment space", "initial_warning": "condition cause and response window", "confidence": "high", "severity": "major", "escalation_allowance": 2, "affected_stocks": ["Medicine", "Clean Water"], "affected_utilities": [], "access_effect": "treatment bed reserved", "propagation_rule": "does not propagate", "maximum_propagation_depth": 0, "auto_pause_tier": "critical", "immediate_responses": ["stabilize", "move treatment", "evacuate from hazard"], "generated_work_orders": ["medical treatment"], "required_materials_or_components": {}, "required_equipment": ["triage cot"], "evacuation_rule": "move from current hazard", "isolation_rule": "not applicable", "recovery_work": 4.0, "physical_aftermath": "occupied cot and treatment supplies", "human_consequence_placeholder": "recovery behavior", "delayed_consequence": "follow-up observation", "completion_condition": "stable and resting", "failure_condition": "known serious condition cannot be stabilized"}
+  },
+  "incident_scheduler": {
+    "maximum_live_major": 1,
+    "maximum_queued_minor_warnings": 2,
+    "irreversible_choices_queue": true,
+    "relationship_scenes_wait_for_safe_window": true,
+    "daily_budget": {
+      "1": {"major": 0, "minor": 1, "medical": 1, "human": 0, "hope": 0, "optional": 0},
+      "2": {"major": 0, "minor": 1, "medical": 1, "human": 0, "hope": 0, "optional": 1},
+      "3": {"major": 0, "minor": 1, "medical": 0, "human": 0, "hope": 0, "optional": 1},
+      "4": {"major": 0, "minor": 1, "medical": 0, "human": 1, "hope": 0, "optional": 1},
+      "5": {"major": 1, "minor": 2, "medical": 1, "human": 0, "hope": 0, "optional": 0},
+      "6": {"major": 0, "minor": 1, "medical": 1, "human": 1, "hope": 0, "optional": 1},
+      "7": {"major": 0, "minor": 1, "medical": 1, "human": 1, "hope": 1, "optional": 1}
+    }
+  },
+  "hope_beats": {
+    "full_project": "hope_beat_setup",
+    "fallbacks": [
+      {"id": "relit_platform_sign", "work": 0.0, "requires_project": "platform_lamp_install", "creates_resources": false},
+      {"id": "first_safe_clean_water_tap", "work": 1.0, "requires_project": "west_water_treatment", "creates_resources": false},
+      {"id": "residents_use_storm_repair", "work": 1.0, "requires_project": "storm_recovery_repairs", "creates_resources": false},
+      {"id": "first_quiet_sleep", "work": 2.0, "requires_project": "east_quiet_berths", "creates_resources": false}
+    ],
+    "fallback_supports_recover_first": true
+  },
+  "schedule_resilience": {
+    "minimum_normal_day_contingency": 2.0,
+    "critical_days": [2, 3, 5, 6],
+    "metrics": ["aggregate_weekly_unused_work", "minimum_daily_uncommitted_work", "minimum_phase_slack", "critical_path_slack", "incident_response_reserve", "carryover_capacity", "optional_work_capacity", "emergency_recovery_capacity"]
+  },
+  "resource_response_values": {
+    "food_trader": {"day": 4, "materials_cost": 3.0, "food_gain": 4.0},
+    "food_expedition_choice": {"materials_opportunity_cost": 4.0, "food_gain": 4.0},
+    "medicine_prioritization": {"deferred_followup_medicine": 1.0, "stress_points": 3, "recovery_delay_days": 1},
+    "materials_shortage": {"loss": 18.0, "deferred_project": "hope_beat_setup"},
+    "charge_shortage": {"capacity_multiplier": 0.35, "required_response": "load_shed"}
   },
   "routes": {
     "east": {
@@ -696,7 +975,7 @@
       "id": "hope_beat_setup",
       "name": "Prepare communal recovery beat",
       "route": "all",
-      "tier": "mandatory",
+      "tier": "ambition",
       "class": "short_install",
       "available_day": 7,
       "deadline_day": 7,
@@ -864,20 +1143,23 @@
   "highball": {
     "candidate_benefits": [0.25, 0.35, 0.50],
     "baseline_candidate": 0.35,
+    "production_multiplier_selected": false,
     "eligible_work_block": 10.0,
     "first_use": {
       "charge_cost": 2.0,
       "materials_wear": 1.0,
       "fatigue_capacity_loss_next_day": 3.0,
       "stress_points": 10,
-      "promised_rest_work": 3.0
+      "promised_rest_work": 3.0,
+      "strain": 1
     },
     "consecutive_use": {
       "charge_cost": 4.0,
       "materials_wear": 2.0,
       "fatigue_capacity_loss_next_day": 7.0,
       "stress_points": 20,
-      "promised_rest_work": 5.0
+      "promised_rest_work": 5.0,
+      "strain": 2
     },
     "maximum_consecutive_uses": 2,
     "promise_breach": {
@@ -885,6 +1167,15 @@
       "stress_points": 20,
       "refuses_next_highball": true
     },
+    "strain_tiers": {
+      "low": {"minimum": 0, "maximum": 1, "inspection_work": 0.0, "another_use_blocked": false},
+      "elevated": {"minimum": 2, "maximum": 3, "inspection_work": 3.0, "another_use_blocked": false},
+      "critical": {"minimum": 4, "maximum": 99, "inspection_work": 6.0, "another_use_blocked": true}
+    },
+    "low_equipment_condition_threshold": 0.50,
+    "low_equipment_extra_strain": 1,
+    "medical_ineligibility": ["medically_incapacitated", "critical_untreated_injury", "collapse", "unconscious", "severe_respiratory"],
+    "emergency_override_at_critical_strain": "guaranteed impairment and repair work; never a hidden roll",
     "emotional_effects_placeholder_for_prompt": 5
   },
   "juna": {
@@ -943,7 +1234,8 @@
     {"id": "project_completion", "save_before": true, "commit_after": true, "reversible": false, "resume": "Completed project and benefit persist", "idempotency": "Completion reward ID", "mid_animation": "Completion commit precedes celebration"},
     {"id": "project_cancellation", "save_before": true, "commit_after": true, "reversible": false, "resume": "Canceled project and single refund persist", "idempotency": "Cancellation/refund ID", "mid_animation": "Ledger determines refund"},
     {"id": "room_repurpose", "save_before": true, "commit_after": true, "reversible": false, "resume": "New room family and displaced tasks persist", "idempotency": "Repurpose ID", "mid_animation": "Commit precedes visual swap"},
-    {"id": "highball_confirmation", "save_before": true, "commit_after": true, "reversible": false, "resume": "Costs, promise, and acceleration persist", "idempotency": "Highball order ID", "mid_animation": "Commit precedes accelerated animation"},
+    {"id": "highball_confirmation", "save_before": true, "commit_after": true, "reversible": false, "resume": "Costs, promise, strain, and acceleration persist", "idempotency": "Highball order ID", "mid_animation": "Commit precedes accelerated animation"},
+    {"id": "relay_load_test", "save_before": true, "commit_after": true, "reversible": false, "resume": "Charge, shed-load, or delay response persists", "idempotency": "Relay test response ID", "mid_animation": "Lighting and calibration animation follow the committed response"},
     {"id": "promise_creation", "save_before": true, "commit_after": true, "reversible": false, "resume": "Promise and due phase persist", "idempotency": "Promise ID", "mid_animation": "Dialogue is presentation only"},
     {"id": "signal_commitment", "save_before": true, "commit_after": true, "reversible": false, "resume": "Selected signal and expiry persist", "idempotency": "Signal commitment ID", "mid_animation": "Commit precedes tuning animation"},
     {"id": "signal_expiry", "save_before": false, "commit_after": true, "reversible": false, "resume": "Expired state persists", "idempotency": "Signal/day ID", "mid_animation": "Clock transaction is authority"},
@@ -954,8 +1246,12 @@
     {"id": "trader_transaction", "save_before": true, "commit_after": true, "reversible": false, "resume": "Exact exchange persists", "idempotency": "Trade ID", "mid_animation": "Inventory ledger is authority"},
     {"id": "juna_admission", "save_before": true, "commit_after": true, "reversible": false, "resume": "Agreement, capacity, and resource costs persist", "idempotency": "Admission ID", "mid_animation": "Gate animation follows commit"},
     {"id": "incident_escalation", "save_before": true, "commit_after": true, "reversible": false, "resume": "Exact bounded stage persists", "idempotency": "Incident stage ID", "mid_animation": "Effects derive from stage transaction"},
+    {"id": "incident_recovery", "save_before": true, "commit_after": true, "reversible": false, "resume": "Recovery work and aftermath persist", "idempotency": "Incident recovery claim ID", "mid_animation": "Repair presentation follows the ledger"},
     {"id": "treatment_start", "save_before": true, "commit_after": true, "reversible": false, "resume": "Patient, costs, and end condition persist", "idempotency": "Treatment ID", "mid_animation": "Treatment animation is not authority"},
+    {"id": "treatment_interruption", "save_before": true, "commit_after": true, "reversible": false, "resume": "Exact treatment stage and reservation persist", "idempotency": "Treatment interruption ID", "mid_animation": "No second Medicine reservation"},
     {"id": "treatment_completion", "save_before": false, "commit_after": true, "reversible": false, "resume": "Recovered state persists", "idempotency": "Treatment completion ID", "mid_animation": "Completion commit controls recovery"},
+    {"id": "emergency_action", "save_before": true, "commit_after": true, "reversible": false, "resume": "Selected action, immediate cost, and delayed obligation persist", "idempotency": "Emergency action ID", "mid_animation": "Physical response follows the committed action"},
+    {"id": "hope_fallback", "save_before": true, "commit_after": true, "reversible": false, "resume": "Earned minimal recovery beat persists", "idempotency": "Hope fallback ID", "mid_animation": "Scene uses already-earned physical state"},
     {"id": "phase_transition", "save_before": true, "commit_after": true, "reversible": false, "resume": "Exact new phase resumes", "idempotency": "Day/phase ID", "mid_animation": "Transition animation can replay safely"},
     {"id": "end_of_day_ledger", "save_before": true, "commit_after": true, "reversible": false, "resume": "Next day starts from accepted ledger", "idempotency": "Day ledger ID", "mid_animation": "Ledger commit controls day advance"}
   ]

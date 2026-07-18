@@ -216,3 +216,7 @@ flowchart TD
 - A reload must recreate stocks, networks, tasks, residents, room/equipment states, incidents, signal commitments, expedition node, memories, relationships, promises, forecasts, and random-stream state exactly.
 
 These are design contracts. Save correctness and interruption recovery require technical prototypes before they are considered validated.
+
+## Prompt 3 loop amendment
+
+Survival changes now occur at visible issue, work, incident, treatment, rest, and ledger boundaries. Forecasts classify current facts, committed projections, estimates, signal intelligence, and unknowns. A serious pressure follows warning → response → restriction → recovery before failure. Day 7 resolves as Full Proof, Recover First, Proof Incomplete, Shelter Failure, or Invariant Error; only the first two are convenience-viable, and only Full Proof completes the release-slice proof.

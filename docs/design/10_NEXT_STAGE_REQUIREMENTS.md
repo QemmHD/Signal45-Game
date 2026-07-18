@@ -1,10 +1,10 @@
-# Signal 45 — Prompt 2 Requirements and Prompt 3 Handoff
+# Signal 45 — Prompt 2 Record, Prompt 3 Completion, and Prompt 4 Handoff
 
 ## Prompt 2 completion status
 
-Prompt 2 is complete at the deterministic-design level. The repository now contains one canonical JSON balance source, 90 scenario inputs, a deterministic Python runner, 67 unit tests, generated machine-readable evidence, and documents 11–17. Both routes pass without Highball; expected adverse cases fail. This does not constitute playable validation.
+Prompt 2 remains the pacing/construction baseline. Prompt 3 extends it to 176 canonical scenarios, 144 local tests, explicit survival/outcome semantics, generated machine-readable evidence, and documents 18–23. Both routes reach Full Proof without Highball; adverse cases and responding cases remain distinct. This does not constitute playable validation.
 
-The requirements below are retained as the record of why the model exists. Prompt 3 must begin from the decisions and revalidation gates in `17_PROMPT_2_DECISIONS.md`; it must not silently retune this baseline.
+The Prompt 2 requirements below are retained as the record of why the model exists. Prompt 3 followed those gates; documents 18–23 now define the survival baseline that Prompt 4 must preserve.
 
 ## Purpose
 
@@ -181,8 +181,8 @@ Completed artifacts:
 10. safe-save transaction matrix;
 11. sensitivity analysis and revised risk/decision entries.
 
-## Prompt 3 entry boundary
+## Prompt 4 entry boundary
 
-Prompt 3 may refine survival resources, resident needs and medical conditions, utility-network behavior, forecasts, weather/incident architecture, cascades, emergency actions, and the final Highball risk model. It must preserve the Prompt 2 falsification cases and update canonical data, tests, scenarios, decisions, and affected design documents together.
+Prompt 4 must define authoritative station coordinates, reclamation geometry, seven-family footprints, equipment and utility nodes, navigation, access/evacuation, mobile build mode, and machine-readable Day 1/East Day 7/West Day 7 layouts. It must remeasure travel, hauling, vertical access, congestion, isolation, and evacuation against Prompt 3’s schedule—especially Day 5 zero uncommitted WU.
 
-Do not begin Prompt 3 until explicitly requested.
+Prompt 4 must not retune survival, expand resident AI/crafting/conflict/expeditions/factions, add maps, or create final assets. Do not begin Prompt 4 until explicitly requested.

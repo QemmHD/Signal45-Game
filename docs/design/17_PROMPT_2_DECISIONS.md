@@ -142,3 +142,9 @@ Prompt 3 may begin only from this canonical baseline and must:
 5. Re-run validation, unit tests, mandatory scenarios, and save-fault tests.
 
 Prompt 3 must not yet expand full resident AI, final art, campaign content beyond validation needs, multiplayer, full combat, or additional station maps.
+
+## Prompt 3 completion amendment
+
+Prompt 3 has now executed these entry requirements without changing the 12-WU resident base or adding stocks, primary conditions, utilities, room families, maps, combat, or resident AI. It split the existing ten-WU daily allowance into eight essential plus two incident reserve; replaced the per-person emergency floor with a shelter-pool rule; added five outcome classes, an earned hope fallback, explicit resource responses, the Relay Load Test, named treatment, reusable incidents, and deterministic Highball strain.
+
+Current evidence is 176/176 matched scenarios and 144 passing local tests. Documents 18–23 and canonical/generated data supersede Prompt 2 wherever survival semantics or current result counts differ. Prompt 4, not Prompt 3, is the next entry boundary.

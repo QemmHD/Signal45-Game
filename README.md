@@ -4,7 +4,7 @@ Mobile-first survival management, railway shelter construction, community simula
 
 ## Development status
 
-Prompt 2 adds a deterministic seven-day feasibility model on top of the Prompt 1 design foundation. At provisional inputs, both routes pass without Highball and expected adverse cases fail. This is not evidence that the game is fun, balanced in play, production-ready, technically validated on devices, or legally cleared.
+Prompt 3 refines the deterministic seven-day model with five-stock behavior, four resident conditions, named medical treatment, section-level utilities, forecasts, bounded incidents, emergency actions, explicit outcome classes, and deterministic Highball strain. At provisional inputs, both routes still reach Full Proof without Highball; adverse and response cases retain meaningful failure. This is not evidence that the game is fun, balanced in play, production-ready, comprehensible on devices, medically authoritative, or legally cleared.
 
 ## Design foundation
 
@@ -26,6 +26,12 @@ Prompt 2 adds a deterministic seven-day feasibility model on top of the Prompt 1
 16. [First Session and Safe Stops](docs/design/15_FIRST_SESSION_AND_SAFE_STOPS.md)
 17. [Sensitivity and Revalidation](docs/design/16_SENSITIVITY_AND_REVALIDATION.md)
 18. [Prompt 2 Decisions](docs/design/17_PROMPT_2_DECISIONS.md)
+19. [Survival Resource Model](docs/design/18_SURVIVAL_RESOURCE_MODEL.md)
+20. [Resident Conditions and Medical](docs/design/19_RESIDENT_CONDITIONS_AND_MEDICAL.md)
+21. [Utility Networks and Forecasts](docs/design/20_UTILITY_NETWORKS_AND_FORECASTS.md)
+22. [Weather, Incidents, Emergency Actions, and Highball](docs/design/21_WEATHER_INCIDENTS_AND_EMERGENCY_ACTIONS.md)
+23. [Survival Simulation Results](docs/design/22_SURVIVAL_SIMULATION_RESULTS.md)
+24. [Prompt 3 Decisions](docs/design/23_PROMPT_3_DECISIONS.md)
 
 ## Feasibility model
 
@@ -34,9 +40,9 @@ Python 3.12 and the standard library are sufficient.
 ```powershell
 python tools/feasibility/validate_data.py
 python -m unittest discover -s tools/feasibility/tests -v
-python tools/feasibility/run_scenarios.py --mandatory
+python tools/feasibility/run_scenarios.py --mandatory --check-determinism
 ```
 
-`tools/feasibility/data/model.json` is the single canonical balance source. `tools/feasibility/reports/scenario_results.json` contains day/phase-level machine-readable results; `scenario_summary.md` is the concise matrix. The CI workflow runs validation, all tests, and every mandatory scenario.
+`tools/feasibility/data/model.json` is the single canonical numerical source. `tools/feasibility/reports/scenario_results.json` contains day/phase-level machine-readable survival, utility, treatment, incident, save, and outcome results; `scenario_summary.md` is the concise matrix. The CI workflow validates data, runs all Prompt 2 and Prompt 3 tests, repeats every mandatory scenario for determinism, rejects unexpected invariants, and verifies that reports are current.
 
-Prompt 3 is deliberately not started.
+The model distinguishes Full Proof, Recover First, Proof Incomplete, Shelter Failure, and Invariant Error. Its convenience viability flag is derived from those classes. Prompt 4 is deliberately not started.

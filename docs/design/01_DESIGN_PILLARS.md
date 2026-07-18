@@ -105,5 +105,9 @@ A proposed feature enters scope only when all applicable tests pass:
 | Ten-minute active stealth levels with direct movement | Reject for slice | Becomes a second game and breaks mobile-session scope. |
 | A signal that only reveals lore text | Redesign | Must affect a forecast, relationship, route, visitor, evidence state, or preparation. |
 | A cosmetic blanket made from found textiles and visibly used by Maren | Accept if cheap | Supports home transformation and character specificity without a new system. |
-| Hidden 5% generator explosion under Highball | Reject | Serious risk is invisible; replace with labeled conditional breakdown risk. |
+| Hidden 5% generator explosion under Highball | Reject | Serious risk is invisible; Prompt 3 replaces it with deterministic strain, inspection, eligibility, and repayment. |
+
+## Prompt 3 survival acceptance amendment
+
+Forecast-before-harm now has executable gates: five explicit outcome classes, named failing links, visible medical restrictions, one-major-crisis scheduling, and deterministic Highball strain. A feature fails the pillars if it forces a medically incapacitated resident to produce WU, consumes a stock without a transaction, or reports a missing slice proof as fictional shelter death. See documents 18–23.
 | Another unique crafting room for electronics | Reject | Install an electronics bench module in Workshop instead. |

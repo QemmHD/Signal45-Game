@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Deterministic, falsifiable seven-day feasibility model for Signal 45.
+"""Deterministic, falsifiable seven-day survival model for Signal 45.
 
 The model intentionally represents only work, stocks, bounded utilities, projects,
 events, expedition facts, admissions, and serialization invariants needed by
-Prompt 2. It is not a game engine and does not simulate resident footsteps.
+Prompts 2 and 3. It is not a game engine and does not simulate resident footsteps.
 """
 
 from __future__ import annotations
@@ -16,8 +16,14 @@ from pathlib import Path
 from typing import Any, Callable
 
 try:
+    from . import forecasts, incidents, medical, survival, utilities
     from .validate_data import DEFAULT_MODEL, DEFAULT_SCENARIOS, validate_all
 except ImportError:  # Direct script/test discovery execution.
+    import forecasts
+    import incidents
+    import medical
+    import survival
+    import utilities
     from validate_data import DEFAULT_MODEL, DEFAULT_SCENARIOS, validate_all
 
 
@@ -77,6 +83,18 @@ class SimulationState:
     target_misses: list[str] = field(default_factory=list)
     deadline_misses: list[str] = field(default_factory=list)
     shortfalls: dict[str, float] = field(default_factory=dict)
+    resident_conditions: dict[str, dict[str, str]] = field(default_factory=dict)
+    contextual_conditions: dict[str, dict[str, Any]] = field(default_factory=dict)
+    treatments: dict[str, dict[str, Any]] = field(default_factory=dict)
+    incidents: dict[str, dict[str, Any]] = field(default_factory=dict)
+    incident_queue: list[dict[str, Any]] = field(default_factory=list)
+    promises: dict[str, dict[str, Any]] = field(default_factory=dict)
+    highball_state: dict[str, Any] = field(default_factory=dict)
+    relay_load_test_state: dict[str, Any] = field(default_factory=dict)
+    hope_state: dict[str, Any] = field(default_factory=dict)
+    proof_gaps: list[str] = field(default_factory=list)
+    recovery_reasons: list[str] = field(default_factory=list)
+    invariant_errors: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         result = asdict(self)
@@ -177,12 +195,26 @@ def grant_reward_once(
 
 
 def default_conditions() -> dict[str, str]:
-    return {
-        "health": "healthy",
-        "hunger": "fed",
-        "fatigue": "rested",
-        "stress": "steady",
-    }
+    return survival.default_conditions()
+
+
+def calculate_resident_work_profile(
+    config: dict[str, Any],
+    resident_name: str,
+    conditions: dict[str, str] | None = None,
+    *,
+    availability: float = 1.0,
+    global_multiplier: float = 1.0,
+    medical_restriction: str = "none",
+) -> dict[str, Any]:
+    return survival.resident_work_profile(
+        config,
+        resident_name,
+        conditions,
+        availability=availability,
+        global_multiplier=global_multiplier,
+        medical_restriction=medical_restriction,
+    )
 
 
 def calculate_resident_capacity(
@@ -193,17 +225,13 @@ def calculate_resident_capacity(
     availability: float = 1.0,
     global_multiplier: float = 1.0,
 ) -> float:
-    resident = config["residents"][resident_name]
-    work = config["work"]
-    availability = min(1.0, max(0.0, availability))
-    if availability <= EPSILON:
-        return 0.0
-    capacity = resident["base_capacity"] * availability
-    for category, state_name in (conditions or default_conditions()).items():
-        capacity *= work["condition_multipliers"][category][state_name]
-    capacity *= global_multiplier
-    minimum = work["minimum_emergency_capacity"] * availability
-    return rounded(max(minimum, capacity))
+    return calculate_resident_work_profile(
+        config,
+        resident_name,
+        conditions,
+        availability=availability,
+        global_multiplier=global_multiplier,
+    )["productive_capacity"]
 
 
 def aptitude_modifier(config: dict[str, Any], resident_name: str, role: str) -> float:
@@ -261,22 +289,12 @@ def resolve_good_preparation() -> bool:
     return score < 2
 
 
-def forecast_stock(config: dict[str, Any], stock: str, amount: float) -> dict[str, Any]:
-    data = config["stocks"][stock]
-    if amount < data["minimum_viable_reserve"] - EPSILON:
-        status = "critical"
-    elif amount < data["warning_threshold"] - EPSILON:
-        status = "warning"
-    elif amount < data["comfortable_reserve"] - EPSILON:
-        status = "tight"
-    else:
-        status = "comfortable"
-    return {
-        "amount": rounded(amount),
-        "status": status,
-        "minimum_viable_reserve": data["minimum_viable_reserve"],
-        "comfortable_reserve": data["comfortable_reserve"],
-    }
+def forecast_stock(
+    config: dict[str, Any], stock: str, amount: float, *, resident_count: int = 4
+) -> dict[str, Any]:
+    return forecasts.stock_forecast_card(
+        config, stock, amount, resident_count=resident_count
+    )
 
 
 def calculate_power(
@@ -311,7 +329,7 @@ def calculate_power(
     shutdown = []
     remaining_deficit = max(0.0, -headroom)
     if remaining_deficit > EPSILON:
-        for load_name in reversed(power["priority_order"]):
+        for load_name in power["shed_order"]:
             if load_name in active_loads and remaining_deficit > EPSILON:
                 shutdown.append(load_name)
                 remaining_deficit -= active_loads[load_name] * demand_multiplier
@@ -322,6 +340,8 @@ def calculate_power(
         "condition": power["condition"],
         "loads": {key: rounded(value * demand_multiplier) for key, value in active_loads.items()},
         "shutdown_order_if_uncovered": shutdown,
+        "priority_tiers": copy.deepcopy(power["priority_tiers"]),
+        "first_shed_load": shutdown[0] if shutdown else None,
         "next_endangered": "water_pumping" if headroom < 0 else None,
     }
 
@@ -360,6 +380,9 @@ def calculate_air(
         "filter_condition": rounded(condition),
         "state": state,
         "failing_link": "filter condition" if headroom < 0 else None,
+        "warning_before_exposure": state in {"loaded", "degraded"},
+        "exposure_window_stages": air["exposure_window_stages"],
+        "responses": copy.deepcopy(air["responses"]),
     }
 
 
@@ -382,16 +405,27 @@ def calculate_water_utility(
         link = "source capacity"
     else:
         link = None
-    return {
-        "source_capacity": rounded(source),
-        "pump_availability": rounded(pump),
-        "treatment_efficiency": rounded(treatment),
-        "delivery": rounded(delivered),
-        "demand": rounded(demand),
-        "headroom": rounded(headroom),
-        "contamination_state": "suspect" if impaired else "clean",
-        "failing_link": link,
-    }
+    diagnosis = utilities.diagnose_water_link(
+        config,
+        source=source,
+        pump=pump,
+        treatment=treatment,
+        delivery=water["delivery_efficiency"],
+        storage_state="suspect" if impaired else "clean",
+        demand=demand,
+    )
+    diagnosis.update(
+        {
+            "source_capacity": rounded(source),
+            "pump_availability": rounded(pump),
+            "treatment_efficiency": rounded(treatment),
+            "delivery": rounded(delivered),
+            "headroom": rounded(headroom),
+            "contamination_state": "suspect" if impaired else "clean",
+            "failing_link": link or diagnosis["failing_link"],
+        }
+    )
+    return diagnosis
 
 
 def calculate_structure(
@@ -508,6 +542,610 @@ def highball_cost(config: dict[str, Any], use_number: int) -> dict[str, Any]:
 
 def highball_saved_work(work: float, benefit: float) -> float:
     return rounded(work - work / (1.0 + benefit))
+
+
+def start_named_treatment(
+    state: SimulationState,
+    config: dict[str, Any],
+    *,
+    treatment_id: str,
+    resident: str,
+    condition: str,
+    severity: str,
+    room_available: bool = True,
+    skilled_staff_available: bool = True,
+    medicine_multiplier: float = 1.0,
+) -> dict[str, Any]:
+    if treatment_id in state.treatments:
+        return copy.deepcopy(state.treatments[treatment_id])
+    plan = medical.treatment_plan(
+        config,
+        treatment_id,
+        resident,
+        condition,
+        severity,
+        room_available=room_available,
+        skilled_staff_available=skilled_staff_available,
+    )
+    if plan["blockers"]:
+        return plan
+    plan["medicine_reserved"] = rounded(
+        plan["medicine_reserved"] * float(medicine_multiplier)
+    )
+
+    def mutation() -> None:
+        consume_stock(
+            state,
+            "Medicine",
+            plan["medicine_reserved"],
+            f"treatment {treatment_id} Medicine reservation",
+        )
+        consume_stock(
+            state,
+            "Clean Water",
+            plan["water_reserved"],
+            f"treatment {treatment_id} Clean Water reservation",
+        )
+        state.treatments[treatment_id] = copy.deepcopy(plan)
+        state.treatment_open = True
+
+    commit_once(state, plan["reservation_id"], mutation)
+    return copy.deepcopy(state.treatments[treatment_id])
+
+
+def interrupt_named_treatment(
+    state: SimulationState, treatment_id: str, reason: str
+) -> dict[str, Any]:
+    if treatment_id not in state.treatments:
+        raise KeyError(treatment_id)
+
+    def mutation() -> None:
+        state.treatments[treatment_id] = medical.interrupt_treatment(
+            state.treatments[treatment_id], reason
+        )
+
+    commit_once(state, f"treatment:{treatment_id}:interrupt", mutation)
+    return copy.deepcopy(state.treatments[treatment_id])
+
+
+def complete_named_treatment(
+    state: SimulationState,
+    treatment_id: str,
+    *,
+    current_health: float = 70.0,
+    precondition_max_health: float = 100.0,
+) -> dict[str, Any]:
+    if treatment_id not in state.treatments:
+        raise KeyError(treatment_id)
+
+    def mutation() -> None:
+        record = state.treatments[treatment_id]
+        if record["status"] == "interrupted":
+            record = medical.resume_treatment(record)
+        state.treatments[treatment_id] = medical.complete_treatment(
+            record,
+            current_health=current_health,
+            precondition_max_health=precondition_max_health,
+        )
+        state.treatment_open = any(
+            item["status"] != "completed" for item in state.treatments.values()
+        )
+
+    commit_once(state, f"treatment:{treatment_id}:completion", mutation)
+    return copy.deepcopy(state.treatments[treatment_id])
+
+
+def apply_relay_load_test(
+    state: SimulationState,
+    config: dict[str, Any],
+    response: str,
+    *,
+    branch_connected: bool = True,
+) -> dict[str, Any]:
+    if state.relay_load_test_state:
+        return copy.deepcopy(state.relay_load_test_state)
+    result = utilities.relay_load_test(
+        config,
+        response,
+        state.stocks["Charge"],
+        branch_connected=branch_connected,
+    )
+
+    def mutation() -> None:
+        if result["charge_draw"] > 0:
+            consume_stock(
+                state,
+                "Charge",
+                result["charge_draw"],
+                "Relay Load Test connected reserve",
+            )
+        state.relay_load_test_state = copy.deepcopy(result)
+
+    commit_once(state, f"relay_load_test:{response}", mutation)
+    return copy.deepcopy(state.relay_load_test_state)
+
+
+def resolve_hope_beat(
+    config: dict[str, Any],
+    completed_projects: set[str],
+    *,
+    available_work: float,
+    force_minimal: bool = False,
+) -> dict[str, Any]:
+    full_id = config["hope_beats"]["full_project"]
+    if full_id in completed_projects and not force_minimal:
+        full_work = next(
+            project["work"] for project in config["projects"] if project["id"] == full_id
+        )
+        return {
+            "type": "full",
+            "id": full_id,
+            "work": float(full_work),
+            "uses_earned_state": True,
+            "creates_resources": False,
+            "supports_recover_first": True,
+        }
+    eligible = [
+        item
+        for item in config["hope_beats"]["fallbacks"]
+        if item["requires_project"] in completed_projects
+        and float(item["work"]) <= max(0.0, available_work) + EPSILON
+    ]
+    if not eligible:
+        return {
+            "type": "none",
+            "id": None,
+            "work": 0.0,
+            "uses_earned_state": False,
+            "creates_resources": False,
+            "supports_recover_first": False,
+        }
+    choice = sorted(eligible, key=lambda item: (item["work"], item["id"]))[0]
+    return {
+        "type": "minimal",
+        "id": choice["id"],
+        "work": float(choice["work"]),
+        "requires_project": choice["requires_project"],
+        "uses_earned_state": True,
+        "creates_resources": bool(choice["creates_resources"]),
+        "supports_recover_first": True,
+    }
+
+
+def highball_strain_tier(config: dict[str, Any], strain: int) -> tuple[str, dict[str, Any]]:
+    for name, data in config["highball"]["strain_tiers"].items():
+        if int(data["minimum"]) <= strain <= int(data["maximum"]):
+            return name, copy.deepcopy(data)
+    raise ValueError(f"strain {strain} does not match a configured tier")
+
+
+def derive_outcome_class(
+    config: dict[str, Any],
+    *,
+    invariant_errors: list[str],
+    shelter_failures: list[str],
+    proof_gaps: list[str],
+    recover_first_reasons: list[str],
+    ending_eligibility: dict[str, bool],
+    force_proof_incomplete: bool = False,
+) -> dict[str, Any]:
+    if invariant_errors:
+        outcome = "INVARIANT_ERROR"
+        limiting = invariant_errors[0]
+    elif shelter_failures:
+        outcome = "SHELTER_FAILURE"
+        limiting = shelter_failures[0]
+    elif force_proof_incomplete or proof_gaps:
+        if recover_first_reasons and ending_eligibility.get("recover_first") and not force_proof_incomplete:
+            outcome = "RECOVER_FIRST"
+            limiting = recover_first_reasons[0]
+        else:
+            outcome = "PROOF_INCOMPLETE"
+            limiting = proof_gaps[0] if proof_gaps else "required release-slice proof missing"
+    elif recover_first_reasons:
+        outcome = "RECOVER_FIRST"
+        limiting = recover_first_reasons[0]
+    elif any(
+        ending_eligibility.get(name, False)
+        for name in ["prepare_the_platform", "root_the_settlement", "strengthen_the_relay"]
+    ):
+        outcome = "FULL_PROOF"
+        limiting = "all mandatory survival and slice-proof gates met"
+    else:
+        outcome = "PROOF_INCOMPLETE"
+        limiting = "no supported Day 7 direction"
+    return {
+        "outcome_class": outcome,
+        "survival_viable": outcome not in {"SHELTER_FAILURE", "INVARIANT_ERROR"},
+        "slice_proof_complete": outcome == "FULL_PROOF",
+        "ending_directions_available": [
+            name for name, available in ending_eligibility.items() if available
+        ],
+        "recover_first_available": bool(ending_eligibility.get("recover_first")),
+        "invariant_valid": outcome != "INVARIANT_ERROR",
+        "viable": outcome in {"FULL_PROOF", "RECOVER_FIRST"},
+        "exact_limiting_fact": limiting,
+        "definition": config["outcome_classes"][outcome],
+    }
+
+
+def resolve_incident_case(
+    state: SimulationState,
+    config: dict[str, Any],
+    *,
+    family: str,
+    response: str | None = None,
+    second_major_family: str | None = None,
+    queue_minor: bool = False,
+    isolate: bool = False,
+    evacuate: bool = False,
+    recover: bool = True,
+) -> dict[str, Any]:
+    primary = incidents.create_incident(
+        config, f"case:{family}", family, section="test_section"
+    )
+    active: list[dict[str, Any]] = []
+    queued: list[dict[str, Any]] = []
+    start = incidents.schedule_incident(active, queued, primary)
+    primary = incidents.advance_incident(primary)
+    scheduling: list[dict[str, Any]] = [start]
+    if second_major_family:
+        second = incidents.create_incident(
+            config,
+            f"case:{second_major_family}:queued",
+            second_major_family,
+            section="adjacent",
+        )
+        scheduling.append(incidents.schedule_incident(active, queued, second))
+    if queue_minor:
+        minor = incidents.create_incident(
+            config,
+            "case:equipment_breakdown:minor",
+            "equipment_breakdown",
+            section="central",
+        )
+        queued.append(minor)
+    if response:
+        primary = incidents.interrupt_incident(
+            primary, response, isolate=isolate, evacuate=evacuate
+        )
+    if recover and primary["current_stage"] == "recovery":
+        primary = incidents.recover_incident(primary)
+    if active:
+        active[0] = copy.deepcopy(primary)
+    state.incidents[primary["incident_id"]] = copy.deepcopy(primary)
+    state.incident_queue = copy.deepcopy(queued)
+    restored = SimulationState.from_json(state.to_json())
+    return {
+        "incident": copy.deepcopy(primary),
+        "scheduling": scheduling,
+        "queued": copy.deepcopy(queued),
+        "major_live_count": sum(
+            1 for item in active if item["major"] and item["status"] == "active"
+        ),
+        "second_major_started": not any(item.get("queued") for item in scheduling[1:]),
+        "save_roundtrip_equal": restored.to_json() == state.to_json(),
+        "recovery_work": float(primary["recovery_work"]),
+    }
+
+
+def calculate_schedule_resilience(
+    state: SimulationState,
+    selected_projects: dict[str, dict[str, Any]],
+    day_reports: list[dict[str, Any]],
+    *,
+    total_project_capacity: float,
+    total_project_used: float,
+) -> dict[str, Any]:
+    daily_uncommitted = [
+        float(day["work"]["daily_uncommitted"]) for day in day_reports
+    ]
+    phase_slack = [
+        float(day["work"]["minimum_phase_slack"]) for day in day_reports
+    ]
+    critical_path: dict[str, float] = {}
+    for project_id, project in selected_projects.items():
+        if project["tier"] not in {"mandatory", "route_mandatory", "ambition"}:
+            continue
+        hard_day = int(project.get("hard_deadline_day", project["deadline_day"]))
+        progress = state.projects[project_id]
+        if progress.completion_day is None:
+            critical_path[project_id] = rounded(
+                -progress.remaining_work / max(1.0, float(project["work"]))
+            )
+        else:
+            critical_path[project_id] = rounded(hard_day - progress.completion_day)
+    aggregate_unused = rounded(total_project_capacity - total_project_used)
+    incident_reserve = rounded(
+        sum(day["work"]["incident_reserve"] for day in day_reports)
+    )
+    incident_reserve_unused = rounded(
+        sum(day["work"]["incident_reserve_unused"] for day in day_reports)
+    )
+    return {
+        "aggregate_weekly_unused_work": aggregate_unused,
+        "minimum_daily_uncommitted_work": rounded(min(daily_uncommitted)),
+        "minimum_phase_slack": rounded(min(phase_slack)),
+        "critical_path_slack_by_project_days": critical_path,
+        "minimum_critical_path_slack_days": rounded(min(critical_path.values())),
+        "incident_response_reserve": incident_reserve,
+        "incident_response_reserve_unused": incident_reserve_unused,
+        "carryover_capacity": rounded(sum(max(0.0, value) for value in daily_uncommitted)),
+        "optional_work_capacity": rounded(
+            sum(
+                max(0.0, day["work"]["buffer"])
+                for day in day_reports
+                if day["day"] >= 4
+            )
+        ),
+        "emergency_recovery_capacity": rounded(
+            incident_reserve_unused + max(0.0, day_reports[-1]["work"]["buffer"])
+        ),
+        "critical_days": {
+            str(day["day"]): {
+                "daily_uncommitted": day["work"]["daily_uncommitted"],
+                "phase_slack": day["work"]["minimum_phase_slack"],
+            }
+            for day in day_reports
+            if day["day"] in {2, 3, 5, 6}
+        },
+        "aggregate_is_not_complete_safety_margin": True,
+    }
+
+
+def build_prompt3_case_evidence(
+    state: SimulationState,
+    config: dict[str, Any],
+    options: dict[str, Any],
+    day_reports: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    case = options.get("prompt3_case")
+    if not case:
+        return None
+    evidence: dict[str, Any] = {"case": case, "executed": True}
+    probe = options.get("capacity_probe")
+    if probe:
+        profile = calculate_resident_work_profile(
+            config,
+            probe.get("resident", "Ash"),
+            probe.get("conditions"),
+            availability=probe.get("availability", 1.0),
+            medical_restriction=probe.get("medical_restriction", "none"),
+        )
+        evidence["capacity_probe"] = profile
+        evidence["self_action_counted_as_project_work"] = False
+    if options.get("all_medically_unavailable_probe"):
+        profiles = [
+            calculate_resident_work_profile(
+                config,
+                resident,
+                medical_restriction="medically_incapacitated",
+            )
+            for resident in ["Ash", "Imka", "Teo", "Maren"]
+        ]
+        evidence["shelter_emergency_probe"] = survival.shelter_emergency_capacity(
+            profiles, config["work"]["minimum_emergency_shelter_capacity"]
+        )
+    incident_probe = options.get("incident_probe")
+    if incident_probe:
+        evidence["incident_probe"] = resolve_incident_case(
+            state,
+            config,
+            family=incident_probe["family"],
+            response=incident_probe.get("response"),
+            second_major_family=incident_probe.get("second_major_family"),
+            queue_minor=incident_probe.get("queue_minor", False),
+            isolate=incident_probe.get("isolate", False),
+            evacuate=incident_probe.get("evacuate", False),
+            recover=incident_probe.get("recover", True),
+        )
+    medical_probe = options.get("medical_probe")
+    if medical_probe:
+        probe_state = SimulationState.from_json(state.to_json())
+        plan = start_named_treatment(
+            probe_state,
+            config,
+            treatment_id=f"probe:{case}",
+            resident=medical_probe.get("resident", "Teo"),
+            condition=medical_probe["condition"],
+            severity=medical_probe["severity"],
+        )
+        if medical_probe.get("interrupt"):
+            plan = interrupt_named_treatment(
+                probe_state, plan["treatment_id"], "scenario interruption"
+            )
+        if medical_probe.get("complete"):
+            plan = complete_named_treatment(
+                probe_state,
+                plan["treatment_id"],
+                current_health=medical_probe.get("current_health", 70.0),
+                precondition_max_health=medical_probe.get(
+                    "precondition_max_health", 100.0
+                ),
+            )
+        restored = SimulationState.from_json(probe_state.to_json())
+        evidence["medical_probe"] = plan
+        evidence["medical_save_roundtrip"] = restored.to_json() == probe_state.to_json()
+    charge_probe = options.get("charge_probe")
+    if charge_probe:
+        evidence["charge_probe"] = utilities.discharge_charge(
+            config,
+            charge_probe.get("available", state.stocks["Charge"]),
+            charge_probe.get("requested", 1.0),
+            branch_connected=charge_probe.get("connected", True),
+            stages=charge_probe.get("stages", 1),
+        )
+    air_probe = options.get("air_probe")
+    if air_probe:
+        evidence["air_probe"] = utilities.progress_air_stage(
+            config,
+            air_probe.get("current", "stable"),
+            air_probe.get("pressure_steps", 1),
+            air_probe.get("interruption_steps", 0),
+        )
+    structure_probe = options.get("structure_probe")
+    if structure_probe:
+        evidence["structure_probe"] = utilities.structure_transition(
+            config,
+            structure_probe.get("current", "strained"),
+            structure_probe.get("pressure_steps", 1),
+            structure_probe.get("reinforcement_steps", 0),
+        )
+    if options.get("cascade_probe"):
+        evidence["cascade_probe"] = incidents.validate_cascade(
+            state.storm_state.get("cascade", config["storm"]["cascade_order"]),
+            config["storm"]["maximum_affected_systems"],
+        )
+    if options.get("save_every_incident_stage"):
+        snapshots = []
+        probe_incident = incidents.create_incident(
+            config, f"save:{case}", "air_contamination"
+        )
+        for _ in range(4):
+            snapshots.append(json.dumps(probe_incident, sort_keys=True))
+            probe_incident = incidents.advance_incident(probe_incident)
+        evidence["incident_stage_snapshots"] = snapshots
+        evidence["incident_stage_roundtrip"] = all(
+            json.loads(snapshot) == json.loads(json.dumps(json.loads(snapshot)))
+            for snapshot in snapshots
+        )
+    if options.get("highball_duplicate_probe"):
+        before_stocks = copy.deepcopy(state.stocks)
+        selected, _ = _selected_projects(
+            config, options["route"], options
+        )
+        _, repeated = _apply_highball_setup(
+            state, config, selected, options
+        )
+        evidence["highball_duplicate_probe"] = {
+            "stocks_unchanged": state.stocks == before_stocks,
+            "same_order_state": repeated == state.highball_state,
+            "cost_commit_count": sum(
+                action == "highball:order:costs"
+                for action in state.committed_actions
+            ),
+            "duplicate_benefit_prevented": (
+                state.stocks == before_stocks
+                and repeated == state.highball_state
+            ),
+        }
+    if options.get("medicine_priority"):
+        priority = config["resource_response_values"]["medicine_prioritization"]
+        evidence["medicine_prioritization"] = {
+            "stabilization_protected": True,
+            "deferred_followup_medicine": priority[
+                "deferred_followup_medicine"
+            ],
+            "stress_points": priority["stress_points"],
+            "recovery_delay_days": priority["recovery_delay_days"],
+            "free_medicine_created": False,
+        }
+    if options.get("relay_restore_probe"):
+        relay = state.relay_load_test_state
+        evidence["relay_restore_probe"] = {
+            "response": relay.get("response"),
+            "visible_before": relay.get("lighting_visible_before"),
+            "visible_during": relay.get("lighting_visible_during"),
+            "visible_next_stable_phase": relay.get("lighting_restored"),
+            "restored_without_new_charge": relay.get("charge_draw", 0.0) == 0.0,
+        }
+    resilience_probe = options.get("resilience_probe")
+    if resilience_probe == "minimum_daily_uncommitted_work":
+        evidence["resilience_probe"] = {
+            "metric": resilience_probe,
+            "value": min(day["work"]["daily_uncommitted"] for day in day_reports),
+            "by_day": {
+                str(day["day"]): day["work"]["daily_uncommitted"]
+                for day in day_reports
+            },
+        }
+    elif resilience_probe == "critical_path_slack":
+        evidence["resilience_probe"] = {
+            "metric": resilience_probe,
+            "minimum_phase_deadline_days": min(
+                phase["critical_path_slack_days"]
+                for day in day_reports
+                for phase in day["phases"]
+            ),
+        }
+    elif resilience_probe == "incident_response_reserve":
+        evidence["resilience_probe"] = {
+            "metric": resilience_probe,
+            "reserved": rounded(
+                sum(day["work"]["incident_reserve"] for day in day_reports)
+            ),
+            "used": rounded(
+                sum(day["work"]["incident_reserve_used"] for day in day_reports)
+            ),
+            "unused": rounded(
+                sum(day["work"]["incident_reserve_unused"] for day in day_reports)
+            ),
+        }
+    if options.get("hope_probe"):
+        evidence["hope_probe"] = copy.deepcopy(state.hope_state)
+    resource_probe = options.get("resource_pressure_probe")
+    if resource_probe:
+        final_day = day_reports[-1]
+        evidence["resource_pressure_probe"] = {
+            "stock": resource_probe,
+            "ending": final_day["stocks_end"][resource_probe],
+            "minimum": final_day["minimum_stock_to_date"][resource_probe],
+            "forecast_status": final_day["stock_forecasts"][resource_probe]["status"],
+            "minimum_viable_reserve": config["stocks"][resource_probe][
+                "minimum_viable_reserve"
+            ],
+        }
+    if options.get("failure_cause_probe"):
+        evidence["failure_cause_probe"] = {
+            "storm_profile": state.storm_state.get("profile"),
+            "cascade": copy.deepcopy(state.storm_state.get("cascade", [])),
+            "recoverable": state.storm_state.get("recoverable"),
+            "failures": list(state.failures),
+        }
+    if options.get("response_work_probe"):
+        storm_day = next(day for day in day_reports if day["day"] == 5)
+        evidence["response_work_probe"] = {
+            "actual_incident_work": storm_day["work"]["incident_response"],
+            "reserve_used": storm_day["work"]["incident_reserve_used"],
+            "overflow": storm_day["work"]["incident_overflow"],
+            "daily_uncommitted": storm_day["work"]["daily_uncommitted"],
+        }
+    if options.get("inject_invariant_error"):
+        state.invariant_errors.append(str(options["inject_invariant_error"]))
+        evidence["invariant_detected"] = True
+    if options.get("no_hidden_work_probe"):
+        checks = []
+        for day in day_reports:
+            work = day["work"]
+            accounted = (
+                work["personal_overhead"]
+                + work["travel"]
+                + work["hauling"]
+                + work["highball_or_promise_loss"]
+                + work["essential_operation_requirement"]
+                + work["incident_reserve"]
+                + work["incident_overflow"]
+                + work["treatment_and_rest"]
+                - work["highball_or_promise_loss"]
+                + work["mistake_rework"]
+                + work["risk_preparation"]
+                + work["project_used"]
+                + work["buffer"]
+            )
+            checks.append(
+                {
+                    "day": day["day"],
+                    "gross": work["gross"],
+                    "accounted": rounded(accounted),
+                    "difference": rounded(work["gross"] - accounted),
+                }
+            )
+        evidence["work_accounting"] = checks
+        evidence["all_work_accounted"] = all(
+            abs(item["difference"]) <= 0.002 for item in checks
+        )
+    evidence["distinct_output_marker"] = f"executed:{case}"
+    return evidence
 
 
 def _selected_projects(
@@ -861,12 +1499,19 @@ def resolve_storm(
     if route == "west" and "west_drain_isolation" in state.completed_projects:
         water_reduction += 4.0
     water_loss = max(0.0, profile["water_loss"] - water_reduction)
-    charge_use = max(0.0, profile["charge_use"])
+    charge_requested = max(0.0, profile["charge_use"])
     max_discharge = config["stocks"]["Charge"]["discharge_limit_per_stage"] * affected
-    charge_use = min(charge_use, max_discharge)
-    charge_shortfall = consume_stock(
-        state, "Charge", charge_use, "storm Power deficit", critical=False
+    charge_requested = min(charge_requested, max_discharge)
+    discharge = utilities.discharge_charge(
+        config,
+        state.stocks["Charge"],
+        charge_requested,
+        branch_connected=True,
+        stages=affected,
     )
+    charge_use = discharge["stock_draw"]
+    consume_stock(state, "Charge", charge_use, "storm Power deficit", critical=False)
+    charge_shortfall = max(0.0, charge_requested - discharge["delivered"])
     if charge_shortfall > EPSILON:
         water_loss += charge_shortfall * 0.5
     consume_stock(state, "Clean Water", water_loss, "storm Water impairment")
@@ -905,6 +1550,9 @@ def resolve_storm(
         "strategy": strategy_name,
         "response_work": rounded(profile["response_work"]),
         "charge_use": rounded(charge_use),
+        "charge_requested_delivery": rounded(charge_requested),
+        "charge_delivered": discharge["delivered"],
+        "charge_conversion_loss": discharge["conversion_loss"],
         "water_loss": rounded(water_loss),
         "medicine_use": rounded(profile["medicine_use"] * medicine_multiplier),
         "next_day_capacity_loss": rounded(profile["next_day_capacity_loss"]),
@@ -913,6 +1561,21 @@ def resolve_storm(
         "physical_aftermath": "filter residue, load-shed rooms, water marks, and visible repair state",
         "human_aftermath": "Fatigue, treatment, promise repayment, and recovery work",
     }
+    storm_incident = incidents.create_incident(
+        config, f"day5:{route}:cinder", "air_contamination", section=route
+    )
+    storm_incident["cascade"] = copy.deepcopy(cascade)
+    storm_incident["maximum_propagation_depth"] = storm["maximum_affected_systems"]
+    storm_incident["current_stage"] = (
+        "severe" if profile_name == "neglect" else "recovery"
+    )
+    storm_incident["status"] = "active" if profile_name == "neglect" else "resolved"
+    storm_incident["transaction_ids"].extend(
+        f"incident:day5:{route}:stage:{index}"
+        for index in range(1, affected + 1)
+    )
+    state.incidents[storm_incident["incident_id"]] = storm_incident
+    result["incident"] = copy.deepcopy(storm_incident)
     state.storm_state = copy.deepcopy(result)
     if not result["recoverable"]:
         state.failures.append("Extended storm neglect produced an unrecoverable slice state")
@@ -928,6 +1591,32 @@ def _apply_highball_setup(
     highball = options.get("highball")
     if not highball:
         return {}, None
+    if state.highball_state:
+        stored = copy.deepcopy(state.highball_state)
+        return {
+            int(day): float(value)
+            for day, value in stored.get("capacity_losses", {}).items()
+        }, stored
+    worker = highball.get("resident", "Teo")
+    medical_restriction = highball.get("medical_restriction", "none")
+    if medical_restriction in config["highball"]["medical_ineligibility"]:
+        report = {
+            "uses": 0,
+            "requested_uses": int(highball.get("uses", 1)),
+            "candidate_benefit": float(
+                highball.get("benefit", config["highball"]["baseline_candidate"])
+            ),
+            "provisional": True,
+            "production_multiplier_selected": False,
+            "resident": worker,
+            "eligible": False,
+            "rejection_reason": f"{worker} is medically restricted: {medical_restriction}",
+            "work_saved": 0.0,
+            "strain": 0,
+            "hidden_random_risk": False,
+        }
+        state.highball_state = copy.deepcopy(report)
+        return {}, report
     uses = int(highball.get("uses", 1))
     if uses > config["highball"]["maximum_consecutive_uses"]:
         state.failures.append("Highball requested beyond consecutive-use limit")
@@ -965,10 +1654,22 @@ def _apply_highball_setup(
         key: rounded(sum(item[key] for item in cost_breakdown))
         for key in cost_breakdown[0]
     }
-    consume_stock(state, "Charge", costs["charge_cost"], "Highball order")
-    consume_stock(state, "Materials", costs["materials_wear"], "Highball material wear")
+    strain = int(costs.pop("strain"))
+    equipment_condition = float(highball.get("equipment_condition", 1.0))
+    if equipment_condition < config["highball"]["low_equipment_condition_threshold"]:
+        strain += int(config["highball"]["low_equipment_extra_strain"])
+    strain_name, strain_data = highball_strain_tier(config, strain)
+
+    def commit_costs() -> None:
+        consume_stock(state, "Charge", costs["charge_cost"], "Highball order")
+        consume_stock(
+            state, "Materials", costs["materials_wear"], "Highball material wear"
+        )
+
+    commit_once(state, "highball:order:costs", commit_costs)
     capacity_losses: dict[int, float] = {
         repayment_day: costs["fatigue_capacity_loss_next_day"]
+        + float(strain_data["inspection_work"])
     }
     promise = highball.get("promise", "kept")
     if promise == "kept":
@@ -982,7 +1683,10 @@ def _apply_highball_setup(
         "uses": uses,
         "candidate_benefit": benefit,
         "provisional": True,
+        "production_multiplier_selected": False,
         "context": context,
+        "resident": worker,
+        "eligible": True,
         "order_day": order_day,
         "target_project": target_id,
         "work_saved": saved,
@@ -991,9 +1695,25 @@ def _apply_highball_setup(
         "promise": promise,
         "capacity_losses": capacity_losses,
         "net_week_work_value": rounded(saved - sum(capacity_losses.values())),
+        "strain": strain,
+        "strain_tier": strain_name,
+        "inspection_work": float(strain_data["inspection_work"]),
+        "another_use_blocked": bool(strain_data["another_use_blocked"]),
+        "equipment_condition": equipment_condition,
+        "guaranteed_impairment_if_emergency_override": bool(
+            strain_data["another_use_blocked"]
+        ),
+        "hidden_random_risk": False,
         "emotional_effects_are_placeholder": True,
         "refuses_next_highball": promise == "breached",
     }
+    state.promises["highball_rest"] = {
+        "resident": worker,
+        "status": promise,
+        "due_day": repayment_day,
+        "work": costs["promised_rest_work"],
+    }
+    state.highball_state = copy.deepcopy(report)
     return capacity_losses, report
 
 
@@ -1013,6 +1733,17 @@ def _conditions_for(
     return conditions
 
 
+def _stress_band(config: dict[str, Any], points: int) -> str:
+    bands = config["work"]["stress_point_bands"]
+    if points < bands["steady_below"]:
+        return "steady"
+    if points < bands["elevated_below"]:
+        return "elevated"
+    if points < bands["high_below"]:
+        return "high"
+    return "acute"
+
+
 def _daily_capacity(
     config: dict[str, Any], route: str, day: int, options: dict[str, Any], capacity_losses: dict[int, float], juna_report: dict[str, Any] | None
 ) -> dict[str, Any]:
@@ -1023,15 +1754,24 @@ def _daily_capacity(
     absence = options.get("absence")
     if absence and absence.get("day") == day:
         availability[absence["resident"]] = float(absence["availability"])
-    resident_capacity = {
-        resident: calculate_resident_capacity(
+    restriction_map = copy.deepcopy(options.get("resident_medical_restrictions", {}))
+    restriction_event = options.get("medical_restriction_event")
+    if restriction_event and day in restriction_event.get("days", [restriction_event.get("day")]):
+        restriction_map[restriction_event["resident"]] = restriction_event["restriction"]
+    resident_profiles = {
+        resident: calculate_resident_work_profile(
             config,
             resident,
             _conditions_for(options, resident, day),
             availability=availability[resident],
             global_multiplier=global_multiplier,
+            medical_restriction=restriction_map.get(resident, "none"),
         )
         for resident in availability
+    }
+    resident_capacity = {
+        resident: profile["productive_capacity"]
+        for resident, profile in resident_profiles.items()
     }
     gross = sum(resident_capacity.values())
     if day >= 4:
@@ -1046,10 +1786,30 @@ def _daily_capacity(
     travel_multiplier = modifiers.get("travel_overhead_multiplier", 1.0)
     travel = gross * work["travel_profiles"][travel_profile] * travel_multiplier
     hauling = gross * work["hauling_rate"] * travel_multiplier
+    emergency = survival.shelter_emergency_capacity(
+        list(resident_profiles.values()),
+        work["minimum_emergency_shelter_capacity"],
+    )
     return {
         "available_residents": [name for name, fraction in availability.items() if fraction > 0],
         "resident_availability": availability,
         "resident_capacity": {key: rounded(value) for key, value in resident_capacity.items()},
+        "resident_work_profiles": resident_profiles,
+        "medically_restricted_residents": [
+            name
+            for name, profile in resident_profiles.items()
+            if profile["current_work_restriction"]
+            in {
+                "critical_health",
+                "collapse_risk",
+                "medically_incapacitated",
+                "critical_untreated_injury",
+                "collapse",
+                "unconscious",
+                "severe_respiratory",
+            }
+        ],
+        "shelter_emergency_capacity": emergency,
         "juna_limited_work": rounded(juna_work),
         "gross": rounded(gross),
         "personal_overhead": rounded(personal),
@@ -1097,7 +1857,12 @@ def _session_budget(config: dict[str, Any], day: int, expedition_mode: str, stor
 
 
 def _ending_eligibility(
-    state: SimulationState, config: dict[str, Any], storm_profile: str, survival_viable: bool
+    state: SimulationState,
+    config: dict[str, Any],
+    storm_profile: str,
+    survival_viable: bool,
+    *,
+    recovery_needed: bool = False,
 ) -> dict[str, bool]:
     req = config["ending_requirements"]
 
@@ -1122,7 +1887,9 @@ def _ending_eligibility(
         and state.stocks["Charge"] >= req["strengthen_relay"]["minimum_charge"]
         and state.outside_contact
     )
-    recover = survival_viable and (storm_profile != "prepared" or state.treatment_open)
+    recover = survival_viable and (
+        storm_profile != "prepared" or state.treatment_open or recovery_needed
+    )
     return {
         "prepare_the_platform": prepare,
         "root_the_settlement": root,
@@ -1167,6 +1934,20 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
     modifiers = options.get("modifiers", {})
     selected_projects, omitted = _selected_projects(config, route, options)
     state = _initial_state(config, selected_projects, modifiers)
+    if options.get("materials_shortage"):
+        shortage = float(
+            options.get(
+                "materials_shortage_amount",
+                config["resource_response_values"]["materials_shortage"]["loss"],
+            )
+        )
+        consume_stock(
+            state,
+            "Materials",
+            shortage,
+            "forecast Materials shortage",
+            critical=False,
+        )
     capacity_losses, highball_report = _apply_highball_setup(
         state, config, selected_projects, options
     )
@@ -1178,9 +1959,14 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
     expedition_report: dict[str, Any] | None = None
     juna_report: dict[str, Any] | None = None
     storm_report: dict[str, Any] | None = None
+    relay_load_test_report: dict[str, Any] | None = None
+    incident_case_report: dict[str, Any] | None = None
     total_project_capacity = 0.0
     total_project_used = 0.0
     total_essential = 0.0
+    hunger_state = "fed"
+    stress_points = 0
+    consecutive_ration_days = 0
 
     for day in range(1, 8):
         state.day = day
@@ -1190,38 +1976,112 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
 
         if day == config["signals"][signal_name]["trader_day"]:
             trader_report = _apply_trader(state, config, signal_name)
+        food_response = options.get("food_response", {})
+        if (
+            food_response.get("type") == "trader"
+            and day == config["resource_response_values"]["food_trader"]["day"]
+        ):
+            response = config["resource_response_values"]["food_trader"]
+
+            def food_trade_mutation() -> None:
+                consume_stock(
+                    state,
+                    "Materials",
+                    response["materials_cost"],
+                    "Food pressure trader exchange",
+                )
+                grant_reward_once(
+                    state,
+                    config,
+                    "resource_response:food_trader",
+                    stocks={"Food": response["food_gain"]},
+                )
+
+            commit_once(state, "resource_response:food_trader:exchange", food_trade_mutation)
         if day == config["juna"]["arrival_day"]:
             juna_report = _apply_juna(state, config, options, modifiers)
+        if day == config["relay_load_test"]["day"]:
+            relay_response = options.get("relay_load_test_response", "shed_lighting")
+            relay_load_test_report = apply_relay_load_test(
+                state,
+                config,
+                relay_response,
+                branch_connected=not options.get("relay_branch_disconnected", False),
+            )
+            if relay_load_test_report.get("warning_lead_delta", 0) < 0:
+                modifiers["storm_lead_reduction"] = modifiers.get(
+                    "storm_lead_reduction", 0
+                ) + abs(relay_load_test_report["warning_lead_delta"])
 
         treatment_work = 0.0
         if day == 1 and not options.get("treatment_delay"):
-            medicine_use = config["stocks"]["Medicine"]["examination_use"] * modifiers.get("medicine_use_multiplier", 1.0)
-            consume_stock(state, "Medicine", medicine_use, "Teo respiratory examination")
-            consume_stock(state, "Clean Water", config["stocks"]["Clean Water"]["treatment_use"], "Teo respiratory examination")
-            treatment_work += config["work"]["teo_examination_work"]
+            treatment = start_named_treatment(
+                state,
+                config,
+                treatment_id="teo:respiratory:early",
+                resident="Teo",
+                condition="respiratory_exposure",
+                severity="limited",
+                medicine_multiplier=modifiers.get("medicine_use_multiplier", 1.0),
+            )
+            treatment_work += treatment["medical_work"]
+            complete_named_treatment(
+                state,
+                treatment["treatment_id"],
+                current_health=75.0,
+                precondition_max_health=100.0,
+            )
         if day == 2 and options.get("treatment_delay"):
-            medicine_use = 2.0 * config["stocks"]["Medicine"]["examination_use"] * modifiers.get("medicine_use_multiplier", 1.0)
-            consume_stock(state, "Medicine", medicine_use, "delayed Teo respiratory treatment")
-            consume_stock(state, "Clean Water", 2.0 * config["stocks"]["Clean Water"]["treatment_use"], "delayed Teo respiratory treatment")
-            treatment_work += 4.0
-            state.treatment_open = True
+            treatment = start_named_treatment(
+                state,
+                config,
+                treatment_id="teo:respiratory:delayed",
+                resident="Teo",
+                condition="respiratory_exposure",
+                severity="severe",
+                medicine_multiplier=modifiers.get("medicine_use_multiplier", 1.0),
+            )
+            treatment_work += treatment["medical_work"]
         if day == 2 and construction_risk["injury"] != "none":
             serious = construction_risk["injury"] == "serious"
-            medicine_key = "serious_injury_use" if serious else "minor_injury_use"
-            consume_stock(
+            condition = "serious_injury" if serious else "minor_injury"
+            severity = "serious" if serious else "minor"
+            treatment = start_named_treatment(
                 state,
-                "Medicine",
-                config["stocks"]["Medicine"][medicine_key] * modifiers.get("medicine_use_multiplier", 1.0),
-                f"{construction_risk['injury']} construction injury",
+                config,
+                treatment_id=f"construction:{condition}",
+                resident="Ash",
+                condition=condition,
+                severity=severity,
+                medicine_multiplier=modifiers.get("medicine_use_multiplier", 1.0),
             )
-            consume_stock(
+            treatment_work += treatment["medical_work"]
+        if day == int(options.get("waterborne_illness_day", -1)):
+            treatment = start_named_treatment(
                 state,
-                "Clean Water",
-                2.0 if serious else 1.0,
-                f"{construction_risk['injury']} construction injury treatment",
+                config,
+                treatment_id="waterborne:case",
+                resident=options.get("waterborne_resident", "Maren"),
+                condition="waterborne_illness",
+                severity=options.get("waterborne_severity", "moderate"),
+                medicine_multiplier=modifiers.get("medicine_use_multiplier", 1.0),
             )
-            treatment_work += 6.0 if serious else 4.0
-            state.treatment_open = True
+            treatment_work += treatment["medical_work"]
+        if day == 3 and "teo:respiratory:delayed" in state.treatments:
+            if options.get("treatment_interrupted"):
+                interrupt_named_treatment(
+                    state, "teo:respiratory:delayed", "Power shed during care"
+                )
+            else:
+                complete_named_treatment(state, "teo:respiratory:delayed")
+        if day == 3 and "construction:minor_injury" in state.treatments:
+            complete_named_treatment(state, "construction:minor_injury")
+        if day == 4 and "construction:serious_injury" in state.treatments:
+            complete_named_treatment(state, "construction:serious_injury")
+        if day == 4 and options.get("treatment_interrupted") and "teo:respiratory:delayed" in state.treatments:
+            complete_named_treatment(state, "teo:respiratory:delayed")
+        if day == int(options.get("waterborne_illness_day", -1)) + 1 and "waterborne:case" in state.treatments:
+            complete_named_treatment(state, "waterborne:case")
         if day == 1:
             treatment_work += float(options.get("treatment_extra_work", 0.0))
             extra_medicine = float(options.get("treatment_extra_medicine", 0.0))
@@ -1235,11 +2095,34 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
             )
             incident_work = storm_report["response_work"]
             capacity_losses[6] = capacity_losses.get(6, 0.0) + storm_report["next_day_capacity_loss"]
+        incident_probe = options.get("incident_probe")
+        if incident_probe and day == int(options.get("incident_day", 4)):
+            incident_case_report = resolve_incident_case(
+                state,
+                config,
+                family=incident_probe["family"],
+                response=incident_probe.get("response"),
+                second_major_family=incident_probe.get("second_major_family"),
+                queue_minor=incident_probe.get("queue_minor", False),
+                isolate=incident_probe.get("isolate", False),
+                evacuate=incident_probe.get("evacuate", False),
+                recover=incident_probe.get("recover", True),
+            )
+        disruption = options.get("ordinary_disruption")
+        if disruption and disruption.get("day") == day:
+            incident_work += float(disruption.get("work", 0.0))
+        for minor in options.get("minor_disruptions", []):
+            if minor.get("day") == day:
+                incident_work += float(minor.get("work", 0.0))
 
         capacity = _daily_capacity(
             config, route, day, options, capacity_losses, juna_report
         )
         essential_work = config["work"]["daily_essential_work"]
+        incident_reserve = config["work"]["daily_incident_reserve"]
+        incident_reserve_used = min(incident_reserve, incident_work)
+        incident_reserve_unused = max(0.0, incident_reserve - incident_reserve_used)
+        incident_overflow = max(0.0, incident_work - incident_reserve)
         if day == 3:
             essential_work += config["work"]["nightrun_preparation_work"]
         if day == 6:
@@ -1272,15 +2155,26 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
             + capacity["hauling"]
             + capacity["highball_or_promise_loss"]
             + essential_work
+            + incident_reserve
             + treatment_work
-            + incident_work
+            + incident_overflow
             + mistake_work
             + risk_preparation_work
         )
         project_capacity = max(0.0, capacity["gross"] - nonproject)
         total_project_capacity += project_capacity
-        total_essential += essential_work + treatment_work + incident_work + mistake_work
+        total_essential += essential_work + incident_reserve + treatment_work + incident_overflow + mistake_work
         total_essential += risk_preparation_work
+        if not capacity["shelter_emergency_capacity"]["met"]:
+            reason = (
+                f"Day {day} shelter labor pool cannot supply minimum emergency survival work; "
+                "incapacitated residents are not forced to work"
+            )
+            if options.get("outside_emergency_fallback"):
+                day_warnings.append(reason + "; declared outside/manual fallback used")
+                state.recovery_reasons.append(reason)
+            elif reason not in state.failures:
+                state.failures.append(reason)
 
         if options.get("cancel_optional_day") == day and options.get("optional_project") in state.projects:
             cancel_project(
@@ -1293,6 +2187,7 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
         project_work_by_tier = {
             "mandatory": 0.0,
             "route_mandatory": 0.0,
+            "ambition": 0.0,
             "optional": 0.0,
         }
         for work_entry in project_work_log:
@@ -1324,22 +2219,71 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
                 expedition_mode,
                 options.get("expedition"),
             )
+            if food_response.get("type") == "expedition":
+                response = config["resource_response_values"]["food_expedition_choice"]
+
+                def food_expedition_mutation() -> None:
+                    consume_stock(
+                        state,
+                        "Materials",
+                        response["materials_opportunity_cost"],
+                        "Food expedition carry opportunity",
+                    )
+                    grant_reward_once(
+                        state,
+                        config,
+                        "resource_response:food_expedition",
+                        stocks={"Food": response["food_gain"]},
+                    )
+
+                commit_once(
+                    state,
+                    "resource_response:food_expedition:choice",
+                    food_expedition_mutation,
+                )
 
         resident_count = 4 + int(state.juna_admitted)
         food_multiplier = modifiers.get("food_consumption_multiplier", 1.0)
         water_multiplier = modifiers.get("water_consumption_multiplier", 1.0)
+        ration_days = set(food_response.get("days", []))
+        food_issue_type = "restricted" if day in ration_days else "normal"
+        food_plan = survival.food_issue(
+            config, resident_count, issue=food_issue_type
+        )
+        if food_issue_type == "restricted":
+            consecutive_ration_days += 1
+        else:
+            consecutive_ration_days = 0
+        ration_effect = survival.ration_consequence(
+            config, consecutive_ration_days
+        )
+        hunger_state = ration_effect["hunger_band"]
+        stress_points += ration_effect["stress_points"]
         consume_stock(
             state,
             "Food",
-            resident_count * config["stocks"]["Food"]["normal_per_resident_day"] * food_multiplier,
-            f"Day {day} ration",
+            food_plan["amount"] * food_multiplier,
+            f"Day {day} {food_issue_type} ration",
         )
+        water_response = options.get("water_response", {})
+        water_days = set(water_response.get("days", []))
+        water_issue_type = "restricted" if day in water_days else "normal"
+        water_plan = survival.water_issue(
+            config, resident_count, issue=water_issue_type
+        )
+        stress_points += water_plan["stress_points"]
         consume_stock(
             state,
             "Clean Water",
-            resident_count * config["stocks"]["Clean Water"]["normal_per_resident_day"] * water_multiplier,
-            f"Day {day} water issue",
+            water_plan["amount"] * water_multiplier,
+            f"Day {day} {water_issue_type} water issue",
         )
+        stress_band = _stress_band(config, stress_points)
+        for resident, profile in capacity["resident_work_profiles"].items():
+            resident_conditions = copy.deepcopy(profile["conditions"])
+            resident_conditions["hunger"] = hunger_state
+            resident_conditions["stress"] = stress_band
+            state.resident_conditions[resident] = resident_conditions
         signature_id = config["routes"][route]["signature_project"]
         if signature_id in state.completed_projects:
             add_stock(
@@ -1383,7 +2327,9 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
             options,
         )
         stock_forecasts = {
-            name: forecast_stock(config, name, value)
+            name: forecast_stock(
+                config, name, value, resident_count=resident_count
+            )
             for name, value in state.stocks.items()
         }
         day_buffer = rounded(project_capacity - project_used)
@@ -1394,6 +2340,14 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
             exact_day_reason = state.deadline_misses[-1]
         elif state.target_misses:
             exact_day_reason = state.target_misses[-1]
+        open_deadline_slack = [
+            int(project.get("hard_deadline_day", project["deadline_day"])) - day
+            for project_id, project in selected_projects.items()
+            if project["tier"] in {"mandatory", "route_mandatory", "ambition"}
+            and project_id not in state.completed_projects
+        ]
+        phase_critical_path_slack = min(open_deadline_slack) if open_deadline_slack else 0
+        emergency_actions_available = list(config["emergency_actions"])
         phases = [
             {
                 "phase": "swelter",
@@ -1424,6 +2378,52 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
                 "autosave_points": ["before ledger", "after treatment", "accepted ledger"],
             },
         ]
+        phase_utility_snapshot = {
+            "Power": {"headroom": power["headroom"], "condition": power["condition"]},
+            "Air": {"headroom": air["headroom"], "state": air["state"]},
+            "Water": {
+                "headroom": water["headroom"],
+                "condition": water["contamination_state"],
+                "failing_link": water["failing_link"],
+            },
+            "Structure": {
+                "condition": structure["state"],
+                "access_open": structure["access_open"],
+            },
+        }
+        for phase in phases:
+            phase.update(
+                {
+                    "available_residents": capacity["available_residents"],
+                    "productive_capacity": capacity["gross"],
+                    "medically_restricted_residents": capacity[
+                        "medically_restricted_residents"
+                    ],
+                    "essential_operation_work": rounded(
+                        essential_work if phase["phase"] == "swelter" else 0.0
+                    ),
+                    "incident_reserve": rounded(
+                        incident_reserve if phase["phase"] == "swelter" else 0.0
+                    ),
+                    "critical_path_slack_days": phase_critical_path_slack,
+                    "stocks": copy.deepcopy(state.stocks),
+                    "condition_summary": {
+                        "hunger": hunger_state,
+                        "fatigue_restrictions": capacity[
+                            "medically_restricted_residents"
+                        ],
+                        "stress": stress_band,
+                        "health_contexts": sorted(state.contextual_conditions),
+                    },
+                    "utilities": copy.deepcopy(phase_utility_snapshot),
+                    "forecast_status": {
+                        name: card["status"] for name, card in stock_forecasts.items()
+                    },
+                    "emergency_actions_available": emergency_actions_available,
+                    "active_promises": copy.deepcopy(state.promises),
+                    "outcome_status": "IN_PROGRESS",
+                }
+            )
         day_reports.append(
             {
                 "day": day,
@@ -1432,6 +2432,11 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
                 "work": {
                     **capacity,
                     "essential": rounded(essential_work),
+                    "essential_operation_requirement": rounded(essential_work),
+                    "incident_reserve": rounded(incident_reserve),
+                    "incident_reserve_used": rounded(incident_reserve_used),
+                    "incident_reserve_unused": rounded(incident_reserve_unused),
+                    "incident_overflow": rounded(incident_overflow),
                     "treatment_and_rest": rounded(treatment_work + capacity["highball_or_promise_loss"]),
                     "incident_response": rounded(incident_work),
                     "mistake_rework": rounded(mistake_work),
@@ -1441,7 +2446,10 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
                     "mandatory_shared_project_work": project_work_by_tier["mandatory"],
                     "mandatory_route_project_work": project_work_by_tier["route_mandatory"],
                     "optional_project_work": project_work_by_tier["optional"],
+                    "ambition_project_work": project_work_by_tier["ambition"],
                     "buffer": day_buffer,
+                    "daily_uncommitted": rounded(day_buffer + incident_reserve_unused),
+                    "minimum_phase_slack": rounded(incident_reserve_unused),
                 },
                 "project_work_log": project_work_log,
                 "projects_completed": sorted(
@@ -1453,6 +2461,17 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
                 "stocks_end": copy.deepcopy(state.stocks),
                 "minimum_stock_to_date": copy.deepcopy(state.stock_minima),
                 "stock_forecasts": stock_forecasts,
+                "resident_conditions": copy.deepcopy(state.resident_conditions),
+                "condition_summary": {
+                    "hunger": hunger_state,
+                    "stress": stress_band,
+                    "stress_points": stress_points,
+                    "ration_consequence": ration_effect,
+                },
+                "food_issue": food_plan,
+                "water_issue": water_plan,
+                "medical_conditions": copy.deepcopy(state.contextual_conditions),
+                "treatments": copy.deepcopy(state.treatments),
                 "utilities": {
                     "Power": power,
                     "Air": air,
@@ -1460,13 +2479,22 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
                     "Structure": structure,
                 },
                 "charge_consumer": "storm Power deficit" if day == 5 and storm_report and storm_report["charge_use"] > 0 else None,
+                "relay_load_test": copy.deepcopy(relay_load_test_report) if day >= 4 else None,
                 "signal_state": {
                     "committed": signal_name,
                     "confidence": config["storm"]["base_confidence"],
                     "expiry_resolved": day >= config["signals"][signal_name]["trader_day"],
                 },
                 "expedition_state": expedition_report if day == 3 else None,
-                "incident_stage": storm_report if day == 5 else None,
+                "incident_stage": (
+                    storm_report
+                    if day == 5
+                    else (
+                        copy.deepcopy(incident_case_report)
+                        if incident_case_report and day >= int(options.get("incident_day", 4))
+                        else None
+                    )
+                ),
                 "warning_lead": storm_report["warning_lead_stages"] if day == 5 and storm_report else None,
                 "recovery_work": incident_work if day == 5 else (project_used if day >= 6 else 0.0),
                 "juna_state": copy.deepcopy(juna_report) if day >= 6 else None,
@@ -1475,6 +2503,8 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
                 "buffer_or_deficit": day_buffer,
                 "exact_failure_reason": exact_day_reason,
                 "warnings": day_warnings,
+                "emergency_actions_available": emergency_actions_available,
+                "active_promises": copy.deepcopy(state.promises),
             }
         )
 
@@ -1484,39 +2514,117 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
         if project["tier"] in {"mandatory", "route_mandatory"}
     }
     incomplete_required = sorted(selected_required - state.completed_projects)
+    force_proof_incomplete = bool(options.get("force_proof_incomplete"))
     for project_id in incomplete_required:
         progress = state.projects[project_id]
         reason = progress.block_reason or f"{progress.remaining_work:.2f} work remains"
-        state.failures.append(f"required project {project_id} incomplete: {reason}")
+        gap = f"required project {project_id} incomplete: {reason}"
+        state.proof_gaps.append(gap)
+        if "missing component" in reason:
+            force_proof_incomplete = True
+        else:
+            state.recovery_reasons.append(
+                f"Recover First preserves survival while {project_id} remains incomplete"
+            )
     if state.functional_areas < 8 or state.functional_areas > 10:
-        state.failures.append(
+        state.proof_gaps.append(
             f"ending functional areas {state.functional_areas} outside required 8..10"
         )
+        force_proof_incomplete = True
     for stock_name, stock_data in config["stocks"].items():
         if state.stocks[stock_name] + EPSILON < stock_data["minimum_viable_reserve"]:
             state.failures.append(
                 f"{stock_name} ending reserve {state.stocks[stock_name]:.2f} below minimum {stock_data['minimum_viable_reserve']:.2f}"
             )
     if state.deadline_misses:
-        state.failures.extend(state.deadline_misses)
-    survival_viable = not state.failures
+        for miss in state.deadline_misses:
+            if miss not in state.proof_gaps:
+                state.proof_gaps.append(miss)
+                state.recovery_reasons.append(
+                    f"Recover First absorbs missed critical path: {miss}"
+                )
+    day7_available_for_hope = day_reports[-1]["work"]["daily_uncommitted"]
+    state.hope_state = resolve_hope_beat(
+        config,
+        state.completed_projects,
+        available_work=day7_available_for_hope,
+        force_minimal=bool(options.get("force_minimal_hope")),
+    )
+    full_hope_id = config["hope_beats"]["full_project"]
+    if state.hope_state["type"] != "full":
+        state.proof_gaps.append(f"full authored hope setup {full_hope_id} not completed")
+        if state.hope_state["supports_recover_first"]:
+            state.recovery_reasons.append(
+                f"minimal earned hope beat {state.hope_state['id']} supports Recover First"
+            )
+        else:
+            force_proof_incomplete = True
+    if options.get("major_ambition_missed"):
+        state.proof_gaps.append("major Day 7 ambition deliberately deferred")
+        state.recovery_reasons.append(
+            "Recover First chosen instead of an unsafe ambitious direction"
+        )
+    if consecutive_ration_days >= 3:
+        state.recovery_reasons.append(
+            "repeated rationing leaves prolonged Hunger requiring recovery"
+        )
+    if options.get("force_recover_first"):
+        state.recovery_reasons.append(str(options["force_recover_first"]))
+
+    survival_before_outcome = not state.failures
     final_storm_profile = storm_report["profile"] if storm_report else "prepared"
     endings = _ending_eligibility(
-        state, config, final_storm_profile, survival_viable
+        state,
+        config,
+        final_storm_profile,
+        survival_before_outcome,
+        recovery_needed=bool(state.recovery_reasons),
     )
-    if survival_viable and not any(endings.values()):
-        state.failures.append("no ending direction is eligible")
-        survival_viable = False
+    if survival_before_outcome and not any(endings.values()):
+        state.proof_gaps.append("no ending direction is eligible")
+        force_proof_incomplete = True
     save_probe = run_save_probe(state, config, options.get("save_probe"))
     if save_probe and not save_probe["passed"]:
-        state.failures.append(f"save probe {save_probe['probe']} failed")
-        survival_viable = False
+        state.invariant_errors.append(f"save probe {save_probe['probe']} failed")
+
+    prompt3_evidence = build_prompt3_case_evidence(
+        state, config, options, day_reports
+    )
+    outcome = derive_outcome_class(
+        config,
+        invariant_errors=state.invariant_errors,
+        shelter_failures=state.failures,
+        proof_gaps=state.proof_gaps,
+        recover_first_reasons=state.recovery_reasons,
+        ending_eligibility=endings,
+        force_proof_incomplete=force_proof_incomplete,
+    )
 
     total_buffer = rounded(total_project_capacity - total_project_used)
     capacity_margin = (
         100.0 * total_buffer / total_project_capacity
         if total_project_capacity > EPSILON
         else 0.0
+    )
+    resilience = calculate_schedule_resilience(
+        state,
+        selected_projects,
+        day_reports,
+        total_project_capacity=total_project_capacity,
+        total_project_used=total_project_used,
+    )
+    for day_report in day_reports:
+        day_report["ending_eligibility"] = (
+            copy.deepcopy(endings) if day_report["day"] == 7 else {}
+        )
+        day_report["outcome_status"] = (
+            outcome["outcome_class"] if day_report["day"] == 7 else "IN_PROGRESS"
+        )
+        for phase in day_report["phases"]:
+            phase["outcome_status"] = day_report["outcome_status"]
+    expected_outcome = scenario.get(
+        "expected_outcome_class",
+        "FULL_PROOF" if scenario["expected_viable"] else "SHELTER_FAILURE",
     )
     result = {
         "scenario_id": scenario["id"],
@@ -1525,9 +2633,17 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
         "route": route,
         "signal": signal_name,
         "expected_viable": scenario["expected_viable"],
+        "expected_outcome_class": expected_outcome,
         "mandatory": scenario["mandatory"],
-        "viable": survival_viable,
-        "expectation_met": survival_viable == scenario["expected_viable"],
+        "outcome_class": outcome["outcome_class"],
+        "survival_viable": outcome["survival_viable"],
+        "slice_proof_complete": outcome["slice_proof_complete"],
+        "ending_directions_available": outcome["ending_directions_available"],
+        "recover_first_available": outcome["recover_first_available"],
+        "invariant_valid": outcome["invariant_valid"],
+        "exact_limiting_fact": outcome["exact_limiting_fact"],
+        "viable": outcome["viable"],
+        "expectation_met": outcome["outcome_class"] == expected_outcome,
         "days": day_reports,
         "final": {
             "stocks": copy.deepcopy(state.stocks),
@@ -1541,14 +2657,26 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
             "deadline_misses": list(state.deadline_misses),
             "target_misses": list(state.target_misses),
             "ending_eligibility": endings,
+            "outcome": outcome,
+            "hope_beat": copy.deepcopy(state.hope_state),
+            "proof_gaps": list(dict.fromkeys(state.proof_gaps)),
+            "recovery_reasons": list(dict.fromkeys(state.recovery_reasons)),
+            "invariant_errors": list(dict.fromkeys(state.invariant_errors)),
             "work_capacity_after_overhead": rounded(total_project_capacity),
             "project_work_used": rounded(total_project_used),
             "usable_buffer": total_buffer,
             "usable_buffer_percent": rounded(capacity_margin),
             "essential_and_incident_work": rounded(total_essential),
+            "schedule_resilience": resilience,
             "failure_reasons": list(dict.fromkeys(state.failures)),
             "warnings": list(dict.fromkeys(state.warnings)),
-            "exact_failure_reason": state.failures[0] if state.failures else None,
+            "exact_failure_reason": (
+                outcome["exact_limiting_fact"]
+                if outcome["outcome_class"]
+                in {"SHELTER_FAILURE", "INVARIANT_ERROR", "PROOF_INCOMPLETE"}
+                else None
+            ),
+            "exact_limiting_fact": outcome["exact_limiting_fact"],
         },
         "construction_risk": construction_risk,
         "medical_tutorial": {
@@ -1558,11 +2686,13 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
             "new_injury_occurred": construction_risk["injury"] != "none",
         },
         "highball": highball_report,
+        "relay_load_test": relay_load_test_report,
         "trader": trader_report,
         "expedition": expedition_report,
         "storm": storm_report,
         "juna": juna_report,
         "save_probe": save_probe,
+        "prompt3_evidence": prompt3_evidence,
         "provisional": True,
         "model_limits": [
             "No exact pathfinding or footstep simulation",

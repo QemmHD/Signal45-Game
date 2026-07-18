@@ -132,3 +132,7 @@ These multipliers are workload budgets only. Device testing must measure text wr
 ## Timing acceptance and revalidation
 
 Prompt 2 accepts the schedule because modeled normal days fit 5–12 minutes, active days fit 11–16 minutes, and every phase exposes transaction-level safe stops. Prompt 3 must not silently add decisions. A playable prototype must reopen the schedule if median interaction time falls outside 20–40 seconds, the first safe stop exceeds seven minutes, or accessibility raises an ordinary session above twelve minutes.
+
+## Prompt 3 timing amendment
+
+The first-session teaching budget is unchanged. Charge mastery, incident cascades, admission, and Highball remain withheld/teased. The Relay Load Test is introduced on Day 4 as one controlled decision with an autosave before commitment. Major incidents auto-pause; one major/two minor warnings cap alert density. No survival system advances while closed. Phase reports now include conditions, utility summary, forecasts, emergency actions, promises, and critical-path slack, but these fields do not add player decisions by themselves.

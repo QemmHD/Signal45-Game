@@ -145,7 +145,7 @@ The slice uses **seven true room families**.
 - **Repurpose:** changes family within bay compatibility, with downtime, material recovery/loss, moved/stored equipment, resident/task displacement, and utility changes previewed.
 - **Deconstruct:** removes player-built elements and recovers a declared portion; authored shell and story machinery remain.
 
-The slice must include one upgrade and one adaptation/repurpose. A strong candidate is upgrading the Rest camp into berths on East, or adapting the concession cage from combined Food/Storage to dedicated Food after West storage is reclaimed. Exact costs and timing belong to Prompt 2.
+The slice includes one upgrade and one adaptation/repurpose. Prompt 2 schedules Quiet Berths or Water Treatment as the route upgrade and the Concession repurpose as a shared proof, with exact provisional WU, material reservations, dependencies, target dates, and hard carryover dates in `tools/feasibility/data/model.json` and `12_WORK_AND_CONSTRUCTION_MODEL.md`.
 
 ## Utilities
 
@@ -165,7 +165,7 @@ Every overlay uses the same information order: **source/state → connected path
 - **Power** is connected real-time capacity, demand, topology, and condition.
 - **Charge** is a stored stock used by battery/flywheel backup or portable cells.
 - Charge does not replace generation and should not be consumed by every task merely as a stamina currency.
-- Exact units and conversion losses remain provisional until Prompt 2.
+- Prompt 2 provisionally models Charge at 24 stored units within a 30-unit capacity, a 3-unit discharge limit per affected incident stage, and 10% losses. These remain prototype inputs, not final player-facing units.
 
 ## Population growth
 

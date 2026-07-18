@@ -1,10 +1,16 @@
-# Signal 45 — Prompt 2 Requirements
+# Signal 45 — Prompt 2 Requirements and Prompt 3 Handoff
+
+## Prompt 2 completion status
+
+Prompt 2 is complete at the deterministic-design level. The repository now contains one canonical JSON balance source, 90 scenario inputs, a deterministic Python runner, 67 unit tests, generated machine-readable evidence, and documents 11–17. Both routes pass without Highball; expected adverse cases fail. This does not constitute playable validation.
+
+The requirements below are retained as the record of why the model exists. Prompt 3 must begin from the decisions and revalidation gates in `17_PROMPT_2_DECISIONS.md`; it must not silently retune this baseline.
 
 ## Purpose
 
-Prompt 2 must convert **The First Count** from a coherent design into a deterministic seven-day feasibility model. It must answer whether the intended work, consumption, construction, utilities, recovery, route differences, first-session teaching, and safe stopping points can fit the mobile-session target.
+Prompt 2 converted **The First Count** from a coherent design into a deterministic seven-day feasibility model. It answers whether the intended work, consumption, construction, utilities, recovery, route differences, first-session teaching, and safe stopping points fit the provisional mobile-session target.
 
-Prompt 2 must not begin full implementation or expand the game into later-stage systems.
+Prompt 2 did not begin full implementation or expand the game into later-stage systems.
 
 ## Inputs that are locked
 
@@ -128,23 +134,23 @@ It must state what is skippable, what pauses the simulation, and how reduced mot
 
 ## Deterministic model acceptance gates
 
-Prompt 2 is complete only if:
+Prompt 2 acceptance record:
 
-- [ ] Required quantities and formulas are explicit, internally consistent, and labeled provisional.
-- [ ] Both East and West can complete all mandatory slice proofs without mandatory Highball.
-- [ ] Highball creates a useful alternative and real repayment, not an optimal spam action.
-- [ ] At least one imperfect-play state per route can recover through understandable action.
-- [ ] Day 5 failure is possible through deliberate risk/extended neglect but not an unseen roll.
-- [ ] Required work fits resident capacity with a visible buffer; optional work is clearly separated.
-- [ ] Food, water, medicine, materials/components, and Charge remain viable through Day 7 in representative plans.
-- [ ] Utility overlays can derive plain-language cause/forecast from the model.
-- [ ] Juna paths account for capacity and treatment honestly.
-- [ ] Active/delegated expedition results derive from the same graph state.
-- [ ] Normal day/session targets and longer optional nightrun sessions are reconciled.
-- [ ] Safe stopping points cover every dangerous or irreversible transaction.
-- [ ] No closed-app simulation advancement is introduced.
-- [ ] Sensitivity analysis identifies which provisional numbers are fragile.
-- [ ] Discovered contradictions are proposed as logged concept changes, not hidden tuning.
+- [x] Required quantities and formulas are explicit, internally consistent, and labeled provisional.
+- [x] Both East and West can complete all mandatory slice proofs without mandatory Highball.
+- [x] Highball creates a useful alternative and real repayment, not an optimal spam action.
+- [x] At least one imperfect-play state per route can recover through understandable action.
+- [x] Day 5 failure is possible through deliberate risk/extended neglect but not an unseen roll.
+- [x] Required work fits resident capacity with a visible buffer; optional work is clearly separated.
+- [x] Food, Water, Medicine, Materials/components, and Charge remain viable through Day 7 in representative plans.
+- [x] Utility state derives a plain-language cause and forecast from the model.
+- [x] Juna paths account for capacity and treatment honestly.
+- [x] Active/Delegated expedition results derive from the same graph state.
+- [x] Normal day/session targets and longer optional nightrun sessions are reconciled.
+- [x] Safe stopping points cover every dangerous or irreversible transaction.
+- [x] No closed-app simulation advancement is introduced.
+- [x] Sensitivity analysis identifies which provisional numbers are fragile.
+- [x] Discovered contradictions are logged as concept changes rather than hidden tuning.
 
 ## What must not be expanded yet
 
@@ -159,9 +165,9 @@ Do not use Prompt 2 to design or produce:
 - store packaging, final entitlement UX, pricing, achievements, or platform submissions;
 - multiplayer, PvP, online raids, procedural stations, vehicles, children, pregnancy, generations, pets, hundreds of residents, realistic fluids, particle air, freehand walls, full voice acting, extra maps, or endless mode.
 
-## Prompt 2 deliverables
+## Prompt 2 deliverables — completed
 
-Recommended artifacts for the next stage:
+Completed artifacts:
 
 1. pacing and phase specification;
 2. work-capacity model;
@@ -175,4 +181,8 @@ Recommended artifacts for the next stage:
 10. safe-save transaction matrix;
 11. sensitivity analysis and revised risk/decision entries.
 
-Do not begin Prompt 2 until explicitly requested.
+## Prompt 3 entry boundary
+
+Prompt 3 may refine survival resources, resident needs and medical conditions, utility-network behavior, forecasts, weather/incident architecture, cascades, emergency actions, and the final Highball risk model. It must preserve the Prompt 2 falsification cases and update canonical data, tests, scenarios, decisions, and affected design documents together.
+
+Do not begin Prompt 3 until explicitly requested.

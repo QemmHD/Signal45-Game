@@ -154,6 +154,8 @@ Accessibility affects rendering and interaction architecture from the first prot
 
 ## Production boundaries
 
+Prompt 2 does not redesign this camera. Its timing model budgets five seconds of a normal interaction for camera/selection and reduces transition time under reduced motion, while every simulation result remains invariant to Overview, zoom, and Room Focus. Those budgets require playable measurement.
+
 - Higgsfield and other generative tools may support mood boards, anchors, room/lighting studies, motion reference, marketing concepts, and trailer planning.
 - Generated output is not automatically a runtime asset. Record prompt/tool/source/version and rights notes, then apply consistency review, modeling or cleanup, rigging, animation, texturing, pivots, collision, optimization, and export validation.
 - Use a modular station kit, trim/material sets, decals, authored damage variants, shared resident rigs, prop atlases, and LODs.
@@ -162,7 +164,7 @@ Accessibility affects rendering and interaction architecture from the first prot
 
 ## Future graphics-stage questions
 
-Do not answer these with final assets during Prompt 1:
+These remain unanswered until the appropriate graphics and camera prototype stage:
 
 1. Orthographic, weak perspective, or constrained perspective projection?
 2. Exact overview and Room Focus zoom bounds and transition timings?

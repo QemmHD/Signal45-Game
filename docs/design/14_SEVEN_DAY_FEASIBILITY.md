@@ -2,17 +2,17 @@
 
 ## Verdict
 
-The deterministic Prompt 2 model finds **The First Count feasible at baseline but fragile**.
+The deterministic Prompt 3-refined model finds **The First Count feasible at baseline but fragile**.
 
 - East and West complete all mandatory slice proofs without Highball.
 - Both expand from four to ten functioning areas using seven room families.
-- East retains 20.4% modeled usable project capacity; West retains 15.8%.
+- Prompt 3 replaces a single buffer percentage with aggregate, daily, phase, critical-path, incident-reserve, carryover, optional, and emergency-recovery metrics.
 - One common 8 WU construction mistake remains recoverable on either route.
 - A half-day resident absence remains recoverable.
 - Prepared and unprepared-but-responded storms remain recoverable; extended neglect fails.
 - Active and Delegated nightruns secure the same required objective from one graph.
 - Juna admission, temporary admission, delay, and refusal-with-aid remain viable.
-- Eight deliberately adverse sensitivity cases fail, so the model does not always pass.
+- Deliberately adverse sensitivity and ignored-response cases still fail, so the model does not always pass.
 
 This verdict proves internal schedule consistency only. It does not prove fun, comprehension, emotional impact, camera comfort, visual readability, or actual session duration.
 
@@ -64,7 +64,7 @@ The station completes visible recovery repairs and a hope beat, reaching ten fun
 | 6 | Triage upgrade, Workshop | 24.66 / 24.66 | 15 / 21 / 8 / 35 / 24 |
 | 7 | recovery repairs, hope beat | 26.66 / 7.67 | 11 / 15 / 8 / 34 / 24 |
 
-Final: ten areas, 20.4% weekly project-capacity buffer, no Highball.
+Final: ten areas, Full Proof, no Highball; 36.788 aggregate unused project WU, with Day 5 minimum daily slack of zero after the prepared response.
 
 ### West baseline — S02
 
@@ -78,7 +78,7 @@ Final: ten areas, 20.4% weekly project-capacity buffer, no Highball.
 | 6 | Triage upgrade, Workshop | 22.45 / 22.45 | 15 / 29.5 / 9 / 38 / 24 |
 | 7 | recovery repairs, hope beat | 24.45 / 12.09 | 11 / 25 / 9 / 37 / 24 |
 
-Final: ten areas, 15.8% weekly project-capacity buffer, no Highball.
+Final: ten areas, Full Proof, no Highball; 27.108 aggregate unused project WU, with Day 5 minimum daily slack of zero after the prepared response.
 
 ## Route distinction
 
@@ -140,6 +140,8 @@ Routes influence cost, not moral rank. Multiple directions may be eligible; the 
 
 ## Scenario suite and falsifying failures
 
-The generated report contains **90 scenarios**, all matching their expected outcome: 77 viable outcomes, 13 expected infeasible outcomes, and zero invariant errors. Expected failures include extended storm neglect, both routes at −10% and −20% work capacity, both routes at +15% construction work, both routes at +20% Food use, East at +20% Water use, and either route missing its required expedition component.
+The Prompt 3 generated report contains **176 scenarios**, all matching expectation: 139 Full Proof, 21 Recover First, 3 Proof Incomplete, 12 Shelter Failure, and 1 intentionally detected Invariant Error, with zero unexpected quality errors. Expected failures still include extended storm neglect, throughput/cost sensitivities, ignored stock pressure, route-component proof loss, and injected invalid state. Responding Food, Water, Medicine, Materials, and Charge cases preserve survival at an explicit cost.
 
 The full day/phase results are in `tools/feasibility/reports/scenario_results.json`; the concise matrix is in `tools/feasibility/reports/scenario_summary.md`.
+
+Prompt 3 also adds the Day 4 Relay Load Test, explicit condition/medical restrictions, incident scheduling, deterministic Highball strain, and the earned minimal hope fallback. See `22_SURVIVAL_SIMULATION_RESULTS.md` for current evidence.

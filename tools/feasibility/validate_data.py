@@ -90,6 +90,19 @@ def validate_model(model: dict[str, Any]) -> list[str]:
                 "initial_shelter",
                 "ending_requirements",
                 "transactions",
+                "outcome_classes",
+                "forecast_framework",
+                "condition_definitions",
+                "medical_restrictions",
+                "medical_conditions",
+                "relay_load_test",
+                "weather_states",
+                "emergency_actions",
+                "incident_definitions",
+                "incident_scheduler",
+                "hope_beats",
+                "schedule_resilience",
+                "resource_response_values",
             },
             "model",
         )
@@ -98,7 +111,7 @@ def validate_model(model: dict[str, Any]) -> list[str]:
         if model["metadata"].get("title") != "Signal 45":
             raise DataValidationError("model: title must be Signal 45")
         if model["metadata"].get("provisional") is not True:
-            raise DataValidationError("model: all Prompt 2 balance must be provisional")
+            raise DataValidationError("model: all balance values must remain provisional")
 
         expected_stocks = {"Food", "Clean Water", "Medicine", "Materials", "Charge"}
         if set(model["stocks"]) != expected_stocks:
@@ -106,6 +119,11 @@ def validate_model(model: dict[str, Any]) -> list[str]:
         expected_utilities = {"power", "air", "water", "structure"}
         if set(model["utilities"]) != expected_utilities:
             raise DataValidationError("utilities: must contain exactly Power, Air, Water, Structure")
+        expected_conditions = {"health", "hunger", "fatigue", "stress"}
+        if set(model["condition_definitions"]) != expected_conditions:
+            raise DataValidationError(
+                "conditions: must contain exactly Health, Hunger, Fatigue, and Stress"
+            )
         expected_residents = {"Ash", "Imka", "Teo", "Maren", "Juna Malek"}
         if set(model["residents"]) != expected_residents:
             raise DataValidationError("residents: locked cast is incomplete or changed")
@@ -123,17 +141,50 @@ def validate_model(model: dict[str, Any]) -> list[str]:
                 raise DataValidationError(f"stock {stock_name}: start must fit capacity")
             if stock["minimum_viable_reserve"] > stock["comfortable_reserve"]:
                 raise DataValidationError(f"stock {stock_name}: reserve thresholds reversed")
+            _require_keys(
+                stock,
+                {
+                    "internal_unit",
+                    "player_interpretation",
+                    "primary_sources",
+                    "secondary_sources",
+                    "primary_sinks",
+                    "emergency_sinks",
+                    "reservation_behavior",
+                    "storage_behavior",
+                    "loss_behavior",
+                    "forecast_formula",
+                    "ordinary_responses",
+                    "emergency_responses",
+                    "save_representation",
+                    "slice_boundary",
+                    "full_game_extension_boundary",
+                },
+                f"stock {stock_name}",
+            )
 
         work = model["work"]
-        if work["minimum_emergency_capacity"] <= 0:
-            raise DataValidationError("work: minimum emergency capacity must be positive")
-        if work["minimum_emergency_capacity"] >= work["base_capacity_per_resident_day"]:
-            raise DataValidationError("work: emergency capacity must remain below base capacity")
+        if work["minimum_emergency_shelter_capacity"] <= 0:
+            raise DataValidationError(
+                "work: minimum shelter emergency capacity must be positive"
+            )
+        if (
+            work["minimum_emergency_shelter_capacity"]
+            >= work["base_capacity_per_resident_day"]
+        ):
+            raise DataValidationError(
+                "work: shelter emergency capacity must remain below resident base capacity"
+            )
         for class_name, project_class in work["project_classes"].items():
             if project_class["max_workers"] != len(project_class["worker_efficiency"]):
                 raise DataValidationError(f"project class {class_name}: worker efficiency length mismatch")
             if any(value <= 0 for value in project_class["worker_efficiency"]):
                 raise DataValidationError(f"project class {class_name}: worker efficiencies must be positive")
+        combination = work["condition_combination"]
+        if combination.get("method") != "dominant impairment plus capped secondary penalties":
+            raise DataValidationError("work: condition combination must remain explicit and legible")
+        if not 0 < combination.get("maximum_penalty", 0) < 1:
+            raise DataValidationError("work: combined condition penalty must be bounded below 100%")
 
         projects = model["projects"]
         if not isinstance(projects, list) or not projects:
@@ -164,6 +215,14 @@ def validate_model(model: dict[str, Any]) -> list[str]:
             )
             if project["route"] not in {"all", "east", "west"}:
                 raise DataValidationError(f"project {project['id']}: invalid route")
+            if project["tier"] not in {
+                "mandatory",
+                "route_mandatory",
+                "ambition",
+                "optional",
+                "stretch",
+            }:
+                raise DataValidationError(f"project {project['id']}: invalid tier")
             if project["class"] not in project_classes:
                 raise DataValidationError(f"project {project['id']}: invalid class")
             low, high = work["project_classes"][project["class"]]["work_range"]
@@ -202,6 +261,143 @@ def validate_model(model: dict[str, Any]) -> list[str]:
             raise DataValidationError("highball: baseline candidate must be sensitivity-tested")
         if sorted(candidates) != candidates or any(not 0 < value < 1 for value in candidates):
             raise DataValidationError("highball: candidates must be ascending fractions")
+        if model["highball"].get("production_multiplier_selected") is not False:
+            raise DataValidationError("highball: Prompt 3 may not select a production multiplier")
+        if set(candidates) != {0.25, 0.35, 0.5}:
+            raise DataValidationError("highball: all three provisional timing candidates are required")
+        strain_tiers = model["highball"].get("strain_tiers", {})
+        if set(strain_tiers) != {"low", "elevated", "critical"}:
+            raise DataValidationError("highball: deterministic low/elevated/critical strain tiers required")
+
+        expected_outcomes = {
+            "FULL_PROOF",
+            "RECOVER_FIRST",
+            "PROOF_INCOMPLETE",
+            "SHELTER_FAILURE",
+            "INVARIANT_ERROR",
+        }
+        if set(model["outcome_classes"]) != expected_outcomes:
+            raise DataValidationError("outcomes: explicit five-class taxonomy is required")
+        expected_forecasts = {
+            "FACT",
+            "PROJECTION",
+            "ESTIMATE",
+            "SIGNAL_INTELLIGENCE",
+            "UNKNOWN",
+        }
+        if set(model["forecast_framework"].get("classes", [])) != expected_forecasts:
+            raise DataValidationError("forecasts: required confidence classes are incomplete")
+        if model["forecast_framework"].get("maximum_overview_taps_to_diagnose") != 2:
+            raise DataValidationError("forecasts: major shortage diagnosis must remain within two taps")
+
+        relay = model["relay_load_test"]
+        if set(relay.get("responses", [])) != {"charge", "shed_lighting", "delay"}:
+            raise DataValidationError("relay load test: all three viable responses are required")
+        if relay.get("introduced_after_first_session") is not True or relay.get("new_project_work") != 0:
+            raise DataValidationError("relay load test: must occur after onboarding without new project WU")
+
+        for restriction, rule in model["medical_restrictions"].items():
+            _require_keys(
+                rule,
+                {
+                    "productive_work_blocked",
+                    "emergency_self_action",
+                    "requires_assistance",
+                    "treatment_required",
+                    "evacuation_required",
+                },
+                f"medical restriction {restriction}",
+            )
+        for required_restriction in {
+            "medically_incapacitated",
+            "critical_untreated_injury",
+            "collapse",
+            "unconscious",
+            "severe_respiratory",
+        }:
+            if not model["medical_restrictions"][required_restriction]["productive_work_blocked"]:
+                raise DataValidationError(
+                    f"medical restriction {required_restriction}: must block productive work"
+                )
+        required_medical = {
+            "respiratory_exposure",
+            "minor_injury",
+            "serious_injury",
+            "exhaustion",
+            "waterborne_illness",
+        }
+        if set(model["medical_conditions"]) != required_medical:
+            raise DataValidationError("medical: vertical-slice contextual condition set changed")
+
+        required_weather = {"swelter_heat", "cinder_front", "ash_wash_aftermath"}
+        if set(model["weather_states"]) != required_weather:
+            raise DataValidationError("weather: bounded vertical-slice weather set required")
+        required_incidents = {
+            "power_instability",
+            "air_contamination",
+            "water_contamination",
+            "structural_instability",
+            "equipment_breakdown",
+            "medical_emergency",
+        }
+        if set(model["incident_definitions"]) != required_incidents:
+            raise DataValidationError("incidents: representative reusable family set is incomplete")
+        incident_schema = {
+            "source",
+            "trigger",
+            "affected_room_or_object",
+            "initial_warning",
+            "confidence",
+            "severity",
+            "escalation_allowance",
+            "affected_stocks",
+            "affected_utilities",
+            "access_effect",
+            "propagation_rule",
+            "maximum_propagation_depth",
+            "auto_pause_tier",
+            "immediate_responses",
+            "generated_work_orders",
+            "required_materials_or_components",
+            "required_equipment",
+            "evacuation_rule",
+            "isolation_rule",
+            "recovery_work",
+            "physical_aftermath",
+            "human_consequence_placeholder",
+            "delayed_consequence",
+            "completion_condition",
+            "failure_condition",
+        }
+        for family, definition in model["incident_definitions"].items():
+            _require_keys(definition, incident_schema, f"incident {family}")
+            if definition["maximum_propagation_depth"] > 1:
+                raise DataValidationError(f"incident {family}: propagation exceeds slice bound")
+        scheduler = model["incident_scheduler"]
+        if scheduler.get("maximum_live_major") != 1:
+            raise DataValidationError("incidents: no more than one major crisis may be live")
+        if scheduler.get("maximum_queued_minor_warnings", 99) > 2:
+            raise DataValidationError("incidents: no more than two minor warnings may queue")
+        if set(scheduler.get("daily_budget", {})) != {str(day) for day in range(1, 8)}:
+            raise DataValidationError("incidents: seven-day budget is incomplete")
+
+        fallbacks = model["hope_beats"].get("fallbacks", [])
+        if not fallbacks or min(float(item["work"]) for item in fallbacks) > 2:
+            raise DataValidationError("hope: an earned zero-to-two-WU fallback is required")
+        if any(item.get("creates_resources") for item in fallbacks):
+            raise DataValidationError("hope: fallback may not create free resources")
+        required_resilience = {
+            "aggregate_weekly_unused_work",
+            "minimum_daily_uncommitted_work",
+            "minimum_phase_slack",
+            "critical_path_slack",
+            "incident_response_reserve",
+            "carryover_capacity",
+            "optional_work_capacity",
+            "emergency_recovery_capacity",
+        }
+        if set(model["schedule_resilience"].get("metrics", [])) != required_resilience:
+            raise DataValidationError("schedule: required resilience metrics are incomplete")
 
         if model["expedition"].get("exclusive_rewards") is not False:
             raise DataValidationError("expedition: mode-exclusive rewards are prohibited")
@@ -252,6 +448,11 @@ def validate_model(model: dict[str, Any]) -> list[str]:
             "treatment_start",
             "phase_transition",
             "end_of_day_ledger",
+            "relay_load_test",
+            "incident_recovery",
+            "treatment_interruption",
+            "emergency_action",
+            "hope_fallback",
         }
         if not required_transactions.issubset(transaction_ids):
             raise DataValidationError("transactions: required serialization boundaries missing")
@@ -267,12 +468,12 @@ def validate_scenarios(scenario_data: dict[str, Any], model: dict[str, Any]) -> 
         if scenario_data["schema_version"] != 1:
             raise DataValidationError("scenarios: unsupported schema_version")
         scenarios = scenario_data["scenarios"]
-        if not isinstance(scenarios, list) or len(scenarios) < 64:
-            raise DataValidationError("scenarios: at least 64 deterministic scenarios are required")
+        if not isinstance(scenarios, list) or len(scenarios) < 176:
+            raise DataValidationError("scenarios: at least 176 deterministic scenarios are required")
         ids = [scenario.get("id") for scenario in scenarios]
         if len(ids) != len(set(ids)):
             raise DataValidationError("scenarios: IDs must be unique")
-        required_ids = {f"S{number:02d}" for number in range(1, 65)}
+        required_ids = {f"S{number:02d}" for number in range(1, 177)}
         missing_required = required_ids - set(ids)
         if missing_required:
             raise DataValidationError(
@@ -291,12 +492,27 @@ def validate_scenarios(scenario_data: dict[str, Any], model: dict[str, Any]) -> 
                 raise DataValidationError(f"scenario {scenario['id']}: invalid signal")
             if not isinstance(scenario["expected_viable"], bool) or not isinstance(scenario["mandatory"], bool):
                 raise DataValidationError(f"scenario {scenario['id']}: expected/mandatory must be boolean")
+            expected_class = scenario.get(
+                "expected_outcome_class",
+                "FULL_PROOF" if scenario["expected_viable"] else "SHELTER_FAILURE",
+            )
+            if expected_class not in model["outcome_classes"]:
+                raise DataValidationError(
+                    f"scenario {scenario['id']}: invalid expected outcome class {expected_class}"
+                )
+            class_viable = expected_class in {"FULL_PROOF", "RECOVER_FIRST"}
+            if scenario["expected_viable"] != class_viable:
+                raise DataValidationError(
+                    f"scenario {scenario['id']}: convenience viability conflicts with outcome class"
+                )
             if scenario["id"] in required_ids and not scenario["mandatory"]:
                 raise DataValidationError(
                     f"scenario {scenario['id']}: required scenario must be mandatory"
                 )
+            behavior_options = dict(scenario["options"])
+            behavior_options.pop("prompt3_case", None)
             signature = json.dumps(
-                {"route": scenario["route"], "signal": scenario["signal"], "options": scenario["options"]},
+                {"route": scenario["route"], "signal": scenario["signal"], "options": behavior_options},
                 sort_keys=True,
             )
             if signature in input_signatures:
@@ -315,6 +531,16 @@ def validate_scenarios(scenario_data: dict[str, Any], model: dict[str, Any]) -> 
             "juna",
             "save_reload",
             "sensitivity",
+            "outcome_classification",
+            "resident_capacity",
+            "food_water_response",
+            "power_charge",
+            "medical",
+            "incidents",
+            "storm_prompt3",
+            "highball_prompt3",
+            "schedule_resilience",
+            "resource_response",
         }
         categories = {scenario["category"] for scenario in scenarios}
         if not required_categories.issubset(categories):

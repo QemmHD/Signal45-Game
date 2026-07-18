@@ -182,3 +182,7 @@ These remain unanswered until the appropriate graphics and camera prototype stag
 ## Camera acceptance prototype
 
 Before final graphics production, a graybox build must show four adjacent functional areas, two levels, at least four moving residents, one placement action, one repair, one utility overlay, and one incident. It must demonstrate overview readability, Room Focus selection, obstruction fading, zoom/pan bounds, reduced motion, target choosing, rapid return, and uninterrupted save/pause. Results must be measured on representative phones; a desktop capture alone is not validation.
+
+## Prompt 3 physical-state amendment
+
+The graybox must also distinguish powered/shed/disconnected equipment; the five Air stages; clean/suspect/contaminated/isolated Water; Safe through Closed Structure; treatment occupancy; evacuation; and incident recovery aftermath. The Day 4 Relay Load Test must visibly dim and restore task lighting. These are presentation requirements for one camera-independent simulation, not authorization for final assets.

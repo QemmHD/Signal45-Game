@@ -94,11 +94,13 @@ Post-launch possibility is not a promise or roadmap commitment.
 
 ## Cross-tier dependencies and gates
 
-1. **Prompt 2 feasibility gate — passed provisionally:** 90 deterministic scenarios match expectation, 67 unit tests pass, both routes complete without Highball, and expected adverse cases fail. This is arithmetic evidence, not playable validation.
+1. **Prompt 3 survival-feasibility gate — passed provisionally:** 176 deterministic scenarios match expectation, 144 local tests pass, both routes complete Full Proof without Highball, explicit response cases work at a cost, and expected adverse cases remain. This is arithmetic/serialization evidence, not playable validation.
 2. **Graybox gate:** side cutaway, Room Focus, bay placement, resident selection, and one utility overlay on a representative phone.
 3. **System gate:** one complete forecast → cascade → intervention → recovery chain.
 4. **Human gate:** one Highball promise and one Juna admission path persist across save/reload and change later willingness.
 5. **Expedition gate:** one graph resolves actively and through delegation from the same state model.
-6. **Content gate — deterministic portion passed:** East and West finish Day 7 without Highball at 20.4% and 15.8% modeled capacity buffer; spatial and player-comprehension portions remain open.
+6. **Content gate — deterministic portion passed:** East and West finish Day 7 at ten areas without Highball. Aggregate unused WU is reported separately from daily/phase slack; Day 5 has zero uncommitted WU and remains a spatial revalidation risk.
+
+Prompt 3 adds no new production-scale feature tier. Medical, forecast, utility, incident, and emergency-action detail is bounded to reusable slice architecture. Conflict resolution, extra weather families, individual networks, and extra need bars remain deferred.
 7. **Production gate:** measured art/animation/content time supports a credible schedule before Act II content expands.
 8. **Full-game gate:** do not approve more maps, endless mode, or post-launch systems before one 45-day campaign is coherent and tested.

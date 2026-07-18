@@ -8,7 +8,7 @@ One **work unit (WU)** is a normalized share of useful resident effort after tas
 
 ## Resident capacity
 
-Each of the four starting residents has a provisional base of **12 WU per day**. A resident may perform at most **8 WU of useful continuous work** before a rest or task change. Essential survival work retains a **2 WU minimum emergency capacity** for an available resident, preventing a short Hunger or Fatigue disruption from setting all work to zero.
+Each of the four starting residents has a provisional base of **12 WU per day**. A resident may perform at most **8 WU of useful continuous work** before a rest or task change. Prompt 3 corrects the emergency rule: a Critical, collapsed, unconscious, medically incapacitated, or severely respiratory-restricted resident supplies **zero productive WU**. The **available shelter labor pool**, not each person, must supply a two-WU emergency survival minimum.
 
 Daily project capacity is calculated as:
 
@@ -124,4 +124,4 @@ The emotional Stress and refusal effects are explicit Prompt 5 placeholders. The
 
 ## Feasibility result
 
-Baseline required project work fits with **20.4% usable capacity in East** and **15.8% in West**, ending at ten functioning areas from four initial areas while reusing seven room families. A common 8 WU rework mistake remains viable, at 12.1% East and 11.3% West. A 10% global work loss or 15% construction increase fails both routes, making work throughput a high-severity prototype measurement rather than safe tuning slack.
+Prompt 3 keeps the 12-WU base and project schedule. The old ten-WU daily survival allowance is now eight essential WU plus two explicit incident-reserve WU, with no capacity increase. East and West still end at ten areas without Highball. Aggregate unused project WU is 36.788 East and 27.108 West, but both have **zero daily/phase slack on Day 5** after the prepared storm response; this replaces the earlier practice of presenting one weekly percentage as the full margin. A 10% global work loss or 15% construction increase remains a high-severity revalidation case.

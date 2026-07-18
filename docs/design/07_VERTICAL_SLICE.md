@@ -61,7 +61,7 @@ Both routes are viable. The route choice changes the easiest recovery tools and 
 | Likely repurpose | Concession Cage can become dedicated Food once East storage/lockers are fitted | Concession Cage can become better Rest/Food use once West Stores take inventory |
 | Juna pressure | A berth exists more easily, but water forecast may not support a fifth person without restrictions | Water supports admission more easily, but adequate rest/privacy must be improvised |
 
-No route receives strictly better stocks, resident outcomes, and incident answers. Prompt 2 tests both deterministically, including imperfect but competent play: East and West reach ten functioning areas without Highball, at 20.4% and 15.8% modeled usable-capacity buffer respectively.
+No route receives strictly better stocks, resident outcomes, and incident answers. Prompt 3 tests both deterministically, including imperfect but competent play: East and West reach ten functioning areas and Full Proof without Highball. Weekly unused WU is no longer presented as the whole safety margin; Day 5 consumes all uncommitted response slack.
 
 ## Seven-day beat sheet
 
@@ -117,7 +117,7 @@ No route receives strictly better stocks, resident outcomes, and incident answer
 - Complete **one room upgrade** and **one adaptation/repurpose**. The recommended demonstration depends on route but the player chooses among valid compatible plans.
 - Travel and utility previews reveal the route’s meaningful layout consequence (East treatment distance from gate or West recovery/noise distance).
 - Ash wants construction finished before the forecast storm; Maren argues for reserve and living capacity. The disagreement uses real project/stock/condition facts.
-- A **Highball Order** becomes optional: finish reinforcement/filter/pump work before the storm for a provisional displayed work benefit. Known costs include named-resident Fatigue/Stress, Charge or shutdown elsewhere, material wear, and a promise of rest. Breakdown risk is labeled conditional and not hidden.
+- A **Highball Order** becomes optional: finish reinforcement/filter/pump work before the storm for one of three provisional displayed timing candidates. Known costs include named-resident Fatigue/Stress, Charge, material wear, deterministic strain, inspection, and a promise of rest. There is no hidden breakdown roulette.
 - Competent normal play can prepare without Highball by narrowing the plan. Highball creates margin, not a paywall or mandatory answer.
 - If used, the player records a specific rest promise. If refused or negotiated, the reason is shown.
 - **Safe stops:** before placement confirmation, after undo window, before Highball, after promise, and at the ledger.
@@ -249,3 +249,11 @@ The slice passes only when:
 - [ ] Save/reload and background pause preserve state; nothing dangerous advances while closed.
 - [ ] Safe stopping points are available throughout a normal mobile session.
 - [ ] No result is described as proven fun, balanced, technically validated, or production-ready until corresponding tests pass.
+
+### Prompt 3 additions to the slice proof
+
+- Day 4 includes the zero-WU Relay Load Test: Charge, task-light shedding, or delay all remain viable.
+- Day 5 is one major Cinder Front with Air → Power → Water maximum depth and queued ash-wash aftermath.
+- Critical medical incapacity supplies zero productive WU; Teo’s exposure preserves the no-injury tutorial path.
+- Day 7 may produce Full Proof, Recover First, Proof Incomplete, or Shelter Failure for distinct causes.
+- Missing only the five-WU authored hope setup uses an earned zero-to-two-WU fallback and cannot create stock.

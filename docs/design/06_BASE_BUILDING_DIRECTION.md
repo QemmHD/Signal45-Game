@@ -205,3 +205,7 @@ Ending preparations dominate selected spaces: a secured platform and travel stag
 6. Every major construction stage appears in the world and survives save/reload.
 7. The player can complete common building actions on a phone without tiny taps, persistent menu coverage, or memorizing hidden bonuses.
 8. The station remains railway-specific after player construction; partitions do not erase the authored shell.
+
+## Prompt 3 survival/building amendment
+
+Room function now depends on section-level Power, Air, Water, and Structure state. Isolation suspends the affected room; evacuation removes resident work; temporary conversion creates treatment/rest/storage capacity only by displacing the original function. Temporary bypasses and inferior substitutions create explicit later repair. Prompt 4 must place utility nodes and safe routes without adding freehand wiring or hidden survival WU.

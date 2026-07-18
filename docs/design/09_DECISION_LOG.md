@@ -70,3 +70,18 @@
 - A 10–14 person community provides enough strategic and emotional variety.
 - East and West are arithmetically viable without exact symmetry; spatial and comprehension balance remain unproven.
 - The seven-day chapter feels complete enough to support the optional commercial structure.
+
+## Prompt 3 decisions
+
+| Decision | Reason | Alternatives rejected | Consequence | Assumption | Revisit trigger |
+|---|---|---|---|---|---|
+| D-041: Use five outcome classes and derive viability | separate survival, release proof, and defects | one pass/fail flag; treating celebration loss as death | Full Proof, Recover First, Proof Incomplete, Shelter Failure, Invariant Error | players can understand recovery as a valid direction | ending UX confuses class meaning |
+| D-042: Full hope is ambition; earned fallback costs 0–2 WU | hope cannot become a mandatory construction tax | free resource gift; deleting hope | stable shelter may Recover First with a physical earned beat | small scene can feel meaningful | narrative prototype feels unearned |
+| D-043: Critical incapacity is zero productive WU | people are not batteries | per-person emergency floor | self-action is separate; pool supplies emergency work | at least one manual/equipment fallback can be authored | all-resident emergency design changes |
+| D-044: Split ten WU into eight essential plus two incident reserve | reveal interruption margin without adding labor | raising base WU; hidden incident cost | Day 5 zero slack is explicit | reserve accurately represents routine readiness | animation/task measurement disagrees |
+| D-045: Use dominant plus capped secondary condition penalties | avoid opaque multiplicative collapse | independent multipliers; ignoring compounding | bounded 75% arithmetic then explicit restrictions | plain-language attribution is readable | usability test cannot explain work loss |
+| D-046: Medicine is transaction-bound | prevent duplication and passive mystery loss | passive expiration; per-condition currencies | named reservation, interruption, idempotent completion | one stock is sufficient for slice | care choices lack distinction |
+| D-047: Relay Load Test teaches Power versus Charge on Day 4 | controlled nonlethal learning before storm | onboarding lesson; tutorial text only | Charge/shed/delay all viable; zero new project WU | lighting feedback is legible | players still conflate systems |
+| D-048: One reusable incident schema; one major/two minor ceiling | bounded mobile pressure and production scope | bespoke incident minigames; uncontrolled stack | six families share stages and saves | family parameters provide enough variety | incidents feel identical or alerts overwhelm |
+| D-049: Highball uses deterministic strain and medical eligibility | timing value without roulette or forced labor | random breakdown; final 35% lock | three candidates remain unselected; repeated use can force recovery | costs are attributable | playable use is always optimal/ignored |
+| D-050: Prompt 4 must remeasure geometry against Day 5 zero slack | travel is still an allowance | silently raising capacity | geometry may force workload/scope correction | authored coordinates can supply stable measurements | either route exceeds allowances |

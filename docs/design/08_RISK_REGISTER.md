@@ -36,6 +36,17 @@ Probability: Low / Medium / High. Impact: Medium / High / Critical.
 | R-21 | East or West is secretly correct | Medium | High | One route has better water, comfort, salvage, and incident recovery; one admission path dominates | Deterministic feasibility model; route-specific strengths/costs; equivalent survival margin through different tools; imperfect-play tests | Adjust bay compatibility, travel, starting components, storm weak link, or recovery options—not exact symmetry | Prompt 2 exit gate | **Yes:** deterministic seven-day simulations for both routes at multiple competent strategies |
 | R-22 | Business model or chapter boundary feels exploitative/incomplete | Medium | High | Seven-day ending is a cliffhanger without value; unlock prompts interrupt suffering; balance pressures purchase | Full seven-day mini-campaign with recovery and resolution direction; one permanent unlock; no paid relief/resources/energy; clear pricing | Prefer straightforward premium purchase; revise chapter endpoint/entitlement messaging | Before commercial UX and store work | **Yes:** entitlement flow/user test, but not during Prompt 1 |
 
+## Prompt 2 evidence update
+
+Prompt 2 reduces uncertainty but does not close prototype-dependent risks:
+
+- **R-09 Save complexity:** ten save/reload scenarios and unit tests now verify canonical round-trip state, idempotent rewards/refunds, and no offline advancement. Risk remains High/Critical until lifecycle fault injection runs in an app.
+- **R-10/R-11 Utilities:** the storm is bounded to one cinder pressure and Air → Power → Water, with no more than three affected systems and one major crisis. Arithmetic passes; phone comprehension and runtime graph performance remain open.
+- **R-17 QA state space:** canonical validation, 90 deterministic scenarios, and 67 unit tests now fail on malformed data, route infeasibility, missing components, duplicated rewards, negative stock, and save drift. Device, accessibility, narrative, and runtime state coverage remain open.
+- **R-20 Core-loop feel:** modeled ordinary days are 7.5–8.1 minutes, Delegated Day 3 is 9.1, and Active Day 3 is 12.3. This does not lower the probability until instrumented play confirms the timings and visible response.
+- **R-21 Route dominance:** East and West pass without Highball at 20.4% and 15.8% work buffer; all four route/signal pairs, one common mistake, one bounded absence, storms, and Juna paths pass. West fails a 50% travel-overhead increase while East survives, and East fails a 20% Water increase while West survives. Spatial testing remains the decision gate.
+- **New fragility evidence:** both routes fail at −10% global work, +15% construction work, and +20% Food use. These warning signs must be monitored before any content or animation estimate is allowed to grow.
+
 ## Risk ownership and review cadence
 
 - The production lead owns the register; discipline owners supply evidence.

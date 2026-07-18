@@ -12,7 +12,7 @@
 4. Assign, prioritize, place, route, or confirm; irreversible actions include confirmation and undo where physically plausible.
 5. Receive immediate visual and numerical feedback: a resident moves, a blueprint appears, a network path changes, a forecast updates, or a promise is recorded.
 
-This loop must feel worthwhile before long timers or narrative payoff. Prompt 2 will determine whether the target duration is feasible.
+This loop must feel worthwhile before long timers or narrative payoff. Prompt 2 budgets the sequence at 32 seconds: 4 notice, 5 selection/camera, 8 reading, 8 choice, 3 confirmation, and 4 initial response. Only a playable build can validate it.
 
 ### 2–5 minute action loop
 
@@ -46,7 +46,7 @@ An optional active nightrun can extend a session. It is never required merely to
 - Resolve consumption, utility wear, exposure, memories, promises, relationships, incidents, and progress.
 - Enter the next day from a serialized state with a plain-language change summary.
 
-Exact phase duration and number of meaningful assignments belong to Prompt 2. The design goal is one day per normal session, not a promise.
+Prompt 2 budgets an ordinary day at 7.5 minutes and six meaningful decisions, a delegated-nightrun day at 9.1 minutes and eight decisions, and an active-nightrun day at 12.3 minutes and twelve decisions. These remain modeled targets, not measured pacing.
 
 ### 45-day campaign loop
 
@@ -60,12 +60,12 @@ The railway-native names are retained but always paired with plain-language labe
 
 | Phase | Plain-language label | Function | Dominant decisions | Safe stopping point |
 |---|---|---|---|---|
-| **Swelter** | Day Shelter Phase | Surface heat is worst; the community works underground. | Production, construction, reclamation, treatment, maintenance, utility routing, visitor handling. | After any contextual action or stabilized incident; backgrounding pauses immediately. |
-| **Slack** | Evening Planning Phase | Heat falls and the station prepares for night. | Rest rotations, meals, equipment loadout, signal review, forecasts, promises, route choice, gate policy. | Before committing a nightrun and after all shelter orders are serialized. |
-| **Nightrun** | Night Expedition Window | Surface travel is temporarily possible. | Send nobody, delegate a route, or actively direct node-to-node movement; balance time, noise, air protection, carry, danger, and retreat. | At each secured node and before/after every irreversible encounter; committed results serialize atomically. |
-| **Graymorn** | Dawn Consequence Phase | Travelers return and the station counts what changed. | Triage, inventory, debrief, relationship reactions, promise checks, incident aftermath, next forecast. | After the day ledger is accepted; this is the strongest between-session boundary. |
+| **Swelter** | Day Shift | Surface heat is worst; the community works underground. | Production, construction, reclamation, treatment, maintenance, utility routing, visitor handling. | After any project transaction or stabilized incident; backgrounding pauses immediately. |
+| **Slack** | Evening Window | Heat falls and the station prepares for night. | Rest rotations, meals, equipment loadout, signal review, forecasts, promises, route choice, gate policy. | Before committing a nightrun and after all shelter orders are serialized. |
+| **Nightrun** | Night Operation | Surface travel is temporarily possible. | Send nobody, delegate a route, or actively direct node-to-node movement; balance time, noise, air protection, carry, danger, and retreat. | At each secured node and before/after every irreversible encounter; committed results serialize atomically. |
+| **Graymorn** | Return and Report | Travelers return and the station counts what changed. | Triage, inventory, debrief, relationship reactions, promise checks, incident aftermath, next forecast. | After the day ledger is accepted; this is the strongest between-session boundary. |
 
-Phase names are flavor, not comprehension tests. “Day Shelter,” “Evening Planning,” “Night Expedition,” and “Dawn Consequences” can be shown permanently when enhanced clarity is enabled.
+Phase names are flavor, not comprehension tests. “Day Shift,” “Evening Window,” “Night Operation,” and “Return and Report” can be shown permanently when enhanced clarity is enabled.
 
 ## Resource and decision rhythm
 

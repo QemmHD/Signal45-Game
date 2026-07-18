@@ -6,7 +6,7 @@
 - A feature is not “done” because it exists in prose. Acceptance conditions require a prototype, build, content pass, or measured behavior as stated.
 - The full-game ceiling of 20–24 room families is a guardrail, not a target. New families are admitted only when modules or specializations cannot express the required play.
 - Normal full-campaign population is approximately 10–14. About 16 is a technical validation target; 20 is stretch only.
-- Nothing in this matrix authorizes Prompt 2 systems, final production assets, detailed resident AI, complete crafting balance, or store packaging during Prompt 1.
+- Prompt 2 now authorizes only the deterministic feasibility tooling and documents recorded in this repository. It does not authorize full game implementation, final production assets, detailed resident AI, complete crafting balance, or store packaging.
 
 ## 1. Vertical slice — The First Count
 
@@ -26,7 +26,7 @@
 | Listening Post with competing signals | Signal cards; time commitment; campaign flags | L | Following one signal changes storm, trader, expedition, route, or evidence state; ignoring another has an understandable opportunity cost. |
 | One shared active/delegated nightrun graph | Node graph; loadout; resolution; scene | XL | Same route, time, noise, protection, carry, hazards, retreat, and persistent location state resolve consistently in either mode. |
 | Trader, outside group, and Juna decision | Visitor framework; inventory; capacity | L | Admission is constrained by real capacity/air/relationship facts and has more than binary “good/evil” framing. |
-| Seven-day authored event spine | All slice systems; narrative tools | XL | Day 1–7 can complete from both routes, includes storm, cascade, injury, treatment, conflict, delayed consequence, recovery, and ending evaluation. |
+| Seven-day authored event spine | All slice systems; narrative tools | XL | Day 1–7 can complete from both routes, includes storm, bounded cascade, preventable injury or Teo's no-new-injury treatment path, conflict, delayed consequence, recovery, and ending evaluation. |
 | Offline pause, save, reload, and safe stopping | Serialization; app lifecycle; deterministic stream | XL | Automated and manual interruption tests reproduce exact state; no dangerous simulation advances while closed. |
 | Mobile/accessibility baseline | UI framework; settings | L | Adjustable text, symbols+color, contrast, reduced motion/shake, subtitles/speaker labels, sound direction, haptics, speed/pause, tap alternatives, extended decisions, enhanced forecasts, confirmations. |
 | Placeholder audio and cohesive prototype art | Asset registry; mixer | M | Functional cues communicate selections, warnings, direction, machinery, and state; placeholders are explicitly marked and provenance tracked. |
@@ -94,11 +94,11 @@ Post-launch possibility is not a promise or roadmap commitment.
 
 ## Cross-tier dependencies and gates
 
-1. **Prompt 2 feasibility gate:** deterministic seven-day timing, work, consumption, utility, and route model.
+1. **Prompt 2 feasibility gate — passed provisionally:** 90 deterministic scenarios match expectation, 67 unit tests pass, both routes complete without Highball, and expected adverse cases fail. This is arithmetic evidence, not playable validation.
 2. **Graybox gate:** side cutaway, Room Focus, bay placement, resident selection, and one utility overlay on a representative phone.
 3. **System gate:** one complete forecast → cascade → intervention → recovery chain.
 4. **Human gate:** one Highball promise and one Juna admission path persist across save/reload and change later willingness.
 5. **Expedition gate:** one graph resolves actively and through delegation from the same state model.
-6. **Content gate:** both East and West finish Day 7 without a hidden correct route in deterministic tests.
+6. **Content gate — deterministic portion passed:** East and West finish Day 7 without Highball at 20.4% and 15.8% modeled capacity buffer; spatial and player-comprehension portions remain open.
 7. **Production gate:** measured art/animation/content time supports a credible schedule before Act II content expands.
 8. **Full-game gate:** do not approve more maps, endless mode, or post-launch systems before one 45-day campaign is coherent and tested.

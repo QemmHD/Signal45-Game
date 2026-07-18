@@ -26,7 +26,7 @@ It does not prove a complete 45-day content pipeline, late population scale, fin
 - limited Food, Clean Water, Medicine, Materials, and Charge;
 - limited Power, limited Clean Water delivery, damaged Air, and local Structure risk.
 
-Exact starting quantities and deterministic feasibility belong to Prompt 2.
+Prompt 2 now defines the provisional starting quantities and deterministic feasibility in `tools/feasibility/data/model.json`. They remain model inputs rather than final balance.
 
 ## Canonical slice residents
 
@@ -61,23 +61,23 @@ Both routes are viable. The route choice changes the easiest recovery tools and 
 | Likely repurpose | Concession Cage can become dedicated Food once East storage/lockers are fitted | Concession Cage can become better Rest/Food use once West Stores take inventory |
 | Juna pressure | A berth exists more easily, but water forecast may not support a fifth person without restrictions | Water supports admission more easily, but adequate rest/privacy must be improvised |
 
-No route receives strictly better stocks, resident outcomes, and incident answers. Prompt 2 must test both deterministically, including imperfect but competent play.
+No route receives strictly better stocks, resident outcomes, and incident answers. Prompt 2 tests both deterministically, including imperfect but competent play: East and West reach ten functioning areas without Highball, at 20.4% and 15.8% modeled usable-capacity buffer respectively.
 
 ## Seven-day beat sheet
 
 ### Day 1 — The Count
 
-**Purpose:** Teach shelter overview, Room Focus, assignment, stocks versus utilities, contextual actions, and safe pause.
+**Purpose:** Practice one complete shelter action while demonstrating only the minimum stock, utility, condition, and pause context needed to understand it.
 
 - Graymorn opens on the four residents counting supplies and confirming that the station clock paused while the game was closed.
-- The player inspects all four functional areas, selects residents/objects, and uses Power or Air overlay—never both at once.
-- Assign a short repair, ration setup, and filter inspection; watch residents move and work.
+- The player practices selecting the damaged platform lamp, entering Room Focus, assigning one resident, confirming the repair, returning to Overview, and accepting a safe save.
+- Only one Food forecast, one Power connection warning, Teo's contextual Health exposure, and Pause are demonstrated. The player is not asked to master all five stocks or four utilities.
 - Imka identifies Teo’s early cinder exposure as treatable if dusty tasks are limited and protection is prepared. It is a warning, not random damage.
 - The Relay Kiosk catches two incomplete bursts: a municipal drainage code and a medical trader call. Neither can be fully followed yet.
-- The day ends after a small stabilizing choice: clean the ration surface, improve a bedroll corner, or secure the gate staging area. This gives an immediate visible home beat.
+- The repaired platform lamp supplies the first visible improvement at the modeled 4.1-minute mark. The safe ledger is budgeted at 6.1 minutes.
 - **Safe stops:** after each tutorial action, after assignments, and at the Day 1 ledger.
 
-**Proof:** 20–40 second interaction loop, resident assignment, one overlay, resources/forecasts, visible activity, save/reload tutorial.
+**Proof:** 32-second baseline interaction, resident assignment, Room Focus, one stock forecast, one utility warning, visible activity, and save/reload tutorial. Listening Post, routes, other utilities, Highball, and Nightrun are teased; advanced systems are withheld.
 
 ### Day 2 — Choose a Wing
 
@@ -85,13 +85,13 @@ No route receives strictly better stocks, resident outcomes, and incident answer
 
 - The player surveys both blockages. Forecast cards state route strengths, hazards, work/component needs, and uncertainty.
 - Choose the first route; the unchosen route remains visible and available later in the campaign, not permanently erased.
-- During controlled clearing, Ash’s work exposes unstable debris. The player can reinforce first, change worker/protection, or accept a labeled injury risk to finish sooner.
-- The authored slice ensures a **minor but consequential injury** occurs through one of several causal paths (e.g., falling tile after risk acceptance or strain while containing a secondary shift), never from an invisible roll.
-- Imka performs stabilization at an improvised triage cot. Medicine, clean water, travel, and room condition determine recovery forecast.
+- During controlled clearing, Ash's work exposes unstable debris. The player can reinforce first, change worker/protection, or accept a labeled injury risk to finish sooner.
+- **Good preparation prevents a new injury.** A deterministic authored injury occurs only after at least two visible accepted hazards, such as accepting the risk without protection, ignoring a warning, or delaying stabilization. It never exists merely to force the tutorial.
+- The guaranteed Medical path is Teo's existing respiratory exposure and examination. If the player accepts the construction risk, Imka additionally stabilizes that injury at the triage cot; Medicine, Clean Water, travel, and room condition determine its recovery forecast.
 - A new signal choice appears: commit Relay attention to the drainage code or the trader call. It expires on Day 3/4 and visibly changes forecasted opportunities.
 - **Safe stops:** after survey, before route commitment, after hazard stabilization, and at the ledger.
 
-**Proof:** reclamation, East/West choice, injury, warning/response, treatment, signal commitment.
+**Proof:** reclamation, East/West choice, injury prevention or causal injury, warning/response, treatment through at least one forecast path, and signal commitment.
 
 ### Day 3 — On the Wire
 
@@ -129,10 +129,10 @@ No route receives strictly better stocks, resident outcomes, and incident answer
 **Purpose:** Test forecasting, one storm, a legible failure cascade, intervention, and recovery.
 
 - The storm forecast states arrival, confidence, expected cinder load, vulnerable Air branch, Power/Charge headroom, Structure concern, and response options.
-- The storm drives a bounded cascade: **cinder load increases → damaged filter/fan demand rises → Power margin fails or a branch degrades → water pump/treatment loses priority → clean-water outlook and respiratory risk worsen**.
+- The storm applies one environmental pressure and a maximum three-system cascade: **cinder front → Air → Power → Water**. Preparation may stop it after Air or Power; not every link fires in every run.
 - East and West meet different weak links. East leans on rested responders/clinic while improvising drainage or water reserve. West isolates/pumps more effectively but manages tired, stressed residents and rough recovery space.
 - Interventions include stopping Workshop or another load, discharging Charge, isolating a branch, replacing/repairing filter equipment, protecting/evacuating a zone, repairing a pump, using clean reserve, or accepting a forecast consequence.
-- Structure warnings can close, but not randomly destroy, one project area. A responder can be injured only after a visible risk decision or extended missed response.
+- Only one major crisis may be live; minor consequences queue. Every active stage shows cause, effect, likely next effect, escalation allowance, intervention, known cost, and uncertainty. Structure warnings can close, but not randomly destroy, one project area. A responder can be injured only after a visible risk decision or extended missed response.
 - The game pauses for serious decisions and presents plain-language reasons. No death is used as the main challenge.
 - After the peak, lights and machinery visibly show what held, failed, and was repaired.
 - **Safe stops:** immediately on background, before each incident commitment, after each stabilized cascade stage, and at Graymorn recap.

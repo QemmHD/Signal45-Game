@@ -2,7 +2,7 @@
 
 **Stage:** Prompt 1 foundation
 
-**Status:** Design direction locked; fun, balance, performance, and production feasibility remain unproven until prototyped.
+**Status:** Design direction locked. Prompt 2's deterministic model supports seven-day schedule consistency and route viability at provisional inputs; fun, comprehension, balance in play, performance, and production feasibility remain unproven until prototyped.
 
 **Date:** 2026-07-18
 
@@ -11,7 +11,7 @@
 - **Confirmed owner requirements:** title, mobile-first landscape format, 45-day campaign, side-view 2.5D cutaway rendered with a true 3D world, base-building priority, five stock resources, four resident conditions, offline pause, ethical monetization boundary, and no combat power fantasy.
 - **Design decisions made here:** the exact pitches, five-part identity, day rhythm, seven room families for the slice, named starting cast, route identities, failure process, and vertical-slice proof.
 - **Assumptions:** one authored coastal interchange is the launch map; one in-game day normally fits one deliberate mobile session; the full game targets 10–14 residents; and the visual target uses modular, reusable 3D production rather than bespoke realism everywhere.
-- **Prototype validation required:** session timing, work capacity, utility readability, route balance, camera comfort, crowd/performance targets, expedition presentation, and whether the core loop is enjoyable.
+- **Prototype validation required:** measured session timing and work calibration, utility readability, spatial route balance, camera comfort, crowd/performance targets, expedition presentation, and whether the core loop is enjoyable. Prompt 2 supplies arithmetic evidence, not playable validation.
 
 ## Final pitch
 
@@ -76,13 +76,13 @@ Failure is a readable process, not a surprise roll. Shortages and damage first c
 | Serious realism could make mobile information unreadable. | Shelter Overview prioritizes silhouettes and state symbols; Room Focus carries material detail. One utility overlay at a time and contextual action panels prevent dashboard accumulation. |
 | A variable Signal 45 truth could make preparation feel pointless. | Campaign truth may vary only among authored scenario packages with consistent evidence. Preparation categories remain useful across variants, and the ending explains which evidence was accurate and why. |
 | The coordinator has authority, but residents are autonomous. | Ordinary safe work can be assigned; dangerous, boundary-crossing, or promise-breaking orders trigger negotiation or refusal with a stated reason. Refusal is systemic and predictable, not random. |
-| A 45-day campaign conflicts with 5–12 minute sessions. | Each day is structured around safe phase boundaries and normally fits one session; optional active nightruns extend chosen sessions. Exact timing is reserved for Prompt 2. |
+| A 45-day campaign conflicts with 5–12 minute sessions. | Prompt 2 budgets ordinary days at 7.5–8.1 minutes, a delegated-nightrun day at 9.1, and an active day at 12.3, with transaction-level safe stops. These are modeled targets pending device measurement. |
 
 ### Missing pieces deliberately handed forward
 
-- Exact day and phase duration, work units, production and consumption rates, and construction costs.
-- Deterministic East/West feasibility and recovery math.
-- Exact Highball speed benefit and fatigue/stress cost.
+- Playable calibration of the provisional Prompt 2 day/phase budgets, work units, consumption, project costs, and spatial travel.
+- East/West pathfinding, comprehension, and feel beyond deterministic arithmetic.
+- Final Highball speed benefit, player-facing risk, and human Stress/trust behavior; Prompt 2 tests only provisional 25%, 35%, and 50% candidates plus repayment.
 - Save schema, simulation tick rate, device performance budgets, and content-authoring tools.
 - Full resident behavior architecture, complete crafting balance, full expedition implementation, final graphics, voice scope, and store packaging.
 - Exact number and composition of Signal 45 truth variants; the slice needs one authored truth chain only.
@@ -115,7 +115,7 @@ Failure is a readable process, not a surprise roll. Shortages and damage first c
 | Are there too many room families? | Twenty-four would already be difficult if each were unique. | The slice has seven; the full-game ceiling of 20–24 is not a target. New rooms must reuse a family or pass a unique-system acceptance test. |
 | Does the campaign have a satisfying objective? | “Survive 45 days” alone is passive. | The player builds toward an evidence-backed Day 45 plan: evacuate, remain, or relay. Required preparation is telegraphed throughout the acts. |
 | Can seven days prove the whole game? | It cannot prove late-game scale, only the risky core. | The slice proves building, legibility, human consequences, signal-to-action links, one expedition, and save/pause. It explicitly does not validate full-campaign content volume. |
-| Is the design more impressive to read than to play? | This is the largest current uncertainty. | Prompt 2 must reduce the slice to a deterministic workload model; the next playable milestone must test tap-to-consequence speed, visible transformation, and recovery—not add lore. |
+| Is the design more impressive to read than to play? | This remains the largest uncertainty. | Prompt 2 reduced the slice to a deterministic workload model and exposed fragility at −10% work, +15% construction, Food use, and West travel. The next playable milestone must test tap-to-consequence speed, visible transformation, and recovery—not add lore. |
 
 ## Final concept decision
 

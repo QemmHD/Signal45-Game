@@ -26,9 +26,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Robot
   position:fixed;inset:0;width:100%;height:100dvh}
 #world{position:absolute;inset:0;touch-action:none;display:block}
 .mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
-.lbl{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10px;letter-spacing:.14em;
+.lbl{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--bone-dim)}
-button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;touch-action:manipulation}
 button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 /* ---- top HUD (09 A.9: five chips + clock; suppressed in allocation views) ---- */
@@ -37,7 +37,7 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 .chip{background:var(--glass);border:1px solid var(--line);border-radius:6px;
   padding:4px 8px;display:flex;gap:5px;align-items:baseline;backdrop-filter:blur(6px)}
 .chip b{font-size:13px;font-variant-numeric:tabular-nums;color:var(--chalk);font-weight:600}
-.chip span{font-size:9px;letter-spacing:.1em;color:var(--bone-dim);text-transform:uppercase;
+.chip span{font-size:11px;letter-spacing:.1em;color:var(--bone-dim);text-transform:uppercase;
   font-family:ui-monospace,"SF Mono",Menlo,monospace}
 #clock{color:var(--amber)}
 /* ---- crew strip (left thumb corner) ---- */
@@ -50,7 +50,7 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 /* ---- right control cluster ---- */
 #ctrl{position:absolute;right:calc(var(--sar) + 8px);bottom:calc(var(--sab) + 10px);
   display:flex;flex-direction:column;gap:8px;z-index:20}
-.rbtn{width:46px;height:46px;border-radius:10px;background:var(--glass);
+.rbtn{width:48px;height:48px;border-radius:10px;background:var(--glass);
   border:1px solid var(--line);color:var(--chalk);font-size:17px;
   display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
 .rbtn.on{border-color:var(--amber);color:var(--amber);
@@ -58,20 +58,20 @@ button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 /* ---- layout picker (top-left) ---- */
 #days{position:absolute;left:calc(var(--sal) + 8px);top:calc(var(--sat) + 6px);
   display:flex;gap:5px;z-index:20}
-.day{padding:6px 10px;border-radius:6px;background:var(--glass);border:1px solid var(--line);
-  font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-dim);
-  font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.day{padding:8px 12px;border-radius:6px;background:var(--glass);border:1px solid var(--line);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-dim);
+  font-family:ui-monospace,"SF Mono",Menlo,monospace;min-height:28px}
 .day.on{color:var(--amber);border-color:var(--amber-dim)}
 /* ---- sim controls (top-right) ---- */
 #simc{position:absolute;right:calc(var(--sar) + 8px);top:calc(var(--sat) + 6px);
   display:flex;gap:5px;z-index:20}
 /* ---- workflow bar (build lens only — 24 §2) ---- */
 #wfbar{position:absolute;left:50%;bottom:calc(var(--sab) + 10px);transform:translateX(-50%);
-  display:none;gap:4px;z-index:21;background:var(--glass);border:1px solid var(--amber-dim);
+  display:none;gap:8px;z-index:21;background:var(--glass);border:1px solid var(--amber-dim);
   border-radius:10px;padding:4px;backdrop-filter:blur(6px)}
 body.lens #wfbar{display:flex}
-.wf{padding:9px 11px;border-radius:7px;font-size:10px;letter-spacing:.12em;
-  font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--bone-dim)}
+.wf{padding:9px 13px;border-radius:7px;font-size:11px;letter-spacing:.12em;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--bone-dim);min-height:48px}
 .wf.on{color:var(--void);background:var(--amber)}
 /* lens mode frame (10 §16: the lens announces itself) */
 #lensframe{position:absolute;inset:0;pointer-events:none;z-index:15;display:none;
@@ -81,14 +81,16 @@ body.lens #lensframe{display:block}
 #panel{position:absolute;right:calc(var(--sar) + 8px);top:calc(var(--sat) + 58px);
   bottom:calc(var(--sab) + 66px);width:236px;max-width:38vw;background:var(--glass);
   border:1px solid var(--line);border-radius:12px;padding:12px;z-index:22;
-  backdrop-filter:blur(8px);overflow-y:auto;-webkit-overflow-scrolling:touch;
+  backdrop-filter:blur(8px);overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;
   transform:translateX(calc(100% + 20px));transition:transform .22s ease;display:flex;
   flex-direction:column;gap:8px}
 #panel.open{transform:none}
 #panel h2{font-size:14px;font-weight:600;color:var(--chalk);letter-spacing:.02em;
   text-wrap:balance}
 #panel p{font-size:11.5px;line-height:1.45;color:var(--bone-dim)}
-.verbs{display:flex;flex-wrap:wrap;gap:5px}
+.verbs{display:flex;flex-wrap:wrap;gap:8px}
+.gverbs{display:flex;gap:8px;margin-top:auto;padding-top:8px}
+.gverbs .verb{min-height:48px;flex:1}
 .verb{padding:8px 10px;border-radius:7px;border:1px solid var(--line);font-size:11px;
   color:var(--chalk);background:rgba(233,228,216,.05);min-height:34px}
 .verb.hot{border-color:var(--amber-dim);color:var(--amber)}
@@ -115,7 +117,7 @@ body.lens #lensframe{display:block}
 #board td{padding:5px 4px;font-size:12px;border-bottom:1px solid rgba(233,228,216,.08)}
 #board td:last-child{text-align:right;font-variant-numeric:tabular-nums;
   font-family:ui-monospace,"SF Mono",Menlo,monospace}
-.tier{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-dim);
+.tier{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-dim);
   font-family:ui-monospace,"SF Mono",Menlo,monospace}
 .off{color:var(--ember);text-decoration:line-through}
 /* ---- inspect card (tap-and-hold) ---- */
@@ -148,12 +150,12 @@ body.lens #lensframe{display:block}
 <div id="lensframe"></div>
 
 <div id="days" role="tablist" aria-label="Layout">
-  <button class="day on" data-lay="day1" role="tab">Day 1</button>
-  <button class="day" data-lay="east_day7" role="tab">East D7</button>
-  <button class="day" data-lay="west_day7" role="tab">West D7</button>
+  <button class="day on" data-lay="day1" role="tab" aria-selected="true">Day 1</button>
+  <button class="day" data-lay="east_day7" role="tab" aria-selected="false">East D7</button>
+  <button class="day" data-lay="west_day7" role="tab" aria-selected="false">West D7</button>
 </div>
 
-<div id="hud" aria-hidden="true">
+<div id="hud" role="status" aria-label="Station stocks">
   <div class="chip"><span>Food</span><b id="c-food">34</b></div>
   <div class="chip"><span>Water</span><b id="c-water">12</b></div>
   <div class="chip"><span>Meds</span><b id="c-meds">4</b></div>
@@ -172,15 +174,15 @@ body.lens #lensframe{display:block}
   <button class="rbtn" id="zoomin" aria-label="Zoom in">＋</button>
   <button class="rbtn" id="zoomout" aria-label="Zoom out">－</button>
   <button class="rbtn" id="overlaybtn" aria-label="Engineer's overlay">▦</button>
-  <button class="rbtn" id="lensbtn" aria-label="Build lens">⌂</button>
+  <button class="rbtn" id="lensbtn" aria-label="Build lens" aria-pressed="false">⌂</button>
 </div>
 
 <div id="wfbar" role="toolbar" aria-label="Build workflows">
-  <button class="wf" data-wf="RECLAIM">Reclaim</button>
-  <button class="wf" data-wf="CONNECT">Connect</button>
-  <button class="wf on" data-wf="BUILD">Build</button>
-  <button class="wf" data-wf="OPERATE">Operate</button>
-  <button class="wf" data-wf="ADAPT">Adapt</button>
+  <button class="wf" data-wf="RECLAIM" aria-pressed="false">Reclaim</button>
+  <button class="wf" data-wf="CONNECT" aria-pressed="false">Connect</button>
+  <button class="wf on" data-wf="BUILD" aria-pressed="true">Build</button>
+  <button class="wf" data-wf="OPERATE" aria-pressed="false">Operate</button>
+  <button class="wf" data-wf="ADAPT" aria-pressed="false">Adapt</button>
 </div>
 
 <aside id="panel" aria-label="Context panel"></aside>
@@ -390,6 +392,8 @@ function validateObject(o){
     return "belongs in the West Gallery in the slice";
   if(restr.has("cistern_works_only_in_slice")&&o.room!=="cistern_works")
     return "attaches to the Cistern Works in the slice";
+  if(restr.has("common_areas")&&!SAFE.includes(sid)&&!L.rooms.some(r=>r.section===sid))
+    return "belongs in an inhabited common area";
   const inter=objInter(o),blocked=blockingCells(sid,o.id);
   const clear=inter.filter(c=>inGrid(sid,c)&&
     !(fixedAt(sid,c)&&fixedAt(sid,c).when==="never")&&!blocked.has(c[0]+","+c[1]));
@@ -574,13 +578,17 @@ const DRAG_T=24,HOLD_T=350;
 let pointers=new Map(),gest={mode:"idle"},sel=null,lastTap={x:-99,y:-99,cands:[],i:0};
 let ghost=null,ghostReason=null,pendType=null,lens=false,wf="BUILD";
 cv.addEventListener("touchstart",e=>e.preventDefault(),{passive:false});
+// iOS Safari ignores user-scalable=no for pinch; block native page zoom everywhere
+for(const ev of ["gesturestart","gesturechange","gestureend"])
+  document.addEventListener(ev,e=>e.preventDefault());
 cv.addEventListener("pointerdown",e=>{
   cv.setPointerCapture(e.pointerId);
   pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
   hidePeek();
+  if(pointers.size>2)return; // a palm/edge contact must not clobber a live pinch
   if(pointers.size===2){
     const [a,b]=[...pointers.values()];
-    gest={mode:"pinch",d0:Math.hypot(a.x-b.x,a.y-b.y),s0:cam.s,
+    gest={mode:"pinch",d0:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),s0:cam.s,
       mid:[(a.x+b.x)/2,(a.y+b.y)/2],w0:s2w((a.x+b.x)/2,(a.y+b.y)/2)};
     return;}
   const onGhost=ghost&&hitGhost(e.clientX,e.clientY);
@@ -613,9 +621,15 @@ cv.addEventListener("pointermove",e=>{
 });
 function endPointer(e){
   pointers.delete(e.pointerId);
-  if(gest.mode==="pinch"){if(pointers.size<2)gest={mode:"idle"};return;}
+  if(gest.mode==="pinch"){
+    if(pointers.size<2){gest={mode:"idle"};}
+    else{ // a pinch member lifted while a spare contact remains — rebaseline, no jump
+      const [a,b]=[...pointers.values()];
+      gest.d0=Math.max(1,Math.hypot(a.x-b.x,a.y-b.y));gest.s0=cam.s;
+      gest.w0=s2w((a.x+b.x)/2,(a.y+b.y)/2);}
+    return;}
   clearTimeout(gest.hold);
-  if(gest.mode==="maybe"&&!gest.held)handleTap(e.clientX,e.clientY);
+  if(e.type!=="pointercancel"&&gest.mode==="maybe"&&!gest.held)handleTap(e.clientX,e.clientY);
   hidePeek();gest={mode:"idle"};}
 cv.addEventListener("pointerup",endPointer);
 cv.addEventListener("pointercancel",endPointer);
@@ -628,11 +642,12 @@ function hitGhost(px,py){if(!ghost)return false;
     return px>=x-12&&px<=x+cam.s+12&&py>=y-12&&py<=y+cam.s+12;});}
 
 function candidatesAt(px,py){const out=[];
+  const slop=Math.max(0,Math.ceil(24/cam.s-0.5)); // 48 dp hit box regardless of sprite size (24 §4)
   for(const sid in SEC){const sec=SEC[sid],[sx,sy]=w2s(sec.origin[0],sec.origin[1]);
     const cx=Math.floor((px-sx)/cam.s),cy=Math.floor((py-sy)/cam.s);
     if(cx<0||cy<0||cx>=sec.grid[0]||cy>=sec.grid[1])continue;
     for(const o of L.objects){if(objSection(o)!==sid)continue;
-      if(objCells(o).some(c=>Math.abs(c[0]-cx)<=0&&Math.abs(c[1]-cy)<=0))
+      if(objCells(o).some(c=>Math.abs(c[0]-cx)<=slop&&Math.abs(c[1]-cy)<=slop))
         out.push({kind:"object",id:o.id,label:o.type.replace(/_/g," ")});}
     for(const r of L.rooms){if(r.section!==sid)continue;
       const rc=r.rect;
@@ -661,7 +676,7 @@ function showPeek(px,py){const cands=candidatesAt(px,py);if(!cands.length)return
   let txt="";
   if(c.kind==="section"){const s=SEC[c.id];
     txt="<b>"+s.name+"</b><br>"+(s.story||"")+
-      (s.hazards_day1&&s.hazards_day1.length?"<br><span class='lbl'>hazards: "+s.hazards_day1.join(", ")+"</span>":"");}
+      (s.hazards_day1&&s.hazards_day1.length?"<br><span class='lbl'>hazards: "+s.hazards_day1.map(h=>h.replace(/_/g," ")).join(", ")+"</span>":"");}
   else if(c.kind==="room"){const r=roomById(c.id);
     txt="<b>"+c.label+"</b><br>"+r.family+" · "+(r.state||"")+(r.note?"<br>"+r.note:"");}
   else{const o=L.objects.find(x=>x.id===c.id);
@@ -682,21 +697,31 @@ function panelRender(){
       (ghostReason?esc(ghostReason):"placement valid — confirm to install")+"</div>"+
       "<div class='verbs'>"+
       "<button class='verb' id='g-rot'>⟳ rotate</button>"+
-      "<button class='verb hot' id='g-ok' "+(ghostReason?"disabled":"")+">✓ confirm</button>"+
-      "<button class='verb' id='g-no'>✕ cancel</button>"+
       (placedStack.length?"<button class='verb' id='g-undo'>↩ undo last</button>":"")+
+      "</div>"+
+      "<div class='gverbs'>"+
+      "<button class='verb' id='g-no'>✕ cancel</button>"+
+      "<button class='verb hot' id='g-ok' "+(ghostReason?"disabled":"")+">✓ confirm</button>"+
       "</div>";
     panel.innerHTML=html;panel.classList.add("open");
     bind("g-rot",()=>{ghost.rot=((ghost.rot||0)+90)%360;ghostReason=validateObject(ghost);panelRender();draw();});
     bind("g-ok",()=>{if(ghostReason)return;
-      const o=JSON.parse(JSON.stringify(ghost));L.objects.push(o);placedStack.push(o.id);
-      toast("Installed: "+o.type.replace(/_/g," ")+" — a short-install task in the real build");
+      const o=JSON.parse(JSON.stringify(ghost)),prev=ghost._moving||null;delete o._moving;
+      L.objects.push(o);placedStack.push(prev?{id:o.id,prev}:{id:o.id});
+      toast(prev?"Moved: "+o.type.replace(/_/g," "):
+        "Installed: "+o.type.replace(/_/g," ")+" — a short-install task in the real build");
       ghost=null;pendType=null;panelRender();draw();});
-    bind("g-no",()=>{ghost=null;pendType=null;ghostReason=null;panelRender();draw();});
-    bind("g-undo",()=>{const id=placedStack.pop();
-      L.objects=L.objects.filter(o=>o.id!==id);toast("Removed "+id);panelRender();draw();});
+    bind("g-no",()=>{ // a cancelled Move is a no-op: the original returns to its cell (24 §7)
+      if(ghost&&ghost._moving)L.objects.push(ghost._moving);
+      ghost=null;pendType=null;ghostReason=null;panelRender();draw();});
+    bind("g-undo",undoLast);
     return;}
-  if(!sel){panel.classList.remove("open");return;}
+  if(!sel){
+    if(lens&&placedStack.length){ // undo stays reachable after the ghost panel closes
+      panel.innerHTML="<div class='lbl'>build lens</div><div class='verbs'>"+
+        "<button class='verb' id='g-undo'>↩ undo last</button></div>";
+      panel.classList.add("open");bind("g-undo",undoLast);return;}
+    panel.classList.remove("open");return;}
   if(sel.cands&&sel.cands.length>2){
     html+="<div class='lbl'>overlapping targets — choose</div><div class='chooser'>"+
       sel.cands.map((c,i)=>"<button class='verb "+(i===sel.cands.indexOf(sel.cands.find(x=>x.id===sel.id&&x.kind===sel.kind))?"hot":"")+
@@ -712,7 +737,7 @@ function panelRender(){
       else html+="<p class='lbl'>portal "+esc(st.replace(/_/g," "))+" — a RECLAIM project in the real build</p>";}
   }
   else if(sel.kind==="room"){const r=roomById(sel.id);
-    html+="<h2>"+esc(sel.label)+"</h2><p>"+esc(r.family)+" · "+esc(r.form||"")+" · "+esc(r.state||"")+
+    html+="<h2>"+esc(sel.label)+"</h2><p>"+esc(r.family)+" · "+esc((r.form||"").replace(/_/g," "))+" · "+esc((r.state||"").replace(/_/g," "))+
       (r.note?"<br>"+esc(r.note):"")+"</p>";
     if(lens&&wf==="BUILD")html+=objectPicker(r);
     else html+="<p class='lbl'>open the ⌂ build lens for construction verbs</p>";}
@@ -752,6 +777,13 @@ function panelRender(){
     startGhost(b.dataset.place,b.dataset.room||null);}));
 }
 function bind(id,fn){const el=document.getElementById(id);if(el)el.addEventListener("click",fn);}
+function undoLast(){const rec=placedStack.pop();if(!rec)return;
+  const gone=L.objects.find(x=>x.id===rec.id);
+  L.objects=L.objects.filter(x=>x.id!==rec.id);
+  if(rec.prev){L.objects.push(rec.prev);
+    toast("Move undone — "+rec.prev.type.replace(/_/g," ")+" returns to its old cell");}
+  else toast("Removed "+(gone?gone.type.replace(/_/g," "):"the last placement"));
+  panelRender();draw();}
 const PICKS=["bedroll","bunk_bed","med_cot","triage_bench","storage_shelf","supply_crate",
   "canteen_table","workbench","comfort_lamp","partition","barricade","battery_bank","mask_cache"];
 function objectPicker(room){
@@ -777,42 +809,58 @@ function startGhost(type,roomId){
 
 /* ================= chrome wiring ================= */
 document.querySelectorAll(".day").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll(".day").forEach(x=>x.classList.remove("on"));
-  b.classList.add("on");loadLayout(b.dataset.lay);draw();}));
+  document.querySelectorAll(".day").forEach(x=>{x.classList.remove("on");x.setAttribute("aria-selected","false");});
+  b.classList.add("on");b.setAttribute("aria-selected","true");loadLayout(b.dataset.lay);draw();}));
 bind("zoomin",()=>{cam.s=Math.min(72,cam.s*1.3);userMoved=true;draw();});
 bind("zoomout",()=>{cam.s=Math.max(6,cam.s/1.3);userMoved=true;draw();});
 bind("lensbtn",()=>{lens=!lens;document.body.classList.toggle("lens",lens);
-  document.getElementById("lensbtn").classList.toggle("on",lens);
+  const lb=document.getElementById("lensbtn");
+  lb.classList.toggle("on",lens);lb.setAttribute("aria-pressed",String(lens));
   toast(lens?"Build lens on — five workflows, node capacity visible":"Build lens off");
-  if(!lens){ghost=null;pendType=null;}panelRender();draw();});
+  if(!lens){ // closing the lens mid-move is a no-op, not a deletion
+    if(ghost&&ghost._moving)L.objects.push(ghost._moving);
+    ghost=null;pendType=null;ghostReason=null;}
+  panelRender();draw();});
 bind("overlaybtn",()=>{toast("Engineer's overlay: opens pre-selected to the worst-warning family (18 §7) — full overlay is a later build");});
 document.querySelectorAll(".wf").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll(".wf").forEach(x=>x.classList.remove("on"));
-  b.classList.add("on");wf=b.dataset.wf;
+  document.querySelectorAll(".wf").forEach(x=>{x.classList.remove("on");x.setAttribute("aria-pressed","false");});
+  b.classList.add("on");b.setAttribute("aria-pressed","true");wf=b.dataset.wf;
   if(wf==="OPERATE"){openBoard();return;}
   if(wf==="BUILD"){toast("BUILD: select a room or section, then pick equipment");panelRender();return;}
   toast(wf+" verbs are works-orders in the real build — this prototype places equipment (BUILD) and runs the board (OPERATE)");}));
 bind("helpbtn",()=>document.getElementById("help").classList.add("open"));
 bind("helpclose",()=>document.getElementById("help").classList.remove("open"));
 
-/* ---- load board + shed demo (the comfort-lighting teaching moment) ---- */
-const LOADS=[["scrubbers",12,"critical"],["lights",6,"essential"],["radio",2,"essential"],
-  ["hotplate",4,"normal"],["tools",2,"normal"],["comfort_lighting",2,"optional"]];
+/* ---- load board + shed demo (the comfort-lighting teaching moment) ----
+   Mirrors spatial_model.utility_headroom: each load class counts only when its
+   anchor object is actually placed (base: scrubbers + lights). */
+const LOADDEFS=[["scrubbers",12,"critical",null],["lights",6,"essential",null],
+  ["radio",2,"essential",["radio_rig","radio_rig_wired"]],
+  ["cistern_pumps",4,"essential",["pump_module"]],
+  ["hotplate",4,"normal",["hotplate_counter"]],
+  ["tools",2,"normal",["workbench"]],
+  ["comfort_lighting",2,"optional",["comfort_lamp"]]];
+function activeLoads(){const types=new Set(L.objects.map(o=>o.type));
+  return LOADDEFS.filter(d=>!d[3]||d[3].some(t=>types.has(t)));}
 function openBoard(){renderBoard();document.getElementById("board").classList.add("open");}
 function renderBoard(){
-  const gen=layoutName==="day1"?24:30;
-  let demand=0;const rows=LOADS.map(([n,v,t])=>{
-    const shed=(n==="comfort_lighting"&&shedStage>=1)||(n==="hotplate"&&shedStage>=2);
+  const gen=layoutName==="day1"?24:30; // partial vs stabilized generation (utilities.json)
+  let demand=0;const rows=activeLoads().map(([n,v,t])=>{
+    const shed=(t==="optional"&&shedStage>=1)||(t==="normal"&&shedStage>=2);
     if(!shed)demand+=v;
     return "<tr><td class='"+(shed?"off":"")+"'>"+n.replace(/_/g," ")+
       " <span class='tier'>"+t+"</span></td><td class='"+(shed?"off":"")+"'>"+v+"</td></tr>";});
+  if(shedStage){demand+=6;
+    rows.push("<tr><td>storm draw <span class='tier'>surge</span></td><td>6</td></tr>");}
   document.getElementById("loads").innerHTML=rows.join("")+
-    "<tr><td><b>headroom</b></td><td><b>"+(gen-demand-(shedStage?6:0))+"</b></td></tr>";}
+    "<tr><td><b>headroom</b></td><td><b>"+(gen-demand)+"</b></td></tr>";}
 bind("shedbtn",()=>{
   shedStage=1;renderBoard();draw();
   toast("The platform lamps dim — comfort lighting shed first (Optional tier; the gentlest warning)");
   setTimeout(()=>{shedStage=2;renderBoard();draw();
-    toast("Load board shed the hotplate — cold meal tonight",true);},1600);});
+    const types=new Set(L.objects.map(o=>o.type));
+    toast(types.has("hotplate_counter")?"Load board shed the hotplate — cold meal tonight":
+      "Load board shed the Normal tier — the workbench goes dark",true);},1600);});
 bind("restorebtn",()=>{shedStage=0;renderBoard();draw();
   toast("Capacity back — the platform lamps come on again by themselves (auto-restore)");});
 bind("boardclose",()=>document.getElementById("board").classList.remove("open"));

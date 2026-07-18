@@ -3,10 +3,11 @@
   "power": {
     "producer": "flywheel", "unit": "cell-hours/day",
     "generation": {"partial": 24, "stabilized": 30},
-    "loads": {"scrubbers": 12, "lights": 6, "pump_rig_west": 8, "hotplate": 4, "radio": 2, "tools": 2, "cistern_pumps": 4},
+    "loads": {"scrubbers": 12, "lights": 6, "pump_rig_west": 8, "hotplate": 4, "radio": 2, "tools": 2, "cistern_pumps": 4, "comfort_lighting": 2},
     "priority_tiers": ["critical", "essential", "normal", "optional"],
-    "tier_of": {"scrubbers": "critical", "lights": "essential", "radio": "essential", "pump_rig_west": "essential", "cistern_pumps": "essential", "hotplate": "normal", "tools": "normal"},
-    "tier_note": "the slice ships no optional-tier loads; the lowest occupied tier is Normal (hotplate/tools) — shedding walks tiers lowest-first (D-045)",
+    "tier_of": {"scrubbers": "critical", "lights": "essential", "radio": "essential", "pump_rig_west": "essential", "cistern_pumps": "essential", "hotplate": "normal", "tools": "normal", "comfort_lighting": "optional"},
+    "tier_note": "PLATFORM COMFORT LIGHTING is the slice's single Optional-tier load (D-047, owner directive): decorative/comfort light in inhabited common areas; first shed in any shortage (visible dimming before anything important is threatened); no survival harm; extended darkness modestly raises Stress; auto-restores when capacity returns unless manually disabled; teaches the priority system through the environment. Do not add further optional loads to populate the tier.",
+    "comfort_lighting": {"load": 2, "extended_dark_days": 3, "note": "stress cost per resources.json needs.stress_costs.platform_dark after extended_dark_days consecutive shed days; included in the Power overlay and the first load-shedding teaching moment"},
     "battery": {"capacity": 10, "bridge": "keeps critical tier alive 1 phase after producer failure", "bridge_cost_charge": 5, "bridge_note": "5 cell-hours ≈ one phase of critical+essential load (20/day ÷ 4 phases); the full battery covers ~3 phases at critical-only draw", "bridge_side_effect": "normal tier shed while bridging (cold meal that evening)"},
     "overload": {"threshold_headroom": 0, "warn_headroom": 4, "effect": "sheds the lowest occupied tier first (Normal in the slice), load by load, with banner; residual deficit draws the battery/cell rack; never silently"},
     "storm_intake_clog_draw": 4

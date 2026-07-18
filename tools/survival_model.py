@@ -130,6 +130,9 @@ class Survival:
         self.needs_derate_wu = 0.0   # same-day efficiency-ladder accounting
         self._crew_mult_floor = 1.0
         self._below40 = {}           # resident -> first day health < 40
+        self._shed_counts = {}       # load -> times shed (presentation variation, D-047)
+        self._dark_streak = 0        # consecutive comfort-lighting shed days
+        self._dark_yesterday = False
         self.reload_check = None
 
     # ------------------------------------------------------------------
@@ -206,6 +209,9 @@ class Survival:
             "shed_log": [[d, list(l)] for d, l in self.shed_log],
             "needs_derate_wu": self.needs_derate_wu,
             "below40": dict(self._below40),
+            "shed_counts": dict(self._shed_counts),
+            "dark_streak": self._dark_streak,
+            "dark_yesterday": self._dark_yesterday,
             "rng_state": self.rng.state,
             "warnings": [list(w) for w in self.warnings.log],
             "notes": list(self.notes),
@@ -234,6 +240,9 @@ class Survival:
         self.shed_log = [[d, list(l)] for d, l in s["shed_log"]]
         self.needs_derate_wu = s["needs_derate_wu"]
         self._below40 = dict(s["below40"])
+        self._shed_counts = dict(s["shed_counts"])
+        self._dark_streak = s["dark_streak"]
+        self._dark_yesterday = s["dark_yesterday"]
         self.rng.state = s["rng_state"]
         self.warnings.log = [list(w) for w in s["warnings"]]
         self.notes = list(s["notes"])
@@ -380,7 +389,8 @@ class Survival:
                                  if "flywheel_stab" in done_by and day >= done_by["flywheel_stab"]
                                  else "partial"]
         loads = pcfg["loads"]
-        demand = {"scrubbers": loads["scrubbers"], "lights": loads["lights"], "radio": loads["radio"]}
+        demand = {"scrubbers": loads["scrubbers"], "lights": loads["lights"], "radio": loads["radio"],
+                  "comfort_lighting": loads["comfort_lighting"]}   # the token Optional load (D-047)
         if route == "west" and day >= 2 and not cistern_online:
             demand["pump_rig_west"] = loads["pump_rig_west"]
         if cistern_online:
@@ -389,15 +399,23 @@ class Survival:
             demand["hotplate"] = loads["hotplate"]
         if d["spent"] > 10:
             demand["tools"] = loads["tools"]
+        lantern_draw = 0
+        if route == "east" and day == 3:
+            # the beat sheet's Day-3 east charge pinch (14, 20 §4): the new wing
+            # runs on lanterns until the trunk lands — the first board lesson
+            lantern_draw = 3
+            self.notes.append("d3: the new wing runs on lanterns tonight — the board pinches "
+                              "(east's first load lesson, before the storm asks in anger)")
         storm_draw = pcfg["storm_intake_clog_draw"] if day == 4 else 0
         boil_draw = (INC["families"]["water_contamination"]["boil_order_charge_per_day"]
                      if (self.contamination_active and "contamination_ignored" not in self.flags) else 0)
-        headroom = gen - sum(demand.values()) - storm_draw - boil_draw
+        headroom = gen - sum(demand.values()) - storm_draw - boil_draw - lantern_draw
         tier_of = pcfg["tier_of"]
         shed = []
         if headroom < 0:
             # shed the lowest occupied tier first, load by load — demand actually
-            # falls; only a residual deficit draws the battery/cell rack
+            # falls; only a residual deficit draws the battery/cell rack.
+            # Comfort lighting (Optional) always dims first: the gentlest warning.
             for tier in reversed(pcfg["priority_tiers"]):        # optional, normal, ...
                 if tier in ("critical", "essential"):
                     break
@@ -407,10 +425,23 @@ class Survival:
                         shed.append(load)
             if shed:
                 self.shed_log.append([day, list(shed)])
-                self.notes.append("d%d: load board shed %s (lowest occupied tier: Normal) — banner, %s"
-                                  % (day, "+".join(shed),
-                                     "cold meal tonight" if "hotplate" in shed else "hand tools down"))
-                self._stress_all(stress_c["brown_out"], "brown-out")
+                self._note_shedding(day, shed)
+                if any(tier_of[l] == "normal" for l in shed):
+                    self._stress_all(stress_c["brown_out"], "brown-out")
+        # extended platform darkness: modest stress, never survival harm (D-047)
+        dark_today = "comfort_lighting" in shed
+        if dark_today:
+            self._dark_streak += 1
+            if self._dark_streak == UTIL["power"]["comfort_lighting"]["extended_dark_days"]:
+                self._stress_all(stress_c["platform_dark"], "extended platform darkness")
+                self.notes.append("d%d: three nights dark on the platform — spirits sag a little "
+                                  "(the lamps matter more than they cost)" % day)
+        else:
+            if self._dark_yesterday:
+                self.notes.append("d%d: capacity back — the platform lamps come on again by themselves "
+                                  "(Optional tier auto-restores)" % day)
+            self._dark_streak = 0
+        self._dark_yesterday = dark_today
         if headroom < 0:
             self.stocks["charge"] = clamp(self.stocks["charge"] + headroom, 0, self.caps["charge"])
             self.notes.append("d%d: residual deficit %d cell-hours drawn from the rack" % (day, -headroom))
@@ -610,6 +641,31 @@ class Survival:
                 self.notes.append("d6: Juna settled — fifth resident (food/water demand up, +labor buffer)")
 
     # ------------------------------------------------------------------
+    def _note_shedding(self, day, shed):
+        """Presentation variation (D-047, owner directive): the same penalty must
+        not show the same banner every day — repeats become specific resident
+        memories, scenes, and behavior changes. The mechanical cost is unchanged."""
+        for load in shed:
+            n = self._shed_counts.get(load, 0)
+            self._shed_counts[load] = n + 1
+            if load == "comfort_lighting":
+                texts = ["d%d: the platform lamps dim — comfort lighting shed first "
+                         "(Optional tier; the gentlest warning of a power pinch, banner)",
+                         "d%d: platform dark again — residents carry lanterns between rooms",
+                         "d%d: the dark platform is routine now; Juna's berth corner keeps a candle"]
+            elif load == "hotplate":
+                texts = ["d%d: load board shed the hotplate (Normal tier) — banner, cold meal tonight",
+                         "d%d: Maren serves the meal cold without announcing it — the household notices",
+                         "d%d: cold meals are routine; Teo eats his on the platform edge (a memory, "
+                         "not another banner)",
+                         "d%d: the cook-ring stays unlit and nobody comments — the week will be remembered"]
+            elif load == "tools":
+                texts = ["d%d: load board shed powered tools (Normal tier) — banner, hand tools down",
+                         "d%d: the fitters pace their work to the headroom without being told"]
+            else:
+                texts = ["d%%d: load board shed %s — banner" % load]
+            self.notes.append(texts[min(n, len(texts) - 1)] % day)
+
     def _stress_all(self, amt, why):
         # DECLARED SIMPLIFICATION (D-045): shared hardships stress everyone
         # equally; individual memories/promises/grudges are 19 §6 canon, not

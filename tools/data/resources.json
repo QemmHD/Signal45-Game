@@ -164,6 +164,7 @@
       "dry_taps": 6,
       "short_meals": 4,
       "brown_out": 2,
+      "platform_dark": 2,
       "turn_away": 6,
       "turn_away_ash_extra": 8,
       "highball_consecutive_refusal": 10

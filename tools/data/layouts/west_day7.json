@@ -1,0 +1,428 @@
+{
+  "_comment": "SIGNAL 45 West-route Day-7 layout (Prompt 4, D-046): water first. 10 functional areas; the canteen corner stays a cook-ring zone; Cistern Works + Pump Room online; west-bay bunks hold Juna's berth; filtration module attached.",
+  "name": "west_day7",
+  "route": "west",
+  "day": 7,
+  "portal_states": {
+    "east_portal": "blocked_rubble",
+    "west_portal": "open"
+  },
+  "link_states": {
+    "freight_lift": "operational",
+    "gate_stair": "operational",
+    "signal_ladder": "operational",
+    "service_stair": "operational"
+  },
+  "trunk_states": {
+    "trunk_core": "live",
+    "trunk_east": "dark",
+    "trunk_west": "live"
+  },
+  "rooms": [
+    {
+      "id": "scrubber_hall",
+      "family": "utility",
+      "specialization": "air",
+      "form": "feature_built",
+      "feature": "scrubber_stack",
+      "state": "operational",
+      "section": "scrubber_gate",
+      "rect": {
+        "x": 3,
+        "y": 0,
+        "w": 3,
+        "h": 3
+      }
+    },
+    {
+      "id": "flywheel_room",
+      "family": "utility",
+      "specialization": "power",
+      "form": "feature_built",
+      "feature": "flywheel_housing",
+      "state": "operational",
+      "upgrade": "stabilized",
+      "section": "flywheel_vault",
+      "rect": {
+        "x": 2,
+        "y": 0,
+        "w": 2,
+        "h": 2
+      }
+    },
+    {
+      "id": "staging_room",
+      "family": "operations",
+      "specialization": "staging",
+      "form": "permanent",
+      "state": "operational",
+      "repurposed_from": "camp",
+      "section": "central_platform",
+      "rect": {
+        "x": 4,
+        "y": 0,
+        "w": 3,
+        "h": 3
+      }
+    },
+    {
+      "id": "canteen_corner",
+      "family": "food",
+      "form": "temporary",
+      "state": "operational",
+      "note": "the cook-ring canteen corner \u2014 the west warm-beat venue (D-039)",
+      "section": "central_platform",
+      "rect": {
+        "x": 8,
+        "y": 1,
+        "w": 4,
+        "h": 2
+      }
+    },
+    {
+      "id": "listening_post",
+      "family": "operations",
+      "specialization": "listening_post",
+      "form": "feature_built",
+      "feature": "lever_frame",
+      "state": "operational",
+      "upgrade": "wired",
+      "section": "signal_box",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 3,
+        "h": 2
+      }
+    },
+    {
+      "id": "cistern_works",
+      "family": "utility",
+      "specialization": "water",
+      "form": "feature_built",
+      "feature": "cistern_main",
+      "state": "operational",
+      "section": "west_gallery",
+      "rect": {
+        "x": 3,
+        "y": 0,
+        "w": 1,
+        "h": 2
+      }
+    },
+    {
+      "id": "cistern_filtration",
+      "family": "utility",
+      "form": "module",
+      "module_of": "cistern_works",
+      "state": "operational",
+      "section": "west_gallery",
+      "rect": {
+        "x": 3,
+        "y": 2,
+        "w": 1,
+        "h": 1
+      }
+    },
+    {
+      "id": "pump_room",
+      "family": "utility",
+      "specialization": "water",
+      "form": "permanent",
+      "state": "operational",
+      "section": "west_gallery",
+      "rect": {
+        "x": 5,
+        "y": 0,
+        "w": 2,
+        "h": 2
+      }
+    },
+    {
+      "id": "west_bunks",
+      "family": "rest",
+      "form": "permanent",
+      "state": "operational",
+      "section": "west_gallery",
+      "rect": {
+        "x": 9,
+        "y": 0,
+        "w": 5,
+        "h": 3
+      }
+    },
+    {
+      "id": "cold_store",
+      "family": "storage",
+      "specialization": "cold",
+      "form": "permanent",
+      "state": "operational",
+      "section": "west_gallery",
+      "rect": {
+        "x": 14,
+        "y": 0,
+        "w": 2,
+        "h": 2
+      }
+    },
+    {
+      "id": "fitters_shop",
+      "family": "workshop",
+      "form": "feature_built",
+      "feature": "fitters_bench_bay",
+      "state": "operational",
+      "section": "deep_service",
+      "rect": {
+        "x": 0,
+        "y": 1,
+        "w": 4,
+        "h": 2
+      }
+    }
+  ],
+  "objects": [
+    {
+      "id": "staging_shelf",
+      "type": "storage_shelf",
+      "room": "staging_room",
+      "pos": [
+        4,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "staging_crate",
+      "type": "supply_crate",
+      "room": "staging_room",
+      "pos": [
+        6,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "cook_ring_1",
+      "type": "cook_ring",
+      "room": "canteen_corner",
+      "pos": [
+        8,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "corner_table",
+      "type": "canteen_table",
+      "room": "canteen_corner",
+      "pos": [
+        10,
+        2
+      ],
+      "rot": 0
+    },
+    {
+      "id": "transfer_pump_1",
+      "type": "transfer_pump",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        1,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "purifier_1",
+      "type": "purifier_unit",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        0,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "comfort_lamp_1",
+      "type": "comfort_lamp",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        7,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "comfort_lamp_2",
+      "type": "comfort_lamp",
+      "room": "west_bunks",
+      "pos": [
+        10,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "mask_cache_1",
+      "type": "mask_cache",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        12,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "radio_rig_1",
+      "type": "radio_rig_wired",
+      "room": "listening_post",
+      "pos": [
+        1,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "battery_1",
+      "type": "battery_bank",
+      "room": null,
+      "section": "flywheel_vault",
+      "pos": [
+        6,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "filtration_1",
+      "type": "filtration_module",
+      "room": "cistern_works",
+      "pos": [
+        3,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "pump_1",
+      "type": "pump_module",
+      "room": "pump_room",
+      "pos": [
+        5,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "bunk_w1",
+      "type": "bunk_bed",
+      "room": "west_bunks",
+      "pos": [
+        9,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "bunk_w2",
+      "type": "bunk_bed",
+      "room": "west_bunks",
+      "pos": [
+        11,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "bunk_w3",
+      "type": "bunk_bed",
+      "room": "west_bunks",
+      "pos": [
+        13,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "cold_locker_1",
+      "type": "cold_locker",
+      "room": "cold_store",
+      "pos": [
+        14,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "fitters_bench_1",
+      "type": "workbench",
+      "room": "fitters_shop",
+      "pos": [
+        1,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "silt_line_mark",
+      "type": "memorial_chalk",
+      "room": null,
+      "section": "west_gallery",
+      "pos": [
+        7,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "timetable_board",
+      "type": "memorial_chalk",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        14,
+        1
+      ],
+      "rot": 0
+    }
+  ],
+  "areas": [
+    "Scrubber Gate",
+    "Flywheel Room",
+    "Listening Post (wired)",
+    "Staging Room",
+    "Canteen Corner",
+    "Cistern Works (+filtration)",
+    "Pump Room",
+    "West Bunks",
+    "Cold Store",
+    "Fitters' Shop"
+  ],
+  "essential_facilities": [
+    "scrubber_hall",
+    "flywheel_room",
+    "west_bunks",
+    "canteen_corner",
+    "cistern_works",
+    "pump_room",
+    "listening_post",
+    "fitters_shop"
+  ],
+  "juna_berth": {
+    "room": "west_bunks",
+    "object": "bunk_w3"
+  },
+  "expansion_changes": [
+    "west_portal opened (Drain)",
+    "reinforce_w (gallery arch)",
+    "trunk_west extended",
+    "freight_lift restored (Connect)",
+    "camp repurposed to staging_room",
+    "listening_post upgraded to wired",
+    "cistern_filtration module attached",
+    "comfort lighting kept on the platform; Juna's bunk corner keeps its lamp"
+  ]
+}

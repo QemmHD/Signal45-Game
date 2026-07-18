@@ -170,6 +170,33 @@ class Utilities(unittest.TestCase):
         self.assertTrue(shed_only_days,
                         "every shed day also drained the rack — demand was not reduced")
 
+    def test_comfort_lighting_is_shed_first_and_auto_restores(self):
+        # the token Optional-tier load (D-047): dims before anything important,
+        # and comes back by itself when capacity returns
+        w = run("west_competent")
+        for day, loads in w["shed_log"]:
+            self.assertIn("comfort_lighting", loads,
+                          "a shed day skipped the Optional tier — order broken")
+        e = run("east_competent")
+        east_shed = {d: l for d, l in e["shed_log"]}
+        self.assertEqual(east_shed.get(3), ["comfort_lighting"],
+                         "east's Day-3 pinch must dim ONLY the comfort lighting")
+        for r in (e, w):
+            self.assertTrue(any("auto-restores" in n for n in r["notes"]),
+                            "comfort lighting never visibly restored")
+
+    def test_repeated_shedding_varies_presentation(self):
+        # owner directive (D-047): repeats become resident memories/behavior,
+        # never the same banner every day
+        w = run("west_competent")
+        hot = [n for n in w["notes"]
+               if "hotplate" in n or "meal cold" in n or "cold meals are routine" in n]
+        self.assertGreaterEqual(len(hot), 3)
+        self.assertEqual(len(set(hot)), len(hot),
+                         "identical cold-meal banner repeated — presentation must vary")
+        self.assertTrue(any("spirits sag" in n for n in w["notes"]),
+                        "extended platform darkness never posted its modest stress note")
+
     def test_storm_day_squeezes_power(self):
         r = run("west_competent")
         heads = {h["day"]: h["power"] for h in r["utility_head"]}

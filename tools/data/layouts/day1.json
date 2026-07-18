@@ -1,0 +1,280 @@
+{
+  "_comment": "SIGNAL 45 Day-1 layout (Prompt 4, D-046). Four temporary/damaged functional areas; two blocked horizontal routes; one jammed vertical route. Validated by tools/validate_station_layouts.py.",
+  "name": "day1",
+  "route": null,
+  "day": 1,
+  "portal_states": {
+    "east_portal": "blocked_rubble",
+    "west_portal": "blocked_flood"
+  },
+  "link_states": {
+    "freight_lift": "jammed",
+    "gate_stair": "operational",
+    "signal_ladder": "operational",
+    "service_stair": "operational"
+  },
+  "trunk_states": {
+    "trunk_core": "live",
+    "trunk_east": "dark",
+    "trunk_west": "dark"
+  },
+  "rooms": [
+    {
+      "id": "scrubber_hall",
+      "family": "utility",
+      "specialization": "air",
+      "form": "feature_built",
+      "feature": "scrubber_stack",
+      "state": "impaired",
+      "section": "scrubber_gate",
+      "rect": {
+        "x": 3,
+        "y": 0,
+        "w": 3,
+        "h": 3
+      }
+    },
+    {
+      "id": "flywheel_room",
+      "family": "utility",
+      "specialization": "power",
+      "form": "feature_built",
+      "feature": "flywheel_housing",
+      "state": "impaired",
+      "section": "flywheel_vault",
+      "rect": {
+        "x": 2,
+        "y": 0,
+        "w": 2,
+        "h": 2
+      }
+    },
+    {
+      "id": "camp",
+      "family": "rest",
+      "form": "temporary",
+      "state": "operational",
+      "section": "central_platform",
+      "rect": {
+        "x": 2,
+        "y": 0,
+        "w": 5,
+        "h": 3
+      }
+    },
+    {
+      "id": "cook_zone",
+      "family": "food",
+      "form": "temporary",
+      "state": "operational",
+      "section": "central_platform",
+      "rect": {
+        "x": 8,
+        "y": 1,
+        "w": 2,
+        "h": 2
+      }
+    },
+    {
+      "id": "supply_zone",
+      "family": "storage",
+      "form": "temporary",
+      "state": "operational",
+      "section": "central_platform",
+      "rect": {
+        "x": 12,
+        "y": 1,
+        "w": 4,
+        "h": 2
+      }
+    },
+    {
+      "id": "listening_post",
+      "family": "operations",
+      "specialization": "listening_post",
+      "form": "feature_built",
+      "feature": "lever_frame",
+      "state": "impaired",
+      "section": "signal_box",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 3,
+        "h": 2
+      }
+    }
+  ],
+  "objects": [
+    {
+      "id": "bedroll_1",
+      "type": "bedroll",
+      "room": "camp",
+      "pos": [
+        2,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "bedroll_2",
+      "type": "bedroll",
+      "room": "camp",
+      "pos": [
+        4,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "bedroll_3",
+      "type": "bedroll",
+      "room": "camp",
+      "pos": [
+        5,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "bedroll_4",
+      "type": "bedroll",
+      "room": "camp",
+      "pos": [
+        6,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "camp_bench",
+      "type": "workbench",
+      "room": null,
+      "pos": [
+        14,
+        0
+      ],
+      "rot": 0,
+      "section": "central_platform"
+    },
+    {
+      "id": "cook_ring_1",
+      "type": "cook_ring",
+      "room": "cook_zone",
+      "pos": [
+        8,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "transfer_pump_1",
+      "type": "transfer_pump",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        1,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "purifier_1",
+      "type": "purifier_unit",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        0,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "crate_1",
+      "type": "supply_crate",
+      "room": "supply_zone",
+      "pos": [
+        12,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "crate_2",
+      "type": "supply_crate",
+      "room": "supply_zone",
+      "pos": [
+        13,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "comfort_lamp_1",
+      "type": "comfort_lamp",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        7,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "mask_cache_1",
+      "type": "mask_cache",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        10,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "radio_rig_1",
+      "type": "radio_rig",
+      "room": "listening_post",
+      "pos": [
+        1,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "battery_1",
+      "type": "battery_bank",
+      "room": null,
+      "section": "flywheel_vault",
+      "pos": [
+        6,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "timetable_board",
+      "type": "memorial_chalk",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        11,
+        1
+      ],
+      "rot": 0
+    }
+  ],
+  "areas": [
+    "Scrubber Gate",
+    "Flywheel Room",
+    "the Camp",
+    "Listening Post (improvised)"
+  ],
+  "essential_facilities": [
+    "scrubber_hall",
+    "flywheel_room",
+    "camp",
+    "cook_zone",
+    "listening_post"
+  ],
+  "juna_berth": null
+}

@@ -1,0 +1,484 @@
+{
+  "_comment": "SIGNAL 45 East-route Day-7 layout (Prompt 4, D-046): comfort first. 10 functional areas; Camp repurposed to Staging; LP wired; pantry module; trunk_east live; lift restored; Juna's berth in the Sleeper Car.",
+  "name": "east_day7",
+  "route": "east",
+  "day": 7,
+  "portal_states": {
+    "east_portal": "open",
+    "west_portal": "blocked_flood"
+  },
+  "link_states": {
+    "freight_lift": "operational",
+    "gate_stair": "operational",
+    "signal_ladder": "operational",
+    "service_stair": "operational"
+  },
+  "trunk_states": {
+    "trunk_core": "live",
+    "trunk_east": "live",
+    "trunk_west": "dark"
+  },
+  "rooms": [
+    {
+      "id": "scrubber_hall",
+      "family": "utility",
+      "specialization": "air",
+      "form": "feature_built",
+      "feature": "scrubber_stack",
+      "state": "operational",
+      "section": "scrubber_gate",
+      "rect": {
+        "x": 3,
+        "y": 0,
+        "w": 3,
+        "h": 3
+      }
+    },
+    {
+      "id": "flywheel_room",
+      "family": "utility",
+      "specialization": "power",
+      "form": "feature_built",
+      "feature": "flywheel_housing",
+      "state": "operational",
+      "upgrade": "stabilized",
+      "section": "flywheel_vault",
+      "rect": {
+        "x": 2,
+        "y": 0,
+        "w": 2,
+        "h": 2
+      }
+    },
+    {
+      "id": "staging_room",
+      "family": "operations",
+      "specialization": "staging",
+      "form": "permanent",
+      "state": "operational",
+      "repurposed_from": "camp",
+      "section": "central_platform",
+      "rect": {
+        "x": 2,
+        "y": 0,
+        "w": 5,
+        "h": 3
+      }
+    },
+    {
+      "id": "cook_zone",
+      "family": "food",
+      "form": "temporary",
+      "state": "operational",
+      "note": "kettle corner kept by the stair after the Canteen opens",
+      "section": "central_platform",
+      "rect": {
+        "x": 8,
+        "y": 1,
+        "w": 2,
+        "h": 2
+      }
+    },
+    {
+      "id": "listening_post",
+      "family": "operations",
+      "specialization": "listening_post",
+      "form": "feature_built",
+      "feature": "lever_frame",
+      "state": "operational",
+      "upgrade": "wired",
+      "section": "signal_box",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 3,
+        "h": 2
+      }
+    },
+    {
+      "id": "sleeper_car",
+      "family": "rest",
+      "form": "railcar",
+      "shell": "railcar_a",
+      "state": "operational",
+      "section": "east_concourse",
+      "rect": {
+        "x": 0,
+        "y": 2,
+        "w": 6,
+        "h": 2
+      }
+    },
+    {
+      "id": "aid_car",
+      "family": "medical",
+      "form": "railcar",
+      "shell": "railcar_b",
+      "state": "operational",
+      "section": "east_concourse",
+      "rect": {
+        "x": 7,
+        "y": 2,
+        "w": 6,
+        "h": 2
+      }
+    },
+    {
+      "id": "canteen",
+      "family": "food",
+      "form": "kiosk",
+      "shell": "kiosk_row",
+      "state": "operational",
+      "section": "east_concourse",
+      "rect": {
+        "x": 8,
+        "y": 0,
+        "w": 4,
+        "h": 2
+      }
+    },
+    {
+      "id": "canteen_pantry",
+      "family": "food",
+      "form": "module",
+      "module_of": "canteen",
+      "state": "operational",
+      "section": "east_concourse",
+      "rect": {
+        "x": 12,
+        "y": 0,
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "id": "cold_store",
+      "family": "storage",
+      "specialization": "cold",
+      "form": "kiosk",
+      "shell": "kiosk_row",
+      "state": "operational",
+      "section": "east_concourse",
+      "rect": {
+        "x": 14,
+        "y": 0,
+        "w": 2,
+        "h": 2
+      }
+    },
+    {
+      "id": "fitters_shop",
+      "family": "workshop",
+      "form": "feature_built",
+      "feature": "fitters_bench_bay",
+      "state": "operational",
+      "section": "deep_service",
+      "rect": {
+        "x": 0,
+        "y": 1,
+        "w": 4,
+        "h": 2
+      }
+    },
+    {
+      "id": "equipment_locker",
+      "family": "storage",
+      "specialization": "equipment",
+      "form": "feature_built",
+      "feature": "parts_racks",
+      "state": "operational",
+      "section": "deep_service",
+      "rect": {
+        "x": 8,
+        "y": 1,
+        "w": 4,
+        "h": 2
+      }
+    }
+  ],
+  "objects": [
+    {
+      "id": "staging_shelf",
+      "type": "storage_shelf",
+      "room": "staging_room",
+      "pos": [
+        4,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "staging_crate",
+      "type": "supply_crate",
+      "room": "staging_room",
+      "pos": [
+        2,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "cook_ring_1",
+      "type": "cook_ring",
+      "room": "cook_zone",
+      "pos": [
+        8,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "transfer_pump_1",
+      "type": "transfer_pump",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        1,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "purifier_1",
+      "type": "purifier_unit",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        0,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "comfort_lamp_1",
+      "type": "comfort_lamp",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        7,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "comfort_lamp_2",
+      "type": "comfort_lamp",
+      "room": null,
+      "section": "east_concourse",
+      "pos": [
+        6,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "mask_cache_1",
+      "type": "mask_cache",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        10,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "radio_rig_1",
+      "type": "radio_rig_wired",
+      "room": "listening_post",
+      "pos": [
+        1,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "battery_1",
+      "type": "battery_bank",
+      "room": null,
+      "section": "flywheel_vault",
+      "pos": [
+        6,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "bunk_e1",
+      "type": "bunk_bed",
+      "room": "sleeper_car",
+      "pos": [
+        0,
+        2
+      ],
+      "rot": 0
+    },
+    {
+      "id": "bunk_e2",
+      "type": "bunk_bed",
+      "room": "sleeper_car",
+      "pos": [
+        2,
+        2
+      ],
+      "rot": 0
+    },
+    {
+      "id": "bunk_e3",
+      "type": "bunk_bed",
+      "room": "sleeper_car",
+      "pos": [
+        4,
+        2
+      ],
+      "rot": 0
+    },
+    {
+      "id": "cot_e1",
+      "type": "med_cot",
+      "room": "aid_car",
+      "pos": [
+        7,
+        2
+      ],
+      "rot": 0
+    },
+    {
+      "id": "cot_e2",
+      "type": "med_cot",
+      "room": "aid_car",
+      "pos": [
+        9,
+        2
+      ],
+      "rot": 0
+    },
+    {
+      "id": "med_cabinet_1",
+      "type": "med_cabinet",
+      "room": "aid_car",
+      "pos": [
+        11,
+        2
+      ],
+      "rot": 0
+    },
+    {
+      "id": "hotplate_1",
+      "type": "hotplate_counter",
+      "room": "canteen",
+      "pos": [
+        8,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "canteen_table_1",
+      "type": "canteen_table",
+      "room": "canteen",
+      "pos": [
+        10,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "pantry_shelf",
+      "type": "storage_shelf",
+      "room": "canteen_pantry",
+      "pos": [
+        12,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "cold_locker_1",
+      "type": "cold_locker",
+      "room": "cold_store",
+      "pos": [
+        14,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "fitters_bench_1",
+      "type": "workbench",
+      "room": "fitters_shop",
+      "pos": [
+        1,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "locker_shelf",
+      "type": "storage_shelf",
+      "room": "equipment_locker",
+      "pos": [
+        9,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "kiosk_chalk",
+      "type": "memorial_chalk",
+      "room": null,
+      "section": "east_concourse",
+      "pos": [
+        15,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "timetable_board",
+      "type": "memorial_chalk",
+      "room": null,
+      "section": "central_platform",
+      "pos": [
+        11,
+        1
+      ],
+      "rot": 0
+    }
+  ],
+  "areas": [
+    "Scrubber Gate",
+    "Flywheel Room",
+    "Listening Post (wired)",
+    "Staging Room",
+    "Sleeper Car",
+    "Aid Car",
+    "Canteen (+pantry)",
+    "Cold Store",
+    "Fitters' Shop",
+    "Equipment Locker"
+  ],
+  "essential_facilities": [
+    "scrubber_hall",
+    "flywheel_room",
+    "sleeper_car",
+    "aid_car",
+    "canteen",
+    "listening_post",
+    "fitters_shop"
+  ],
+  "juna_berth": {
+    "room": "sleeper_car",
+    "object": "bunk_e3"
+  },
+  "expansion_changes": [
+    "east_portal opened (Clear)",
+    "reinforce_e (canopy bay)",
+    "trunk_east extended",
+    "freight_lift restored (Connect)",
+    "camp repurposed to staging_room",
+    "listening_post upgraded to wired",
+    "canteen_pantry module attached",
+    "comfort lighting extended to the east wing"
+  ]
+}

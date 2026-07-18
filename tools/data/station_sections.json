@@ -1,0 +1,160 @@
+{
+  "_comment": "SIGNAL 45 slice station sections (Prompt 4, D-046). ONE logical source of truth: SECTION -> BAY -> CELL. 1 cell ~= 1.5 m; a structural bay spans 4 cells between roof columns (10 S2's ~6 m). Coordinates are section-local cells [x, y] with x rightward, y downward (row 0 = section's upper edge); world position = section origin (abstract render units) + level elevation. Rendering, collision, room ownership, utilities, navigation, and save data ALL reference these cell addresses; renderers convert cells to world transforms at draw time and never store their own coordinates. PROVISIONAL geometry — sizes are design targets, not final art metrics.",
+  "cell_meters": 1.5,
+  "bay_cells": 4,
+  "levels": {"1": "upper / surface access", "0": "platform level", "-1": "service vaults"},
+  "sections": {
+    "scrubber_gate": {
+      "name": "The Scrubber Gate",
+      "story": "the station's lungs and only door — a damaged airlock/decon gate the fitters kept alive until the end",
+      "origin": [8, 0], "level": 1, "grid": [8, 3], "bays": 2,
+      "fixed": [
+        {"type": "airlock_doors", "cells": [[0, 0], [0, 1], [0, 2]], "walkable_when": "open"},
+        {"type": "decon_channel", "cells": [[1, 1], [2, 1]], "walkable_when": "always"},
+        {"type": "scrubber_stack", "cells": [[6, 0], [7, 0]], "walkable_when": "never"}
+      ],
+      "buildable": [{"x": 1, "y": 0, "w": 5, "h": 3, "except_fixed": true}],
+      "entries": [{"id": "surface_door", "edge": "west", "cells": [[0, 1]], "to": "surface", "state_day1": "operational"}],
+      "vertical_links": [{"id": "gate_stair", "kind": "stair", "cells": [[7, 2]], "to": "central_platform", "to_cells": [[8, 0]], "state_day1": "operational"}],
+      "utility_node": {"id": "node_gate", "trunk": "trunk_core", "state_day1": "connected"},
+      "hazards_day1": ["intake_damaged"],
+      "reclamation": {"class": "minor_clearance", "requires": ["repair"], "labor_forecast_wu": 4},
+      "max_occupancy": 6,
+      "environment": {"noise": "high", "temperature": "hot_at_intake", "air": "decon"},
+      "camera_bounds": {"zoom_overview": true, "frame": "upper_left"},
+      "unlock": "start", "story_reveal": null
+    },
+    "central_platform": {
+      "name": "The Central Platform",
+      "story": "the surviving heart of Kestrel Cross — the Camp huddles here between the columns",
+      "origin": [0, 6], "level": 0, "grid": [16, 4], "bays": 4,
+      "fixed": [
+        {"type": "column", "cells": [[3, 0], [7, 0], [11, 0]], "walkable_when": "never"},
+        {"type": "track_bed", "cells_rect": {"x": 0, "y": 3, "w": 16, "h": 1}, "walkable_when": "never"},
+        {"type": "emergency_tank", "cells": [[1, 0]], "walkable_when": "never"}
+      ],
+      "buildable": [{"x": 0, "y": 0, "w": 16, "h": 3, "except_fixed": true}],
+      "entries": [
+        {"id": "west_portal", "edge": "west", "cells": [[0, 1]], "to": "west_gallery", "state_day1": "blocked_flood"},
+        {"id": "east_portal", "edge": "east", "cells": [[15, 1]], "to": "east_concourse", "state_day1": "blocked_rubble"}
+      ],
+      "vertical_links": [
+        {"id": "gate_stair", "kind": "stair", "cells": [[8, 0]], "to": "scrubber_gate", "to_cells": [[7, 2]], "state_day1": "operational"},
+        {"id": "signal_ladder", "kind": "ladder", "cells": [[10, 0]], "to": "signal_box", "to_cells": [[0, 1]], "state_day1": "operational"},
+        {"id": "service_stair", "kind": "stair", "cells": [[5, 2]], "to": "flywheel_vault", "to_cells": [[0, 0]], "state_day1": "operational"},
+        {"id": "freight_lift", "kind": "lift", "cells": [[13, 0]], "to": "deep_service", "to_cells": [[0, 0]], "state_day1": "jammed"}
+      ],
+      "utility_node": {"id": "node_core", "trunk": "trunk_core", "state_day1": "connected"},
+      "hazards_day1": [],
+      "reclamation": {"class": "none", "requires": [], "labor_forecast_wu": 0},
+      "max_occupancy": 10,
+      "environment": {"noise": "medium", "temperature": "cool", "air": "core"},
+      "camera_bounds": {"zoom_overview": true, "frame": "center"},
+      "unlock": "start", "story_reveal": "the timetable board still lists the last three departures that never left"
+    },
+    "signal_box": {
+      "name": "The Signal Box",
+      "story": "the elevated interlocking cabin — sightlines down the whole platform; the improvised Listening Post",
+      "origin": [10, 3], "level": 1, "grid": [4, 2], "bays": 1,
+      "fixed": [{"type": "lever_frame", "cells": [[3, 0]], "walkable_when": "never"}],
+      "buildable": [{"x": 0, "y": 0, "w": 3, "h": 2, "except_fixed": true}],
+      "entries": [],
+      "vertical_links": [{"id": "signal_ladder", "kind": "ladder", "cells": [[0, 1]], "to": "central_platform", "to_cells": [[10, 0]], "state_day1": "operational"}],
+      "utility_node": {"id": "node_signal", "trunk": "trunk_core", "state_day1": "connected"},
+      "hazards_day1": [],
+      "reclamation": {"class": "none", "requires": [], "labor_forecast_wu": 0},
+      "max_occupancy": 2,
+      "environment": {"noise": "low", "temperature": "cool", "air": "core"},
+      "camera_bounds": {"zoom_overview": true, "frame": "upper_right"},
+      "unlock": "start", "story_reveal": null
+    },
+    "flywheel_vault": {
+      "name": "The Flywheel Vault",
+      "story": "the regenerative-brake flywheel the fitters rigged as the station's heart — still turning, barely",
+      "origin": [2, 12], "level": -1, "grid": [8, 3], "bays": 2,
+      "fixed": [
+        {"type": "flywheel_housing", "cells": [[4, 0], [5, 0], [4, 1], [5, 1]], "walkable_when": "never"},
+        {"type": "cable_gallery", "cells_rect": {"x": 0, "y": 2, "w": 8, "h": 1}, "walkable_when": "always"}
+      ],
+      "buildable": [{"x": 0, "y": 0, "w": 4, "h": 2, "except_fixed": true}, {"x": 6, "y": 0, "w": 2, "h": 2, "except_fixed": true}],
+      "entries": [],
+      "vertical_links": [{"id": "service_stair", "kind": "stair", "cells": [[0, 0]], "to": "central_platform", "to_cells": [[5, 2]], "state_day1": "operational"}],
+      "utility_node": {"id": "node_flywheel", "trunk": "trunk_core", "state_day1": "connected"},
+      "hazards_day1": ["bearing_wear"],
+      "reclamation": {"class": "none", "requires": [], "labor_forecast_wu": 0},
+      "max_occupancy": 3,
+      "environment": {"noise": "very_high", "temperature": "warm", "air": "core"},
+      "camera_bounds": {"zoom_overview": true, "frame": "lower_left"},
+      "unlock": "start", "story_reveal": null
+    },
+    "east_concourse": {
+      "name": "The East Concourse",
+      "story": "two stranded railcars and the kiosk row — the shopping arcade of a station that expected tomorrow",
+      "origin": [17, 6], "level": 0, "grid": [16, 4], "bays": 4,
+      "fixed": [
+        {"type": "column", "cells": [[3, 0], [7, 0], [11, 0]], "walkable_when": "never"},
+        {"type": "railcar_a", "cells_rect": {"x": 0, "y": 2, "w": 6, "h": 2}, "walkable_when": "interior", "note": "stranded railcar shell — convertible (Sleeper Car / Aid Car)"},
+        {"type": "railcar_b", "cells_rect": {"x": 7, "y": 2, "w": 6, "h": 2}, "walkable_when": "interior", "note": "stranded railcar shell — convertible (Sleeper Car / Aid Car)"},
+        {"type": "kiosk_row", "cells_rect": {"x": 8, "y": 0, "w": 8, "h": 1}, "walkable_when": "interior", "note": "shuttered kiosks — Canteen / Cold Store shells"}
+      ],
+      "buildable": [{"x": 0, "y": 0, "w": 16, "h": 4, "except_fixed": false, "note": "railcars and kiosks are CONVERTIBLE fixed shells: rooms may claim them; open floor cells host built shells"}],
+      "entries": [{"id": "east_portal", "edge": "west", "cells": [[0, 1]], "to": "central_platform", "state_day1": "blocked_rubble"}],
+      "vertical_links": [],
+      "utility_node": {"id": "node_east", "trunk": "trunk_east", "state_day1": "unpowered"},
+      "hazards_day1": ["rubble_collapse", "east_canopy_bay_strained"],
+      "reclamation": {"class": "major", "requires": ["survey", "clear", "reinforce", "connect_utility"], "labor_forecast_wu": 21, "materials": 3, "yields_materials": 10},
+      "max_occupancy": 8,
+      "environment": {"noise": "low", "temperature": "cool", "air": "east"},
+      "camera_bounds": {"zoom_overview": true, "frame": "right"},
+      "unlock": "survey", "story_reveal": "one kiosk is still shuttered mid-inventory — its owner's last stock count chalked on the board"
+    },
+    "west_gallery": {
+      "name": "The West Gallery",
+      "story": "the flooded cistern gallery — the station's water heart, drowned on evacuation night",
+      "origin": [-17, 6], "level": 0, "grid": [16, 4], "bays": 4,
+      "fixed": [
+        {"type": "column", "cells": [[4, 0], [8, 0], [12, 0]], "walkable_when": "never"},
+        {"type": "cistern_main", "cells_rect": {"x": 0, "y": 0, "w": 3, "h": 2}, "walkable_when": "never", "note": "the cistern head — Cistern Works is feature-built around it"},
+        {"type": "gallery_arch", "cells": [[8, 1]], "walkable_when": "never", "note": "west_gallery_arch structural hotspot (18 S5)"},
+        {"type": "drain_channel", "cells_rect": {"x": 0, "y": 3, "w": 16, "h": 1}, "walkable_when": "never"}
+      ],
+      "buildable": [{"x": 3, "y": 0, "w": 13, "h": 3, "except_fixed": true}],
+      "entries": [{"id": "west_portal", "edge": "east", "cells": [[15, 1]], "to": "central_platform", "state_day1": "blocked_flood"}],
+      "vertical_links": [],
+      "utility_node": {"id": "node_west", "trunk": "trunk_west", "state_day1": "unpowered"},
+      "hazards_day1": ["flooded", "west_gallery_arch_strained"],
+      "reclamation": {"class": "major", "requires": ["survey", "drain", "reinforce", "connect_utility"], "labor_forecast_wu": 21, "materials": 3, "yields_materials": 8},
+      "max_occupancy": 8,
+      "environment": {"noise": "low", "temperature": "cold_damp", "air": "west"},
+      "camera_bounds": {"zoom_overview": true, "frame": "left"},
+      "unlock": "survey", "story_reveal": "the silt line shows the storm drain was blocked deliberately, from inside, during the evacuation"
+    },
+    "deep_service": {
+      "name": "The Deep Service Level",
+      "story": "the fitters' domain — workshop, parts store, and the shift log of the crew who kept the lights on until the end",
+      "origin": [12, 12], "level": -1, "grid": [12, 3], "bays": 3,
+      "fixed": [
+        {"type": "column", "cells": [[3, 0], [7, 0]], "walkable_when": "never"},
+        {"type": "fitters_bench_bay", "cells_rect": {"x": 0, "y": 1, "w": 4, "h": 2}, "walkable_when": "interior", "note": "the Fitters' Shop shell — feature-built"},
+        {"type": "parts_racks", "cells_rect": {"x": 8, "y": 1, "w": 4, "h": 2}, "walkable_when": "interior", "note": "the parts store — Equipment Locker shell"}
+      ],
+      "buildable": [{"x": 0, "y": 0, "w": 12, "h": 3, "except_fixed": false}],
+      "entries": [],
+      "vertical_links": [{"id": "freight_lift", "kind": "lift", "cells": [[0, 0]], "to": "central_platform", "to_cells": [[13, 0]], "state_day1": "jammed"}],
+      "utility_node": {"id": "node_deep", "trunk": "trunk_core", "state_day1": "unpowered"},
+      "hazards_day1": ["dark", "lift_jammed"],
+      "reclamation": {"class": "standard", "requires": ["survey", "connect"], "labor_forecast_wu": 5, "tools_required": ["tools"], "intel_discount": "V2 lift schematics"},
+      "max_occupancy": 4,
+      "environment": {"noise": "medium", "temperature": "cool", "air": "core"},
+      "camera_bounds": {"zoom_overview": true, "frame": "lower_right"},
+      "unlock": "survey", "story_reveal": "the abandoned shift log — the fitters who kept the lights on until the end, and where they went"
+    }
+  },
+  "trunks": {
+    "trunk_core": {"serves": ["node_gate", "node_core", "node_signal", "node_flywheel", "node_deep"], "state_day1": "live"},
+    "trunk_east": {"serves": ["node_east"], "state_day1": "dark", "extend_from": "node_core", "extend_cost_wu": 6, "extend_materials": 3},
+    "trunk_west": {"serves": ["node_west"], "state_day1": "dark", "extend_from": "node_core", "extend_cost_wu": 6, "extend_materials": 3}
+  },
+  "safe_areas": ["central_platform", "scrubber_gate"],
+  "muster_point": {"section": "central_platform", "cells": [[9, 1]]}
+}

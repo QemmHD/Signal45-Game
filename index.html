@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SIGNAL 45 — Build-Mode Prototype</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0c1413">
+<style>
+/* SIGNAL 45 "soot and lamplight" (09 B.6) — single-theme by commitment:
+   this is the game's world, not a document. */
+:root{
+  --void:#0c1413; --ground:#16211f; --floor:#1b2725; --deadcell:#121a19;
+  --amber:#e8a34c; --amber-dim:#8a6a3a; --umber:#4a3826;
+  --bone:#e9e4d8; --bone-dim:#9a968b; --chalk:#d8d2c2;
+  --ember:#d96038; --flood:#2e5350; --glass:rgba(10,16,15,.86);
+  --line:rgba(233,228,216,.16);
+  --sal:env(safe-area-inset-left,0px); --sar:env(safe-area-inset-right,0px);
+  --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;overscroll-behavior:none;background:var(--void)}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+  color:var(--bone);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+  position:fixed;inset:0;width:100%;height:100dvh}
+#world{position:absolute;inset:0;touch-action:none;display:block}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.lbl{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--bone-dim)}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;touch-action:manipulation}
+button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* ---- top HUD (09 A.9: five chips + clock; suppressed in allocation views) ---- */
+#hud{position:absolute;top:calc(var(--sat) + 6px);left:50%;transform:translateX(-50%);
+  display:flex;gap:6px;align-items:center;z-index:20;pointer-events:none}
+.chip{background:var(--glass);border:1px solid var(--line);border-radius:6px;
+  padding:4px 8px;display:flex;gap:5px;align-items:baseline;backdrop-filter:blur(6px)}
+.chip b{font-size:13px;font-variant-numeric:tabular-nums;color:var(--chalk);font-weight:600}
+.chip span{font-size:11px;letter-spacing:.1em;color:var(--bone-dim);text-transform:uppercase;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace}
+#clock{color:var(--amber)}
+/* ---- crew strip (left thumb corner) ---- */
+#crew{position:absolute;left:calc(var(--sal) + 8px);bottom:calc(var(--sab) + 10px);
+  display:flex;flex-direction:column;gap:6px;z-index:20}
+.face{width:40px;height:40px;border-radius:50%;background:var(--glass);
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;color:var(--chalk);letter-spacing:.05em}
+.face.juna{border-color:var(--amber-dim)}
+/* ---- right control cluster ---- */
+#ctrl{position:absolute;right:calc(var(--sar) + 8px);bottom:calc(var(--sab) + 10px);
+  display:flex;flex-direction:column;gap:8px;z-index:20}
+.rbtn{width:48px;height:48px;border-radius:10px;background:var(--glass);
+  border:1px solid var(--line);color:var(--chalk);font-size:17px;
+  display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.rbtn.on{border-color:var(--amber);color:var(--amber);
+  box-shadow:0 0 12px rgba(232,163,76,.25) inset}
+/* ---- layout picker (top-left) ---- */
+#days{position:absolute;left:calc(var(--sal) + 8px);top:calc(var(--sat) + 6px);
+  display:flex;gap:5px;z-index:20}
+.day{padding:8px 12px;border-radius:6px;background:var(--glass);border:1px solid var(--line);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-dim);
+  font-family:ui-monospace,"SF Mono",Menlo,monospace;min-height:28px}
+.day.on{color:var(--amber);border-color:var(--amber-dim)}
+/* ---- sim controls (top-right) ---- */
+#simc{position:absolute;right:calc(var(--sar) + 8px);top:calc(var(--sat) + 6px);
+  display:flex;gap:5px;z-index:20}
+/* ---- workflow bar (build lens only — 24 §2) ---- */
+#wfbar{position:absolute;left:50%;bottom:calc(var(--sab) + 10px);transform:translateX(-50%);
+  display:none;gap:8px;z-index:21;background:var(--glass);border:1px solid var(--amber-dim);
+  border-radius:10px;padding:4px;backdrop-filter:blur(6px)}
+body.lens #wfbar{display:flex}
+.wf{padding:9px 13px;border-radius:7px;font-size:11px;letter-spacing:.12em;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--bone-dim);min-height:48px}
+.wf.on{color:var(--void);background:var(--amber)}
+/* lens mode frame (10 §16: the lens announces itself) */
+#lensframe{position:absolute;inset:0;pointer-events:none;z-index:15;display:none;
+  box-shadow:0 0 0 3px var(--amber-dim) inset;opacity:.55}
+body.lens #lensframe{display:block}
+/* ---- context panel (right slide-in; never covers selection = right third only) ---- */
+#panel{position:absolute;right:calc(var(--sar) + 8px);top:calc(var(--sat) + 58px);
+  bottom:calc(var(--sab) + 66px);width:236px;max-width:38vw;background:var(--glass);
+  border:1px solid var(--line);border-radius:12px;padding:12px;z-index:22;
+  backdrop-filter:blur(8px);overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;
+  transform:translateX(calc(100% + 20px));transition:transform .22s ease;display:flex;
+  flex-direction:column;gap:8px}
+#panel.open{transform:none}
+#panel h2{font-size:14px;font-weight:600;color:var(--chalk);letter-spacing:.02em;
+  text-wrap:balance}
+#panel p{font-size:11.5px;line-height:1.45;color:var(--bone-dim)}
+.verbs{display:flex;flex-wrap:wrap;gap:8px}
+.gverbs{display:flex;gap:8px;margin-top:auto;padding-top:8px}
+.gverbs .verb{min-height:48px;flex:1}
+.verb{padding:8px 10px;border-radius:7px;border:1px solid var(--line);font-size:11px;
+  color:var(--chalk);background:rgba(233,228,216,.05);min-height:34px}
+.verb.hot{border-color:var(--amber-dim);color:var(--amber)}
+.verb.danger{border-color:rgba(217,96,56,.5);color:var(--ember)}
+.verb:disabled{opacity:.38}
+#reason{font-size:11px;line-height:1.4;color:var(--ember);min-height:0}
+#reason.ok{color:#9dc08a}
+.chooser{display:flex;flex-direction:column;gap:4px}
+.chooser .verb{text-align:left}
+/* ---- banners / toasts ---- */
+#toasts{position:absolute;top:calc(var(--sat) + 44px);left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;gap:6px;z-index:30;pointer-events:none;width:min(78vw,430px)}
+.toast{background:var(--glass);border:1px solid var(--line);border-left:3px solid var(--amber);
+  border-radius:8px;padding:8px 12px;font-size:12px;line-height:1.4;color:var(--chalk);
+  backdrop-filter:blur(6px);animation:tin .25s ease}
+.toast.warn{border-left-color:var(--ember)}
+@keyframes tin{from{opacity:0;transform:translateY(-6px)}to{opacity:1}}
+/* ---- overlay board (OPERATE / power) ---- */
+#board{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(88vw,420px);
+  background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:16px;
+  z-index:40;display:none;backdrop-filter:blur(10px)}
+#board.open{display:block}
+#board table{width:100%;border-collapse:collapse;margin:10px 0}
+#board td{padding:5px 4px;font-size:12px;border-bottom:1px solid rgba(233,228,216,.08)}
+#board td:last-child{text-align:right;font-variant-numeric:tabular-nums;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.tier{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-dim);
+  font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.off{color:var(--ember);text-decoration:line-through}
+/* ---- inspect card (tap-and-hold) ---- */
+#peek{position:absolute;z-index:35;background:var(--glass);border:1px solid var(--amber-dim);
+  border-radius:8px;padding:8px 10px;font-size:11px;line-height:1.4;color:var(--chalk);
+  max-width:210px;display:none;pointer-events:none;backdrop-filter:blur(6px)}
+/* ---- help + rotate ---- */
+.sheet{position:absolute;inset:0;background:rgba(6,10,9,.9);z-index:50;display:none;
+  align-items:center;justify-content:center;padding:24px}
+.sheet.open{display:flex}
+.card{max-width:430px;background:var(--ground);border:1px solid var(--line);border-radius:16px;
+  padding:22px;display:flex;flex-direction:column;gap:10px}
+.card h1{font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);
+  font-weight:600}
+.card p{font-size:13px;line-height:1.55;color:var(--bone-dim)}
+.card b{color:var(--chalk);font-weight:600}
+.card .verb{align-self:flex-start}
+#rotate{display:none}
+@media (orientation:portrait){
+  #rotate{display:flex}
+  #hud,#crew,#ctrl,#days,#wfbar,#panel,#simc{display:none!important}
+}
+@media (prefers-reduced-motion:reduce){
+  #panel{transition:none}.toast{animation:none}
+}
+</style>
+</head>
+<body>
+<canvas id="world" aria-label="Kestrel Cross station cutaway"></canvas>
+<div id="lensframe"></div>
+
+<div id="days" role="tablist" aria-label="Layout">
+  <button class="day on" data-lay="day1" role="tab" aria-selected="true">Day 1</button>
+  <button class="day" data-lay="east_day7" role="tab" aria-selected="false">East D7</button>
+  <button class="day" data-lay="west_day7" role="tab" aria-selected="false">West D7</button>
+</div>
+
+<div id="hud" role="status" aria-label="Station stocks">
+  <div class="chip"><span>Food</span><b id="c-food">34</b></div>
+  <div class="chip"><span>Water</span><b id="c-water">12</b></div>
+  <div class="chip"><span>Meds</span><b id="c-meds">4</b></div>
+  <div class="chip"><span>Mat</span><b id="c-mat">12</b></div>
+  <div class="chip"><span>Charge</span><b id="c-charge">10</b></div>
+  <div class="chip" id="clockchip"><b id="clock" class="mono">DAY&nbsp;1</b><span>Swelter</span></div>
+</div>
+
+<div id="simc">
+  <button class="rbtn" id="helpbtn" aria-label="Help">?</button>
+</div>
+
+<div id="crew" aria-label="Crew strip"></div>
+
+<div id="ctrl">
+  <button class="rbtn" id="zoomin" aria-label="Zoom in">＋</button>
+  <button class="rbtn" id="zoomout" aria-label="Zoom out">－</button>
+  <button class="rbtn" id="overlaybtn" aria-label="Engineer's overlay">▦</button>
+  <button class="rbtn" id="lensbtn" aria-label="Build lens" aria-pressed="false">⌂</button>
+</div>
+
+<div id="wfbar" role="toolbar" aria-label="Build workflows">
+  <button class="wf" data-wf="RECLAIM" aria-pressed="false">Reclaim</button>
+  <button class="wf" data-wf="CONNECT" aria-pressed="false">Connect</button>
+  <button class="wf on" data-wf="BUILD" aria-pressed="true">Build</button>
+  <button class="wf" data-wf="OPERATE" aria-pressed="false">Operate</button>
+  <button class="wf" data-wf="ADAPT" aria-pressed="false">Adapt</button>
+</div>
+
+<aside id="panel" aria-label="Context panel"></aside>
+<div id="toasts" aria-live="polite"></div>
+<div id="peek" role="status"></div>
+
+<div id="board" aria-label="Load-priority board">
+  <div class="lbl">Load-priority board — Power</div>
+  <table id="loads"></table>
+  <div style="display:flex;gap:6px;justify-content:flex-end">
+    <button class="verb" id="shedbtn">Simulate storm pinch</button>
+    <button class="verb hot" id="restorebtn">Restore</button>
+    <button class="verb" id="boardclose">Close</button>
+  </div>
+</div>
+
+<div class="sheet open" id="help">
+  <div class="card">
+    <h1>Signal 45 — Build-Mode Prototype</h1>
+    <p><b>Tap</b> to select (tap again to cycle stacked targets) · <b>drag</b> to pan ·
+       <b>pinch</b> to zoom · <b>hold</b> to inspect.</p>
+    <p>Toggle the <b>⌂ build lens</b>, pick <b>BUILD</b>, choose an object, then place it —
+       every rejection states its reason in the game's own words. <b>OPERATE</b> opens the
+       load board: run the storm pinch and watch the platform lamps dim first.</p>
+    <p class="lbl">Interaction grammar per design doc 24 · geometry generated from the
+       repository layout data · not final art, not balance</p>
+    <button class="verb hot" id="helpclose">Enter the station</button>
+  </div>
+</div>
+
+<div class="sheet" id="rotate">
+  <div class="card">
+    <h1>Rotate your phone</h1>
+    <p>Kestrel Cross is a horizontal composition — SIGNAL 45 plays landscape-only.
+       Turn the device sideways to enter the station.</p>
+  </div>
+</div>
+
+<script>
+"use strict";
+const DATA = {"sections":{"_comment":"SIGNAL 45 slice station sections (Prompt 4, D-046). ONE logical source of truth: SECTION -> BAY -> CELL. 1 cell ~= 1.5 m; a structural bay spans 4 cells between roof columns (10 S2's ~6 m). Coordinates are section-local cells [x, y] with x rightward, y downward (row 0 = section's upper edge); world position = section origin (abstract render units) + level elevation. Rendering, collision, room ownership, utilities, navigation, and save data ALL reference these cell addresses; renderers convert cells to world transforms at draw time and never store their own coordinates. PROVISIONAL geometry \u2014 sizes are design targets, not final art metrics.","cell_meters":1.5,"bay_cells":4,"levels":{"1":"upper / surface access","0":"platform level","-1":"service vaults"},"sections":{"scrubber_gate":{"name":"The Scrubber Gate","story":"the station's lungs and only door \u2014 a damaged airlock/decon gate the fitters kept alive until the end","origin":[8,0],"level":1,"grid":[8,3],"bays":2,"fixed":[{"type":"airlock_doors","cells":[[0,0],[0,1],[0,2]],"walkable_when":"open"},{"type":"decon_channel","cells":[[1,1],[2,1]],"walkable_when":"always"},{"type":"scrubber_stack","cells":[[6,0],[7,0]],"walkable_when":"never"}],"buildable":[{"x":1,"y":0,"w":5,"h":3,"except_fixed":true}],"entries":[{"id":"surface_door","edge":"west","cells":[[0,1]],"to":"surface","state_day1":"operational"}],"vertical_links":[{"id":"gate_stair","kind":"stair","cells":[[7,2]],"to":"central_platform","to_cells":[[8,0]],"state_day1":"operational"}],"utility_node":{"id":"node_gate","trunk":"trunk_core","state_day1":"connected"},"hazards_day1":["intake_damaged"],"reclamation":{"class":"minor_clearance","requires":["repair"],"labor_forecast_wu":4},"max_occupancy":6,"environment":{"noise":"high","temperature":"hot_at_intake","air":"decon"},"camera_bounds":{"zoom_overview":true,"frame":"upper_left"},"unlock":"start","story_reveal":null},"central_platform":{"name":"The Central Platform","story":"the surviving heart of Kestrel Cross \u2014 the Camp huddles here between the columns","origin":[0,6],"level":0,"grid":[16,4],"bays":4,"fixed":[{"type":"column","cells":[[3,0],[7,0],[11,0]],"walkable_when":"never"},{"type":"track_bed","cells_rect":{"x":0,"y":3,"w":16,"h":1},"walkable_when":"never"},{"type":"emergency_tank","cells":[[1,0]],"walkable_when":"never"}],"buildable":[{"x":0,"y":0,"w":16,"h":3,"except_fixed":true}],"entries":[{"id":"west_portal","edge":"west","cells":[[0,1]],"to":"west_gallery","state_day1":"blocked_flood"},{"id":"east_portal","edge":"east","cells":[[15,1]],"to":"east_concourse","state_day1":"blocked_rubble"}],"vertical_links":[{"id":"gate_stair","kind":"stair","cells":[[8,0]],"to":"scrubber_gate","to_cells":[[7,2]],"state_day1":"operational"},{"id":"signal_ladder","kind":"ladder","cells":[[10,0]],"to":"signal_box","to_cells":[[0,1]],"state_day1":"operational"},{"id":"service_stair","kind":"stair","cells":[[5,2]],"to":"flywheel_vault","to_cells":[[0,0]],"state_day1":"operational"},{"id":"freight_lift","kind":"lift","cells":[[13,0]],"to":"deep_service","to_cells":[[0,0]],"state_day1":"jammed"}],"utility_node":{"id":"node_core","trunk":"trunk_core","state_day1":"connected"},"hazards_day1":[],"reclamation":{"class":"none","requires":[],"labor_forecast_wu":0},"max_occupancy":10,"environment":{"noise":"medium","temperature":"cool","air":"core"},"camera_bounds":{"zoom_overview":true,"frame":"center"},"unlock":"start","story_reveal":"the timetable board still lists the last three departures that never left"},"signal_box":{"name":"The Signal Box","story":"the elevated interlocking cabin \u2014 sightlines down the whole platform; the improvised Listening Post","origin":[10,3],"level":1,"grid":[4,2],"bays":1,"fixed":[{"type":"lever_frame","cells":[[3,0]],"walkable_when":"never"}],"buildable":[{"x":0,"y":0,"w":3,"h":2,"except_fixed":true}],"entries":[],"vertical_links":[{"id":"signal_ladder","kind":"ladder","cells":[[0,1]],"to":"central_platform","to_cells":[[10,0]],"state_day1":"operational"}],"utility_node":{"id":"node_signal","trunk":"trunk_core","state_day1":"connected"},"hazards_day1":[],"reclamation":{"class":"none","requires":[],"labor_forecast_wu":0},"max_occupancy":2,"environment":{"noise":"low","temperature":"cool","air":"core"},"camera_bounds":{"zoom_overview":true,"frame":"upper_right"},"unlock":"start","story_reveal":null},"flywheel_vault":{"name":"The Flywheel Vault","story":"the regenerative-brake flywheel the fitters rigged as the station's heart \u2014 still turning, barely","origin":[2,12],"level":-1,"grid":[8,3],"bays":2,"fixed":[{"type":"flywheel_housing","cells":[[4,0],[5,0],[4,1],[5,1]],"walkable_when":"never"},{"type":"cable_gallery","cells_rect":{"x":0,"y":2,"w":8,"h":1},"walkable_when":"always"}],"buildable":[{"x":0,"y":0,"w":4,"h":2,"except_fixed":true},{"x":6,"y":0,"w":2,"h":2,"except_fixed":true}],"entries":[],"vertical_links":[{"id":"service_stair","kind":"stair","cells":[[0,0]],"to":"central_platform","to_cells":[[5,2]],"state_day1":"operational"}],"utility_node":{"id":"node_flywheel","trunk":"trunk_core","state_day1":"connected"},"hazards_day1":["bearing_wear"],"reclamation":{"class":"none","requires":[],"labor_forecast_wu":0},"max_occupancy":3,"environment":{"noise":"very_high","temperature":"warm","air":"core"},"camera_bounds":{"zoom_overview":true,"frame":"lower_left"},"unlock":"start","story_reveal":null},"east_concourse":{"name":"The East Concourse","story":"two stranded railcars and the kiosk row \u2014 the shopping arcade of a station that expected tomorrow","origin":[17,6],"level":0,"grid":[16,4],"bays":4,"fixed":[{"type":"column","cells":[[3,0],[7,0],[11,0]],"walkable_when":"never"},{"type":"railcar_a","cells_rect":{"x":0,"y":2,"w":6,"h":2},"walkable_when":"interior","note":"stranded railcar shell \u2014 convertible (Sleeper Car / Aid Car)"},{"type":"railcar_b","cells_rect":{"x":7,"y":2,"w":6,"h":2},"walkable_when":"interior","note":"stranded railcar shell \u2014 convertible (Sleeper Car / Aid Car)"},{"type":"kiosk_row","walkable_when":"interior","note":"shuttered kiosks - Canteen / Cold Store shells; the x11 roof column stands mid-row","cells":[[8,0],[9,0],[10,0],[12,0],[13,0],[14,0],[15,0]]}],"buildable":[{"x":0,"y":0,"w":16,"h":4,"except_fixed":false,"note":"railcars and kiosks are CONVERTIBLE fixed shells: rooms may claim them; open floor cells host built shells"}],"entries":[{"id":"east_portal","edge":"west","cells":[[0,1]],"to":"central_platform","state_day1":"blocked_rubble"}],"vertical_links":[],"utility_node":{"id":"node_east","trunk":"trunk_east","state_day1":"unpowered"},"hazards_day1":["rubble_collapse","east_canopy_bay_strained"],"reclamation":{"class":"major","requires":["survey","clear","reinforce","connect_utility"],"labor_forecast_wu":21,"materials":3,"yields_materials":10},"max_occupancy":8,"environment":{"noise":"low","temperature":"cool","air":"east"},"camera_bounds":{"zoom_overview":true,"frame":"right"},"unlock":"survey","story_reveal":"one kiosk is still shuttered mid-inventory \u2014 its owner's last stock count chalked on the board"},"west_gallery":{"name":"The West Gallery","story":"the flooded cistern gallery \u2014 the station's water heart, drowned on evacuation night","origin":[-17,6],"level":0,"grid":[16,4],"bays":4,"fixed":[{"type":"column","cells":[[4,0],[8,0],[12,0]],"walkable_when":"never"},{"type":"cistern_main","cells_rect":{"x":0,"y":0,"w":3,"h":2},"walkable_when":"never","note":"the cistern head \u2014 Cistern Works is feature-built around it"},{"type":"gallery_arch","cells":[[8,1]],"walkable_when":"never","note":"west_gallery_arch structural hotspot (18 S5)"},{"type":"drain_channel","cells_rect":{"x":0,"y":3,"w":16,"h":1},"walkable_when":"never"}],"buildable":[{"x":3,"y":0,"w":13,"h":3,"except_fixed":true}],"entries":[{"id":"west_portal","edge":"east","cells":[[15,1]],"to":"central_platform","state_day1":"blocked_flood"}],"vertical_links":[],"utility_node":{"id":"node_west","trunk":"trunk_west","state_day1":"unpowered"},"hazards_day1":["flooded","west_gallery_arch_strained"],"reclamation":{"class":"major","requires":["survey","drain","reinforce","connect_utility"],"labor_forecast_wu":21,"materials":3,"yields_materials":8},"max_occupancy":8,"environment":{"noise":"low","temperature":"cold_damp","air":"west"},"camera_bounds":{"zoom_overview":true,"frame":"left"},"unlock":"survey","story_reveal":"the silt line shows the storm drain was blocked deliberately, from inside, during the evacuation"},"deep_service":{"name":"The Deep Service Level","story":"the fitters' domain \u2014 workshop, parts store, and the shift log of the crew who kept the lights on until the end","origin":[12,12],"level":-1,"grid":[12,3],"bays":3,"fixed":[{"type":"column","cells":[[3,0],[7,0]],"walkable_when":"never"},{"type":"fitters_bench_bay","cells_rect":{"x":0,"y":1,"w":4,"h":2},"walkable_when":"interior","note":"the Fitters' Shop shell \u2014 feature-built"},{"type":"parts_racks","cells_rect":{"x":8,"y":1,"w":4,"h":2},"walkable_when":"interior","note":"the parts store \u2014 Equipment Locker shell"}],"buildable":[{"x":0,"y":0,"w":12,"h":3,"except_fixed":false}],"entries":[],"vertical_links":[{"id":"freight_lift","kind":"lift","cells":[[0,0]],"to":"central_platform","to_cells":[[13,0]],"state_day1":"jammed"}],"utility_node":{"id":"node_deep","trunk":"trunk_core","state_day1":"unpowered"},"hazards_day1":["dark","lift_jammed"],"reclamation":{"class":"standard","requires":["survey","connect"],"labor_forecast_wu":5,"tools_required":["tools"],"intel_discount":"V2 lift schematics"},"max_occupancy":4,"environment":{"noise":"medium","temperature":"cool","air":"core"},"camera_bounds":{"zoom_overview":true,"frame":"lower_right"},"unlock":"survey","story_reveal":"the abandoned shift log \u2014 the fitters who kept the lights on until the end, and where they went"}},"trunks":{"trunk_core":{"serves":["node_gate","node_core","node_signal","node_flywheel","node_deep"],"state_day1":"live"},"trunk_east":{"serves":["node_east"],"state_day1":"dark","extend_from":"node_core","extend_cost_wu":6,"extend_materials":3},"trunk_west":{"serves":["node_west"],"state_day1":"dark","extend_from":"node_core","extend_cost_wu":6,"extend_materials":3}},"safe_areas":["central_platform","scrubber_gate"],"muster_point":{"section":"central_platform","cells":[[9,1]]}},"layouts":{"day1":{"_comment":"SIGNAL 45 Day-1 layout (Prompt 4, D-046). Four temporary/damaged functional areas; two blocked horizontal routes; one jammed vertical route. Validated by tools/validate_station_layouts.py.","name":"day1","route":null,"day":1,"portal_states":{"east_portal":"blocked_rubble","west_portal":"blocked_flood"},"link_states":{"freight_lift":"jammed","gate_stair":"operational","signal_ladder":"operational","service_stair":"operational"},"trunk_states":{"trunk_core":"live","trunk_east":"dark","trunk_west":"dark"},"rooms":[{"id":"scrubber_hall","family":"utility","specialization":"air","form":"feature_built","feature":"scrubber_stack","state":"impaired","section":"scrubber_gate","rect":{"x":3,"y":0,"w":3,"h":3},"area":"Scrubber Gate"},{"id":"flywheel_room","family":"utility","specialization":"power","form":"feature_built","feature":"flywheel_housing","state":"impaired","section":"flywheel_vault","rect":{"x":2,"y":0,"w":2,"h":2},"area":"Flywheel Room"},{"id":"camp","family":"rest","form":"temporary","state":"operational","section":"central_platform","rect":{"x":2,"y":0,"w":5,"h":3},"area":"the Camp"},{"id":"cook_zone","family":"food","form":"temporary","state":"operational","section":"central_platform","rect":{"x":8,"y":1,"w":2,"h":2},"area":"the Camp"},{"id":"supply_zone","family":"storage","form":"temporary","state":"operational","section":"central_platform","rect":{"x":12,"y":1,"w":4,"h":2},"area":"the Camp"},{"id":"listening_post","family":"operations","specialization":"listening_post","form":"feature_built","feature":"lever_frame","state":"impaired","section":"signal_box","rect":{"x":0,"y":0,"w":3,"h":2},"area":"Listening Post (improvised)"},{"id":"triage_corner","family":"medical","form":"temporary","state":"operational","note":"Ash's bench at the decon channel - return-and-triage is staged at the gate (01 Pillar 4); the west route keeps this class of venue all week","section":"scrubber_gate","rect":{"x":1,"y":2,"w":2,"h":1},"area":"Scrubber Gate"}],"objects":[{"id":"bedroll_1","type":"bedroll","room":"camp","pos":[2,0],"rot":0},{"id":"bedroll_2","type":"bedroll","room":"camp","pos":[4,0],"rot":0},{"id":"bedroll_3","type":"bedroll","room":"camp","pos":[5,0],"rot":0},{"id":"bedroll_4","type":"bedroll","room":"camp","pos":[6,0],"rot":0},{"id":"camp_bench","type":"workbench","room":null,"pos":[14,0],"rot":0,"section":"central_platform"},{"id":"cook_ring_1","type":"cook_ring","room":"cook_zone","pos":[8,1],"rot":0},{"id":"transfer_pump_1","type":"transfer_pump","room":null,"section":"central_platform","pos":[1,1],"rot":0},{"id":"purifier_1","type":"purifier_unit","room":null,"section":"central_platform","pos":[0,0],"rot":0},{"id":"crate_1","type":"supply_crate","room":"supply_zone","pos":[12,1],"rot":0},{"id":"crate_2","type":"supply_crate","room":"supply_zone","pos":[13,1],"rot":0},{"id":"comfort_lamp_1","type":"comfort_lamp","room":null,"section":"central_platform","pos":[7,1],"rot":0},{"id":"mask_cache_1","type":"mask_cache","room":null,"section":"central_platform","pos":[10,1],"rot":0},{"id":"radio_rig_1","type":"radio_rig","room":"listening_post","pos":[1,0],"rot":0},{"id":"battery_1","type":"battery_bank","room":"flywheel_room","pos":[3,1],"rot":0},{"id":"timetable_board","type":"memorial_chalk","room":null,"section":"central_platform","pos":[11,1],"rot":0},{"id":"gate_bench","type":"triage_bench","room":"triage_corner","pos":[1,2],"rot":180}],"areas":["Scrubber Gate","Flywheel Room","the Camp","Listening Post (improvised)"],"essential_facilities":["scrubber_hall","flywheel_room","camp","cook_zone","listening_post","triage_corner"],"juna_berth":null},"east_day7":{"_comment":"SIGNAL 45 East-route Day-7 layout (Prompt 4, D-046): comfort first. 10 functional areas; Camp repurposed to Staging; LP wired; pantry module; trunk_east live; lift restored; Juna's berth in the Sleeper Car.","name":"east_day7","route":"east","day":7,"portal_states":{"east_portal":"open","west_portal":"blocked_flood"},"link_states":{"freight_lift":"operational","gate_stair":"operational","signal_ladder":"operational","service_stair":"operational"},"trunk_states":{"trunk_core":"live","trunk_east":"live","trunk_west":"dark"},"rooms":[{"id":"scrubber_hall","family":"utility","specialization":"air","form":"feature_built","feature":"scrubber_stack","state":"operational","section":"scrubber_gate","rect":{"x":3,"y":0,"w":3,"h":3},"area":"Scrubber Gate"},{"id":"flywheel_room","family":"utility","specialization":"power","form":"feature_built","feature":"flywheel_housing","state":"operational","upgrade":"stabilized","section":"flywheel_vault","rect":{"x":2,"y":0,"w":2,"h":2},"area":"Flywheel Room"},{"id":"staging_room","family":"operations","specialization":"staging","form":"permanent","state":"operational","repurposed_from":"camp","section":"central_platform","rect":{"x":2,"y":0,"w":5,"h":3},"area":"Staging Room"},{"id":"cook_zone","family":"food","form":"temporary","state":"operational","note":"kettle corner kept by the stair after the Canteen opens","section":"central_platform","rect":{"x":8,"y":1,"w":2,"h":2},"area":"Staging Room"},{"id":"listening_post","family":"operations","specialization":"listening_post","form":"feature_built","feature":"lever_frame","state":"operational","upgrade":"wired","section":"signal_box","rect":{"x":0,"y":0,"w":3,"h":2},"area":"Listening Post (wired)"},{"id":"sleeper_car","family":"rest","form":"railcar","shell":"railcar_b","state":"operational","section":"east_concourse","rect":{"x":7,"y":2,"w":6,"h":2},"note":"the far railcar: quiet sleep away from the portal-side traffic (the railcar-role decision, 10 S15)","area":"Sleeper Car"},{"id":"aid_car","family":"medical","form":"railcar","shell":"railcar_a","state":"operational","section":"east_concourse","rect":{"x":0,"y":2,"w":6,"h":2},"note":"the portal-side railcar: shortest carry from the gate for casualties (the railcar-role decision)","area":"Aid Car"},{"id":"canteen","family":"food","form":"kiosk","shell":"kiosk_row","state":"operational","section":"east_concourse","rect":{"x":8,"y":0,"w":4,"h":2},"area":"Canteen (+pantry)"},{"id":"canteen_pantry","family":"food","form":"module","module_of":"canteen","state":"operational","section":"east_concourse","rect":{"x":12,"y":0,"w":2,"h":1},"area":"Canteen (+pantry)"},{"id":"cold_store","family":"storage","specialization":"cold","form":"kiosk","shell":"kiosk_row","state":"operational","section":"east_concourse","rect":{"x":14,"y":0,"w":2,"h":2},"area":"Cold Store"},{"id":"fitters_shop","family":"workshop","form":"feature_built","feature":"fitters_bench_bay","state":"operational","section":"deep_service","rect":{"x":0,"y":1,"w":4,"h":2},"area":"Fitters' Shop"},{"id":"equipment_locker","family":"storage","specialization":"equipment","form":"feature_built","feature":"parts_racks","state":"operational","section":"deep_service","rect":{"x":8,"y":1,"w":4,"h":2},"area":"Equipment Locker"}],"objects":[{"id":"staging_shelf","type":"storage_shelf","room":"staging_room","pos":[4,0],"rot":0},{"id":"staging_crate","type":"supply_crate","room":"staging_room","pos":[2,0],"rot":0},{"id":"cook_ring_1","type":"cook_ring","room":"cook_zone","pos":[8,1],"rot":0},{"id":"transfer_pump_1","type":"transfer_pump","room":null,"section":"central_platform","pos":[1,1],"rot":0},{"id":"purifier_1","type":"purifier_unit","room":null,"section":"central_platform","pos":[0,0],"rot":0},{"id":"comfort_lamp_1","type":"comfort_lamp","room":null,"section":"central_platform","pos":[7,1],"rot":0},{"id":"comfort_lamp_2","type":"comfort_lamp","room":null,"section":"east_concourse","pos":[6,1],"rot":0},{"id":"mask_cache_1","type":"mask_cache","room":null,"section":"central_platform","pos":[10,1],"rot":0},{"id":"radio_rig_1","type":"radio_rig_wired","room":"listening_post","pos":[1,0],"rot":0},{"id":"battery_1","type":"battery_bank","room":"flywheel_room","pos":[3,1],"rot":0},{"id":"bunk_e1","type":"bunk_bed","room":"sleeper_car","pos":[7,2],"rot":0},{"id":"bunk_e2","type":"bunk_bed","room":"sleeper_car","pos":[9,2],"rot":0},{"id":"bunk_e3","type":"bunk_bed","room":"sleeper_car","pos":[11,2],"rot":0},{"id":"cot_e1","type":"med_cot","room":"aid_car","pos":[0,2],"rot":0},{"id":"cot_e2","type":"med_cot","room":"aid_car","pos":[2,2],"rot":0},{"id":"med_cabinet_1","type":"med_cabinet","room":"aid_car","pos":[4,2],"rot":0},{"id":"hotplate_1","type":"hotplate_counter","room":"canteen","pos":[8,0],"rot":0},{"id":"canteen_table_1","type":"canteen_table","room":null,"pos":[13,2],"rot":0,"section":"east_concourse"},{"id":"pantry_shelf","type":"storage_shelf","room":"canteen_pantry","pos":[12,0],"rot":0},{"id":"cold_locker_1","type":"cold_locker","room":"cold_store","pos":[14,0],"rot":0},{"id":"fitters_bench_1","type":"workbench","room":"fitters_shop","pos":[1,1],"rot":0},{"id":"locker_shelf","type":"storage_shelf","room":"equipment_locker","pos":[9,1],"rot":0},{"id":"kiosk_chalk","type":"memorial_chalk","room":null,"section":"east_concourse","pos":[15,1],"rot":0},{"id":"timetable_board","type":"memorial_chalk","room":null,"section":"central_platform","pos":[11,1],"rot":0},{"id":"shift_log_1","type":"shift_log","room":null,"section":"deep_service","pos":[5,1],"rot":0}],"areas":["Scrubber Gate","Flywheel Room","Listening Post (wired)","Staging Room","Sleeper Car","Aid Car","Canteen (+pantry)","Cold Store","Fitters' Shop","Equipment Locker"],"essential_facilities":["scrubber_hall","flywheel_room","sleeper_car","aid_car","canteen","listening_post","fitters_shop"],"juna_berth":{"room":"sleeper_car","object":"bunk_e3"},"expansion_changes":["east_portal opened (Clear)","reinforce_e (canopy bay)","trunk_east extended","freight_lift restored (Connect)","camp repurposed to staging_room","listening_post upgraded to wired","canteen_pantry module attached","comfort lighting extended to the east wing","Level-1 seal installed on the east bulkhead (storm isolation decision in data)"],"seal_bulkhead":{"portal":"east_portal","note":"the Level-1 seal guards the new wing (the Day-2 isolation decision)"}},"west_day7":{"_comment":"SIGNAL 45 West-route Day-7 layout (Prompt 4, D-046): water first. 10 functional areas; the canteen corner stays a cook-ring zone; Cistern Works + Pump Room online; west-bay bunks hold Juna's berth; filtration module attached.","name":"west_day7","route":"west","day":7,"portal_states":{"east_portal":"blocked_rubble","west_portal":"open"},"link_states":{"freight_lift":"operational","gate_stair":"operational","signal_ladder":"operational","service_stair":"operational"},"trunk_states":{"trunk_core":"live","trunk_east":"dark","trunk_west":"live"},"rooms":[{"id":"scrubber_hall","family":"utility","specialization":"air","form":"feature_built","feature":"scrubber_stack","state":"operational","section":"scrubber_gate","rect":{"x":3,"y":0,"w":3,"h":3},"area":"Scrubber Gate"},{"id":"flywheel_room","family":"utility","specialization":"power","form":"feature_built","feature":"flywheel_housing","state":"operational","upgrade":"stabilized","section":"flywheel_vault","rect":{"x":2,"y":0,"w":2,"h":2},"area":"Flywheel Room"},{"id":"staging_room","family":"operations","specialization":"staging","form":"permanent","state":"operational","repurposed_from":"camp","section":"central_platform","rect":{"x":4,"y":0,"w":3,"h":3},"area":"Staging Room (+triage bench)"},{"id":"canteen_corner","family":"food","form":"temporary","state":"operational","note":"the cook-ring canteen corner \u2014 the west warm-beat venue (D-039)","section":"central_platform","rect":{"x":8,"y":1,"w":4,"h":2},"area":"Canteen Corner"},{"id":"listening_post","family":"operations","specialization":"listening_post","form":"feature_built","feature":"lever_frame","state":"operational","upgrade":"wired","section":"signal_box","rect":{"x":0,"y":0,"w":3,"h":2},"area":"Listening Post (wired)"},{"id":"cistern_works","family":"utility","specialization":"water","form":"feature_built","feature":"cistern_main","state":"operational","section":"west_gallery","rect":{"x":3,"y":0,"w":1,"h":2},"area":"Cistern Works (+filtration)"},{"id":"cistern_filtration","family":"utility","form":"module","module_of":"cistern_works","state":"operational","section":"west_gallery","rect":{"x":3,"y":2,"w":1,"h":1},"area":"Cistern Works (+filtration)"},{"id":"pump_room","family":"utility","specialization":"water","form":"permanent","state":"operational","section":"west_gallery","rect":{"x":5,"y":0,"w":2,"h":2},"area":"Pump Room"},{"id":"west_bunks","family":"rest","form":"permanent","state":"operational","section":"west_gallery","rect":{"x":9,"y":0,"w":5,"h":3},"area":"West Bunks"},{"id":"cold_store","family":"storage","specialization":"cold","form":"permanent","state":"operational","section":"west_gallery","rect":{"x":14,"y":0,"w":2,"h":2},"area":"Cold Store"},{"id":"fitters_shop","family":"workshop","form":"feature_built","feature":"fitters_bench_bay","state":"operational","section":"deep_service","rect":{"x":0,"y":1,"w":4,"h":2},"area":"Fitters' Shop"},{"id":"triage_corner","family":"medical","form":"temporary","state":"operational","note":"Ash's bench beside the Staging Room - the west route's treatment venue at her stated penalty (D-039 route-completeness canon)","section":"central_platform","rect":{"x":2,"y":0,"w":2,"h":3},"area":"Staging Room (+triage bench)"}],"objects":[{"id":"staging_shelf","type":"storage_shelf","room":"staging_room","pos":[4,0],"rot":0},{"id":"staging_crate","type":"supply_crate","room":"staging_room","pos":[6,0],"rot":0},{"id":"cook_ring_1","type":"cook_ring","room":"canteen_corner","pos":[8,1],"rot":0},{"id":"corner_table","type":"canteen_table","room":"canteen_corner","pos":[10,2],"rot":0},{"id":"transfer_pump_1","type":"transfer_pump","room":null,"section":"central_platform","pos":[1,1],"rot":0},{"id":"purifier_1","type":"purifier_unit","room":null,"section":"central_platform","pos":[0,0],"rot":0},{"id":"comfort_lamp_1","type":"comfort_lamp","room":null,"section":"central_platform","pos":[7,1],"rot":0},{"id":"comfort_lamp_2","type":"comfort_lamp","room":"west_bunks","pos":[12,1],"rot":0,"note":"Juna's bunk corner keeps its lamp (adjacent to bunk_w3 - the candle line's anchor)"},{"id":"mask_cache_1","type":"mask_cache","room":null,"section":"central_platform","pos":[12,1],"rot":0},{"id":"radio_rig_1","type":"radio_rig_wired","room":"listening_post","pos":[1,0],"rot":0},{"id":"battery_1","type":"battery_bank","room":"flywheel_room","pos":[3,1],"rot":0},{"id":"filtration_1","type":"filtration_module","room":"cistern_works","pos":[3,0],"rot":0},{"id":"pump_1","type":"pump_module","room":"pump_room","pos":[5,0],"rot":0},{"id":"bunk_w1","type":"bunk_bed","room":"west_bunks","pos":[9,0],"rot":0},{"id":"bunk_w2","type":"bunk_bed","room":"west_bunks","pos":[11,0],"rot":0},{"id":"bunk_w3","type":"bunk_bed","room":"west_bunks","pos":[13,0],"rot":180},{"id":"cold_locker_1","type":"cold_locker","room":"cold_store","pos":[14,0],"rot":0},{"id":"fitters_bench_1","type":"workbench","room":"fitters_shop","pos":[1,1],"rot":0},{"id":"silt_line_mark","type":"memorial_chalk","room":null,"section":"west_gallery","pos":[7,1],"rot":0},{"id":"timetable_board","type":"memorial_chalk","room":null,"section":"central_platform","pos":[14,1],"rot":0},{"id":"staging_bench","type":"triage_bench","room":"triage_corner","pos":[2,1],"rot":0},{"id":"shift_log_1","type":"shift_log","room":null,"section":"deep_service","pos":[5,1],"rot":0}],"areas":["Scrubber Gate","Flywheel Room","Listening Post (wired)","Staging Room (+triage bench)","Canteen Corner","Cistern Works (+filtration)","Pump Room","West Bunks","Cold Store","Fitters' Shop"],"essential_facilities":["scrubber_hall","flywheel_room","west_bunks","canteen_corner","cistern_works","pump_room","listening_post","fitters_shop","triage_corner"],"juna_berth":{"room":"west_bunks","object":"bunk_w3"},"expansion_changes":["west_portal opened (Drain)","reinforce_w (gallery arch)","trunk_west extended","freight_lift restored (Connect)","camp repurposed to staging_room","listening_post upgraded to wired","cistern_filtration module attached","comfort lighting kept on the platform; Juna's bunk corner keeps its lamp","Level-1 seal installed on the west bulkhead (storm isolation decision in data)"],"seal_bulkhead":{"portal":"west_portal","note":"the Level-1 seal guards the drained gallery (the Day-2 isolation decision)"}}},"objects":{"_comment":"SIGNAL 45 placeable objects (Prompt 4, D-047). NINE behavior families carry all simulation logic; objects are data. footprint [w,h] in cells; interaction = cells (relative to footprint origin, pre-rotation) that must stay clear for use; rotation: footprints rotate in 90-degree steps (w/h swap; interaction cells rotate with them). block_paths: whether the footprint blocks resident movement. PROVISIONAL.","behavior_families":{"workstation":"resident works here; requires clear interaction cell(s); generates/receives work orders","rest_point":"resident sleeps/recovers here; quality tier feeds fatigue/stress recovery","storage":"holds stock/equipment; affects delivery distance; free-vs-reserved aware","utility_module":"produces/moves a utility; must sit in a served section within node reach; service clearance required","comfort_object":"passive comfort/stress relief in its room; no work orders","barrier":"blocks or gates movement (partitions, barricades, doors); changes the nav graph","decoration":"identity and warmth; no simulation beyond visual-stage contribution","emergency_object":"used during incidents (masks, valve, extinguisher point); must stay reachable","story_object":"authored reveal anchor; inspectable; never deconstructable"},"objects":{"bedroll":{"family":"rest_point","tier":1,"capacity":1,"footprint":[1,2],"interaction":[[0,0]],"block_paths":false,"utility":null,"rooms":["rest","medical"],"restrictions":[],"upgrade_to":"bunk_bed","damage_states":2,"store_result":"stored","deconstruct_yield":0},"bunk_bed":{"family":"rest_point","tier":2,"capacity":2,"footprint":[1,2],"interaction":[[0,0]],"block_paths":true,"utility":null,"rooms":["rest"],"restrictions":["not_against_interaction_side"],"upgrade_to":"berth_bed","damage_states":2,"store_result":"stored","deconstruct_yield":1},"berth_bed":{"family":"rest_point","tier":3,"capacity":1,"footprint":[1,2],"interaction":[[0,0]],"block_paths":true,"utility":null,"rooms":["rest"],"restrictions":["wants_partition_adjacent"],"upgrade_to":null,"damage_states":2,"store_result":"stored","deconstruct_yield":1},"med_cot":{"family":"rest_point","tier":2,"capacity":1,"footprint":[1,2],"interaction":[[0,0],[0,1]],"block_paths":true,"utility":null,"rooms":["medical"],"restrictions":["carer_side_clear"],"upgrade_to":null,"damage_states":2,"store_result":"stored","deconstruct_yield":1},"triage_bench":{"family":"workstation","tier":1,"footprint":[2,1],"interaction":[[0,1],[1,1]],"block_paths":true,"utility":null,"rooms":["medical","operations"],"restrictions":[],"upgrade_to":"med_cabinet","damage_states":2,"store_result":"stored","deconstruct_yield":1},"med_cabinet":{"family":"storage","tier":2,"footprint":[1,1],"interaction":[[0,1]],"block_paths":true,"utility":null,"rooms":["medical"],"restrictions":[],"upgrade_to":null,"damage_states":2,"store_result":"stored","deconstruct_yield":1},"cook_ring":{"family":"workstation","tier":1,"footprint":[2,2],"interaction":[[0,1],[1,1]],"block_paths":false,"utility":null,"rooms":["food"],"restrictions":["open_zone_ok"],"upgrade_to":"hotplate_counter","damage_states":2,"store_result":"stored","deconstruct_yield":0},"hotplate_counter":{"family":"workstation","tier":2,"footprint":[2,1],"interaction":[[0,1],[1,1]],"block_paths":true,"utility":"power_normal_tier","rooms":["food"],"restrictions":[],"upgrade_to":null,"damage_states":2,"store_result":"stored","deconstruct_yield":1},"canteen_table":{"family":"comfort_object","tier":1,"footprint":[2,1],"interaction":[[0,1],[1,1],[0,-1],[1,-1]],"block_paths":true,"utility":null,"rooms":["food","operations"],"restrictions":[],"upgrade_to":null,"damage_states":1,"store_result":"stored","deconstruct_yield":1},"storage_shelf":{"family":"storage","tier":1,"footprint":[2,1],"interaction":[[0,1],[1,1]],"block_paths":true,"utility":null,"rooms":["storage","food","workshop","medical","operations"],"restrictions":[],"upgrade_to":"cold_locker","damage_states":2,"store_result":"stored","deconstruct_yield":1},"supply_crate":{"family":"storage","tier":1,"footprint":[1,1],"interaction":[[0,1]],"block_paths":false,"utility":null,"rooms":["*"],"restrictions":["open_zone_ok"],"upgrade_to":null,"damage_states":1,"store_result":"stored","deconstruct_yield":0},"cold_locker":{"family":"storage","tier":2,"footprint":[2,1],"interaction":[[0,1],[1,1]],"block_paths":true,"utility":"power_normal_tier","rooms":["storage"],"restrictions":[],"upgrade_to":null,"damage_states":2,"store_result":"stored","deconstruct_yield":1},"workbench":{"family":"workstation","tier":1,"footprint":[2,1],"interaction":[[0,1],[1,1]],"block_paths":true,"utility":"power_normal_tier_optional","rooms":["workshop","utility"],"restrictions":[],"upgrade_to":null,"damage_states":2,"store_result":"stored","deconstruct_yield":1},"radio_rig":{"family":"workstation","tier":1,"footprint":[2,1],"interaction":[[0,1]],"block_paths":true,"utility":"power_essential_tier","rooms":["operations"],"restrictions":["signal_box_only_in_slice"],"upgrade_to":"radio_rig_wired","damage_states":2,"store_result":"stored","deconstruct_yield":1},"radio_rig_wired":{"family":"workstation","tier":2,"footprint":[2,1],"interaction":[[0,1]],"block_paths":true,"utility":"power_essential_tier","rooms":["operations"],"restrictions":["signal_box_only_in_slice"],"upgrade_to":null,"damage_states":2,"store_result":"stored","deconstruct_yield":1},"transfer_pump":{"family":"utility_module","tier":1,"footprint":[1,1],"interaction":[[0,1]],"block_paths":true,"utility":"power_essential_tier","rooms":["utility","*"],"restrictions":["needs_water_feature_or_tank_adjacent"],"upgrade_to":null,"damage_states":2,"store_result":"stored","deconstruct_yield":1},"purifier_unit":{"family":"utility_module","tier":1,"footprint":[1,1],"interaction":[[0,1]],"block_paths":true,"utility":null,"rooms":["utility","*"],"restrictions":["tank_adjacent"],"upgrade_to":"filtration_module","damage_states":2,"store_result":"stored","deconstruct_yield":1},"filtration_module":{"family":"utility_module","tier":2,"footprint":[1,2],"interaction":[[0,2]],"block_paths":true,"utility":"power_essential_tier","rooms":["utility"],"restrictions":["cistern_works_only_in_slice (the west module)"],"upgrade_to":null,"damage_states":2,"store_result":"stored","deconstruct_yield":1},"pump_module":{"family":"utility_module","tier":2,"footprint":[2,2],"interaction":[[0,2],[1,2]],"block_paths":true,"utility":"power_essential_tier","rooms":["utility"],"restrictions":["west_gallery_only_in_slice"],"upgrade_to":null,"damage_states":3,"store_result":"stored","deconstruct_yield":2},"battery_bank":{"family":"utility_module","tier":1,"footprint":[1,1],"interaction":[[0,1]],"block_paths":true,"utility":"power_storage","rooms":["utility","medical","operations"],"restrictions":[],"upgrade_to":null,"damage_states":2,"store_result":"stored","deconstruct_yield":1,"note":"the backup-charge adjacency object (25): extends emergency operation of its room"},"comfort_lamp":{"family":"comfort_object","tier":1,"footprint":[1,1],"interaction":[],"block_paths":false,"utility":"power_optional_tier","rooms":["*"],"restrictions":["common_areas"],"upgrade_to":null,"damage_states":1,"store_result":"stored","deconstruct_yield":0,"note":"PLATFORM COMFORT LIGHTING's placeable anchor (D-047): first shed, visible dimming, modest Stress on extended darkness"},"partition":{"family":"barrier","tier":1,"footprint":[1,1],"interaction":[],"block_paths":true,"utility":null,"rooms":["*"],"restrictions":["interior_only","never_seals_last_path"],"upgrade_to":null,"damage_states":1,"store_result":"stored","deconstruct_yield":1},"door_panel":{"family":"barrier","tier":1,"footprint":[1,1],"interaction":[],"block_paths":false,"utility":null,"rooms":["*"],"restrictions":["portal_or_partition_gap_only"],"upgrade_to":null,"damage_states":2,"store_result":"stored","deconstruct_yield":1,"note":"walkable when open; closable for isolation (incidents, 25)"},"barricade":{"family":"barrier","tier":1,"footprint":[1,1],"interaction":[],"block_paths":true,"utility":null,"rooms":["*"],"restrictions":["never_seals_last_path"],"upgrade_to":null,"damage_states":2,"store_result":"stored","deconstruct_yield":1},"mask_cache":{"family":"emergency_object","tier":1,"footprint":[1,1],"interaction":[[0,1]],"block_paths":false,"utility":null,"rooms":["*"],"restrictions":["must_stay_reachable"],"upgrade_to":null,"damage_states":1,"store_result":"stored","deconstruct_yield":0},"memorial_chalk":{"family":"story_object","tier":1,"footprint":[1,1],"interaction":[[0,1]],"block_paths":false,"utility":null,"rooms":["*"],"restrictions":["never_deconstruct"],"upgrade_to":null,"damage_states":1,"store_result":null,"deconstruct_yield":null},"shift_log":{"family":"story_object","tier":1,"footprint":[1,1],"interaction":[[0,1]],"block_paths":false,"utility":null,"rooms":["*"],"restrictions":["never_deconstruct"],"upgrade_to":null,"damage_states":1,"store_result":null,"deconstruct_yield":null}},"_restrictions_note":"Restriction enforcement (D-048): hard restrictions are executed by spatial_model.py (interior_only, portal_or_partition_gap_only, tank_adjacent, needs_water_feature_or_tank_adjacent, signal_box_only_in_slice, west_gallery_only_in_slice, cistern_works_only_in_slice, common_areas, carer_side_clear, never_deconstruct; must_stay_reachable and never_seals_last_path are enforced globally by the flood-fill strand/sever guard). ADVISORY restrictions (UI hints, not validator rules): not_against_interaction_side, wants_partition_adjacent, open_zone_ok."},"families":{"_comment":"SIGNAL 45 room-family architecture (Prompt 4, D-047). SEVEN true slice families; every slice area is an instance, specialization, temporary form, or module of one of these. Full-game target: 20-24 families (22 named in docs/design/22) realized from the ~40-room catalog \u2014 rooms are instances/specializations, never one-off systems. All numbers PROVISIONAL. footprint units are cells (station_sections.json); min_footprint [w,h]; noise/comfort on a low/med/high scale consumed by adjacency rules (docs/design/25).","slice_families":{"rest":{"name":"Rest","purpose":"sleep and recovery \u2014 fatigue/stress recovery quality scales with form","min_footprint":[2,2],"supported_footprints":["2x2","4x2","railcar","open_zone"],"required_architecture":[],"required_utilities":{"power":"lights_only"},"capacity_per_bed":1,"equipment_sockets":["rest_point","comfort_object","storage"],"storage_sockets":1,"access":{"min_doors":1,"evac_routes":1},"work_tasks":["tidy"],"outputs":["fatigue_recovery","stress_recovery"],"risks":["crowding"],"noise_emit":"low","noise_sensitive":true,"heat":"low","comfort":"form-dependent (bedroll < bunk < berth \u2014 10 S11 housing ladder)","medical":"rest quality feeds recovery (17)","incidents":["evacuation_target","crowding_stress"],"upgrades":["bunks","private_berth_partitions"],"specializations":["family_berths (full game)"],"temporary_form":"the Camp bedroll ring (open_zone, no shell)","permanent_form":"Sleeper Car / west-bay bunks / Dormitory","damage_states":["operational","impaired","damaged"],"visual_stages":"bedrolls -> bunks -> berths with curtains (10 S13)","save":"instance record + bed objects + occupancy","acceptance":"sleep quality measurably differs by form (07 S21; rough-sleep pricing already modeled, 15)"},"medical":{"name":"Medical","purpose":"treatment, triage, recovery beds \u2014 the care loop (17 S3)","min_footprint":[2,2],"supported_footprints":["2x2","railcar","open_zone"],"required_architecture":[],"required_utilities":{"power":"lights","water":"clean_supply"},"capacity_per_bed":1,"equipment_sockets":["rest_point","workstation","storage"],"storage_sockets":1,"access":{"min_doors":1,"evac_routes":1,"prefers":"near_gate (adjacency, 25)"},"work_tasks":["treat","restock"],"outputs":["treatment_capacity"],"risks":["infection_if_unclean"],"noise_emit":"low","noise_sensitive":true,"heat":"low","comfort":"med","medical":"treatment venue quality: bench < Aid Car (Ash's penalty, D-039)","incidents":["health_emergency_venue","triage_collision (event 19)"],"upgrades":["ward_module"],"specializations":["surgery vs ward (full game)"],"temporary_form":"the triage bench (open_zone at Camp/Staging)","permanent_form":"Aid Car / Clinic","damage_states":["operational","impaired","damaged"],"visual_stages":"bench -> cots + cabinet -> ward","save":"instance + bookings (committed doses serialize \u2014 17 S5)","acceptance":"bench-vs-Aid-Car penalty verified (07 S12); bookings survive reload (07 S4b)"},"food":{"name":"Food","purpose":"meal preparation and shared eating \u2014 the two visible meal windows (16 S2)","min_footprint":[2,2],"supported_footprints":["2x2","kiosk","open_zone"],"required_architecture":[],"required_utilities":{"power":"hotplate (Normal tier; cold meals without)","water":"clean_supply"},"capacity_per_bed":0,"equipment_sockets":["workstation","comfort_object","storage"],"storage_sockets":2,"access":{"min_doors":1,"evac_routes":1,"prefers":"near_storage"},"work_tasks":["cook","serve","clean"],"outputs":["meals","canteen_waste_reduction (16)"],"risks":["contamination_if_near_bad_water (25 adjacency)"],"noise_emit":"med","noise_sensitive":false,"heat":"med","comfort":"high when warm \u2014 the gathering-scene venue (02 S6 hope floor)","medical":"nutrition path (hunger recovery)","incidents":["cold_meals_on_shed (modeled)","contamination_vector"],"upgrades":["pantry_module"],"specializations":["Long Table dining (full game)"],"temporary_form":"the cook ring (open_zone)","permanent_form":"the Canteen (kiosk conversion)","damage_states":["operational","impaired","damaged"],"visual_stages":"cook ring -> counter + hotplate -> lit canteen with tables","save":"instance + equipment states","acceptance":"warm-beat scene stages here (east) or at the cook-ring corner (west) \u2014 both venues function (07 S7)"},"storage":{"name":"Storage","purpose":"stock capacity, staging, reservation-aware storage (16 S2 caps)","min_footprint":[1,2],"supported_footprints":["1x2","2x2","kiosk","corridor_run","open_zone"],"required_architecture":[],"required_utilities":{},"capacity_per_bed":0,"equipment_sockets":["storage","barrier"],"storage_sockets":4,"access":{"min_doors":1,"evac_routes":0,"prefers":"near_workshop_and_food (hauling, 25)"},"work_tasks":["haul","inventory"],"outputs":["storage_capacity","cold_capacity (Cold Store spec)"],"risks":["spoilage (full game)","single-point loss if centralized"],"noise_emit":"low","noise_sensitive":false,"heat":"low","comfort":"low","medical":null,"incidents":["emergency_material_delivery_distance (25)"],"upgrades":["cold_store (raises food cap \u2014 16)"],"specializations":["Equipment Locker (tools/gear)"],"temporary_form":"supply stacks at the Camp","permanent_form":"Cold Store / Equipment Locker","damage_states":["operational","impaired","damaged"],"visual_stages":"stacked crates -> shelving -> cold lockers","save":"instance + contents summary (stocks stay global in slice; location affects delivery distance only)","acceptance":"Cold Store siting decision functions (travel vs cascade \u2014 07 S21)"},"utility":{"name":"Utility","purpose":"machine rooms producing/moving Power, Air, or Water \u2014 one family, three specializations (D-047)","min_footprint":[1,2],"supported_footprints":["1x2","2x2","feature_built","tall (full game)"],"required_architecture":["service node in section","feature anchor for feature-built (flywheel housing, cistern main, scrubber stack)"],"required_utilities":{"power":"self_or_grid"},"capacity_per_bed":0,"equipment_sockets":["utility_module","workstation","emergency_object"],"storage_sockets":1,"access":{"min_doors":1,"evac_routes":1,"service_clearance":"every utility_module keeps 1 free interaction cell"},"work_tasks":["operate","maintain","repair"],"outputs":["generation/filtration/pumping per specialization"],"risks":["breakdown","cascade_origin (19)"],"noise_emit":"very_high","noise_sensitive":false,"heat":"high","comfort":"low \u2014 noisy neighbor (the canonical noise-adjacency axis, 10 S15)","medical":"accident risk on hazardous maintenance","incidents":["flywheel_instability","air_filtration_failure","pump_stall \u2014 the 19 families live here"],"upgrades":["stabilize (Flywheel partial->stable)","module (filtration module)"],"specializations":["power (Flywheel Room, Cell Rack)","air (Scrubber Gate/Hall)","water (Pump Room, Cistern Works)"],"temporary_form":"the transfer-pump rig (equipment at the Camp)","permanent_form":"the named machine rooms","damage_states":["operational","impaired","damaged","critical"],"visual_stages":"jury-rigged -> stabilized -> redundant (09 B.8)","save":"instance + specialization + machine condition","acceptance":"cascade fires through these rooms with visible intermediate states (07 S4)"},"workshop":{"name":"Workshop","purpose":"fabrication and maintenance labor \u2014 the crafting queue's venue (03 crafting row)","min_footprint":[2,2],"supported_footprints":["2x2","feature_built"],"required_architecture":[],"required_utilities":{"power":"tools (Normal tier; hand tools without)"},"capacity_per_bed":0,"equipment_sockets":["workstation","storage"],"storage_sockets":2,"access":{"min_doors":1,"evac_routes":1,"prefers":"near_storage (hauling, 25)"},"work_tasks":["fabricate","maintain","repair_prep"],"outputs":["craft_queue_throughput","repair_readiness"],"risks":["accident_on_hazard_work"],"noise_emit":"high","noise_sensitive":false,"heat":"med","comfort":"low","medical":"minor-injury source","incidents":["tool-down on load shed (modeled)"],"upgrades":["tool_crib_bench"],"specializations":["Fine Bench electronics (full game)"],"temporary_form":"the improvised bench at the Camp","permanent_form":"the Fitters' Shop (feature-built, Deep Service)","damage_states":["operational","impaired","damaged"],"visual_stages":"improvised bench -> the fitters' benches relit","save":"instance + queue reference","acceptance":"craft chain (wire->splice) runs through it (07 S9)"},"operations":{"name":"Operations","purpose":"information and expedition infrastructure \u2014 the radio heart and the run door","min_footprint":[1,2],"supported_footprints":["1x2","2x2","feature_built"],"required_architecture":["signal box for the Listening Post (feature-built)"],"required_utilities":{"power":"radio (Essential tier)"},"capacity_per_bed":0,"equipment_sockets":["workstation","storage","story_object"],"storage_sockets":2,"access":{"min_doors":1,"evac_routes":0},"work_tasks":["listen","verify","stage_runs"],"outputs":["radio_slots (2/night)","run_preparation"],"risks":["charge_draw"],"noise_emit":"low","noise_sensitive":true,"heat":"low","comfort":"med \u2014 the warm chalkboard room (01 Pillar 3)","medical":null,"incidents":["reception_quality (splice chain)"],"upgrades":["wired (improvised -> wired LP \u2014 the slice upgrade beat)"],"specializations":["listening_post (unique)","staging (expedition prep \u2014 the Camp repurpose target)"],"temporary_form":"the improvised set in the signal box","permanent_form":"wired Listening Post / Staging Room","damage_states":["operational","impaired","damaged"],"visual_stages":"improvised rig -> wired rack + punch-card schedule board","save":"instance + upgrade state","acceptance":"LP wiring upgrade completes (07 S21); Camp->Staging repurpose is this family's staging specialization"}},"full_game_families":["rest","medical","food","storage","utility","workshop","operations","farm (Spore Beds, Grow Gallery)","fabrication (Fine Bench, Stitchery, Tool Crib, Still Room)","recycling (Reclaim Room)","community (Long Table, Waiting Room, Meeting Hall)","education (Schoolroom, Lending Shelf)","family_quarters (Family Berths, Private Berths)","memorial (Memorial Wall, Quiet Car)","sanitation (Washhouse \u2014 if the network is earned, 16 S1)","quarantine (Isolation Berth)","climate (Warming Room, Draught House)","structure (Shoring Post, Storm Refuge)","security (Watch Post \u2014 D-044-compatible)","trade (Trade Gate)","signals_analysis (Signal Bench, Map Room, Wire Room, Weather Mast)","circulation (stairs/lift/corridor works \u2014 CONNECT's domain, not a buildable room)"],"full_game_family_count_target":"20-24 (22 listed); the ~40-room catalog maps to instances/specializations of these \u2014 never 40 independent systems (D-047)"}};
+
+/* ================= data plumbing ================= */
+const SEC = DATA.sections.sections, TRUNKS = DATA.sections.trunks,
+      MUSTER = DATA.sections.muster_point, SAFE = DATA.sections.safe_areas,
+      OBJ = DATA.objects.objects, FAM = DATA.families.slice_families;
+const HUDVALS = {day1:{food:34,water:12,meds:4,mat:12,charge:10,day:"DAY 1"},
+  east_day7:{food:4,water:16,meds:7,mat:12,charge:24,day:"DAY 7"},
+  west_day7:{food:2,water:21,meds:7,mat:12,charge:10,day:"DAY 7"}};
+const FAMTINT = {rest:"#7d6a9e",medical:"#8fae95",food:"#c98f4a",storage:"#8d8158",
+  utility:"#5e8891",workshop:"#a06a4d",operations:"#6fa08a"};
+const UNIVERSAL = new Set(["barrier","decoration","story_object","emergency_object","comfort_object"]);
+
+function rectCells(r){const o=[];for(let dy=0;dy<r.h;dy++)for(let dx=0;dx<r.w;dx++)o.push([r.x+dx,r.y+dy]);return o;}
+function rotFoot(w,h,cells,rot){rot=((rot%360)+360)%360;
+  if(rot===0)return[w,h,cells.map(c=>[c[0],c[1]])];
+  if(rot===90)return[h,w,cells.map(([x,y])=>[h-1-y,x])];
+  if(rot===180)return[w,h,cells.map(([x,y])=>[w-1-x,h-1-y])];
+  return[h,w,cells.map(([x,y])=>[y,w-1-x])];}
+const FIXED = {};   // sid -> Map "x,y" -> {t,when}
+for(const sid in SEC){const m=new Map();
+  for(const f of (SEC[sid].fixed||[])){
+    const cells=f.cells?f.cells:rectCells(f.cells_rect);
+    for(const c of cells)m.set(c[0]+","+c[1],{t:f.type,when:f.walkable_when});}
+  FIXED[sid]=m;}
+function inGrid(sid,c){const g=SEC[sid].grid;return c[0]>=0&&c[0]<g[0]&&c[1]>=0&&c[1]<g[1];}
+function fixedAt(sid,c){return FIXED[sid].get(c[0]+","+c[1])||null;}
+function buildable(sid,c){if(!inGrid(sid,c))return false;
+  for(const z of (SEC[sid].buildable||[])){
+    if(c[0]>=z.x&&c[0]<z.x+z.w&&c[1]>=z.y&&c[1]<z.y+z.h){
+      const fx=fixedAt(sid,c);if(!fx)return true;
+      if(z.except_fixed!==false)return false;return fx.when==="interior";}}
+  return false;}
+function linkCells(sid){const s=new Set();
+  for(const l of (SEC[sid].vertical_links||[]))for(const c of l.cells)s.add(c[0]+","+c[1]);
+  for(const e of (SEC[sid].entries||[]))for(const c of e.cells)s.add(c[0]+","+c[1]);
+  return s;}
+
+/* ================= layout state ================= */
+let L=null, layoutName="day1", placedStack=[];
+function loadLayout(n){layoutName=n;L=JSON.parse(JSON.stringify(DATA.layouts[n]));
+  L.door_states=L.door_states||{};placedStack=[];sel=null;ghost=null;pendType=null;
+  shedStage=0;updateHUD();updateCrew();panelRender();fitCam();toast(SEC_TITLE(n));}
+function SEC_TITLE(n){return n==="day1"?"Day 1 — four areas, three blocked routes":
+  n==="east_day7"?"Day 7 EAST — comfort first":"Day 7 WEST — water first";}
+function roomById(id){return L.rooms.find(r=>r.id===id);}
+function objSection(o){return o.section||roomById(o.room).section;}
+function objCells(o){const s=OBJ[o.type],[w,h]=rotFoot(s.footprint[0],s.footprint[1],[],o.rot||0),
+  out=[];for(let dy=0;dy<h;dy++)for(let dx=0;dx<w;dx++)out.push([o.pos[0]+dx,o.pos[1]+dy]);return out;}
+function objInter(o){const s=OBJ[o.type],
+  [,,cells]=rotFoot(s.footprint[0],s.footprint[1],s.interaction,o.rot||0);
+  return cells.map(([x,y])=>[o.pos[0]+x,o.pos[1]+y]);}
+function objBlocks(o){const s=OBJ[o.type];
+  if(o.type==="door_panel")return (L.door_states[o.id]||"open")!=="open";
+  return s.block_paths;}
+function blockingCells(sid,ignore){const b=new Set();
+  for(const o of L.objects){if(o.id===ignore||objSection(o)!==sid||!objBlocks(o))continue;
+    for(const c of objCells(o))b.add(c[0]+","+c[1]);}return b;}
+function occupiedCells(sid,ignore){const b=new Set();
+  for(const o of L.objects){if(o.id===ignore||objSection(o)!==sid)continue;
+    for(const c of objCells(o))b.add(c[0]+","+c[1]);}return b;}
+function walkable(sid,c,ignore){if(!inGrid(sid,c))return false;
+  const fx=fixedAt(sid,c);
+  if(fx){if(fx.when==="never")return false;
+    if(fx.when==="open"&&(L.door_states[fx.t]||"open")!=="open")return false;}
+  return !blockingCells(sid,ignore).has(c[0]+","+c[1]);}
+function edges(){const out=[],seen=new Set();
+  for(const sid in SEC){
+    for(const e of (SEC[sid].entries||[])){if(e.to==="surface")continue;
+      const st=L.portal_states[e.id]||e.state_day1;
+      if(st!=="open"&&st!=="operational")continue;
+      for(const oe of (SEC[e.to].entries||[])){
+        if(oe.id===e.id||oe.to===sid)
+          for(const a of e.cells)for(const b of oe.cells)
+            out.push([[sid,a],[e.to,b]]);}}
+    for(const l of (SEC[sid].vertical_links||[])){
+      if(seen.has(l.id))continue;seen.add(l.id);
+      const st=L.link_states[l.id]||l.state_day1;
+      if(st!=="operational")continue;
+      for(const a of l.cells)for(const b of l.to_cells)
+        out.push([[sid,a],[l.to,b]]);}}
+  return out;}
+function reached(ignore){const start=[MUSTER.section,MUSTER.cells[0]];
+  if(!walkable(start[0],start[1],ignore))return new Set();
+  const jump=new Map(),key=(s,c)=>s+"|"+c[0]+","+c[1];
+  for(const [a,b] of edges()){
+    const ka=key(a[0],a[1]),kb=key(b[0],b[1]);
+    if(!jump.has(ka))jump.set(ka,[]);jump.get(ka).push(b);
+    if(!jump.has(kb))jump.set(kb,[]);jump.get(kb).push(a);}
+  const seen=new Set([key(start[0],start[1])]),q=[start];
+  while(q.length){const [sid,c]=q.shift();
+    const nb=[[sid,[c[0]+1,c[1]]],[sid,[c[0]-1,c[1]]],[sid,[c[0],c[1]+1]],[sid,[c[0],c[1]-1]]];
+    for(const j of (jump.get(key(sid,c))||[]))nb.push(j);
+    for(const [ns,nc] of nb){const k=key(ns,nc);
+      if(seen.has(k)||!walkable(ns,nc,ignore))continue;seen.add(k);q.push([ns,nc]);}}
+  return seen;}
+function roomReachable(id,reach){const r=roomById(id);if(!r)return false;
+  const sid=r.section;
+  for(const c of rectCells(r.rect)){
+    if(reach.has(sid+"|"+c[0]+","+c[1]))return true;
+    for(const n of [[c[0]+1,c[1]],[c[0]-1,c[1]],[c[0],c[1]+1],[c[0],c[1]-1]])
+      if(reach.has(sid+"|"+n[0]+","+n[1]))return true;}
+  return false;}
+function strandedSet(){const reach=reached(null),out=new Set();
+  for(const o of L.objects){const inter=objInter(o);if(!inter.length)continue;
+    const sid=objSection(o),blocked=blockingCells(sid,o.id);
+    const served=inter.some(c=>{
+      if(!inGrid(sid,c))return false;const fx=fixedAt(sid,c);
+      if(fx&&fx.when==="never")return false;
+      if(blocked.has(c[0]+","+c[1]))return false;
+      if(reach.has(sid+"|"+c[0]+","+c[1]))return true;
+      return [[c[0]+1,c[1]],[c[0]-1,c[1]],[c[0],c[1]+1],[c[0],c[1]-1]]
+        .some(n=>reach.has(sid+"|"+n[0]+","+n[1]));});
+    if(!served)out.add(o.id);}
+  return out;}
+
+/* ---- the validator port: every rejection in the game's own words (24 §5) ---- */
+function validateObject(o){
+  const s=OBJ[o.type],sid=objSection(o),cells=objCells(o);
+  for(const c of cells){
+    if(!inGrid(sid,c))return "outside a buildable zone (leaves the section)";
+    const fx=fixedAt(sid,c);
+    if(fx&&fx.when==="never")return "overlaps fixed architecture ("+fx.t.replace(/_/g," ")+")";
+    if(!buildable(sid,c)&&!(fx&&(fx.when==="always"||fx.when==="open")&&!s.block_paths))
+      return "outside a buildable zone";
+    if(linkCells(sid).has(c[0]+","+c[1])&&s.block_paths)
+      return "would block a stair/lift/portal cell";}
+  const occ=occupiedCells(sid,o.id);
+  for(const c of cells)if(occ.has(c[0]+","+c[1]))return "those cells are occupied";
+  if(o.room){const r=roomById(o.room),fam=FAM[r.family];
+    if(!s.rooms.includes("*")&&!s.rooms.includes(r.family))
+      return o.type.replace(/_/g," ")+" does not belong in a "+r.family+" room";
+    let rc=new Set(rectCells(r.rect).map(c=>c.join(",")));
+    for(const m of L.rooms)if(m.module_of===r.id)
+      for(const c of rectCells(m.rect))rc.add(c.join(","));
+    for(const c of cells)if(!rc.has(c.join(",")))return "sticks out of its room";
+    if(!UNIVERSAL.has(s.family)&&!(fam.equipment_sockets||[]).includes(s.family))
+      return "no "+s.family.replace(/_/g," ")+" socket in a "+r.family+" room";
+    if(s.family==="storage"){
+      const n=L.objects.filter(x=>x.room===r.id&&x.id!==o.id&&OBJ[x.type].family==="storage").length;
+      if(n+1>(fam.storage_sockets||99))return "storage sockets full in "+r.id.replace(/_/g," ");}}
+  const util=s.utility||"";
+  if(util.startsWith("power")&&!util.endsWith("_optional")&&!util.includes("storage")){
+    const node=SEC[sid].utility_node,
+      live=(L.trunk_states[node.trunk]||TRUNKS[node.trunk].state_day1)==="live";
+    if(!live)return "needs power — "+node.trunk.replace("_"," ")+" is dark (CONNECT first)";}
+  const restr=new Set(s.restrictions||[]);
+  const near=(types)=>{for(const t of types){
+    for(const [k,f] of FIXED[sid]){if(f.t!==t)continue;const [fx,fy]=k.split(",").map(Number);
+      for(const c of cells)if(Math.abs(c[0]-fx)+Math.abs(c[1]-fy)<=1)return true;}}return false;};
+  if(restr.has("interior_only")){
+    let rc=new Set();for(const r of L.rooms)if(r.section===sid)
+      for(const c of rectCells(r.rect))rc.add(c.join(","));
+    if(!cells.every(c=>rc.has(c.join(","))))return "interior only — place it inside a room";}
+  if(restr.has("portal_or_partition_gap_only")){
+    const lk=linkCells(sid);
+    if(!cells.every(c=>lk.has(c.join(",")))&&!near(["airlock_doors"]))
+      return "must hang in a portal or a partition gap";}
+  if(restr.has("tank_adjacent")&&!near(["emergency_tank"]))
+    return "must sit beside the emergency tank";
+  if(restr.has("needs_water_feature_or_tank_adjacent")&&
+     !near(["emergency_tank","cistern_main","drain_channel"]))
+    return "needs a water feature or the tank beside it";
+  if(restr.has("signal_box_only_in_slice")&&sid!=="signal_box")
+    return "belongs in the Signal Box in the slice";
+  if(restr.has("west_gallery_only_in_slice")&&sid!=="west_gallery")
+    return "belongs in the West Gallery in the slice";
+  if(restr.has("cistern_works_only_in_slice")&&o.room!=="cistern_works")
+    return "attaches to the Cistern Works in the slice";
+  if(restr.has("common_areas")&&!SAFE.includes(sid)&&!L.rooms.some(r=>r.section===sid))
+    return "belongs in an inhabited common area";
+  const inter=objInter(o),blocked=blockingCells(sid,o.id);
+  const clear=inter.filter(c=>inGrid(sid,c)&&
+    !(fixedAt(sid,c)&&fixedAt(sid,c).when==="never")&&!blocked.has(c[0]+","+c[1]));
+  if(restr.has("carer_side_clear")&&clear.length<inter.length)
+    return "needs its carer side clear (every working cell open)";
+  if(inter.length&&!clear.length)
+    return "no clear working side — every interaction cell is blocked";
+  if(s.block_paths&&inter.length){
+    const reach=reached(o.id);
+    if(!clear.some(c=>reach.has(sid+"|"+c[0]+","+c[1])))
+      return "its working side would be unreachable from the muster point";}
+  /* severe class: sever / strand (refused outright — slice policy, 25 §1) */
+  const before=strandedSet();
+  L.objects.push(o);
+  try{
+    const reach=reached(null);
+    for(const fac of (L.essential_facilities||[]))
+      if(!roomReachable(fac,reach))
+        return "refused: would cut off "+fac.replace(/_/g," ")+" — open another route first";
+    const after=strandedSet();
+    for(const id of after)if(!before.has(id)&&id!==o.id)
+      return "refused: would strand "+id.replace(/_/g," ")+" — its every working cell goes dark";
+  }finally{L.objects.pop();}
+  return null;}
+
+/* ================= camera & canvas ================= */
+const cv=document.getElementById("world"),ctx=cv.getContext("2d");
+let cam={x:8,y:8,s:20},DPR=1,CW=0,CH=0,userMoved=false;
+function resize(){DPR=Math.min(window.devicePixelRatio||1,3);
+  CW=window.innerWidth;CH=window.innerHeight;
+  cv.width=Math.round(CW*DPR);cv.height=Math.round(CH*DPR);
+  cv.style.width=CW+"px";cv.style.height=CH+"px";
+  if(!userMoved)fitCam();draw();}
+function worldBounds(){let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  for(const sid in SEC){const s=SEC[sid];
+    x0=Math.min(x0,s.origin[0]);y0=Math.min(y0,s.origin[1]);
+    x1=Math.max(x1,s.origin[0]+s.grid[0]);y1=Math.max(y1,s.origin[1]+s.grid[1]);}
+  return {x0,y0,x1,y1};}
+function fitCam(){const b=worldBounds();
+  cam.s=Math.max(8,Math.min((CW-40)/(b.x1-b.x0+2),(CH-96)/(b.y1-b.y0+2)));
+  cam.x=(b.x0+b.x1)/2;cam.y=(b.y0+b.y1)/2;userMoved=false;}
+function w2s(wx,wy){return [(wx-cam.x)*cam.s+CW/2,(wy-cam.y)*cam.s+CH/2];}
+function s2w(sx,sy){return [(sx-CW/2)/cam.s+cam.x,(sy-CH/2)/cam.s+cam.y];}
+
+const GLYPH={column:"▮",track_bed:"",emergency_tank:"T",airlock_doors:"◫",decon_channel:"",
+  scrubber_stack:"S",flywheel_housing:"F",cable_gallery:"",lever_frame:"L",
+  railcar_a:"",railcar_b:"",kiosk_row:"",cistern_main:"C",gallery_arch:"⌃",
+  drain_channel:"",fitters_bench_bay:"",parts_racks:""};
+let shedStage=0; // 0 normal · 1 comfort shed · 2 +hotplate shed
+
+function draw(){ctx.setTransform(DPR,0,0,DPR,0,0);
+  ctx.fillStyle="#0c1413";ctx.fillRect(0,0,CW,CH);
+  const s=cam.s;
+  for(const sid in SEC){
+    const sec=SEC[sid],[gx,gy]=sec.origin,[gw,gh]=sec.grid;
+    const [sx,sy]=w2s(gx,gy);
+    if(sx>CW+40||sy>CH+40||sx+gw*s<-40||sy+gh*s<-40)continue;
+    // floor
+    for(let y=0;y<gh;y++)for(let x=0;x<gw;x++){
+      const c=[x,y],fx=fixedAt(sid,c);
+      let col=buildable(sid,c)?"#1b2725":"#141d1c";
+      if(fx){
+        if(fx.t==="track_bed"||fx.t==="drain_channel")col="#0e1514";
+        else if(fx.when==="never")col="#0a100f";
+        else if(fx.when==="interior")col="#20302c";
+        else if(fx.when==="always")col="#223230";
+        else col="#1d2a28";}
+      ctx.fillStyle=col;
+      ctx.fillRect(sx+x*s,sy+y*s,s+0.5,s+0.5);}
+    // grid whisper
+    if(s>=16){ctx.strokeStyle="rgba(233,228,216,.04)";ctx.lineWidth=1;
+      for(let x=0;x<=gw;x++){ctx.beginPath();ctx.moveTo(sx+x*s,sy);ctx.lineTo(sx+x*s,sy+gh*s);ctx.stroke();}
+      for(let y=0;y<=gh;y++){ctx.beginPath();ctx.moveTo(sx,sy+y*s);ctx.lineTo(sx+gw*s,sy+y*s);ctx.stroke();}}
+    // section frame + name
+    ctx.strokeStyle="rgba(233,228,216,.14)";ctx.lineWidth=1.5;
+    ctx.strokeRect(sx,sy,gw*s,gh*s);
+    if(s>=10){ctx.fillStyle="rgba(233,228,216,.45)";
+      ctx.font="600 "+Math.max(9,Math.min(12,s*0.55))+"px ui-monospace,Menlo,monospace";
+      ctx.fillText(sec.name.toUpperCase(),sx+3,sy-4);}
+    // rooms (warm pools)
+    for(const r of L.rooms){if(r.section!==sid)continue;
+      const rc=r.rect,x=sx+rc.x*s,y=sy+rc.y*s,w=rc.w*s,h=rc.h*s;
+      const tint=FAMTINT[r.family]||"#888";
+      if(r.state!=="unreclaimed"){
+        const g=ctx.createRadialGradient(x+w/2,y+h/2,2,x+w/2,y+h/2,Math.max(w,h));
+        const warm=r.state==="operational"?0.16:0.07;
+        g.addColorStop(0,"rgba(232,163,76,"+warm+")");g.addColorStop(1,"rgba(232,163,76,0)");
+        ctx.fillStyle=g;ctx.fillRect(x-s,y-s,w+2*s,h+2*s);}
+      ctx.fillStyle=tint+"38";ctx.fillRect(x,y,w,h);
+      ctx.strokeStyle=tint+"aa";ctx.lineWidth=1.5;
+      if(r.form==="temporary")ctx.setLineDash([4,3]);
+      ctx.strokeRect(x+1,y+1,w-2,h-2);ctx.setLineDash([]);
+      if(s>=22){ctx.fillStyle="rgba(233,228,216,.75)";
+        ctx.font="600 "+Math.min(11,s*0.4)+"px -apple-system,sans-serif";
+        ctx.fillText(r.id.replace(/_/g," "),x+4,y+12);}}
+    // fixed glyphs
+    if(s>=12)for(const [k,f] of FIXED[sid]){
+      const [x,y]=k.split(",").map(Number),g=GLYPH[f.t];
+      if(!g)continue;
+      ctx.fillStyle=f.when==="never"?"rgba(233,228,216,.3)":"rgba(232,163,76,.4)";
+      ctx.font=Math.floor(s*0.6)+"px ui-monospace,Menlo,monospace";
+      ctx.fillText(g,sx+x*s+s*0.22,sy+y*s+s*0.72);}
+    // portals & links
+    for(const e of (SEC[sid].entries||[])){if(e.to==="surface")continue;
+      const st=L.portal_states[e.id]||e.state_day1,c=e.cells[0];
+      const x=sx+c[0]*s,y=sy+c[1]*s;
+      if(st==="open"||st==="operational"){ctx.fillStyle="rgba(232,163,76,.25)";ctx.fillRect(x,y,s,s);}
+      else{ctx.fillStyle=st==="blocked_flood"?"rgba(46,83,80,.8)":"rgba(74,56,38,.85)";
+        ctx.fillRect(x,y,s,s);
+        ctx.strokeStyle="rgba(217,96,56,.9)";ctx.lineWidth=2;
+        ctx.beginPath();ctx.moveTo(x+3,y+3);ctx.lineTo(x+s-3,y+s-3);
+        ctx.moveTo(x+s-3,y+3);ctx.lineTo(x+3,y+s-3);ctx.stroke();}}
+    for(const l of (SEC[sid].vertical_links||[])){
+      const st=L.link_states[l.id]||l.state_day1,c=l.cells[0];
+      const x=sx+c[0]*s,y=sy+c[1]*s;
+      ctx.fillStyle=st==="operational"?"rgba(232,163,76,.85)":"rgba(217,96,56,.85)";
+      ctx.font="600 "+Math.floor(s*0.62)+"px ui-monospace,Menlo,monospace";
+      const ic=l.kind==="stair"?"╱":l.kind==="ladder"?"‖":"◍";
+      ctx.fillText(st==="operational"?ic:"✕",x+s*0.2,y+s*0.75);}
+    // objects
+    for(const o of L.objects){if(objSection(o)!==sid)continue;
+      const cells=objCells(o),spec=OBJ[o.type];
+      const x0=Math.min(...cells.map(c=>c[0])),y0=Math.min(...cells.map(c=>c[1]));
+      const x1=Math.max(...cells.map(c=>c[0])),y1=Math.max(...cells.map(c=>c[1]));
+      const x=sx+x0*s,y=sy+y0*s,w=(x1-x0+1)*s,h=(y1-y0+1)*s;
+      if(o.type==="comfort_lamp"){
+        const on=shedStage<1;
+        if(on){const g=ctx.createRadialGradient(x+w/2,y+h/2,1,x+w/2,y+h/2,s*2.6);
+          g.addColorStop(0,"rgba(232,163,76,.5)");g.addColorStop(1,"rgba(232,163,76,0)");
+          ctx.fillStyle=g;ctx.fillRect(x-s*2.6,y-s*2.6,w+5.2*s,h+5.2*s);}
+        ctx.fillStyle=on?"#e8a34c":"#4a3826";
+        ctx.beginPath();ctx.arc(x+w/2,y+h/2,Math.max(3,s*0.22),0,7);ctx.fill();continue;}
+      const fam=spec.family;
+      ctx.fillStyle=(fam==="story_object")?"rgba(216,210,194,.2)":"rgba(233,228,216,.14)";
+      const off=(o.type==="hotplate_counter"&&shedStage>=2);
+      if(off)ctx.fillStyle="rgba(217,96,56,.18)";
+      ctx.beginPath();ctx.roundRect(x+2,y+2,w-4,h-4,3);ctx.fill();
+      ctx.strokeStyle=off?"rgba(217,96,56,.7)":"rgba(233,228,216,.4)";
+      ctx.lineWidth=1;ctx.stroke();
+      if(s>=15){ctx.fillStyle=off?"var(--ember)":"rgba(233,228,216,.8)";
+        ctx.fillStyle=off?"#d96038":"rgba(233,228,216,.8)";
+        ctx.font="600 "+Math.floor(s*0.42)+"px ui-monospace,Menlo,monospace";
+        const g=fam==="story_object"?"!":o.type[0].toUpperCase();
+        ctx.fillText(g,x+w/2-s*0.14,y+h/2+s*0.16);}}
+  }
+  // selection
+  if(sel){const b=selBounds(sel);
+    if(b){ctx.strokeStyle="#e9e4d8";ctx.lineWidth=2;ctx.setLineDash([6,4]);
+      ctx.strokeRect(b[0]-2,b[1]-2,b[2]+4,b[3]+4);ctx.setLineDash([]);}}
+  // ghost
+  if(ghost){const sid=ghost.section||roomById(ghost.room).section;
+    const sec=SEC[sid],[sx,sy]=w2s(sec.origin[0],sec.origin[1]);
+    const cells=objCells(ghost);
+    const bad=ghostReason!==null;
+    for(const c of cells){
+      ctx.fillStyle=bad?"rgba(217,96,56,.3)":"rgba(232,163,76,.3)";
+      ctx.fillRect(sx+c[0]*s,sy+c[1]*s,s,s);}
+    const x0=Math.min(...cells.map(c=>c[0])),y0=Math.min(...cells.map(c=>c[1]));
+    const x1=Math.max(...cells.map(c=>c[0])),y1=Math.max(...cells.map(c=>c[1]));
+    ctx.strokeStyle=bad?"#d96038":"#e8a34c";ctx.lineWidth=2;ctx.setLineDash([5,4]);
+    ctx.strokeRect(sx+x0*s,sy+y0*s,(x1-x0+1)*s,(y1-y0+1)*s);ctx.setLineDash([]);
+    for(const c of objInter(ghost)){
+      ctx.strokeStyle="rgba(216,210,194,.55)";ctx.lineWidth=1;
+      ctx.strokeRect(sx+c[0]*s+3,sy+c[1]*s+3,s-6,s-6);}}
+}
+function selBounds(sl){const s=cam.s;
+  if(sl.kind==="object"){const o=L.objects.find(x=>x.id===sl.id);if(!o)return null;
+    const sid=objSection(o),sec=SEC[sid],[sx,sy]=w2s(sec.origin[0],sec.origin[1]);
+    const cells=objCells(o);
+    const x0=Math.min(...cells.map(c=>c[0])),y0=Math.min(...cells.map(c=>c[1]));
+    const x1=Math.max(...cells.map(c=>c[0])),y1=Math.max(...cells.map(c=>c[1]));
+    return [sx+x0*s,sy+y0*s,(x1-x0+1)*s,(y1-y0+1)*s];}
+  if(sl.kind==="room"){const r=roomById(sl.id);if(!r)return null;
+    const sec=SEC[r.section],[sx,sy]=w2s(sec.origin[0],sec.origin[1]);
+    return [sx+r.rect.x*s,sy+r.rect.y*s,r.rect.w*s,r.rect.h*s];}
+  const sec=SEC[sl.id];if(!sec)return null;
+  const [sx,sy]=w2s(sec.origin[0],sec.origin[1]);
+  return [sx,sy,sec.grid[0]*s,sec.grid[1]*s];}
+
+/* ================= gestures (24 §3: movement AND time thresholds) ================= */
+const DRAG_T=24,HOLD_T=350;
+let pointers=new Map(),gest={mode:"idle"},sel=null,lastTap={x:-99,y:-99,cands:[],i:0};
+let ghost=null,ghostReason=null,pendType=null,lens=false,wf="BUILD";
+cv.addEventListener("touchstart",e=>e.preventDefault(),{passive:false});
+// iOS Safari ignores user-scalable=no for pinch; block native page zoom everywhere
+for(const ev of ["gesturestart","gesturechange","gestureend"])
+  document.addEventListener(ev,e=>e.preventDefault());
+cv.addEventListener("pointerdown",e=>{
+  cv.setPointerCapture(e.pointerId);
+  pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  hidePeek();
+  if(pointers.size>2)return; // a palm/edge contact must not clobber a live pinch
+  if(pointers.size===2){
+    const [a,b]=[...pointers.values()];
+    gest={mode:"pinch",d0:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),s0:cam.s,
+      mid:[(a.x+b.x)/2,(a.y+b.y)/2],w0:s2w((a.x+b.x)/2,(a.y+b.y)/2)};
+    return;}
+  const onGhost=ghost&&hitGhost(e.clientX,e.clientY);
+  gest={mode:"maybe",x0:e.clientX,y0:e.clientY,cx0:cam.x,cy0:cam.y,onGhost,
+    hold:setTimeout(()=>{if(gest.mode==="maybe"){gest.held=true;showPeek(e.clientX,e.clientY);}},HOLD_T)};
+});
+cv.addEventListener("pointermove",e=>{
+  if(!pointers.has(e.pointerId))return;
+  pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(gest.mode==="pinch"&&pointers.size>=2){
+    const [a,b]=[...pointers.values()];
+    const d=Math.hypot(a.x-b.x,a.y-b.y);
+    cam.s=Math.max(6,Math.min(72,gest.s0*d/gest.d0));
+    const mid=[(a.x+b.x)/2,(a.y+b.y)/2];
+    cam.x=gest.w0[0]-(mid[0]-CW/2)/cam.s;cam.y=gest.w0[1]-(mid[1]-CH/2)/cam.s;
+    userMoved=true;draw();return;}
+  if(gest.mode==="maybe"){
+    const dx=e.clientX-gest.x0,dy=e.clientY-gest.y0;
+    if(Math.hypot(dx,dy)>=DRAG_T){clearTimeout(gest.hold);hidePeek();
+      gest.mode=gest.onGhost?"ghost":"pan";}
+    else if(Math.hypot(dx,dy)>10){clearTimeout(gest.hold);hidePeek();}}
+  if(gest.mode==="pan"){
+    cam.x=gest.cx0-(e.clientX-gest.x0)/cam.s;
+    cam.y=gest.cy0-(e.clientY-gest.y0)/cam.s;userMoved=true;draw();}
+  else if(gest.mode==="ghost"&&ghost){
+    const [wx,wy]=s2w(e.clientX,e.clientY),sid=ghost.section||roomById(ghost.room).section;
+    const sec=SEC[sid];
+    ghost.pos=[Math.round(wx-sec.origin[0]-0.5),Math.round(wy-sec.origin[1]-0.5)];
+    ghostReason=validateObject(ghost);panelRender();draw();}
+});
+function endPointer(e){
+  pointers.delete(e.pointerId);
+  if(gest.mode==="pinch"){
+    if(pointers.size<2){gest={mode:"idle"};}
+    else{ // a pinch member lifted while a spare contact remains — rebaseline, no jump
+      const [a,b]=[...pointers.values()];
+      gest.d0=Math.max(1,Math.hypot(a.x-b.x,a.y-b.y));gest.s0=cam.s;
+      gest.w0=s2w((a.x+b.x)/2,(a.y+b.y)/2);}
+    return;}
+  clearTimeout(gest.hold);
+  if(e.type!=="pointercancel"&&gest.mode==="maybe"&&!gest.held)handleTap(e.clientX,e.clientY);
+  hidePeek();gest={mode:"idle"};}
+cv.addEventListener("pointerup",endPointer);
+cv.addEventListener("pointercancel",endPointer);
+
+function hitGhost(px,py){if(!ghost)return false;
+  const sid=ghost.section||roomById(ghost.room).section,sec=SEC[sid];
+  const [sx,sy]=w2s(sec.origin[0],sec.origin[1]);
+  return objCells(ghost).some(c=>{
+    const x=sx+c[0]*cam.s,y=sy+c[1]*cam.s;
+    return px>=x-12&&px<=x+cam.s+12&&py>=y-12&&py<=y+cam.s+12;});}
+
+function candidatesAt(px,py){const out=[];
+  const slop=Math.max(0,Math.ceil(24/cam.s-0.5)); // 48 dp hit box regardless of sprite size (24 §4)
+  for(const sid in SEC){const sec=SEC[sid],[sx,sy]=w2s(sec.origin[0],sec.origin[1]);
+    const cx=Math.floor((px-sx)/cam.s),cy=Math.floor((py-sy)/cam.s);
+    if(cx<0||cy<0||cx>=sec.grid[0]||cy>=sec.grid[1])continue;
+    for(const o of L.objects){if(objSection(o)!==sid)continue;
+      if(objCells(o).some(c=>Math.abs(c[0]-cx)<=slop&&Math.abs(c[1]-cy)<=slop))
+        out.push({kind:"object",id:o.id,label:o.type.replace(/_/g," ")});}
+    for(const r of L.rooms){if(r.section!==sid)continue;
+      const rc=r.rect;
+      if(cx>=rc.x&&cx<rc.x+rc.w&&cy>=rc.y&&cy<rc.y+rc.h)
+        out.push({kind:"room",id:r.id,label:r.id.replace(/_/g," ")});}
+    out.push({kind:"section",id:sid,label:sec.name});}
+  return out;}
+
+function handleTap(px,py){
+  if(ghost){ // tap-to-place: move ghost to tapped cell (24 §3 tap-first)
+    const sid=ghost.section||roomById(ghost.room).section,sec=SEC[sid];
+    const [sx,sy]=w2s(sec.origin[0],sec.origin[1]);
+    const cx=Math.floor((px-sx)/cam.s),cy=Math.floor((py-sy)/cam.s);
+    if(cx>=-2&&cy>=-2&&cx<sec.grid[0]+2&&cy<sec.grid[1]+2){
+      ghost.pos=[cx,cy];ghostReason=validateObject(ghost);panelRender();draw();return;}}
+  const cands=candidatesAt(px,py);
+  if(!cands.length){sel=null;panelRender();draw();return;}
+  const same=Math.hypot(px-lastTap.x,py-lastTap.y)<24&&
+    JSON.stringify(cands.map(c=>c.id))===JSON.stringify(lastTap.cands.map(c=>c.id));
+  const i=same?(lastTap.i+1)%cands.length:0;
+  lastTap={x:px,y:py,cands,i};
+  sel=cands[i];sel.cands=cands;panelRender();draw();}
+
+function showPeek(px,py){const cands=candidatesAt(px,py);if(!cands.length)return;
+  const c=cands[0],el=document.getElementById("peek");
+  let txt="";
+  if(c.kind==="section"){const s=SEC[c.id];
+    txt="<b>"+s.name+"</b><br>"+(s.story||"")+
+      (s.hazards_day1&&s.hazards_day1.length?"<br><span class='lbl'>hazards: "+s.hazards_day1.map(h=>h.replace(/_/g," ")).join(", ")+"</span>":"");}
+  else if(c.kind==="room"){const r=roomById(c.id);
+    txt="<b>"+c.label+"</b><br>"+r.family+" · "+(r.state||"")+(r.note?"<br>"+r.note:"");}
+  else{const o=L.objects.find(x=>x.id===c.id);
+    txt="<b>"+c.label+"</b><br>"+OBJ[o.type].family.replace(/_/g," ");}
+  el.innerHTML=txt;el.style.display="block";
+  el.style.left=Math.min(px+10,CW-230)+"px";el.style.top=Math.max(py-70,8)+"px";}
+function hidePeek(){document.getElementById("peek").style.display="none";}
+
+/* ================= panel & verbs ================= */
+const panel=document.getElementById("panel");
+function esc(s){return String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));}
+function panelRender(){
+  let html="";
+  if(ghost){
+    html+="<h2>Placing: "+esc(ghost.type.replace(/_/g," "))+"</h2>"+
+      "<p>Tap a cell or drag the ghost. Rotate with ⟳. The reason line speaks the game's words (24 §5).</p>"+
+      "<div id='reason' class='"+(ghostReason?"":"ok")+"'>"+
+      (ghostReason?esc(ghostReason):"placement valid — confirm to install")+"</div>"+
+      "<div class='verbs'>"+
+      "<button class='verb' id='g-rot'>⟳ rotate</button>"+
+      (placedStack.length?"<button class='verb' id='g-undo'>↩ undo last</button>":"")+
+      "</div>"+
+      "<div class='gverbs'>"+
+      "<button class='verb' id='g-no'>✕ cancel</button>"+
+      "<button class='verb hot' id='g-ok' "+(ghostReason?"disabled":"")+">✓ confirm</button>"+
+      "</div>";
+    panel.innerHTML=html;panel.classList.add("open");
+    bind("g-rot",()=>{ghost.rot=((ghost.rot||0)+90)%360;ghostReason=validateObject(ghost);panelRender();draw();});
+    bind("g-ok",()=>{if(ghostReason)return;
+      const o=JSON.parse(JSON.stringify(ghost)),prev=ghost._moving||null;delete o._moving;
+      L.objects.push(o);placedStack.push(prev?{id:o.id,prev}:{id:o.id});
+      toast(prev?"Moved: "+o.type.replace(/_/g," "):
+        "Installed: "+o.type.replace(/_/g," ")+" — a short-install task in the real build");
+      ghost=null;pendType=null;panelRender();draw();});
+    bind("g-no",()=>{ // a cancelled Move is a no-op: the original returns to its cell (24 §7)
+      if(ghost&&ghost._moving)L.objects.push(ghost._moving);
+      ghost=null;pendType=null;ghostReason=null;panelRender();draw();});
+    bind("g-undo",undoLast);
+    return;}
+  if(!sel){
+    if(lens&&placedStack.length){ // undo stays reachable after the ghost panel closes
+      panel.innerHTML="<div class='lbl'>build lens</div><div class='verbs'>"+
+        "<button class='verb' id='g-undo'>↩ undo last</button></div>";
+      panel.classList.add("open");bind("g-undo",undoLast);return;}
+    panel.classList.remove("open");return;}
+  if(sel.cands&&sel.cands.length>2){
+    html+="<div class='lbl'>overlapping targets — choose</div><div class='chooser'>"+
+      sel.cands.map((c,i)=>"<button class='verb "+(i===sel.cands.indexOf(sel.cands.find(x=>x.id===sel.id&&x.kind===sel.kind))?"hot":"")+
+      "' data-pick='"+i+"'>"+esc(c.kind)+" · "+esc(c.label)+"</button>").join("")+"</div>";}
+  if(sel.kind==="section"){const s=SEC[sel.id];
+    html+="<h2>"+esc(s.name)+"</h2><p>"+esc(s.story||"")+"</p>";
+    const node=s.utility_node,live=(L.trunk_states[node.trunk]||TRUNKS[node.trunk].state_day1)==="live";
+    html+="<p class='lbl'>node "+esc(node.id)+" · "+(live?"trunk live":"trunk dark")+"</p>";
+    const portal=(s.entries||[]).find(e=>e.to!=="surface");
+    if(portal){const st=L.portal_states[portal.id]||portal.state_day1;
+      if(st==="open")html+="<div class='verbs'><button class='verb danger' data-close='"+portal.id+"'>Seal "+esc(portal.id.replace(/_/g," "))+"</button></div>";
+      else if(st==="closed")html+="<div class='verbs'><button class='verb hot' data-open='"+portal.id+"'>Reopen "+esc(portal.id.replace(/_/g," "))+"</button></div>";
+      else html+="<p class='lbl'>portal "+esc(st.replace(/_/g," "))+" — a RECLAIM project in the real build</p>";}
+  }
+  else if(sel.kind==="room"){const r=roomById(sel.id);
+    html+="<h2>"+esc(sel.label)+"</h2><p>"+esc(r.family)+" · "+esc((r.form||"").replace(/_/g," "))+" · "+esc((r.state||"").replace(/_/g," "))+
+      (r.note?"<br>"+esc(r.note):"")+"</p>";
+    if(lens&&wf==="BUILD")html+=objectPicker(r);
+    else html+="<p class='lbl'>open the ⌂ build lens for construction verbs</p>";}
+  else{const o=L.objects.find(x=>x.id===sel.id);
+    if(o){const spec=OBJ[o.type];
+      html+="<h2>"+esc(sel.label)+"</h2><p>"+esc(spec.family.replace(/_/g," "))+
+        (o.room?" · in "+esc(o.room.replace(/_/g," ")):"")+"</p>";
+      if(lens)html+="<div class='verbs'>"+
+        "<button class='verb' data-move='"+o.id+"'>Move</button>"+
+        "<button class='verb danger' data-store='"+o.id+"'>Store</button></div>";}}
+  panel.innerHTML=html;panel.classList.add("open");
+  panel.querySelectorAll("[data-pick]").forEach(b=>b.addEventListener("click",()=>{
+    const c=sel.cands[+b.dataset.pick];sel={...c,cands:sel.cands};panelRender();draw();}));
+  panel.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>{
+    const pid=b.dataset.close;L.portal_states[pid]="closed";
+    const cut=(L.essential_facilities||[]).filter(f=>!roomReachable(f,reached(null)));
+    if(cut.length)toast("Sealed. Cut off: "+cut.map(f=>f.replace(/_/g," ")).join(", ")+
+      " — the warn-before channel (25 §1)",true);
+    else toast("Bulkhead sealed — isolation holds");
+    panelRender();draw();}));
+  panel.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>{
+    L.portal_states[b.dataset.open]="open";toast("Portal reopened — routes restored");
+    panelRender();draw();}));
+  panel.querySelectorAll("[data-move]").forEach(b=>b.addEventListener("click",()=>{
+    const o=L.objects.find(x=>x.id===b.dataset.move);
+    L.objects=L.objects.filter(x=>x.id!==o.id);
+    ghost=JSON.parse(JSON.stringify(o));ghost._moving=o;
+    ghostReason=validateObject(ghost);sel=null;panelRender();draw();}));
+  panel.querySelectorAll("[data-store]").forEach(b=>b.addEventListener("click",()=>{
+    const o=L.objects.find(x=>x.id===b.dataset.store),spec=OBJ[o.type];
+    if((spec.restrictions||[]).includes("never_deconstruct")||spec.store_result===null){
+      toast(o.id.replace(/_/g," ")+" is part of the station's story — it cannot be removed",true);return;}
+    L.objects=L.objects.filter(x=>x.id!==o.id);
+    toast("Stored: "+o.type.replace(/_/g," ")+" (equipment kept intact — 10 §4)");
+    sel=null;panelRender();draw();}));
+  panel.querySelectorAll("[data-place]").forEach(b=>b.addEventListener("click",()=>{
+    startGhost(b.dataset.place,b.dataset.room||null);}));
+}
+function bind(id,fn){const el=document.getElementById(id);if(el)el.addEventListener("click",fn);}
+function undoLast(){const rec=placedStack.pop();if(!rec)return;
+  const gone=L.objects.find(x=>x.id===rec.id);
+  L.objects=L.objects.filter(x=>x.id!==rec.id);
+  if(rec.prev){L.objects.push(rec.prev);
+    toast("Move undone — "+rec.prev.type.replace(/_/g," ")+" returns to its old cell");}
+  else toast("Removed "+(gone?gone.type.replace(/_/g," "):"the last placement"));
+  panelRender();draw();}
+const PICKS=["bedroll","bunk_bed","med_cot","triage_bench","storage_shelf","supply_crate",
+  "canteen_table","workbench","comfort_lamp","partition","barricade","battery_bank","mask_cache"];
+function objectPicker(room){
+  const opts=PICKS.filter(t=>{const s=OBJ[t];
+    return s.rooms.includes("*")||(room&&s.rooms.includes(room.family));});
+  return "<div class='lbl'>place equipment ("+(room?esc(room.family)+" room":"section")+")</div>"+
+    "<div class='verbs'>"+opts.map(t=>"<button class='verb' data-place='"+t+"'"+
+    (room?" data-room='"+room.id+"'":"")+">"+esc(t.replace(/_/g," "))+"</button>").join("")+"</div>";}
+let gid=0;
+function startGhost(type,roomId){
+  const spec=OBJ[type];
+  const base=roomId?{room:roomId}:{section:(sel&&sel.kind==="section")?sel.id:"central_platform"};
+  const sid=roomId?roomById(roomId).section:base.section;
+  let pos=[1,1];
+  if(roomId){const r=roomById(roomId);pos=[r.rect.x,r.rect.y];}
+  ghost={id:"placed_"+(++gid),type,rot:0,pos,...base};
+  // auto-propose: first valid cell scan
+  const g=SEC[sid].grid;
+  outer:for(let y=0;y<g[1];y++)for(let x=0;x<g[0];x++){
+    ghost.pos=[x,y];if(validateObject(ghost)===null){break outer;}}
+  ghostReason=validateObject(ghost);
+  sel=null;panelRender();draw();}
+
+/* ================= chrome wiring ================= */
+document.querySelectorAll(".day").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".day").forEach(x=>{x.classList.remove("on");x.setAttribute("aria-selected","false");});
+  b.classList.add("on");b.setAttribute("aria-selected","true");loadLayout(b.dataset.lay);draw();}));
+bind("zoomin",()=>{cam.s=Math.min(72,cam.s*1.3);userMoved=true;draw();});
+bind("zoomout",()=>{cam.s=Math.max(6,cam.s/1.3);userMoved=true;draw();});
+bind("lensbtn",()=>{lens=!lens;document.body.classList.toggle("lens",lens);
+  const lb=document.getElementById("lensbtn");
+  lb.classList.toggle("on",lens);lb.setAttribute("aria-pressed",String(lens));
+  toast(lens?"Build lens on — five workflows, node capacity visible":"Build lens off");
+  if(!lens){ // closing the lens mid-move is a no-op, not a deletion
+    if(ghost&&ghost._moving)L.objects.push(ghost._moving);
+    ghost=null;pendType=null;ghostReason=null;}
+  panelRender();draw();});
+bind("overlaybtn",()=>{toast("Engineer's overlay: opens pre-selected to the worst-warning family (18 §7) — full overlay is a later build");});
+document.querySelectorAll(".wf").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".wf").forEach(x=>{x.classList.remove("on");x.setAttribute("aria-pressed","false");});
+  b.classList.add("on");b.setAttribute("aria-pressed","true");wf=b.dataset.wf;
+  if(wf==="OPERATE"){openBoard();return;}
+  if(wf==="BUILD"){toast("BUILD: select a room or section, then pick equipment");panelRender();return;}
+  toast(wf+" verbs are works-orders in the real build — this prototype places equipment (BUILD) and runs the board (OPERATE)");}));
+bind("helpbtn",()=>document.getElementById("help").classList.add("open"));
+bind("helpclose",()=>document.getElementById("help").classList.remove("open"));
+
+/* ---- load board + shed demo (the comfort-lighting teaching moment) ----
+   Mirrors spatial_model.utility_headroom: each load class counts only when its
+   anchor object is actually placed (base: scrubbers + lights). */
+const LOADDEFS=[["scrubbers",12,"critical",null],["lights",6,"essential",null],
+  ["radio",2,"essential",["radio_rig","radio_rig_wired"]],
+  ["cistern_pumps",4,"essential",["pump_module"]],
+  ["hotplate",4,"normal",["hotplate_counter"]],
+  ["tools",2,"normal",["workbench"]],
+  ["comfort_lighting",2,"optional",["comfort_lamp"]]];
+function activeLoads(){const types=new Set(L.objects.map(o=>o.type));
+  return LOADDEFS.filter(d=>!d[3]||d[3].some(t=>types.has(t)));}
+function openBoard(){renderBoard();document.getElementById("board").classList.add("open");}
+function renderBoard(){
+  const gen=layoutName==="day1"?24:30; // partial vs stabilized generation (utilities.json)
+  let demand=0;const rows=activeLoads().map(([n,v,t])=>{
+    const shed=(t==="optional"&&shedStage>=1)||(t==="normal"&&shedStage>=2);
+    if(!shed)demand+=v;
+    return "<tr><td class='"+(shed?"off":"")+"'>"+n.replace(/_/g," ")+
+      " <span class='tier'>"+t+"</span></td><td class='"+(shed?"off":"")+"'>"+v+"</td></tr>";});
+  if(shedStage){demand+=6;
+    rows.push("<tr><td>storm draw <span class='tier'>surge</span></td><td>6</td></tr>");}
+  document.getElementById("loads").innerHTML=rows.join("")+
+    "<tr><td><b>headroom</b></td><td><b>"+(gen-demand)+"</b></td></tr>";}
+bind("shedbtn",()=>{
+  shedStage=1;renderBoard();draw();
+  toast("The platform lamps dim — comfort lighting shed first (Optional tier; the gentlest warning)");
+  setTimeout(()=>{shedStage=2;renderBoard();draw();
+    const types=new Set(L.objects.map(o=>o.type));
+    toast(types.has("hotplate_counter")?"Load board shed the hotplate — cold meal tonight":
+      "Load board shed the Normal tier — the workbench goes dark",true);},1600);});
+bind("restorebtn",()=>{shedStage=0;renderBoard();draw();
+  toast("Capacity back — the platform lamps come on again by themselves (auto-restore)");});
+bind("boardclose",()=>document.getElementById("board").classList.remove("open"));
+
+/* ---- HUD / crew / toasts ---- */
+function updateHUD(){const v=HUDVALS[layoutName];
+  for(const k of ["food","water","meds","mat","charge"])
+    document.getElementById("c-"+k.replace("mat","mat")).textContent=v[k==="mat"?"mat":k];
+  document.getElementById("c-food").textContent=v.food;
+  document.getElementById("c-water").textContent=v.water;
+  document.getElementById("c-meds").textContent=v.meds;
+  document.getElementById("c-mat").textContent=v.mat;
+  document.getElementById("c-charge").textContent=v.charge;
+  document.getElementById("clock").textContent=v.day;}
+function updateCrew(){const el=document.getElementById("crew");
+  const crew=[["IM","Imka"],["AS","Ash"],["TE","Teo"],["MA","Maren"]];
+  if(layoutName!=="day1"&&DATA.layouts[layoutName].juna_berth)crew.push(["JU","Juna"]);
+  el.innerHTML=crew.map(([i,n])=>"<div class='face"+(i==="JU"?" juna":"")+
+    "' title='"+n+"'>"+i+"</div>").join("");}
+function toast(msg,warn){const t=document.createElement("div");
+  t.className="toast"+(warn?" warn":"");t.textContent=msg;
+  const box=document.getElementById("toasts");box.appendChild(t);
+  while(box.children.length>3)box.removeChild(box.firstChild);
+  setTimeout(()=>{t.style.opacity="0";t.style.transition="opacity .4s";
+    setTimeout(()=>t.remove(),450);},3600);}
+
+/* ================= boot ================= */
+window.addEventListener("resize",resize);
+window.addEventListener("orientationchange",()=>setTimeout(resize,120));
+if(window.visualViewport)visualViewport.addEventListener("resize",resize);
+loadLayout("day1");resize();
+setInterval(()=>{if(document.hidden)return;draw();},1000); // lamp flicker-free ambient refresh
+</script>
+</body>
+</html>

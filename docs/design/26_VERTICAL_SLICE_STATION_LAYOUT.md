@@ -1,6 +1,6 @@
 # 26 — VERTICAL-SLICE STATION LAYOUT
 
-**Stage:** Prompt 4. **Status:** LOCKED at systems level; **not final art**. The authoritative geometry is machine-readable — `tools/data/layouts/{day1,east_day7,west_day7}.json` over `station_sections.json` — and validated by `tools/validate_station_layouts.py` (all three layouts pass the full battery). The diagrams below are *renderings of that data*; on any conflict, the data wins.
+**Stage:** Prompt 4 (amended by the D-048 red-team pass). **Status:** LOCKED at systems level; **not final art**. The authoritative geometry is machine-readable — `tools/data/layouts/{day1,east_day7,west_day7}.json` over `station_sections.json` — and validated by `tools/validate_station_layouts.py` (all three layouts pass the full battery, including derived area counts, the medical venue on both routes, the recorded seal, and the no-sever/no-strand guards). The ASCII diagrams below are **generated from that data by the render probe and pasted verbatim** (D-048 — the first hand-drawn versions drifted and were caught); on any conflict, the data wins. Glyphs: `#` column · `=` track/drain bed · `/` stair · `|` ladder · `^` lift (or the west arch) · `x` jammed link · `O`/`X` open/blocked portal · `A` airlock · `d` decon · `S` scrubber stack · `T` tank · `F` flywheel · `c` cable gallery or a c-named object · `r`/`R` railcars · `k` kiosk · `C` cistern · `f` filtration or fitters' bay · `p` pump or parts racks · `!` story anchor · `*` comfort lamp · lowercase = placed objects (b beds, t bench/pump, s shelf/crate, h hotplate, m cot/cabinet/mask, w workbench).
 
 ---
 
@@ -19,50 +19,53 @@ flowchart TD
 
 ## 2. Day 1 — four areas, three blocked routes
 
-Central Platform (16×4 cells, 4 bays; `#` column, `T` tank, `=` track bed, `/` stair, `|` ladder, `^` lift):
-
 ```
-  P T b # b b b # / . | # . ^ s .      P purifier  b bedrolls (the Camp)
-  X t . C . . . c c c m . s s . X      t transfer pump  C cook ring  c lamp/cache/chalk
-  . . C C C / C . . . . . s . . .      s supply stacks + bench  m muster
-  = = = = = = = = = = = = = = = =      X blocked portal (west flood / east rubble)
+scrubber_gate (L1):          central_platform (L0):
+  A . . . . . S S              p T b # b b b # / . | # . x w w
+  O d d . . . . .              X t b . b b b * c c m ! s s . X
+  A t t . . . . /              . . . . . / . . c c . . . . . .
+                               = = = = = = = = = = = = = = = =
+flywheel_vault (L-1):
+  / . . . F F . .
+  . . . b F F . .
+  c c c c c c c c
 ```
 
-**Areas (4):** Scrubber Gate (impaired) · Flywheel Room (partial) · the Camp (bedrolls + cook ring + bench + pump/tank/purifier — three temporary zones, one home) · Listening Post (improvised, up the ladder). **Blocked:** east rubble, west flood, jammed lift. **Utility path:** trunk_core serves gate/platform/signal/flywheel/deep nodes; east/west trunks dark. **Safe areas:** platform + gate; muster mid-platform. Comfort lamp on the platform (the Optional load, lit). Validated: every essential facility reachable; Deep Service correctly *unreachable* (lift-jam test).
+**Areas (4, derived from the rooms' own labels — validator-checked):** Scrubber Gate (impaired; **Ash's triage bench at the decon channel** — the medical family's temporary form, on every route from Day 1) · Flywheel Room (partial; the battery bank inside — the backup-charge object) · the Camp (bedrolls + cook ring + supply stacks + bench + pump/tank/purifier + the comfort lamp, lit) · Listening Post (improvised, up the ladder). **Blocked:** east rubble (X), west flood (X), jammed lift (x). Trunk_core serves five nodes; east/west trunks dark. Validated: every essential facility reachable; Deep Service correctly *unreachable*.
 
 ## 3. Day 7 EAST — comfort first (10 areas)
 
-East Concourse (railcars `r`/`R` converted, kiosk row `k` claimed):
-
 ```
-  . . . # . . . # H H c c S S C C      H hotplate counter (Canteen)  c table
-  O . . . . . L . . . . . . . . m      S pantry shelf (module)  C cold locker
-  b r b r b r . m R m R m R . . .      b bunks ×3 (Sleeper Car; Juna = 3rd)
-  b r b r b r . m R m R R R . . .      m med cots + cabinet (Aid Car)  L lamp
+east_concourse (L0):                 deep_service (L-1):
+  . . . # . . . # h h k # s s c c     ^ . . # . . . # . . . .
+  O . . . . . * . . . . . . . . !     f w w f . ! . . p s s p
+  m r m r m r . b R b R b R c c .     f f f f . . . . p p p p
+  m r m r r r . b R b R b R . . .
 ```
 
-Sleeper Car (railcar A: 3 bunks, aisles between — Juna's berth the third) · Aid Car (railcar B: 2 cots + cabinet, carer aisles) · Canteen in the kiosk row (+pantry module) · Cold Store in the end kiosks · Camp → **Staging Room** (repurposed) · LP **wired** (upgrade) · Flywheel **stabilized** · trunk_east live · lift restored → Fitters' Shop + Equipment Locker. Corridor row y1 stays clear end to end (validated: no furniture severs it). Emergency route: concourse → portal → platform (safe); the storm seal on this portal is the isolation choice.
+**The railcar-role decision, embodied (D-048):** the **Aid Car takes the portal-side railcar** (shortest casualty carry from the gate — entrance→medical 19 cells) and the **Sleeper Car takes the far railcar** (measurably quieter: noise distance 21 vs the Aid Car's — the tradeoff is a computed metric, and the swapped arrangement validates too, so the choice is real freedom, test-asserted). Canteen in the kiosk row (hotplate on the counter, the table on the concourse floor) + pantry module + Cold Store in the end kiosks; Juna's berth = the third bunk. The **Level-1 seal is recorded on the east portal** (the isolation decision, in data); the shift-log story anchor waits in Deep Service. Camp → Staging; LP wired; trunk_east live; lift restored.
 
 ## 4. Day 7 WEST — water first (10 areas)
 
-West Gallery (cistern main `C`, arch `^`, drain channel `=`):
-
 ```
-  C C C f # p p . # b W b # b c c      f filtration module (on Cistern Works)
-  C C C f . p p m ^ b c b W b C O      p pump module (Pump Room)  m lamp
-  . . . C . . . . . W W W W W . .      b bunks ×3 (West Bunks; Juna = 3rd, lamp corner)
-  = = = = = = = = = = = = = = = =      C cold locker (cool, quiet, far from gate)
+central_platform (L0):               west_gallery (L0):
+  p T . # s s s # / . | # . ^ . .     C C C f # p p . # b . b # b c c
+  O t t t . . . * c c . . m . ! X     C C C f . p p ! ^ b . b * b . O
+  . . . . . / . . c c c c . . . .     . . . . . . . . . . . . . . . .
+  = = = = = = = = = = = = = = = =     = = = = = = = = = = = = = = = =
 ```
 
-Cistern Works (feature-built on the main, +filtration module) · Pump Room · West Bunks (Juna's berth, the candle-lamp corner) · Cold Store (west option: cool but the long haul) · canteen **corner** stays a cook-ring zone on the platform (the D-039 warm-beat variant) · Camp → Staging · LP wired · lift restored → Fitters' Shop. East stays rubble-dark — the visible unchosen future. Validated identically.
+**Ash's triage-bench corner sits beside the Staging Room** (the D-039 bench venue — the west route's medical family, in data with its placed bench, validator-asserted). Cistern Works (feature-built, +filtration module) · Pump Room · West Bunks with **Juna's lamp beside her bunk** (the candle line's anchor, adjacency-tested) · Cold Store in the far bays (cool, quiet, the long haul — priced by the metrics) · the canteen corner stays a cook-ring zone (cold-meal week canon) · seal recorded on the west portal · shift log in Deep Service. East stays rubble-dark — the visible unchosen future.
 
 ## 5. Route contrast (same shell, different stations)
 
-East buys **rooms for people** (real beds, real triage, a warm Canteen) and leaves water on tank-duty drudgery; west buys **infrastructure** (the water chain, cheap storms) and lives rougher (bunks in a work gallery, cold meals through the drain week, the platform lamps dark more nights). Both reach 10 areas from the same 7 families; both keep every essential facility reachable with an emergency path; the validator asserts both — and asserts that neither is achievable by Day 1 geometry alone (blocked portals, dark trunks, jammed lift).
+East buys **rooms for people** (real beds, real triage, a warm Canteen) and leaves water on tank-duty drudgery; west buys **infrastructure** (the water chain, cheap storms) and lives rougher (bunks in a work gallery, bench triage at Ash's penalty, cold meals through the drain week, the platform lamps dark more nights). Both reach 10 areas from the same 7 families; both keep every essential facility reachable with an emergency path; the validator asserts both — and asserts that neither is achievable by Day 1 geometry alone (blocked portals, dark trunks, jammed lift).
+
+**The four within-wing decisions, instantiation status (D-048, honest):** *railcar roles* — in data, both arrangements validated, tradeoff computed (noise vs. gate distance); *seal bulkhead* — in data (`seal_bulkhead`), closure/severance/recovery test-exercised; *Cold Store siting* — the two canonical sites are the cross-route pair (east kiosk vs. west bay, D-039), priced by the delivery-distance metrics; *berth location* — canonically a human-ledger call owned by the resident layer (Prompt 5), not a spatial mechanic. The slice's route redundancy is authored-single (every wing room's SPOF is computed and reported, never hidden); *second passages* are full-game content (25 §3).
 
 ## 6. Incident propagation on this geometry (worked examples)
 
-**Storm (Day 4):** intake clog spikes scrubber draw at the Gate (L1); power dips station-wide (comfort lighting dims first — visibly, on the platform); the pump link stalls (west: Pump Room; east/pre-trunk: the Camp's transfer pump). The **seal bulkhead** (Day-2 choice) closes either the wing portal or the platform core — deciding which side the 3-phase air window threatens. **Contamination (Day 5):** the STORAGE link is the tank (east) or cistern storage (west) — the boil order's charge cost rides the same load board. **Structural:** the east canopy bay / west arch hotspots sit exactly where reinforcement orders go; an unstable bay closes its cells (access, not damage theater).
+**Storm (Day 4)** — labels per D-048's modeled-vs-authored honesty: the demand spike and the shed order (comfort lighting first, then Normal) are **modeled** (survival model, asserted); the pump-link stall staging (west: Pump Room; east/pre-trunk: the Camp's transfer pump per 10 §15) is **authored canon** the incident content stages, not model output. The **seal bulkhead** (Day-2 choice, now in layout data) closes its recorded portal — closure, severance warning, and recovery are exercised against this geometry by `close_door` tests; which side the 3-phase air window threatens follows from it. **Contamination (Day 5):** the STORAGE link is the tank (east) or cistern storage (west) — the boil order's charge cost rides the same load board (modeled). **Structural:** the east canopy bay / west arch hotspots sit exactly where reinforcement orders go; an unstable bay closes its cells (access, not damage theater — authored, geometry-ready).
 
 ## 7. Visual-progression checkpoints (screenshot anchors)
 

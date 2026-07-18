@@ -197,6 +197,15 @@ class Utilities(unittest.TestCase):
         self.assertTrue(any("spirits sag" in n for n in w["notes"]),
                         "extended platform darkness never posted its modest stress note")
 
+    def test_memory_notes_never_name_absent_residents(self):
+        # anti-lie rule (D-048): the Juna candle line may not fire before she
+        # arrives or after she was turned away
+        r = run("juna_no_berth")
+        self.assertFalse(r["juna"])
+        shed_notes = [n for n in r["notes"] if "lamps" in n or "dark platform" in n or "candle" in n]
+        self.assertFalse(any("Juna" in n for n in shed_notes),
+                         "a shed note names Juna in a week that turned her away")
+
     def test_storm_day_squeezes_power(self):
         r = run("west_competent")
         heads = {h["day"]: h["power"] for h in r["utility_head"]}

@@ -1,158 +1,496 @@
 {
-  "_comment": "SIGNAL 45 room-family architecture (Prompt 4, D-047). SEVEN true slice families; every slice area is an instance, specialization, temporary form, or module of one of these. Full-game target: 20-24 families (22 named in docs/design/22) realized from the ~40-room catalog — rooms are instances/specializations, never one-off systems. All numbers PROVISIONAL. footprint units are cells (station_sections.json); min_footprint [w,h]; noise/comfort on a low/med/high scale consumed by adjacency rules (docs/design/25).",
+  "_comment": "SIGNAL 45 room-family architecture (Prompt 4, D-047). SEVEN true slice families; every slice area is an instance, specialization, temporary form, or module of one of these. Full-game target: 20-24 families (22 named in docs/design/22) realized from the ~40-room catalog \u2014 rooms are instances/specializations, never one-off systems. All numbers PROVISIONAL. footprint units are cells (station_sections.json); min_footprint [w,h]; noise/comfort on a low/med/high scale consumed by adjacency rules (docs/design/25).",
   "slice_families": {
     "rest": {
       "name": "Rest",
-      "purpose": "sleep and recovery — fatigue/stress recovery quality scales with form",
-      "min_footprint": [2, 2], "supported_footprints": ["2x2", "4x2", "railcar", "open_zone"],
-      "required_architecture": [], "required_utilities": {"power": "lights_only"},
-      "capacity_per_bed": 1, "equipment_sockets": ["rest_point", "comfort_object", "storage"],
+      "purpose": "sleep and recovery \u2014 fatigue/stress recovery quality scales with form",
+      "min_footprint": [
+        2,
+        2
+      ],
+      "supported_footprints": [
+        "2x2",
+        "4x2",
+        "railcar",
+        "open_zone"
+      ],
+      "required_architecture": [],
+      "required_utilities": {
+        "power": "lights_only"
+      },
+      "capacity_per_bed": 1,
+      "equipment_sockets": [
+        "rest_point",
+        "comfort_object",
+        "storage"
+      ],
       "storage_sockets": 1,
-      "access": {"min_doors": 1, "evac_routes": 1},
-      "work_tasks": ["tidy"], "outputs": ["fatigue_recovery", "stress_recovery"],
-      "risks": ["crowding"], "noise_emit": "low", "noise_sensitive": true, "heat": "low",
-      "comfort": "form-dependent (bedroll < bunk < berth — 10 S11 housing ladder)",
+      "access": {
+        "min_doors": 1,
+        "evac_routes": 1
+      },
+      "work_tasks": [
+        "tidy"
+      ],
+      "outputs": [
+        "fatigue_recovery",
+        "stress_recovery"
+      ],
+      "risks": [
+        "crowding"
+      ],
+      "noise_emit": "low",
+      "noise_sensitive": true,
+      "heat": "low",
+      "comfort": "form-dependent (bedroll < bunk < berth \u2014 10 S11 housing ladder)",
       "medical": "rest quality feeds recovery (17)",
-      "incidents": ["evacuation_target", "crowding_stress"],
-      "upgrades": ["bunks", "private_berth_partitions"], "specializations": ["family_berths (full game)"],
-      "temporary_form": "the Camp bedroll ring (open_zone, no shell)", "permanent_form": "Sleeper Car / west-bay bunks / Dormitory",
-      "damage_states": ["operational", "impaired", "damaged"],
+      "incidents": [
+        "evacuation_target",
+        "crowding_stress"
+      ],
+      "upgrades": [
+        "bunks",
+        "private_berth_partitions"
+      ],
+      "specializations": [
+        "family_berths (full game)"
+      ],
+      "temporary_form": "the Camp bedroll ring (open_zone, no shell)",
+      "permanent_form": "Sleeper Car / west-bay bunks / Dormitory",
+      "damage_states": [
+        "operational",
+        "impaired",
+        "damaged"
+      ],
       "visual_stages": "bedrolls -> bunks -> berths with curtains (10 S13)",
       "save": "instance record + bed objects + occupancy",
       "acceptance": "sleep quality measurably differs by form (07 S21; rough-sleep pricing already modeled, 15)"
     },
     "medical": {
       "name": "Medical",
-      "purpose": "treatment, triage, recovery beds — the care loop (17 S3)",
-      "min_footprint": [2, 2], "supported_footprints": ["2x2", "railcar", "open_zone"],
-      "required_architecture": [], "required_utilities": {"power": "lights", "water": "clean_supply"},
-      "capacity_per_bed": 1, "equipment_sockets": ["rest_point", "workstation", "storage"],
+      "purpose": "treatment, triage, recovery beds \u2014 the care loop (17 S3)",
+      "min_footprint": [
+        2,
+        2
+      ],
+      "supported_footprints": [
+        "2x2",
+        "railcar",
+        "open_zone"
+      ],
+      "required_architecture": [],
+      "required_utilities": {
+        "power": "lights",
+        "water": "clean_supply"
+      },
+      "capacity_per_bed": 1,
+      "equipment_sockets": [
+        "rest_point",
+        "workstation",
+        "storage"
+      ],
       "storage_sockets": 1,
-      "access": {"min_doors": 1, "evac_routes": 1, "prefers": "near_gate (adjacency, 25)"},
-      "work_tasks": ["treat", "restock"], "outputs": ["treatment_capacity"],
-      "risks": ["infection_if_unclean"], "noise_emit": "low", "noise_sensitive": true, "heat": "low",
-      "comfort": "med", "medical": "treatment venue quality: bench < Aid Car (Ash's penalty, D-039)",
-      "incidents": ["health_emergency_venue", "triage_collision (event 19)"],
-      "upgrades": ["ward_module"], "specializations": ["surgery vs ward (full game)"],
-      "temporary_form": "the triage bench (open_zone at Camp/Staging)", "permanent_form": "Aid Car / Clinic",
-      "damage_states": ["operational", "impaired", "damaged"],
+      "access": {
+        "min_doors": 1,
+        "evac_routes": 1,
+        "prefers": "near_gate (adjacency, 25)"
+      },
+      "work_tasks": [
+        "treat",
+        "restock"
+      ],
+      "outputs": [
+        "treatment_capacity"
+      ],
+      "risks": [
+        "infection_if_unclean"
+      ],
+      "noise_emit": "low",
+      "noise_sensitive": true,
+      "heat": "low",
+      "comfort": "med",
+      "medical": "treatment venue quality: bench < Aid Car (Ash's penalty, D-039)",
+      "incidents": [
+        "health_emergency_venue",
+        "triage_collision (event 19)"
+      ],
+      "upgrades": [
+        "ward_module"
+      ],
+      "specializations": [
+        "surgery vs ward (full game)"
+      ],
+      "temporary_form": "the triage bench (open_zone at Camp/Staging)",
+      "permanent_form": "Aid Car / Clinic",
+      "damage_states": [
+        "operational",
+        "impaired",
+        "damaged"
+      ],
       "visual_stages": "bench -> cots + cabinet -> ward",
-      "save": "instance + bookings (committed doses serialize — 17 S5)",
+      "save": "instance + bookings (committed doses serialize \u2014 17 S5)",
       "acceptance": "bench-vs-Aid-Car penalty verified (07 S12); bookings survive reload (07 S4b)"
     },
     "food": {
       "name": "Food",
-      "purpose": "meal preparation and shared eating — the two visible meal windows (16 S2)",
-      "min_footprint": [2, 2], "supported_footprints": ["2x2", "kiosk", "open_zone"],
-      "required_architecture": [], "required_utilities": {"power": "hotplate (Normal tier; cold meals without)", "water": "clean_supply"},
-      "capacity_per_bed": 0, "equipment_sockets": ["workstation", "comfort_object", "storage"],
+      "purpose": "meal preparation and shared eating \u2014 the two visible meal windows (16 S2)",
+      "min_footprint": [
+        2,
+        2
+      ],
+      "supported_footprints": [
+        "2x2",
+        "kiosk",
+        "open_zone"
+      ],
+      "required_architecture": [],
+      "required_utilities": {
+        "power": "hotplate (Normal tier; cold meals without)",
+        "water": "clean_supply"
+      },
+      "capacity_per_bed": 0,
+      "equipment_sockets": [
+        "workstation",
+        "comfort_object",
+        "storage"
+      ],
       "storage_sockets": 2,
-      "access": {"min_doors": 1, "evac_routes": 1, "prefers": "near_storage"},
-      "work_tasks": ["cook", "serve", "clean"], "outputs": ["meals", "canteen_waste_reduction (16)"],
-      "risks": ["contamination_if_near_bad_water (25 adjacency)"], "noise_emit": "med", "noise_sensitive": false, "heat": "med",
-      "comfort": "high when warm — the gathering-scene venue (02 S6 hope floor)",
+      "access": {
+        "min_doors": 1,
+        "evac_routes": 1,
+        "prefers": "near_storage"
+      },
+      "work_tasks": [
+        "cook",
+        "serve",
+        "clean"
+      ],
+      "outputs": [
+        "meals",
+        "canteen_waste_reduction (16)"
+      ],
+      "risks": [
+        "contamination_if_near_bad_water (25 adjacency)"
+      ],
+      "noise_emit": "med",
+      "noise_sensitive": false,
+      "heat": "med",
+      "comfort": "high when warm \u2014 the gathering-scene venue (02 S6 hope floor)",
       "medical": "nutrition path (hunger recovery)",
-      "incidents": ["cold_meals_on_shed (modeled)", "contamination_vector"],
-      "upgrades": ["pantry_module"], "specializations": ["Long Table dining (full game)"],
-      "temporary_form": "the cook ring (open_zone)", "permanent_form": "the Canteen (kiosk conversion)",
-      "damage_states": ["operational", "impaired", "damaged"],
+      "incidents": [
+        "cold_meals_on_shed (modeled)",
+        "contamination_vector"
+      ],
+      "upgrades": [
+        "pantry_module"
+      ],
+      "specializations": [
+        "Long Table dining (full game)"
+      ],
+      "temporary_form": "the cook ring (open_zone)",
+      "permanent_form": "the Canteen (kiosk conversion)",
+      "damage_states": [
+        "operational",
+        "impaired",
+        "damaged"
+      ],
       "visual_stages": "cook ring -> counter + hotplate -> lit canteen with tables",
       "save": "instance + equipment states",
-      "acceptance": "warm-beat scene stages here (east) or at the cook-ring corner (west) — both venues function (07 S7)"
+      "acceptance": "warm-beat scene stages here (east) or at the cook-ring corner (west) \u2014 both venues function (07 S7)"
     },
     "storage": {
       "name": "Storage",
       "purpose": "stock capacity, staging, reservation-aware storage (16 S2 caps)",
-      "min_footprint": [1, 2], "supported_footprints": ["1x2", "2x2", "kiosk", "corridor_run", "open_zone"],
-      "required_architecture": [], "required_utilities": {},
-      "capacity_per_bed": 0, "equipment_sockets": ["storage", "barrier"],
+      "min_footprint": [
+        1,
+        2
+      ],
+      "supported_footprints": [
+        "1x2",
+        "2x2",
+        "kiosk",
+        "corridor_run",
+        "open_zone"
+      ],
+      "required_architecture": [],
+      "required_utilities": {},
+      "capacity_per_bed": 0,
+      "equipment_sockets": [
+        "storage",
+        "barrier"
+      ],
       "storage_sockets": 4,
-      "access": {"min_doors": 1, "evac_routes": 0, "prefers": "near_workshop_and_food (hauling, 25)"},
-      "work_tasks": ["haul", "inventory"], "outputs": ["storage_capacity", "cold_capacity (Cold Store spec)"],
-      "risks": ["spoilage (full game)", "single-point loss if centralized"], "noise_emit": "low", "noise_sensitive": false, "heat": "low",
-      "comfort": "low", "medical": null,
-      "incidents": ["emergency_material_delivery_distance (25)"],
-      "upgrades": ["cold_store (raises food cap — 16)"], "specializations": ["Equipment Locker (tools/gear)"],
-      "temporary_form": "supply stacks at the Camp", "permanent_form": "Cold Store / Equipment Locker",
-      "damage_states": ["operational", "impaired", "damaged"],
+      "access": {
+        "min_doors": 1,
+        "evac_routes": 0,
+        "prefers": "near_workshop_and_food (hauling, 25)"
+      },
+      "work_tasks": [
+        "haul",
+        "inventory"
+      ],
+      "outputs": [
+        "storage_capacity",
+        "cold_capacity (Cold Store spec)"
+      ],
+      "risks": [
+        "spoilage (full game)",
+        "single-point loss if centralized"
+      ],
+      "noise_emit": "low",
+      "noise_sensitive": false,
+      "heat": "low",
+      "comfort": "low",
+      "medical": null,
+      "incidents": [
+        "emergency_material_delivery_distance (25)"
+      ],
+      "upgrades": [
+        "cold_store (raises food cap \u2014 16)"
+      ],
+      "specializations": [
+        "Equipment Locker (tools/gear)"
+      ],
+      "temporary_form": "supply stacks at the Camp",
+      "permanent_form": "Cold Store / Equipment Locker",
+      "damage_states": [
+        "operational",
+        "impaired",
+        "damaged"
+      ],
       "visual_stages": "stacked crates -> shelving -> cold lockers",
       "save": "instance + contents summary (stocks stay global in slice; location affects delivery distance only)",
-      "acceptance": "Cold Store siting decision functions (travel vs cascade — 07 S21)"
+      "acceptance": "Cold Store siting decision functions (travel vs cascade \u2014 07 S21)"
     },
     "utility": {
       "name": "Utility",
-      "purpose": "machine rooms producing/moving Power, Air, or Water — one family, three specializations (D-047)",
-      "min_footprint": [1, 2], "supported_footprints": ["1x2", "2x2", "feature_built", "tall (full game)"],
-      "required_architecture": ["service node in section", "feature anchor for feature-built (flywheel housing, cistern main, scrubber stack)"],
-      "required_utilities": {"power": "self_or_grid"},
-      "capacity_per_bed": 0, "equipment_sockets": ["utility_module", "workstation", "emergency_object"],
+      "purpose": "machine rooms producing/moving Power, Air, or Water \u2014 one family, three specializations (D-047)",
+      "min_footprint": [
+        1,
+        2
+      ],
+      "supported_footprints": [
+        "1x2",
+        "2x2",
+        "feature_built",
+        "tall (full game)"
+      ],
+      "required_architecture": [
+        "service node in section",
+        "feature anchor for feature-built (flywheel housing, cistern main, scrubber stack)"
+      ],
+      "required_utilities": {
+        "power": "self_or_grid"
+      },
+      "capacity_per_bed": 0,
+      "equipment_sockets": [
+        "utility_module",
+        "workstation",
+        "emergency_object"
+      ],
       "storage_sockets": 1,
-      "access": {"min_doors": 1, "evac_routes": 1, "service_clearance": "every utility_module keeps 1 free interaction cell"},
-      "work_tasks": ["operate", "maintain", "repair"], "outputs": ["generation/filtration/pumping per specialization"],
-      "risks": ["breakdown", "cascade_origin (19)"], "noise_emit": "very_high", "noise_sensitive": false, "heat": "high",
-      "comfort": "low — noisy neighbor (the canonical noise-adjacency axis, 10 S15)",
+      "access": {
+        "min_doors": 1,
+        "evac_routes": 1,
+        "service_clearance": "every utility_module keeps 1 free interaction cell"
+      },
+      "work_tasks": [
+        "operate",
+        "maintain",
+        "repair"
+      ],
+      "outputs": [
+        "generation/filtration/pumping per specialization"
+      ],
+      "risks": [
+        "breakdown",
+        "cascade_origin (19)"
+      ],
+      "noise_emit": "very_high",
+      "noise_sensitive": false,
+      "heat": "high",
+      "comfort": "low \u2014 noisy neighbor (the canonical noise-adjacency axis, 10 S15)",
       "medical": "accident risk on hazardous maintenance",
-      "incidents": ["flywheel_instability", "air_filtration_failure", "pump_stall — the 19 families live here"],
-      "upgrades": ["stabilize (Flywheel partial->stable)", "module (filtration module)"],
-      "specializations": ["power (Flywheel Room, Cell Rack)", "air (Scrubber Gate/Hall)", "water (Pump Room, Cistern Works)"],
-      "temporary_form": "the transfer-pump rig (equipment at the Camp)", "permanent_form": "the named machine rooms",
-      "damage_states": ["operational", "impaired", "damaged", "critical"],
+      "incidents": [
+        "flywheel_instability",
+        "air_filtration_failure",
+        "pump_stall \u2014 the 19 families live here"
+      ],
+      "upgrades": [
+        "stabilize (Flywheel partial->stable)",
+        "module (filtration module)"
+      ],
+      "specializations": [
+        "power (Flywheel Room, Cell Rack)",
+        "air (Scrubber Gate/Hall)",
+        "water (Pump Room, Cistern Works)"
+      ],
+      "temporary_form": "the transfer-pump rig (equipment at the Camp)",
+      "permanent_form": "the named machine rooms",
+      "damage_states": [
+        "operational",
+        "impaired",
+        "damaged",
+        "critical"
+      ],
       "visual_stages": "jury-rigged -> stabilized -> redundant (09 B.8)",
       "save": "instance + specialization + machine condition",
       "acceptance": "cascade fires through these rooms with visible intermediate states (07 S4)"
     },
     "workshop": {
       "name": "Workshop",
-      "purpose": "fabrication and maintenance labor — the crafting queue's venue (03 crafting row)",
-      "min_footprint": [2, 2], "supported_footprints": ["2x2", "feature_built"],
-      "required_architecture": [], "required_utilities": {"power": "tools (Normal tier; hand tools without)"},
-      "capacity_per_bed": 0, "equipment_sockets": ["workstation", "storage"],
+      "purpose": "fabrication and maintenance labor \u2014 the crafting queue's venue (03 crafting row)",
+      "min_footprint": [
+        2,
+        2
+      ],
+      "supported_footprints": [
+        "2x2",
+        "feature_built"
+      ],
+      "required_architecture": [],
+      "required_utilities": {
+        "power": "tools (Normal tier; hand tools without)"
+      },
+      "capacity_per_bed": 0,
+      "equipment_sockets": [
+        "workstation",
+        "storage"
+      ],
       "storage_sockets": 2,
-      "access": {"min_doors": 1, "evac_routes": 1, "prefers": "near_storage (hauling, 25)"},
-      "work_tasks": ["fabricate", "maintain", "repair_prep"], "outputs": ["craft_queue_throughput", "repair_readiness"],
-      "risks": ["accident_on_hazard_work"], "noise_emit": "high", "noise_sensitive": false, "heat": "med",
-      "comfort": "low", "medical": "minor-injury source",
-      "incidents": ["tool-down on load shed (modeled)"],
-      "upgrades": ["tool_crib_bench"], "specializations": ["Fine Bench electronics (full game)"],
-      "temporary_form": "the improvised bench at the Camp", "permanent_form": "the Fitters' Shop (feature-built, Deep Service)",
-      "damage_states": ["operational", "impaired", "damaged"],
+      "access": {
+        "min_doors": 1,
+        "evac_routes": 1,
+        "prefers": "near_storage (hauling, 25)"
+      },
+      "work_tasks": [
+        "fabricate",
+        "maintain",
+        "repair_prep"
+      ],
+      "outputs": [
+        "craft_queue_throughput",
+        "repair_readiness"
+      ],
+      "risks": [
+        "accident_on_hazard_work"
+      ],
+      "noise_emit": "high",
+      "noise_sensitive": false,
+      "heat": "med",
+      "comfort": "low",
+      "medical": "minor-injury source",
+      "incidents": [
+        "tool-down on load shed (modeled)"
+      ],
+      "upgrades": [
+        "tool_crib_bench"
+      ],
+      "specializations": [
+        "Fine Bench electronics (full game)"
+      ],
+      "temporary_form": "the improvised bench at the Camp",
+      "permanent_form": "the Fitters' Shop (feature-built, Deep Service)",
+      "damage_states": [
+        "operational",
+        "impaired",
+        "damaged"
+      ],
       "visual_stages": "improvised bench -> the fitters' benches relit",
       "save": "instance + queue reference",
       "acceptance": "craft chain (wire->splice) runs through it (07 S9)"
     },
     "operations": {
       "name": "Operations",
-      "purpose": "information and expedition infrastructure — the radio heart and the run door",
-      "min_footprint": [1, 2], "supported_footprints": ["1x2", "2x2", "feature_built"],
-      "required_architecture": ["signal box for the Listening Post (feature-built)"],
-      "required_utilities": {"power": "radio (Essential tier)"},
-      "capacity_per_bed": 0, "equipment_sockets": ["workstation", "storage", "story_object"],
-      "storage_sockets": 1,
-      "access": {"min_doors": 1, "evac_routes": 0},
-      "work_tasks": ["listen", "verify", "stage_runs"], "outputs": ["radio_slots (2/night)", "run_preparation"],
-      "risks": ["charge_draw"], "noise_emit": "low", "noise_sensitive": true, "heat": "low",
-      "comfort": "med — the warm chalkboard room (01 Pillar 3)",
+      "purpose": "information and expedition infrastructure \u2014 the radio heart and the run door",
+      "min_footprint": [
+        1,
+        2
+      ],
+      "supported_footprints": [
+        "1x2",
+        "2x2",
+        "feature_built"
+      ],
+      "required_architecture": [
+        "signal box for the Listening Post (feature-built)"
+      ],
+      "required_utilities": {
+        "power": "radio (Essential tier)"
+      },
+      "capacity_per_bed": 0,
+      "equipment_sockets": [
+        "workstation",
+        "storage",
+        "story_object"
+      ],
+      "storage_sockets": 2,
+      "access": {
+        "min_doors": 1,
+        "evac_routes": 0
+      },
+      "work_tasks": [
+        "listen",
+        "verify",
+        "stage_runs"
+      ],
+      "outputs": [
+        "radio_slots (2/night)",
+        "run_preparation"
+      ],
+      "risks": [
+        "charge_draw"
+      ],
+      "noise_emit": "low",
+      "noise_sensitive": true,
+      "heat": "low",
+      "comfort": "med \u2014 the warm chalkboard room (01 Pillar 3)",
       "medical": null,
-      "incidents": ["reception_quality (splice chain)"],
-      "upgrades": ["wired (improvised -> wired LP — the slice upgrade beat)"],
-      "specializations": ["listening_post (unique)", "staging (expedition prep — the Camp repurpose target)"],
-      "temporary_form": "the improvised set in the signal box", "permanent_form": "wired Listening Post / Staging Room",
-      "damage_states": ["operational", "impaired", "damaged"],
+      "incidents": [
+        "reception_quality (splice chain)"
+      ],
+      "upgrades": [
+        "wired (improvised -> wired LP \u2014 the slice upgrade beat)"
+      ],
+      "specializations": [
+        "listening_post (unique)",
+        "staging (expedition prep \u2014 the Camp repurpose target)"
+      ],
+      "temporary_form": "the improvised set in the signal box",
+      "permanent_form": "wired Listening Post / Staging Room",
+      "damage_states": [
+        "operational",
+        "impaired",
+        "damaged"
+      ],
       "visual_stages": "improvised rig -> wired rack + punch-card schedule board",
       "save": "instance + upgrade state",
       "acceptance": "LP wiring upgrade completes (07 S21); Camp->Staging repurpose is this family's staging specialization"
     }
   },
   "full_game_families": [
-    "rest", "medical", "food", "storage", "utility", "workshop", "operations",
-    "farm (Spore Beds, Grow Gallery)", "fabrication (Fine Bench, Stitchery, Tool Crib, Still Room)",
-    "recycling (Reclaim Room)", "community (Long Table, Waiting Room, Meeting Hall)",
-    "education (Schoolroom, Lending Shelf)", "family_quarters (Family Berths, Private Berths)",
-    "memorial (Memorial Wall, Quiet Car)", "sanitation (Washhouse — if the network is earned, 16 S1)",
-    "quarantine (Isolation Berth)", "climate (Warming Room, Draught House)",
-    "structure (Shoring Post, Storm Refuge)", "security (Watch Post — D-044-compatible)",
-    "trade (Trade Gate)", "signals_analysis (Signal Bench, Map Room, Wire Room, Weather Mast)",
-    "circulation (stairs/lift/corridor works — CONNECT's domain, not a buildable room)"
+    "rest",
+    "medical",
+    "food",
+    "storage",
+    "utility",
+    "workshop",
+    "operations",
+    "farm (Spore Beds, Grow Gallery)",
+    "fabrication (Fine Bench, Stitchery, Tool Crib, Still Room)",
+    "recycling (Reclaim Room)",
+    "community (Long Table, Waiting Room, Meeting Hall)",
+    "education (Schoolroom, Lending Shelf)",
+    "family_quarters (Family Berths, Private Berths)",
+    "memorial (Memorial Wall, Quiet Car)",
+    "sanitation (Washhouse \u2014 if the network is earned, 16 S1)",
+    "quarantine (Isolation Berth)",
+    "climate (Warming Room, Draught House)",
+    "structure (Shoring Post, Storm Refuge)",
+    "security (Watch Post \u2014 D-044-compatible)",
+    "trade (Trade Gate)",
+    "signals_analysis (Signal Bench, Map Room, Wire Room, Weather Mast)",
+    "circulation (stairs/lift/corridor works \u2014 CONNECT's domain, not a buildable room)"
   ],
-  "full_game_family_count_target": "20-24 (22 listed); the ~40-room catalog maps to instances/specializations of these — never 40 independent systems (D-047)"
+  "full_game_family_count_target": "20-24 (22 listed); the ~40-room catalog maps to instances/specializations of these \u2014 never 40 independent systems (D-047)"
 }

@@ -32,7 +32,8 @@
         "y": 0,
         "w": 3,
         "h": 3
-      }
+      },
+      "area": "Scrubber Gate"
     },
     {
       "id": "flywheel_room",
@@ -48,7 +49,8 @@
         "y": 0,
         "w": 2,
         "h": 2
-      }
+      },
+      "area": "Flywheel Room"
     },
     {
       "id": "staging_room",
@@ -63,7 +65,8 @@
         "y": 0,
         "w": 5,
         "h": 3
-      }
+      },
+      "area": "Staging Room"
     },
     {
       "id": "cook_zone",
@@ -77,7 +80,8 @@
         "y": 1,
         "w": 2,
         "h": 2
-      }
+      },
+      "area": "Staging Room"
     },
     {
       "id": "listening_post",
@@ -93,25 +97,12 @@
         "y": 0,
         "w": 3,
         "h": 2
-      }
+      },
+      "area": "Listening Post (wired)"
     },
     {
       "id": "sleeper_car",
       "family": "rest",
-      "form": "railcar",
-      "shell": "railcar_a",
-      "state": "operational",
-      "section": "east_concourse",
-      "rect": {
-        "x": 0,
-        "y": 2,
-        "w": 6,
-        "h": 2
-      }
-    },
-    {
-      "id": "aid_car",
-      "family": "medical",
       "form": "railcar",
       "shell": "railcar_b",
       "state": "operational",
@@ -121,7 +112,25 @@
         "y": 2,
         "w": 6,
         "h": 2
-      }
+      },
+      "note": "the far railcar: quiet sleep away from the portal-side traffic (the railcar-role decision, 10 S15)",
+      "area": "Sleeper Car"
+    },
+    {
+      "id": "aid_car",
+      "family": "medical",
+      "form": "railcar",
+      "shell": "railcar_a",
+      "state": "operational",
+      "section": "east_concourse",
+      "rect": {
+        "x": 0,
+        "y": 2,
+        "w": 6,
+        "h": 2
+      },
+      "note": "the portal-side railcar: shortest carry from the gate for casualties (the railcar-role decision)",
+      "area": "Aid Car"
     },
     {
       "id": "canteen",
@@ -135,7 +144,8 @@
         "y": 0,
         "w": 4,
         "h": 2
-      }
+      },
+      "area": "Canteen (+pantry)"
     },
     {
       "id": "canteen_pantry",
@@ -149,7 +159,8 @@
         "y": 0,
         "w": 2,
         "h": 1
-      }
+      },
+      "area": "Canteen (+pantry)"
     },
     {
       "id": "cold_store",
@@ -164,7 +175,8 @@
         "y": 0,
         "w": 2,
         "h": 2
-      }
+      },
+      "area": "Cold Store"
     },
     {
       "id": "fitters_shop",
@@ -178,7 +190,8 @@
         "y": 1,
         "w": 4,
         "h": 2
-      }
+      },
+      "area": "Fitters' Shop"
     },
     {
       "id": "equipment_locker",
@@ -193,7 +206,8 @@
         "y": 1,
         "w": 4,
         "h": 2
-      }
+      },
+      "area": "Equipment Locker"
     }
   ],
   "objects": [
@@ -295,11 +309,10 @@
     {
       "id": "battery_1",
       "type": "battery_bank",
-      "room": null,
-      "section": "flywheel_vault",
+      "room": "flywheel_room",
       "pos": [
-        6,
-        0
+        3,
+        1
       ],
       "rot": 0
     },
@@ -308,7 +321,7 @@
       "type": "bunk_bed",
       "room": "sleeper_car",
       "pos": [
-        0,
+        7,
         2
       ],
       "rot": 0
@@ -318,7 +331,7 @@
       "type": "bunk_bed",
       "room": "sleeper_car",
       "pos": [
-        2,
+        9,
         2
       ],
       "rot": 0
@@ -328,7 +341,7 @@
       "type": "bunk_bed",
       "room": "sleeper_car",
       "pos": [
-        4,
+        11,
         2
       ],
       "rot": 0
@@ -338,7 +351,7 @@
       "type": "med_cot",
       "room": "aid_car",
       "pos": [
-        7,
+        0,
         2
       ],
       "rot": 0
@@ -348,7 +361,7 @@
       "type": "med_cot",
       "room": "aid_car",
       "pos": [
-        9,
+        2,
         2
       ],
       "rot": 0
@@ -358,7 +371,7 @@
       "type": "med_cabinet",
       "room": "aid_car",
       "pos": [
-        11,
+        4,
         2
       ],
       "rot": 0
@@ -376,12 +389,13 @@
     {
       "id": "canteen_table_1",
       "type": "canteen_table",
-      "room": "canteen",
+      "room": null,
       "pos": [
-        10,
-        0
+        13,
+        2
       ],
-      "rot": 0
+      "rot": 0,
+      "section": "east_concourse"
     },
     {
       "id": "pantry_shelf",
@@ -444,6 +458,17 @@
         1
       ],
       "rot": 0
+    },
+    {
+      "id": "shift_log_1",
+      "type": "shift_log",
+      "room": null,
+      "section": "deep_service",
+      "pos": [
+        5,
+        1
+      ],
+      "rot": 0
     }
   ],
   "areas": [
@@ -479,6 +504,11 @@
     "camp repurposed to staging_room",
     "listening_post upgraded to wired",
     "canteen_pantry module attached",
-    "comfort lighting extended to the east wing"
-  ]
+    "comfort lighting extended to the east wing",
+    "Level-1 seal installed on the east bulkhead (storm isolation decision in data)"
+  ],
+  "seal_bulkhead": {
+    "portal": "east_portal",
+    "note": "the Level-1 seal guards the new wing (the Day-2 isolation decision)"
+  }
 }

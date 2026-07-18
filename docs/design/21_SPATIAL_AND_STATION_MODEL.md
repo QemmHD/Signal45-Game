@@ -1,6 +1,6 @@
 # 21 — SPATIAL AND STATION MODEL
 
-**Stage:** Prompt 4. **Status:** LOCKED at structural level; geometry values PROVISIONAL in `tools/data/station_sections.json` (D-046). Validation: `tools/spatial_model.py` + `tools/validate_station_layouts.py` + `tools/test_spatial_model.py` (44 checks).
+**Stage:** Prompt 4. **Status:** LOCKED at structural level; geometry values PROVISIONAL in `tools/data/station_sections.json` (D-046). Validation: `tools/spatial_model.py` + `tools/validate_station_layouts.py` + `tools/test_spatial_model.py` (64 checks).
 
 ---
 
@@ -28,10 +28,14 @@ Three levels (upper / platform / service vaults — 09 B.1's one-screen composit
 
 Scrubber Gate (upper; airlock + decon; the only surface door) · Central Platform (the Camp's home; 4 bays; both blocked portals; the muster point) · Signal Box (elevated; the Listening Post's found home) · Flywheel Vault (service level; the noisy heart) · East Concourse (4 bays; two railcar shells + kiosk row; behind rubble) · West Gallery (4 bays; cistern main + arch hotspot; flooded) · Deep Service (fitters' bay + parts racks; behind the jammed lift) · plus the surface entry itself. Trunks: `trunk_core` (live Day 1) serving gate/platform/signal/flywheel/deep nodes; `trunk_east` / `trunk_west` dark until extended (a CONNECT works order, 6 WU + 3 materials — PROVISIONAL, from the labor model's trunk cost).
 
-## 5. Save representation
+## 5. Enforcement honesty (what the validator executes vs. records)
 
-One layout dict (rooms, objects, portal/link/trunk/door states, berth assignment) — the same object the validator loads, mutates, and round-trips (`test_layout_save_reload_roundtrip_and_after_move`). Partial construction saves as ledger state (project stage fractions — §23); both round-trip through JSON byte-identically. This slots into the single world-state object (R-10) unchanged.
+D-048's boundary, stated plainly: the validator **executes** buildable zones, fixed-architecture collision (overlapping fixed features are a load-time error — silent shadowing is impossible), link-cell protection, object overlap, interaction clearance and reachability, room compatibility and socket budgets, module attachment (no chains), feature anchors, trunk service, hard placement restrictions, door/portal/link state navigation, the no-sever/no-strand flood-fill guard, and the reservation ledger. It **records for later stages** (data present, consumed by design prose and future systems, not by checks): bay counts as narrative structure (bays derive from column cells), environment temperature, camera frames, max occupancy, damage-state ladders, and reclamation labor forecasts (the labor model owns labor arithmetic). Docs may cite recorded fields as design intent, never as validated facts.
 
-## 6. Engine requirements recorded (for the selection stage, R-15)
+## 6. Save representation
+
+One layout dict (rooms with their area labels, objects, portal/link/trunk/door states — placed doors carry open/closed state, the seal bulkhead records its portal — berth assignment) — the same object the validator loads, mutates, and round-trips (`test_layout_save_reload_roundtrip_and_after_move`). Partial construction saves as ledger state (project stage fractions — §23); both round-trip through JSON byte-identically. This slots into the single world-state object (R-10) unchanged.
+
+## 7. Engine requirements recorded (for the selection stage, R-15)
 
 Cell-addressed 2.5D placement over authored section data; per-section camera framing; three-level parallax composition; state-gated portal/link traversal; ≤ 20 agents pathing on cell graphs (trivial scale); layout serialization identical to this model's dict. Nothing here demands a specific engine; everything here is testable without one.

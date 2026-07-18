@@ -32,7 +32,8 @@
         "y": 0,
         "w": 3,
         "h": 3
-      }
+      },
+      "area": "Scrubber Gate"
     },
     {
       "id": "flywheel_room",
@@ -48,7 +49,8 @@
         "y": 0,
         "w": 2,
         "h": 2
-      }
+      },
+      "area": "Flywheel Room"
     },
     {
       "id": "staging_room",
@@ -63,7 +65,8 @@
         "y": 0,
         "w": 3,
         "h": 3
-      }
+      },
+      "area": "Staging Room (+triage bench)"
     },
     {
       "id": "canteen_corner",
@@ -77,7 +80,8 @@
         "y": 1,
         "w": 4,
         "h": 2
-      }
+      },
+      "area": "Canteen Corner"
     },
     {
       "id": "listening_post",
@@ -93,7 +97,8 @@
         "y": 0,
         "w": 3,
         "h": 2
-      }
+      },
+      "area": "Listening Post (wired)"
     },
     {
       "id": "cistern_works",
@@ -108,7 +113,8 @@
         "y": 0,
         "w": 1,
         "h": 2
-      }
+      },
+      "area": "Cistern Works (+filtration)"
     },
     {
       "id": "cistern_filtration",
@@ -122,7 +128,8 @@
         "y": 2,
         "w": 1,
         "h": 1
-      }
+      },
+      "area": "Cistern Works (+filtration)"
     },
     {
       "id": "pump_room",
@@ -136,7 +143,8 @@
         "y": 0,
         "w": 2,
         "h": 2
-      }
+      },
+      "area": "Pump Room"
     },
     {
       "id": "west_bunks",
@@ -149,7 +157,8 @@
         "y": 0,
         "w": 5,
         "h": 3
-      }
+      },
+      "area": "West Bunks"
     },
     {
       "id": "cold_store",
@@ -163,7 +172,8 @@
         "y": 0,
         "w": 2,
         "h": 2
-      }
+      },
+      "area": "Cold Store"
     },
     {
       "id": "fitters_shop",
@@ -177,7 +187,23 @@
         "y": 1,
         "w": 4,
         "h": 2
-      }
+      },
+      "area": "Fitters' Shop"
+    },
+    {
+      "id": "triage_corner",
+      "family": "medical",
+      "form": "temporary",
+      "state": "operational",
+      "note": "Ash's bench beside the Staging Room - the west route's treatment venue at her stated penalty (D-039 route-completeness canon)",
+      "section": "central_platform",
+      "rect": {
+        "x": 2,
+        "y": 0,
+        "w": 2,
+        "h": 3
+      },
+      "area": "Staging Room (+triage bench)"
     }
   ],
   "objects": [
@@ -259,10 +285,11 @@
       "type": "comfort_lamp",
       "room": "west_bunks",
       "pos": [
-        10,
+        12,
         1
       ],
-      "rot": 0
+      "rot": 0,
+      "note": "Juna's bunk corner keeps its lamp (adjacent to bunk_w3 - the candle line's anchor)"
     },
     {
       "id": "mask_cache_1",
@@ -288,11 +315,10 @@
     {
       "id": "battery_1",
       "type": "battery_bank",
-      "room": null,
-      "section": "flywheel_vault",
+      "room": "flywheel_room",
       "pos": [
-        6,
-        0
+        3,
+        1
       ],
       "rot": 0
     },
@@ -387,13 +413,34 @@
         1
       ],
       "rot": 0
+    },
+    {
+      "id": "staging_bench",
+      "type": "triage_bench",
+      "room": "triage_corner",
+      "pos": [
+        2,
+        1
+      ],
+      "rot": 0
+    },
+    {
+      "id": "shift_log_1",
+      "type": "shift_log",
+      "room": null,
+      "section": "deep_service",
+      "pos": [
+        5,
+        1
+      ],
+      "rot": 0
     }
   ],
   "areas": [
     "Scrubber Gate",
     "Flywheel Room",
     "Listening Post (wired)",
-    "Staging Room",
+    "Staging Room (+triage bench)",
     "Canteen Corner",
     "Cistern Works (+filtration)",
     "Pump Room",
@@ -409,7 +456,8 @@
     "cistern_works",
     "pump_room",
     "listening_post",
-    "fitters_shop"
+    "fitters_shop",
+    "triage_corner"
   ],
   "juna_berth": {
     "room": "west_bunks",
@@ -423,6 +471,11 @@
     "camp repurposed to staging_room",
     "listening_post upgraded to wired",
     "cistern_filtration module attached",
-    "comfort lighting kept on the platform; Juna's bunk corner keeps its lamp"
-  ]
+    "comfort lighting kept on the platform; Juna's bunk corner keeps its lamp",
+    "Level-1 seal installed on the west bulkhead (storm isolation decision in data)"
+  ],
+  "seal_bulkhead": {
+    "portal": "west_portal",
+    "note": "the Level-1 seal guards the drained gallery (the Day-2 isolation decision)"
+  }
 }

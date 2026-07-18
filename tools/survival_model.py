@@ -644,20 +644,29 @@ class Survival:
     def _note_shedding(self, day, shed):
         """Presentation variation (D-047, owner directive): the same penalty must
         not show the same banner every day — repeats become specific resident
-        memories, scenes, and behavior changes. The mechanical cost is unchanged."""
+        memories, scenes, and behavior changes. The mechanical cost is unchanged.
+        Resident-naming variants are STATE-GATED (D-048): a memory line may never
+        name a person the simulation has not placed there (the anti-lie rule)."""
         for load in shed:
             n = self._shed_counts.get(load, 0)
             self._shed_counts[load] = n + 1
             if load == "comfort_lighting":
                 texts = ["d%d: the platform lamps dim — comfort lighting shed first "
                          "(Optional tier; the gentlest warning of a power pinch, banner)",
-                         "d%d: platform dark again — residents carry lanterns between rooms",
-                         "d%d: the dark platform is routine now; Juna's berth corner keeps a candle"]
+                         "d%d: platform dark again — residents carry lanterns between rooms"]
+                if self.juna_present:
+                    texts.append("d%d: the dark platform is routine now; Juna's berth corner "
+                                 "keeps a candle")
+                else:
+                    texts.append("d%d: the dark platform is routine now — lanterns hang "
+                                 "by the portal instead")
             elif load == "hotplate":
+                teo_fit = not self.residents["Teo"]["conditions"]
                 texts = ["d%d: load board shed the hotplate (Normal tier) — banner, cold meal tonight",
                          "d%d: Maren serves the meal cold without announcing it — the household notices",
-                         "d%d: cold meals are routine; Teo eats his on the platform edge (a memory, "
-                         "not another banner)",
+                         ("d%d: cold meals are routine; Teo eats his on the platform edge (a memory, "
+                          "not another banner)") if teo_fit else
+                         "d%d: cold meals are routine now (a memory, not another banner)",
                          "d%d: the cook-ring stays unlit and nobody comments — the week will be remembered"]
             elif load == "tools":
                 texts = ["d%d: load board shed powered tools (Normal tier) — banner, hand tools down",

@@ -13,6 +13,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import spatial_model as sp
 from spatial_model import (Layout, ValidationError, load_layout, utility_headroom,
                            OBJECTS, FAMILIES, _load)
 
@@ -45,17 +46,21 @@ def validate(name, failures):
         for r in lay.rooms.values():
             if r.get("module_of"):
                 continue
-            length, alts = lay.emergency_path(r["id"])
+            length, alts, spof = lay.emergency_path(r["id"])
             assert length is not None, "no emergency path from %s" % r["id"]
     check("every room has an emergency path to a safe area", _evac, failures)
 
     def _areas():
-        n = len(d["areas"])
+        derived = {r["area"] for r in lay.rooms.values()}
+        assert derived == set(d["areas"]), \
+            "authored area list drifts from the rooms' own area labels: %s vs %s" % (
+                sorted(set(d["areas"]) ^ derived), sorted(derived))
+        n = len(derived)
         if d["day"] == 1:
             assert n == 4, "Day 1 must show exactly 4 functional areas (got %d)" % n
         else:
             assert 8 <= n <= 10, "Day 7 must show 8-10 functional areas (got %d)" % n
-    check("functional-area count", _areas, failures)
+    check("functional-area count (derived from rooms, not the display list)", _areas, failures)
 
     def _comfort():
         lamps = [o for o in lay.objects.values() if o["type"] == "comfort_lamp"]
@@ -65,8 +70,13 @@ def validate(name, failures):
     check("platform comfort lighting present and Optional-tier", _comfort, failures)
 
     def _headroom():
-        assert utility_headroom(lay) is not None
-    check("utility headroom proxy computes", _headroom, failures)
+        head = utility_headroom(lay)
+        shed = sp.sheddable_load(lay)
+        assert head + shed >= 0, \
+            "essential+critical demand exceeds generation even with every sheddable load dark " \
+            "(headroom %d, sheddable %d)" % (head, shed)
+    check("utility headroom: essential demand fits generation (sheddable loads may go dark)",
+          _headroom, failures)
 
     if d["day"] == 7:
         def _juna():
@@ -78,14 +88,41 @@ def validate(name, failures):
             assert lay.reachable_from_muster(jb["room"])
         check("Juna berth prepared and reachable", _juna, failures)
 
+        day1 = load_layout("day1")
+
         def _repurpose():
-            assert any(r.get("repurposed_from") for r in lay.rooms.values()), \
-                "no repurposed area on Day 7"
-        check("at least one repurposed area", _repurpose, failures)
+            reps = [r for r in lay.rooms.values() if r.get("repurposed_from")]
+            assert reps, "no repurposed area on Day 7"
+            for r in reps:
+                assert r["repurposed_from"] in day1.rooms, \
+                    "repurposed_from '%s' names no Day-1 room" % r["repurposed_from"]
+                assert day1.rooms[r["repurposed_from"]]["family"] != r["family"], \
+                    "repurpose %s did not change family vs Day 1" % r["id"]
+        check("repurposed area is a real Day-1 room with a changed family", _repurpose, failures)
 
         def _upgrade():
-            assert any(r.get("upgrade") for r in lay.rooms.values()), "no upgraded facility"
-        check("at least one upgraded facility", _upgrade, failures)
+            ups = [r for r in lay.rooms.values() if r.get("upgrade")]
+            assert ups, "no upgraded facility"
+            for r in ups:
+                if r["id"] in day1.rooms:
+                    assert not day1.rooms[r["id"]].get("upgrade"), \
+                        "%s was already upgraded on Day 1" % r["id"]
+        check("upgraded facility is genuinely new since Day 1", _upgrade, failures)
+
+        def _seal():
+            seal = d.get("seal_bulkhead")
+            assert seal and seal.get("portal") in d["portal_states"], \
+                "Day 7 must record the Level-1 seal on a real portal (the isolation decision)"
+        check("Level-1 seal recorded on a real portal", _seal, failures)
+
+        def _medical():
+            med = [r for r in lay.rooms.values() if r["family"] == "medical"]
+            assert med, "no medical venue — both routes must hold one (07 S12, D-039)"
+            bench_or_cot = any(sp.OBJECTS["objects"][o["type"]]["family"] in ("workstation", "rest_point")
+                               and o.get("room") in {m["id"] for m in med}
+                               for o in lay.objects.values())
+            assert bench_or_cot, "the medical venue holds no treatment equipment"
+        check("medical venue exists with treatment equipment (both routes)", _medical, failures)
 
         def _module():
             assert any(r.get("module_of") for r in lay.rooms.values()), "no attached module"
@@ -133,6 +170,8 @@ def validate(name, failures):
     print("  metrics: avg_path=%s longest_essential=%s entrance->medical=%s storage->workshop=%s"
           % (m["avg_path"], m["longest_essential"], m["entrance_to_medical"],
              m["storage_to_workshop"]))
+    print("  noise_distance(rest)=%s backed_up=%s spof=%s"
+          % (m["noise_distance_rest"], m["backed_up_rooms"], sorted(m["spof_edges"])))
     print()
 
 

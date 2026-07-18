@@ -53,7 +53,7 @@ class Coordinates(unittest.TestCase):
 class Placement(unittest.TestCase):
     def test_place_bed_in_valid_rest_area(self):
         l = lay("east_day7")
-        bed = {"id": "t_bed", "type": "bedroll", "room": "sleeper_car", "pos": [1, 2], "rot": 0}
+        bed = {"id": "t_bed", "type": "bedroll", "room": "sleeper_car", "pos": [8, 2], "rot": 0}
         self.assertTrue(l.place_object(bed))
 
     def test_reject_bed_blocking_only_door(self):
@@ -65,18 +65,40 @@ class Placement(unittest.TestCase):
             l.place_object(bad)
         self.assertIn("stair/lift/portal", str(cm.exception))
 
+    def test_enclosure_at_distance_strands_and_is_refused(self):
+        # three legal-looking placements must NOT combine into a silent pocket:
+        # reachability, not cell coverage, is the strand criterion (D-048)
+        l = lay("east_day7")
+        b1 = {"id": "t_p1", "type": "barricade", "room": None,
+              "section": "east_concourse", "pos": [13, 1], "rot": 0}
+        l.place_object(b1)
+        b2 = {"id": "t_p2", "type": "barricade", "room": None,
+              "section": "east_concourse", "pos": [13, 3], "rot": 0}
+        with self.assertRaises(sp.ValidationError) as cm:
+            l.place_object(b2)   # would seal the Cold Store pocket at distance
+        self.assertIn("strand", str(cm.exception))
+
     def test_reject_furniture_stranding_existing_equipment(self):
-        # sealing both working cells of the fitters' bench darkens it — must
-        # warn before confirm (furniture cannot silently disable a room)
+        # sealing both working cells of the equipment locker's shelf darkens it —
+        # refused before confirm (furniture cannot silently disable a room)
         l = lay("east_day7")
         b1 = {"id": "t_b1", "type": "barricade", "room": None,
-              "section": "deep_service", "pos": [1, 2], "rot": 0}
+              "section": "deep_service", "pos": [9, 2], "rot": 0}
         l.place_object(b1)
         b2 = {"id": "t_b2", "type": "barricade", "room": None,
-              "section": "deep_service", "pos": [2, 2], "rot": 0}
+              "section": "deep_service", "pos": [10, 2], "rot": 0}
         with self.assertRaises(sp.ValidationError) as cm:
             l.place_object(b2)
         self.assertIn("strand", str(cm.exception))
+
+    def test_corridor_severance_refused_even_at_one_cell(self):
+        # the deep-service corridor's one crossing cell: blocking it severs the
+        # whole right half — the guard must refuse the FIRST placement
+        l = lay("east_day7")
+        b1 = {"id": "t_sever", "type": "barricade", "room": None,
+              "section": "deep_service", "pos": [1, 2], "rot": 0}
+        with self.assertRaises(sp.ValidationError):
+            l.place_object(b1)
 
     def test_workstation_with_clear_interaction(self):
         l = lay("day1")
@@ -114,7 +136,7 @@ class Placement(unittest.TestCase):
         dup = {"id": "t_dup", "type": "supply_crate", "room": "supply_zone", "pos": [12, 1], "rot": 0}
         with self.assertRaises(sp.ValidationError) as cm:
             l.place_object(dup)
-        self.assertIn("overlap", str(cm.exception))
+        self.assertIn("occupied", str(cm.exception))
 
     def test_reject_blocking_a_stair_cell(self):
         l = lay("day1")
@@ -147,7 +169,7 @@ class Placement(unittest.TestCase):
         self.assertNotIn("crate_2", l.objects)
 
     def test_equipment_room_compatibility(self):
-        l = lay("east_day7")
+        l = lay("west_day7")
         bad = {"id": "t_cot", "type": "med_cot", "room": "cold_store", "pos": [14, 1], "rot": 0}
         with self.assertRaises(sp.ValidationError) as cm:
             l.place_object(bad)
@@ -162,7 +184,20 @@ class RoomsAndModules(unittest.TestCase):
         self.assertEqual(l.rooms["camp"]["repurposed_from"], "rest")
         self.assertTrue(displaced, "bedrolls must be displaced-and-stored, not destroyed")
         for oid in displaced:
-            self.assertTrue(l.objects[oid].get("stored"))
+            self.assertNotIn(oid, l.objects, "stored equipment must leave the floor")
+        # the layout stays fully navigable after the verb (no corrupt state)
+        for fac in l.d["essential_facilities"]:
+            self.assertTrue(l.reachable_from_muster(fac))
+
+    def test_repurpose_validates_before_committing(self):
+        l = lay("west_day7")
+        before = json.dumps(l.to_dict(), sort_keys=True)
+        with self.assertRaises(sp.ValidationError):
+            # the 1x2 feature-built Cistern Works cannot become a Food room
+            # (below the family minimum) — the verb must refuse BEFORE mutating
+            l.repurpose_room("cistern_works", "food")
+        self.assertEqual(json.dumps(l.to_dict(), sort_keys=True), before,
+                         "a refused repurpose must leave the layout untouched")
 
     def test_attach_valid_module(self):
         l = lay("east_day7")
@@ -198,6 +233,102 @@ class RoomsAndModules(unittest.TestCase):
         self.assertIn("anchor", str(cm.exception))
 
 
+class RestrictionsAndSockets(unittest.TestCase):
+    def test_module_of_module_rejected(self):
+        l = lay("east_day7")
+        bad = {"id": "t_chain", "family": "food", "form": "module", "module_of": "canteen_pantry",
+               "section": "east_concourse", "rect": {"x": 12, "y": 1, "w": 1, "h": 1}}
+        l.rooms[bad["id"]] = bad
+        with self.assertRaises(sp.ValidationError) as cm:
+            l.validate_room(bad)
+        self.assertIn("not another module", str(cm.exception))
+
+    def test_storage_sockets_enforced(self):
+        l = lay("east_day7")
+        extra = {"id": "t_shelf", "type": "storage_shelf", "room": "aid_car", "pos": [3, 3], "rot": 0}
+        with self.assertRaises(sp.ValidationError) as cm:
+            l.place_object(extra)   # the cabinet already fills medical's one storage socket
+        self.assertIn("storage sockets full", str(cm.exception))
+
+    def test_blocking_object_rejected_on_circulation(self):
+        l = lay("day1")
+        bad = {"id": "t_shelf2", "type": "storage_shelf", "room": None,
+               "section": "scrubber_gate", "pos": [1, 1], "rot": 0}   # the decon channel
+        with self.assertRaises(sp.ValidationError) as cm:
+            l.place_object(bad)
+        self.assertIn("buildable", str(cm.exception))
+
+    def test_door_panel_only_in_portal_or_gap(self):
+        l = lay("east_day7")
+        bad = {"id": "t_door", "type": "door_panel", "room": None,
+               "section": "east_concourse", "pos": [2, 1], "rot": 0}
+        with self.assertRaises(sp.ValidationError) as cm:
+            l.place_object(bad)
+        self.assertIn("portal or a partition gap", str(cm.exception))
+
+    def test_partition_is_interior_only(self):
+        l = lay("day1")
+        bad = {"id": "t_part", "type": "partition", "room": None,
+               "section": "central_platform", "pos": [12, 0], "rot": 0}
+        with self.assertRaises(sp.ValidationError) as cm:
+            l.place_object(bad)
+        self.assertIn("interior-only", str(cm.exception))
+
+    def test_purifier_needs_its_tank(self):
+        l = lay("day1")
+        bad = {"id": "t_pur", "type": "purifier_unit", "room": None,
+               "section": "central_platform", "pos": [12, 0], "rot": 0}
+        with self.assertRaises(sp.ValidationError) as cm:
+            l.place_object(bad)
+        self.assertIn("tank", str(cm.exception))
+
+    def test_story_objects_can_never_be_removed(self):
+        l = lay("day1")
+        with self.assertRaises(sp.ValidationError) as cm:
+            l.store_object("timetable_board")
+        self.assertIn("story", str(cm.exception))
+
+    def test_powered_object_needs_live_trunk(self):
+        l = lay("day1")
+        bad = {"id": "t_hot", "type": "hotplate_counter", "room": None,
+               "section": "east_concourse", "pos": [1, 0], "rot": 0}
+        with self.assertRaises(sp.ValidationError) as cm:
+            l.place_object(bad)
+        self.assertIn("dark", str(cm.exception))
+
+    def test_close_door_warns_of_severance_and_reopens(self):
+        l = lay("east_day7")
+        cut = l.close_door("east_portal")
+        self.assertIn("sleeper_car", cut)   # the warn-before channel for state changes
+        l.open_door("east_portal")
+        self.assertTrue(l.reachable_from_muster("sleeper_car"))
+
+    def test_shift_log_reveal_anchor_placed_both_routes(self):
+        for name in ("east_day7", "west_day7"):
+            l = lay(name)
+            self.assertIn("shift_log_1", l.objects, name)
+            self.assertEqual(l.object_section(l.objects["shift_log_1"]), "deep_service")
+
+    def test_junas_corner_keeps_its_lamp(self):
+        l = lay("west_day7")
+        lamp = l.objects["comfort_lamp_2"]
+        bunk_cells = {tuple(c) for c in l.object_cells(l.objects["bunk_w3"])}
+        lc = tuple(lamp["pos"])
+        near = any(abs(lc[0] - b[0]) + abs(lc[1] - b[1]) <= 1 for b in bunk_cells)
+        self.assertTrue(near, "the candle line's anchor must sit beside Juna's bunk")
+
+    def test_medical_venue_on_both_routes(self):
+        for name in ("day1", "east_day7", "west_day7"):
+            l = lay(name)
+            med = [r for r in l.rooms.values() if r["family"] == "medical"]
+            self.assertTrue(med, "%s has no medical venue" % name)
+
+    def test_headroom_honest_bounds(self):
+        d1, e7 = lay("day1"), lay("east_day7")
+        self.assertGreaterEqual(sp.utility_headroom(d1) + sp.sheddable_load(d1), 0)
+        self.assertGreaterEqual(sp.utility_headroom(e7), 0)
+
+
 class Navigation(unittest.TestCase):
     def test_day1_essential_facilities_reachable(self):
         l = lay("day1")
@@ -226,7 +357,7 @@ class Navigation(unittest.TestCase):
             for r in l.rooms.values():
                 if r.get("module_of"):
                     continue
-                length, _ = l.emergency_path(r["id"])
+                length, _, _ = l.emergency_path(r["id"])
                 self.assertIsNotNone(length, "%s: %s has no emergency path" % (name, r["id"]))
 
     def test_hazard_closure_severs_and_recovery_restores(self):
@@ -253,13 +384,39 @@ class Navigation(unittest.TestCase):
             l.place_object(bad2)   # with (0,0) walled, (1,1) seals the whole east wing
         self.assertIn("cut off", str(cm.exception))
 
-    def test_alternate_route_metric_counts(self):
+    def test_spof_metric_names_single_points_of_failure(self):
+        # the slice shell is single-route by authored design (25 S4): the metric
+        # must SAY so, not hide it — sleeper_car's only route is the east portal
         l = lay("east_day7")
-        _, alts = l.emergency_path("flywheel_room")
-        self.assertGreaterEqual(alts, 0)   # metric computes; slice authoring has single stairs
+        _, alts, spof = l.emergency_path("sleeper_car")
+        self.assertIn("east_portal", spof)
         m = l.metrics()
         self.assertIsNotNone(m["avg_path"])
         self.assertIsNotNone(m["storage_to_workshop"])
+        self.assertIn("flywheel_room", m["backed_up_rooms"],
+                      "the battery bank must back up its room (the adjacency object)")
+
+    def test_railcar_roles_embody_the_noise_travel_tradeoff(self):
+        # the railcar-role decision (10 S15): the sleeper sits farther from the
+        # noisy service side than the aid car — measurable, not asserted
+        l = lay("east_day7")
+        self.assertGreater(l.noise_distance("sleeper_car"), l.noise_distance("aid_car"))
+
+    def test_railcar_roles_are_swappable(self):
+        # the OTHER arrangement is equally legal — the decision is real freedom
+        l = lay("east_day7")
+        sc, ac = l.rooms["sleeper_car"], l.rooms["aid_car"]
+        sc["rect"], ac["rect"] = ac["rect"], sc["rect"]
+        sc["shell"], ac["shell"] = ac["shell"], sc["shell"]
+        for oid, pos in (("bunk_e1", [0, 2]), ("bunk_e2", [2, 2]), ("bunk_e3", [4, 2]),
+                         ("cot_e1", [7, 2]), ("cot_e2", [9, 2]), ("med_cabinet_1", [11, 2])):
+            l.objects[oid]["pos"] = pos
+        for r in (sc, ac):
+            self.assertTrue(l.validate_room(r))
+        for oid in ("bunk_e1", "bunk_e2", "bunk_e3", "cot_e1", "cot_e2", "med_cabinet_1"):
+            self.assertTrue(l.validate_object(l.objects[oid]))
+        self.assertTrue(l.reachable_from_muster("sleeper_car"))
+        self.assertTrue(l.reachable_from_muster("aid_car"))
 
 
 class BlueprintLedger(unittest.TestCase):
@@ -324,6 +481,22 @@ class BlueprintLedger(unittest.TestCase):
         self.led.activate("p2")
         self.led.cancel("p2")
         self.assertLess(self.led.stock, start, "cancel after deconstruct must not restore profit")
+
+    def test_complete_requires_active_state(self):
+        self.led.save_blueprint("p1", 6)
+        with self.assertRaises(sp.ValidationError):
+            self.led.complete("p1")          # a blueprint cannot 'complete' free
+        self.led.activate("p1")
+        self.led.cancel("p1")
+        with self.assertRaises(sp.ValidationError):
+            self.led.complete("p1")          # cancel -> complete -> deconstruct is dead
+
+    def test_negative_stage_fraction_rejected(self):
+        self.led.save_blueprint("p1", 6)
+        self.led.activate("p1")
+        with self.assertRaises(sp.ValidationError):
+            self.led.deliver_stage("p1", -0.5)
+        self.assertEqual(self.led.projects["p1"]["reserved"], 6)
 
     def test_duplicate_reservation_impossible(self):
         self.led.save_blueprint("p1", 6)

@@ -32,7 +32,8 @@
         "y": 0,
         "w": 3,
         "h": 3
-      }
+      },
+      "area": "Scrubber Gate"
     },
     {
       "id": "flywheel_room",
@@ -47,7 +48,8 @@
         "y": 0,
         "w": 2,
         "h": 2
-      }
+      },
+      "area": "Flywheel Room"
     },
     {
       "id": "camp",
@@ -60,7 +62,8 @@
         "y": 0,
         "w": 5,
         "h": 3
-      }
+      },
+      "area": "the Camp"
     },
     {
       "id": "cook_zone",
@@ -73,7 +76,8 @@
         "y": 1,
         "w": 2,
         "h": 2
-      }
+      },
+      "area": "the Camp"
     },
     {
       "id": "supply_zone",
@@ -86,7 +90,8 @@
         "y": 1,
         "w": 4,
         "h": 2
-      }
+      },
+      "area": "the Camp"
     },
     {
       "id": "listening_post",
@@ -101,7 +106,23 @@
         "y": 0,
         "w": 3,
         "h": 2
-      }
+      },
+      "area": "Listening Post (improvised)"
+    },
+    {
+      "id": "triage_corner",
+      "family": "medical",
+      "form": "temporary",
+      "state": "operational",
+      "note": "Ash's bench at the decon channel - return-and-triage is staged at the gate (01 Pillar 4); the west route keeps this class of venue all week",
+      "section": "scrubber_gate",
+      "rect": {
+        "x": 1,
+        "y": 2,
+        "w": 2,
+        "h": 1
+      },
+      "area": "Scrubber Gate"
     }
   ],
   "objects": [
@@ -243,11 +264,10 @@
     {
       "id": "battery_1",
       "type": "battery_bank",
-      "room": null,
-      "section": "flywheel_vault",
+      "room": "flywheel_room",
       "pos": [
-        6,
-        0
+        3,
+        1
       ],
       "rot": 0
     },
@@ -261,6 +281,16 @@
         1
       ],
       "rot": 0
+    },
+    {
+      "id": "gate_bench",
+      "type": "triage_bench",
+      "room": "triage_corner",
+      "pos": [
+        1,
+        2
+      ],
+      "rot": 180
     }
   ],
   "areas": [
@@ -274,7 +304,8 @@
     "flywheel_room",
     "camp",
     "cook_zone",
-    "listening_post"
+    "listening_post",
+    "triage_corner"
   ],
   "juna_berth": null
 }

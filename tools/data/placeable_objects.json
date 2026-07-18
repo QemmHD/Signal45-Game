@@ -12,32 +12,734 @@
     "story_object": "authored reveal anchor; inspectable; never deconstructable"
   },
   "objects": {
-    "bedroll":        {"family": "rest_point", "tier": 1, "capacity": 1, "footprint": [1, 2], "interaction": [[0, 0]], "block_paths": false, "utility": null, "rooms": ["rest", "medical"], "restrictions": [], "upgrade_to": "bunk_bed", "damage_states": 2, "store_result": "stored", "deconstruct_yield": 0},
-    "bunk_bed":       {"family": "rest_point", "tier": 2, "capacity": 2, "footprint": [1, 2], "interaction": [[0, 0]], "block_paths": true, "utility": null, "rooms": ["rest"], "restrictions": ["not_against_interaction_side"], "upgrade_to": "berth_bed", "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "berth_bed":      {"family": "rest_point", "tier": 3, "capacity": 1, "footprint": [1, 2], "interaction": [[0, 0]], "block_paths": true, "utility": null, "rooms": ["rest"], "restrictions": ["wants_partition_adjacent"], "upgrade_to": null, "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "med_cot":        {"family": "rest_point", "tier": 2, "capacity": 1, "footprint": [1, 2], "interaction": [[0, 0], [0, 1]], "block_paths": true, "utility": null, "rooms": ["medical"], "restrictions": ["carer_side_clear"], "upgrade_to": null, "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "triage_bench":   {"family": "workstation", "tier": 1, "footprint": [2, 1], "interaction": [[0, 1], [1, 1]], "block_paths": true, "utility": null, "rooms": ["medical", "operations"], "restrictions": [], "upgrade_to": "med_cabinet", "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "med_cabinet":    {"family": "storage", "tier": 2, "footprint": [1, 1], "interaction": [[0, 1]], "block_paths": true, "utility": null, "rooms": ["medical"], "restrictions": [], "upgrade_to": null, "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "cook_ring":      {"family": "workstation", "tier": 1, "footprint": [2, 2], "interaction": [[0, 1], [1, 1]], "block_paths": false, "utility": null, "rooms": ["food"], "restrictions": ["open_zone_ok"], "upgrade_to": "hotplate_counter", "damage_states": 2, "store_result": "stored", "deconstruct_yield": 0},
-    "hotplate_counter": {"family": "workstation", "tier": 2, "footprint": [2, 1], "interaction": [[0, 1], [1, 1]], "block_paths": true, "utility": "power_normal_tier", "rooms": ["food"], "restrictions": [], "upgrade_to": null, "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "canteen_table":  {"family": "comfort_object", "tier": 1, "footprint": [2, 1], "interaction": [[0, 1], [1, 1], [0, -1], [1, -1]], "block_paths": true, "utility": null, "rooms": ["food", "operations"], "restrictions": [], "upgrade_to": null, "damage_states": 1, "store_result": "stored", "deconstruct_yield": 1},
-    "storage_shelf":  {"family": "storage", "tier": 1, "footprint": [2, 1], "interaction": [[0, 1], [1, 1]], "block_paths": true, "utility": null, "rooms": ["storage", "food", "workshop", "medical", "operations"], "restrictions": [], "upgrade_to": "cold_locker", "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "supply_crate":   {"family": "storage", "tier": 1, "footprint": [1, 1], "interaction": [[0, 1]], "block_paths": false, "utility": null, "rooms": ["*"], "restrictions": ["open_zone_ok"], "upgrade_to": null, "damage_states": 1, "store_result": "stored", "deconstruct_yield": 0},
-    "cold_locker":    {"family": "storage", "tier": 2, "footprint": [2, 1], "interaction": [[0, 1], [1, 1]], "block_paths": true, "utility": "power_normal_tier", "rooms": ["storage"], "restrictions": [], "upgrade_to": null, "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "workbench":      {"family": "workstation", "tier": 1, "footprint": [2, 1], "interaction": [[0, 1], [1, 1]], "block_paths": true, "utility": "power_normal_tier_optional", "rooms": ["workshop", "utility"], "restrictions": [], "upgrade_to": null, "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "radio_rig":      {"family": "workstation", "tier": 1, "footprint": [2, 1], "interaction": [[0, 1]], "block_paths": true, "utility": "power_essential_tier", "rooms": ["operations"], "restrictions": ["signal_box_only_in_slice"], "upgrade_to": "radio_rig_wired", "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "radio_rig_wired": {"family": "workstation", "tier": 2, "footprint": [2, 1], "interaction": [[0, 1]], "block_paths": true, "utility": "power_essential_tier", "rooms": ["operations"], "restrictions": ["signal_box_only_in_slice"], "upgrade_to": null, "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "transfer_pump":  {"family": "utility_module", "tier": 1, "footprint": [1, 1], "interaction": [[0, 1]], "block_paths": true, "utility": "power_essential_tier", "rooms": ["utility", "*"], "restrictions": ["needs_water_feature_or_tank_adjacent"], "upgrade_to": null, "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "purifier_unit":  {"family": "utility_module", "tier": 1, "footprint": [1, 1], "interaction": [[0, 1]], "block_paths": true, "utility": null, "rooms": ["utility", "*"], "restrictions": ["tank_adjacent"], "upgrade_to": "filtration_module", "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "filtration_module": {"family": "utility_module", "tier": 2, "footprint": [1, 2], "interaction": [[0, 2]], "block_paths": true, "utility": "power_essential_tier", "rooms": ["utility"], "restrictions": ["cistern_works_only_in_slice (the west module)"], "upgrade_to": null, "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "pump_module":    {"family": "utility_module", "tier": 2, "footprint": [2, 2], "interaction": [[0, 2], [1, 2]], "block_paths": true, "utility": "power_essential_tier", "rooms": ["utility"], "restrictions": ["west_gallery_only_in_slice"], "upgrade_to": null, "damage_states": 3, "store_result": "stored", "deconstruct_yield": 2},
-    "battery_bank":   {"family": "utility_module", "tier": 1, "footprint": [1, 1], "interaction": [[0, 1]], "block_paths": true, "utility": "power_storage", "rooms": ["utility", "medical", "operations"], "restrictions": [], "upgrade_to": null, "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1, "note": "the backup-charge adjacency object (25): extends emergency operation of its room"},
-    "comfort_lamp":   {"family": "comfort_object", "tier": 1, "footprint": [1, 1], "interaction": [], "block_paths": false, "utility": "power_optional_tier", "rooms": ["*"], "restrictions": ["common_areas"], "upgrade_to": null, "damage_states": 1, "store_result": "stored", "deconstruct_yield": 0, "note": "PLATFORM COMFORT LIGHTING's placeable anchor (D-047): first shed, visible dimming, modest Stress on extended darkness"},
-    "partition":      {"family": "barrier", "tier": 1, "footprint": [1, 1], "interaction": [], "block_paths": true, "utility": null, "rooms": ["*"], "restrictions": ["interior_only", "never_seals_last_path"], "upgrade_to": null, "damage_states": 1, "store_result": "stored", "deconstruct_yield": 1},
-    "door_panel":     {"family": "barrier", "tier": 1, "footprint": [1, 1], "interaction": [], "block_paths": false, "utility": null, "rooms": ["*"], "restrictions": ["portal_or_partition_gap_only"], "upgrade_to": null, "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1, "note": "walkable when open; closable for isolation (incidents, 25)"},
-    "barricade":      {"family": "barrier", "tier": 1, "footprint": [1, 1], "interaction": [], "block_paths": true, "utility": null, "rooms": ["*"], "restrictions": ["never_seals_last_path"], "upgrade_to": null, "damage_states": 2, "store_result": "stored", "deconstruct_yield": 1},
-    "mask_cache":     {"family": "emergency_object", "tier": 1, "footprint": [1, 1], "interaction": [[0, 1]], "block_paths": false, "utility": null, "rooms": ["*"], "restrictions": ["must_stay_reachable"], "upgrade_to": null, "damage_states": 1, "store_result": "stored", "deconstruct_yield": 0},
-    "memorial_chalk": {"family": "story_object", "tier": 1, "footprint": [1, 1], "interaction": [[0, 1]], "block_paths": false, "utility": null, "rooms": ["*"], "restrictions": ["never_deconstruct"], "upgrade_to": null, "damage_states": 1, "store_result": null, "deconstruct_yield": null},
-    "shift_log":      {"family": "story_object", "tier": 1, "footprint": [1, 1], "interaction": [[0, 1]], "block_paths": false, "utility": null, "rooms": ["*"], "restrictions": ["never_deconstruct"], "upgrade_to": null, "damage_states": 1, "store_result": null, "deconstruct_yield": null}
-  }
+    "bedroll": {
+      "family": "rest_point",
+      "tier": 1,
+      "capacity": 1,
+      "footprint": [
+        1,
+        2
+      ],
+      "interaction": [
+        [
+          0,
+          0
+        ]
+      ],
+      "block_paths": false,
+      "utility": null,
+      "rooms": [
+        "rest",
+        "medical"
+      ],
+      "restrictions": [],
+      "upgrade_to": "bunk_bed",
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 0
+    },
+    "bunk_bed": {
+      "family": "rest_point",
+      "tier": 2,
+      "capacity": 2,
+      "footprint": [
+        1,
+        2
+      ],
+      "interaction": [
+        [
+          0,
+          0
+        ]
+      ],
+      "block_paths": true,
+      "utility": null,
+      "rooms": [
+        "rest"
+      ],
+      "restrictions": [
+        "not_against_interaction_side"
+      ],
+      "upgrade_to": "berth_bed",
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "berth_bed": {
+      "family": "rest_point",
+      "tier": 3,
+      "capacity": 1,
+      "footprint": [
+        1,
+        2
+      ],
+      "interaction": [
+        [
+          0,
+          0
+        ]
+      ],
+      "block_paths": true,
+      "utility": null,
+      "rooms": [
+        "rest"
+      ],
+      "restrictions": [
+        "wants_partition_adjacent"
+      ],
+      "upgrade_to": null,
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "med_cot": {
+      "family": "rest_point",
+      "tier": 2,
+      "capacity": 1,
+      "footprint": [
+        1,
+        2
+      ],
+      "interaction": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "block_paths": true,
+      "utility": null,
+      "rooms": [
+        "medical"
+      ],
+      "restrictions": [
+        "carer_side_clear"
+      ],
+      "upgrade_to": null,
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "triage_bench": {
+      "family": "workstation",
+      "tier": 1,
+      "footprint": [
+        2,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "block_paths": true,
+      "utility": null,
+      "rooms": [
+        "medical",
+        "operations"
+      ],
+      "restrictions": [],
+      "upgrade_to": "med_cabinet",
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "med_cabinet": {
+      "family": "storage",
+      "tier": 2,
+      "footprint": [
+        1,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ]
+      ],
+      "block_paths": true,
+      "utility": null,
+      "rooms": [
+        "medical"
+      ],
+      "restrictions": [],
+      "upgrade_to": null,
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "cook_ring": {
+      "family": "workstation",
+      "tier": 1,
+      "footprint": [
+        2,
+        2
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "block_paths": false,
+      "utility": null,
+      "rooms": [
+        "food"
+      ],
+      "restrictions": [
+        "open_zone_ok"
+      ],
+      "upgrade_to": "hotplate_counter",
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 0
+    },
+    "hotplate_counter": {
+      "family": "workstation",
+      "tier": 2,
+      "footprint": [
+        2,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "block_paths": true,
+      "utility": "power_normal_tier",
+      "rooms": [
+        "food"
+      ],
+      "restrictions": [],
+      "upgrade_to": null,
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "canteen_table": {
+      "family": "comfort_object",
+      "tier": 1,
+      "footprint": [
+        2,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          1,
+          -1
+        ]
+      ],
+      "block_paths": true,
+      "utility": null,
+      "rooms": [
+        "food",
+        "operations"
+      ],
+      "restrictions": [],
+      "upgrade_to": null,
+      "damage_states": 1,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "storage_shelf": {
+      "family": "storage",
+      "tier": 1,
+      "footprint": [
+        2,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "block_paths": true,
+      "utility": null,
+      "rooms": [
+        "storage",
+        "food",
+        "workshop",
+        "medical",
+        "operations"
+      ],
+      "restrictions": [],
+      "upgrade_to": "cold_locker",
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "supply_crate": {
+      "family": "storage",
+      "tier": 1,
+      "footprint": [
+        1,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ]
+      ],
+      "block_paths": false,
+      "utility": null,
+      "rooms": [
+        "*"
+      ],
+      "restrictions": [
+        "open_zone_ok"
+      ],
+      "upgrade_to": null,
+      "damage_states": 1,
+      "store_result": "stored",
+      "deconstruct_yield": 0
+    },
+    "cold_locker": {
+      "family": "storage",
+      "tier": 2,
+      "footprint": [
+        2,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "block_paths": true,
+      "utility": "power_normal_tier",
+      "rooms": [
+        "storage"
+      ],
+      "restrictions": [],
+      "upgrade_to": null,
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "workbench": {
+      "family": "workstation",
+      "tier": 1,
+      "footprint": [
+        2,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "block_paths": true,
+      "utility": "power_normal_tier_optional",
+      "rooms": [
+        "workshop",
+        "utility"
+      ],
+      "restrictions": [],
+      "upgrade_to": null,
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "radio_rig": {
+      "family": "workstation",
+      "tier": 1,
+      "footprint": [
+        2,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ]
+      ],
+      "block_paths": true,
+      "utility": "power_essential_tier",
+      "rooms": [
+        "operations"
+      ],
+      "restrictions": [
+        "signal_box_only_in_slice"
+      ],
+      "upgrade_to": "radio_rig_wired",
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "radio_rig_wired": {
+      "family": "workstation",
+      "tier": 2,
+      "footprint": [
+        2,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ]
+      ],
+      "block_paths": true,
+      "utility": "power_essential_tier",
+      "rooms": [
+        "operations"
+      ],
+      "restrictions": [
+        "signal_box_only_in_slice"
+      ],
+      "upgrade_to": null,
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "transfer_pump": {
+      "family": "utility_module",
+      "tier": 1,
+      "footprint": [
+        1,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ]
+      ],
+      "block_paths": true,
+      "utility": "power_essential_tier",
+      "rooms": [
+        "utility",
+        "*"
+      ],
+      "restrictions": [
+        "needs_water_feature_or_tank_adjacent"
+      ],
+      "upgrade_to": null,
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "purifier_unit": {
+      "family": "utility_module",
+      "tier": 1,
+      "footprint": [
+        1,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ]
+      ],
+      "block_paths": true,
+      "utility": null,
+      "rooms": [
+        "utility",
+        "*"
+      ],
+      "restrictions": [
+        "tank_adjacent"
+      ],
+      "upgrade_to": "filtration_module",
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "filtration_module": {
+      "family": "utility_module",
+      "tier": 2,
+      "footprint": [
+        1,
+        2
+      ],
+      "interaction": [
+        [
+          0,
+          2
+        ]
+      ],
+      "block_paths": true,
+      "utility": "power_essential_tier",
+      "rooms": [
+        "utility"
+      ],
+      "restrictions": [
+        "cistern_works_only_in_slice (the west module)"
+      ],
+      "upgrade_to": null,
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "pump_module": {
+      "family": "utility_module",
+      "tier": 2,
+      "footprint": [
+        2,
+        2
+      ],
+      "interaction": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "block_paths": true,
+      "utility": "power_essential_tier",
+      "rooms": [
+        "utility"
+      ],
+      "restrictions": [
+        "west_gallery_only_in_slice"
+      ],
+      "upgrade_to": null,
+      "damage_states": 3,
+      "store_result": "stored",
+      "deconstruct_yield": 2
+    },
+    "battery_bank": {
+      "family": "utility_module",
+      "tier": 1,
+      "footprint": [
+        1,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ]
+      ],
+      "block_paths": true,
+      "utility": "power_storage",
+      "rooms": [
+        "utility",
+        "medical",
+        "operations"
+      ],
+      "restrictions": [],
+      "upgrade_to": null,
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1,
+      "note": "the backup-charge adjacency object (25): extends emergency operation of its room"
+    },
+    "comfort_lamp": {
+      "family": "comfort_object",
+      "tier": 1,
+      "footprint": [
+        1,
+        1
+      ],
+      "interaction": [],
+      "block_paths": false,
+      "utility": "power_optional_tier",
+      "rooms": [
+        "*"
+      ],
+      "restrictions": [
+        "common_areas"
+      ],
+      "upgrade_to": null,
+      "damage_states": 1,
+      "store_result": "stored",
+      "deconstruct_yield": 0,
+      "note": "PLATFORM COMFORT LIGHTING's placeable anchor (D-047): first shed, visible dimming, modest Stress on extended darkness"
+    },
+    "partition": {
+      "family": "barrier",
+      "tier": 1,
+      "footprint": [
+        1,
+        1
+      ],
+      "interaction": [],
+      "block_paths": true,
+      "utility": null,
+      "rooms": [
+        "*"
+      ],
+      "restrictions": [
+        "interior_only",
+        "never_seals_last_path"
+      ],
+      "upgrade_to": null,
+      "damage_states": 1,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "door_panel": {
+      "family": "barrier",
+      "tier": 1,
+      "footprint": [
+        1,
+        1
+      ],
+      "interaction": [],
+      "block_paths": false,
+      "utility": null,
+      "rooms": [
+        "*"
+      ],
+      "restrictions": [
+        "portal_or_partition_gap_only"
+      ],
+      "upgrade_to": null,
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1,
+      "note": "walkable when open; closable for isolation (incidents, 25)"
+    },
+    "barricade": {
+      "family": "barrier",
+      "tier": 1,
+      "footprint": [
+        1,
+        1
+      ],
+      "interaction": [],
+      "block_paths": true,
+      "utility": null,
+      "rooms": [
+        "*"
+      ],
+      "restrictions": [
+        "never_seals_last_path"
+      ],
+      "upgrade_to": null,
+      "damage_states": 2,
+      "store_result": "stored",
+      "deconstruct_yield": 1
+    },
+    "mask_cache": {
+      "family": "emergency_object",
+      "tier": 1,
+      "footprint": [
+        1,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ]
+      ],
+      "block_paths": false,
+      "utility": null,
+      "rooms": [
+        "*"
+      ],
+      "restrictions": [
+        "must_stay_reachable"
+      ],
+      "upgrade_to": null,
+      "damage_states": 1,
+      "store_result": "stored",
+      "deconstruct_yield": 0
+    },
+    "memorial_chalk": {
+      "family": "story_object",
+      "tier": 1,
+      "footprint": [
+        1,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ]
+      ],
+      "block_paths": false,
+      "utility": null,
+      "rooms": [
+        "*"
+      ],
+      "restrictions": [
+        "never_deconstruct"
+      ],
+      "upgrade_to": null,
+      "damage_states": 1,
+      "store_result": null,
+      "deconstruct_yield": null
+    },
+    "shift_log": {
+      "family": "story_object",
+      "tier": 1,
+      "footprint": [
+        1,
+        1
+      ],
+      "interaction": [
+        [
+          0,
+          1
+        ]
+      ],
+      "block_paths": false,
+      "utility": null,
+      "rooms": [
+        "*"
+      ],
+      "restrictions": [
+        "never_deconstruct"
+      ],
+      "upgrade_to": null,
+      "damage_states": 1,
+      "store_result": null,
+      "deconstruct_yield": null
+    }
+  },
+  "_restrictions_note": "Restriction enforcement (D-048): hard restrictions are executed by spatial_model.py (interior_only, portal_or_partition_gap_only, tank_adjacent, needs_water_feature_or_tank_adjacent, signal_box_only_in_slice, west_gallery_only_in_slice, cistern_works_only_in_slice, common_areas, carer_side_clear, never_deconstruct; must_stay_reachable and never_seals_last_path are enforced globally by the flood-fill strand/sever guard). ADVISORY restrictions (UI hints, not validator rules): not_against_interaction_side, wants_partition_adjacent, open_zone_ok."
 }

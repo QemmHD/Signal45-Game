@@ -125,6 +125,8 @@ Construction, clearing, draining, reinforcement, repair, crafting (fabrication),
 
 **Visible-work contract:** materials are carried to site; workers start, and the environment shows stages (rubble shrinks, framing rises, waterline falls); work pauses visibly for fatigue, hazard, missing supplies, or utility loss with a banner naming the reason; a second qualified worker accelerates projects up to the max-useful cap; completion changes the room physically and functionally. **"Press build and wait" cannot occur** — there is no detached timer anywhere in the model.
 
+**Construction detail (D-046):** the room-creation flow, blueprint lifecycle, and visible stage grammar are specified in 23 and executable in `tools/spatial_model.py` — blueprints reserve nothing until activation, matching the policy below.
+
 **Cancellation and reservation policy (D-042):** materials consumed at completed stages are non-refundable; the unconsumed reserve refunds 100%; cancellation's price is the sunk labor plus a visible-disruption echo (mirroring the two-sided repurpose rule). Events and bills draw on total holdings, taking reserved stock **last** and pausing the affected order with a named banner — reservation is never a shield, and scarcity telemetry counts reserved stock as held. Cancel/reissue churn yields zero net gain (07 §9 tests it).
 
 **Task class is authored, not computed:** an order's class (placement / short install / project / major reclamation) is set per order type at definition time, never derived from remaining WU at runtime; player-scoped sub-orders inherit the parent's class, and no player action can decompose a project into short installs (anti-cheese, 15 §1).

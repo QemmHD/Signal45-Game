@@ -160,6 +160,17 @@
 - [ ] **Survival-tone probes (D-045, collection instruments for 20 §5's playtest questions):** (a) west-route testers, asked about the drain-week cold meals on a balanced descriptor card (*a price I chose / a tradeoff / an annoyance / felt like a bug*), a majority of the west cohort picks the strategy family; (b) all testers, asked about the end-of-week food state on a balanced descriptor card (*tight / tense / hopeless / starving*), ≥ 3 of 5 pick the tension family, ≤ 1 picks the despair family.
 - [ ] ≥ 3 of 5 express desire to continue past Day 7 ("would you play Day 8?") — the slice's emotional proof, meaningful even with placeholder art.
 
+## 21b. Spatial model, navigation, and build interface (Prompt 4 — D-046/D-047; validator evidence in 21–26)
+- [ ] **Layout battery:** `tools/validate_station_layouts.py` passes on the shipped Day-1 and both Day-7 layout data files at every build (placement validity, access, navigation, evacuation, Juna berth, area counts, comfort lighting, no-sever/no-strand) — committed, not aspirational.
+- [ ] **Gesture separation:** camera pan and object drag provably distinct (24 §3's threshold rule); a 200-tap monkey test during panning issues zero placements; every drag has a tap alternative.
+- [ ] **Invalid placement always states its specific reason** in text + shape (24 §5's vocabulary); the two severe classes (sever, strand) present their confirmation/refusal flows; ≥ 4 of 5 testers can say *why* a rejected placement was rejected.
+- [ ] **Selection:** no pixel-perfect taps; overlapping targets cycle or offer the chooser; a resident, room, and object each selectable in dense scenes at 130% scale.
+- [ ] **Small installs are fast:** placing a bed/lamp/partition takes ≤ 3 taps and no project ceremony; a full room blueprint commits in ≤ 6 taps including lens entry (10 §16's budgets hold in the new flow).
+- [ ] **Comfort lighting teaches:** in the first shed event, ≥ 4 of 5 first-time testers correctly say the dimming lamps mean power is short *before* anything important fails (the Optional tier's teaching claim, D-047).
+- [ ] **Blueprint honesty:** previewing and saving blueprints provably never changes stocks; reservation begins at activation only; the ledger's anti-profit properties (cancel ≤ reserve, deconstruct 50% once) hold in the shipped build exactly as in `tools/test_spatial_model.py`.
+- [ ] **Travel/interaction revalidation (25 §2):** first playable measures average travel share, hauling overhead, vertical delay, congestion, hauling trips, and build-session interaction time; >20% divergence from the model's implied overhead forces re-derivation of the 0.85 factor.
+- [ ] **Screenshot checkpoints:** the Day-1/Day-4/Day-7 same-framing triplet (26 §7) passes the §21 recognition test on both routes.
+
 ## 21. Base building and expansion (Pillar 6 — the slice must prove the building fantasy)
 - [ ] **Start state verified:** Day 1 presents exactly 4 functional areas (Scrubber Gate, Flywheel Room, Camp with its transfer pump, Listening Post), 2 blocked horizontal paths (east rubble, west flood), 1 blocked level (Deep Service lift), and visible unusable station space beyond them.
 - [ ] **Survey:** both blocked paths (and the lift) are surveyable; each survey costs stated labor/intel and returns a one-screen section report (readable at 130% text scale) naming contents, hazards, requirements, **and its story hook**.

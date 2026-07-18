@@ -16,6 +16,7 @@
 - **Materials:** one Salvage pool; start 12; yields: clear +10, drain +8, Depot 9 +7, Arcade +5; reserved at confirmation, refunded on cancel. Crafting beyond the splice/purifier is **not modeled** (listed limitation; 07 §9's joint-account criteria remain a systems-stage test).
 - **Task classes:** short installs (≤3 WU) don't consume one of 3 project slots; the class boundary is **authored per order type, never derived at runtime** (anti-decomposition rule, 11 §5); per-project daily cap 12 WU.
 - **Milestone classes:** *hard* milestones = the slice fails without them; *soft* milestones (storm prep, Juna's berth-by-D6) have authored miss-branches (unprepped storm; the witnessed turn-away). Dramaturgy targets (trunk mid-storm, first room D3) are tracked as **beat drift** — reported, non-fatal, and required clean in competent runs only.
+- **Travel and interface overhead (Prompt-4 boundary, D-046):** the 0.85 factor is where physical travel, hauling trips, vertical delay, and interface time currently hide; no precise travel numbers are retrofitted here. First-playable gates in 25 §2 re-derive the factor from measurement.
 - **Explicitly NOT assumed:** perfect assignment (0.85 factor + the efficiency sweep), exact foreknowledge (the `prep_last` misordering scenario), zero injuries (event 19 is in every run), any mandatory survivor (absence sweep), optional resources, max speed, cancellation exploits, hidden bonuses.
 
 ## 2. The project bill (from the model, not by hand)

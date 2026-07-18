@@ -2,6 +2,7 @@
 
 **Status:** LOCKED. Every feature proposal in later prompts must pass the tests in this document.
 **Revision note (D-038):** the base-building revision added Pillar 6 and Anti-pillar 6. Pillars are co-equal — numbering is referential, not priority order.
+**Revision note (D-046/D-047):** Pillar 6's spatial reality is now specified and validated — one authored-shell + free-interior model (21), seven slice room families under a 20–24 full-game family ceiling (22), the construction/blueprint flow (23), the mobile build grammar (24), navigation and the nine visible adjacencies (25), and the validated slice layouts (26). PLATFORM COMFORT LIGHTING is the single Optional-tier power load — the environment teaches the priority board.
 **Revision note (D-043/D-044):** the survival stage locked the slice's utility families at **Power · Air · Water · Structure** (heat is a load/modifier, seals are isolation controls — 18), canonized the four resident needs as **Health · Hunger · Fatigue · Stress** (the concept-stage names "Condition" and "Strain" refer to Health and Stress respectively wherever they appear in earlier text — 17 §1), and confirmed **Anti-pillar 3 as the governing conflict boundary**, superseding the retired absolute no-combat rule (D-006 → D-044, 19 §7).
 
 ---

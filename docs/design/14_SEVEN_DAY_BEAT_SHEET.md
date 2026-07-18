@@ -22,7 +22,7 @@
 - **Listening Post:** curated 3-signal board (W1 ash front · T1 Sable beacon · V1 carrier), 2 slots.
 - **Nightrun:** none (Teo unprovisioned; promised for Night 2).
 - **Carried consequence:** — (opening day).
-- **Hope beat:** the gate fans spin up; the station breathes (unconditional floor beat #1: first hot meal that evening).
+- **Hope beat:** the gate fans spin up; the station breathes (unconditional floor beat #1: first hot meal that evening) — and the platform comfort lamps come on with the stabilized Flywheel: the Optional tier, lit (its dimming later in the week is the board's gentlest telegraph — D-047).
 - **Safe stops:** post-repair, post-survey, the marquee report stop.
 - **Time:** ≈ 11.1 min (guided). **Available WU:** 16.5 E / 15.5 W-equivalent (guided-pace overhead −2). **Planned WU:** 14.0 (gate repair 4 · purifier 1 · surveys 5 · Flywheel stabilization 4) — priced work, no double-booking.
 - **Materials:** 2 salvage (gate repair) + 1 (purifier) + 2 (Flywheel).
@@ -79,7 +79,7 @@
 - **Listening Post (N4, 1 slot):** storm tail W3 · V1 · V2 · D2 · P1 — one choice under pressure.
 - **Nightrun:** none (sealed).
 - **Carried consequence:** seal-bulkhead choice pays or bites; unprepped storms cost double.
-- **Hope beat:** the trunk lands — new-wing lights through the storm dust (floor beat: storm's-end light return queues for Day 5).
+- **Hope beat:** the trunk lands — new-wing lights through the storm dust (floor beat: storm's-end light return queues for Day 5); the platform lamps sit dark through the storm — nobody needs a banner to know why.
 - **Safe stops:** post-cascade-response, post-board; the storm day is deliberately the shortest day in minutes — and the densest in decisions (12 in ≈11 min); the Day-4 load audit (20 §4) classifies its first-time surfaces and confirms the load holds *because* the board was taught on Day 2–3.
 - **Time:** ≈ 11.0 min (12 decisions, no night). **Available WU:** 12.7 E / 10.9 W. **Planned WU:** all of it.
 - **Materials:** trunk 3 (reserved earlier).

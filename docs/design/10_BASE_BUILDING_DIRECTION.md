@@ -206,6 +206,8 @@ All four documented tension axes (noise, travel, cascade, isolation) are thereby
 
 ## 16. Mobile interaction principles (build mode)
 
+*(Prompt-4 authority note, D-046: the detailed spatial model, room-family architecture, construction/blueprint flow, build interface, navigation, and slice layouts now live in 21–26; this section's rules stand and are completed there.)*
+
 - **Player-facing workflows (D-040):** the sixteen verbs remain internal design vocabulary but surface as **five workflows** — RECLAIM · CONNECT · BUILD · OPERATE · ADAPT (mapping in 12 §4). The UI shows only the actions relevant to the selected target; the full vocabulary is never exposed at once. The ten-step reclamation loop (§3) is a design model, not a per-room checklist — different spaces use different subsets (a kiosk: clear→furnish→staff; the flooded gallery: survey→drain→reinforce→connect→build; a railcar: access→repurpose; the damaged gate: repair only).
 - **Build mode is a toggled lens** over the same cutaway — not a separate screen. Reclaimable sections ghost in; bays show state (blocked / cleared / shell / furnished).
 - **Mode-state rules (D-039):** the build lens **force-enables the engineer's overlay's capacity layer** (a builder always sees node capacity, regardless of the overlay toggle's normal state); the lens announces itself with a visible mode frame/tint and a fixed exit affordance in a named corner; decision cards **queue and never fire** while the lens is open; the monkey test must be unable to issue a construction order from normal mode (07 §17).

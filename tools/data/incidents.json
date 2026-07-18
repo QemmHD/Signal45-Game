@@ -1,0 +1,74 @@
+{
+  "_comment": "SIGNAL 45 slice incident families (six, D-043). Full schema fields per 19; values PROVISIONAL. The scheduler caps stand: 1 major immediate crisis, <=2 minor warnings, queueing for the rest.",
+  "families": {
+    "flywheel_instability": {
+      "family": "power", "trigger": "load spike or bearing wear (event 1 chain)",
+      "warning": "bearing whine + browning lamps (banner), 1 day lead",
+      "severity": "major", "pause_tier": "banner_then_modal_at_imminent",
+      "escalation_phases": 2, "cascade": ["power_headroom_loss", "scrubber_shed", "air_degrade"],
+      "responses": ["shed optional loads (board)", "battery bridge (1 phase)", "emergency repair works order (3 WU)", "HIGHBALL: overdrive the Flywheel (risk)"],
+      "aftermath_physical": "bearing worn -> +1 maintenance WU/day until overhauled",
+      "aftermath_human": "residents in dimmed sections +stress; barks reference the brown-out"
+    },
+    "air_filtration_failure": {
+      "family": "air", "trigger": "power loss to scrubbers OR filter clog (storm)",
+      "warning": "fan pitch drops; section air chip ambers; 3-phase degrade window",
+      "severity": "major", "pause_tier": "modal_at_unsafe",
+      "escalation_phases": 3, "cascade": ["air_degrade", "respiratory_exposure_risk"],
+      "responses": ["restore power priority", "temporary filter (2 materials, 1 WU)", "evacuate section", "masks (protective gear)"],
+      "aftermath_physical": "clogged filters -> replacement order",
+      "aftermath_human": "exposed residents carry respiratory_exposure; evacuated sleepers +stress"
+    },
+    "storm_infiltration": {
+      "family": "weather", "trigger": "Day-4 cinder storm vs seal placement & prep",
+      "warning": "two-tier (D-022): free 1-phase telegraph always; monitored band = 2-day forecast + severity",
+      "severity": "major", "pause_tier": "modal_at_breach",
+      "escalation_phases": 2, "cascade": ["intake_clog", "scrubber_draw_spike", "power_dip", "pump_stall"],
+      "responses": ["cut hotplate", "throttle scrubbers", "hot repair (storm_repair order)", "HIGHBALL bridge", "abandon unsealed side behind bulkhead"],
+      "aftermath_physical": "prepped: cleanup only; unprepped: -2 materials damage + intake repair",
+      "aftermath_human": "unprepped: +stress all; sealed-side choice remembered by the unprotected side's sleepers"
+    },
+    "structural_instability": {
+      "family": "structure", "trigger": "storm load or clearing vibration on a strained bay",
+      "warning": "dust fall + creak audio + Structure overlay flag; staged: strained->unstable->critical",
+      "severity": "minor_to_major", "pause_tier": "banner; modal at critical",
+      "escalation_phases": 3, "cascade": ["bay_unstable", "access_blocked", "adjacent_bay_strain"],
+      "responses": ["reinforce order (props)", "evacuate bay", "halt heavy work in section", "reroute access"],
+      "aftermath_physical": "reinforced bay is permanently safe; collapsed bay costs its contents (slice: never occupied-collapse without the full warning ladder)",
+      "aftermath_human": "evacuees +stress; 'we sleep under that' barks"
+    },
+    "water_contamination": {
+      "family": "water", "trigger": "post-storm cinder wash into the tank (east) or silt slug in the cistern intake (west)",
+      "warning": "taste/odor report at the next meal window; water chip ambers; link named (storage vs purification)",
+      "severity": "major", "pause_tier": "banner_then_modal_at_meal",
+      "escalation_phases": 2, "cascade": ["water_unsafe", "illness_risk"],
+      "responses": ["boil order (+2 charge/day, 2 days)", "purifier flush (1 materials + 2 WU)", "switch source (west: cistern; east: arcade bottled run)", "ration water"],
+      "aftermath_physical": "flushed system; 1 water person-day lost",
+      "aftermath_human": "ill resident if ignored (illness course, 2 medicine); trust hit if the warning was dismissed"
+    },
+    "health_emergency": {
+      "family": "medical", "trigger": "event-19 wound infected OR contamination illness",
+      "warning": "fever banner at Graymorn; condition card names urgency + treatment need",
+      "severity": "major", "pause_tier": "modal_at_critical (auto-pause: a resident may die tier)",
+      "escalation_phases": 2, "cascade": ["work_restriction", "serious_condition"],
+      "responses": ["treatment (1-2 medicine + Aid Car/bench + Ash)", "rest priority", "clinic re-run for meds", "Sable purchase"],
+      "aftermath_physical": "medicine spent; treatment occupies bed + carer WU",
+      "aftermath_human": "treated resident remembers who sat with them; delayed treatment leaves a scar Mark (full game)"
+    }
+  },
+  "slice_conditions": ["minor_injury", "serious_injury", "respiratory_exposure", "exhaustion", "waterborne_illness"],
+  "condition_rules": {
+    "minor_injury": {"cause": "run scrapes, work accidents", "restriction": "hazardous work barred 1 day", "treatment": "dressing (0-1 medicine), bench ok", "recovery_days": 1},
+    "serious_injury": {"cause": "escalated accident, unprepped storm, ignored minor", "restriction": "no work; bed + carer", "treatment": "1-2 medicine + treatment days", "recovery_days": 3, "lasting": "possible stiff-limb Mark if untreated 2+ days"},
+    "respiratory_exposure": {"cause": "unprotected time in degraded-air section", "restriction": "no heavy work 1-2 days", "treatment": "clean air + rest; 1 medicine if severe", "recovery_days": 2},
+    "exhaustion": {"cause": "critical fatigue pushed further (overtime, HIGHBALL)", "restriction": "must rest next shift; refuses hazardous work", "treatment": "sleep; ember tea", "recovery_days": 1},
+    "waterborne_illness": {"cause": "ignored contamination", "restriction": "half capacity, no cooking duty", "treatment": "2 medicine course + rest", "recovery_days": 2, "lasting": "none in slice"}
+  },
+  "highball": {
+    "_comment": "The Redline system, named railway-native: HIGHBALL ORDER (the old all-clear/full-speed signal). One per day; usable <20s; no premium anything.",
+    "effect": "one works order gains +50% progress this phase OR one utility runs past rated capacity for one phase",
+    "costs": {"named_resident_overtime_fatigue": 14, "promise_of_rest_debt": true, "breakdown_risk_pct": 15, "breakdown_cost_materials": 1, "breakdown_cost_repair_wu": 2},
+    "anti_spam": "second use same day: unavailable; consecutive-day use of the same resident: refusal + stress; 3+ uses/week: breakdown risk doubles (worn machinery persists)",
+    "not_required_rule": "no competent-path milestone may depend on it (asserted in tests)"
+  }
+}

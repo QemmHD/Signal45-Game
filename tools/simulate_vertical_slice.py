@@ -182,6 +182,8 @@ class DayLog:
     spent: float = 0
     worked: list = field(default_factory=list)
     notes: list = field(default_factory=list)
+    completed_today: list = field(default_factory=list)
+    run_tonight: object = None
 
 
 def session_minutes(day, night_mode, run_tonight):
@@ -358,6 +360,8 @@ def simulate(route="east", scenario="competent", night_mode="delegated",
             active_minutes += 4.5
         if day == 6 and projects["berth"].done and projects["berth"].done_day <= 6:
             log.notes.append("Juna settled: +%.0f WU uncounted Day-7 buffer available" % JUNA_BUFFER_WU)
+        log.completed_today = [p2.pid for p2 in projects.values() if p2.done_day == day]
+        log.run_tonight = run_schedule.get(day)
         logs.append(log)
 
     breakthrough = projects["clear_east" if route == "east" else "drain_west"]
@@ -434,7 +438,11 @@ def simulate(route="east", scenario="competent", night_mode="delegated",
     return {"missed": missed_hard, "missed_soft": missed_soft, "margin": margin,
             "minutes": minutes, "active_minutes": active_minutes,
             "required": required, "supply": supply, "report": text,
-            "done_days": done_days, "runs": run_schedule}
+            "done_days": done_days, "runs": run_schedule,
+            "days": [{"day": l.day, "gross": l.gross, "essential": l.essential,
+                      "overhead": l.overhead, "available": l.available,
+                      "spent": l.spent, "completed": l.completed_today,
+                      "run": l.run_tonight, "notes": l.notes} for l in logs]}
 
 
 REQUIRED_RUNS = [

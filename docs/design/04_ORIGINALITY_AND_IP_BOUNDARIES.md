@@ -1,6 +1,7 @@
 # 04 — ORIGINALITY AUDIT AND IP BOUNDARIES
 
 **Status:** LOCKED as working policy. This document identifies risks for later professional review; nothing here is a legal clearance, and the project must not be described as legally cleared at any stage.
+**Conflict-boundary note (D-044):** differentiation claims below of the form "management, not shooter / no FPS layer / no creature combat" describe the absence of *combat as gameplay identity* and remain binding. The governing design rule is **NO COMBAT POWER FANTASY** (01 Anti-pillar 3, 19 §7) — not an absolute prohibition of physical conflict in the fiction; the earlier absolute rule (D-006) is retired.
 
 ---
 

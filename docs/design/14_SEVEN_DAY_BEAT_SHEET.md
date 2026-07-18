@@ -1,6 +1,6 @@
 # 14 — SEVEN-DAY BEAT SHEET: THE FIRST COUNT
 
-**Stage:** Prompt 2 (regenerated after red-team pass 3, D-042). **Status:** LOCKED at beat level. Every number below is the feasibility model's actual output (15; `tools/simulate_vertical_slice.py`); durations are the session-time submodel's per-day outputs (delegated nights unless noted).
+**Stage:** Prompt 2 (regenerated after red-team pass 3, D-042; survival-layer annotations added by Prompt 3, D-043). **Status:** LOCKED at beat level. Every number below is the feasibility model's actual output (15; `tools/simulate_vertical_slice.py`); durations are the session-time submodel's per-day outputs (delegated nights unless noted). The survival layer (stocks/needs/utilities/incidents — 16–19) runs underneath every day below; `tools/survival_model.py` (20) validates that competent play on either route stays fed, watered, powered, and unwarned-catastrophe-free across this exact beat structure.
 
 **The week in one line:** hear the promise → choose a direction → win a wing before the storm → hold through it → light the station up → answer Juna at the gate → stand at the relay and decide.
 
@@ -36,7 +36,7 @@
 - **Primary goal:** commit the route; push the breakthrough hard (E: clear rubble 12 WU · W: drain via transfer-pump rig 12 WU — the full 12-WU/day project cap; the whole household digs).
 - **Secondary goal:** install the Level-1 seal — **and choose its bulkhead** (Camp core vs. the new wing: the storm-isolation decision).
 - **Construction milestone:** **breakthrough DONE by nightfall** (model: Day 2, both routes, at the daily cap); seal DONE Day 2 (E) / Day 3 (W — the drain eats Day 2's cap).
-- **Utility problem:** the pump rig (W) draws Charge visibly — first load-board pinch; E: none yet (trunk comes Day 3–4).
+- **Utility problem:** the pump rig (W) draws Charge visibly — first load-board pinch, and the hotplate is the shed load (cold meals while the drain runs, roughly Days 2–4: west's priced discomfort, visible as banners — 20 §2); E: none yet (trunk comes Day 3–4).
 - **Resident beat:** the route scene itself (construction posting to the human ledger); Maren discovers the ration skim (event 6 arms).
 - **Listening Post:** full board opens (5 live signals, N2): storm band W2 forming · T1 last night · V1 · D1 Foundry distress · P1 Teo's band. Storm-vs-people tension begins.
 - **Nightrun:** **Depot 9** (wire + tools + 7 salvage) — the week's keystone run; delegated or active.
@@ -70,7 +70,7 @@
 ## DAY 4 — "Sealed In" (the storm)
 
 - **Starting state:** cinderfall arrives (prepped: 4 WU emergency load · unprepped: 8 WU and it hurts); station sealed; no nightrun tonight.
-- **Immediate pressure:** the cascade fires: intake clog → scrubber draw → flywheel dip → **pump stall** (W: Pump Room chain · E/pre-trunk: transfer-pump tank-feed stall). Three authored responses (cut hotplate / throttle scrubbers / hot repair), each optimal somewhere.
+- **Immediate pressure:** the cascade fires: intake clog → scrubber draw → flywheel dip → **pump stall** (W: Pump Room chain · E/pre-trunk: transfer-pump tank-feed stall). Three authored responses (cut hotplate / throttle scrubbers / hot repair), each optimal somewhere — plus the **HIGHBALL ORDER**, introduced diegetically here as the storm's overdrive option (bridge the flywheel past rated capacity for one phase, at a named resident's cost — 19 §5; never required to survive the day).
 - **Primary goal:** hold the station: work the load board; storm repair underway (model: DONE Day 5, inside its due date).
 - **Secondary goal:** indoor construction continues — sealed days are building days.
 - **Construction milestone:** **reinforcement + trunk extension DONE (both routes, model Day 4)** — the new wing joins the grid mid-storm: lights steady exactly when it matters.
@@ -93,7 +93,8 @@
 - **Primary goal:** E: **Canteen DONE** (the kiosk row opens; warm-beat scene at Accord threshold) · W: **Pump Room + west-bay bunks DONE** (cistern online — water duty drops 3→1 from tomorrow's roster).
 - **Secondary goal:** Juna's berth (model: DONE Day 5, both routes); the splice with Depot wire (model: DONE Day 5); the lift freed (E: Day 5 · W: Day 6).
 - **Construction milestone:** the wave: E: storm repair + lift + Canteen + berth + splice · W: storm repair + bunks + Pump Room + berth + splice.
-- **Utility problem:** post-storm intake maintenance order; hotplate restoration on the load board.
+- **Utility problem:** post-storm intake maintenance order; hotplate restoration on the load board; ash-wash contamination risk on the exposed water link (the storm's aftermath incident — link-named warning, boil order available at its Charge price, 19 §1, 18 §4).
+- **Day-5 load audit (D-043, 20 §4):** the day reads as **one primary goal** (the route room — Canteen E / Pump Room + bunks W) **+ one obligation** (storm repair, due today) **+ two quick wins** (berth, splice — short installs, no project slots); the lift is explicitly deferrable (west already Day 6; east may slip without milestone loss). Graymorn's "tomorrow's headline" names the primary goal so the wave never reads as six competing mandates.
 - **Resident beat:** the gathering scene (Canteen / cook-ring "canteen corner") — warm or withheld by Accord; Ash's clinic aftermath (event 7) if the take path was walked.
 - **Listening Post (N5):** W3 tail · V2 last night · V3 carrier anomaly · T3 Sable return beacon · D2 fading · P1.
 - **Nightrun:** **Fenwick Arcade** (food/water/salvage +5) — the recovery run; a gentler active outing if the player wants one.
@@ -150,7 +151,7 @@
 | | EAST — "Beds first" | WEST — "Water first" |
 |---|---|---|
 | Early gain | Sleeper Car D3 (real rest), Canteen D5, Aid Car D6 (real triage) | Cistern D3, Pump Room D5 (water duty 3→1 WU/day), cheap storm recovery |
-| All-week cost | Tank-water drudgery every day (3 WU/day) | Rough sleeping (Strain), bench triage penalty until late-week |
+| All-week cost | Tank-water drudgery every day (3 WU/day) | Rough sleeping (Stress), bench triage penalty, cold meals during the drain (Days 2–4) |
 | Storm | Rides on comfort (the rest bonus is real: +0.75 WU/day) | Rides on infrastructure; the +3 WU recovery refund funds the Day-5 wave |
 | All-week price | Tank water 3 WU/day until the end | Rough sleep −1 WU/day and bench triage until the bunks land |
 | Juna's berth | Sleeper Car berth (D5) | West-bay bunks (D5) |

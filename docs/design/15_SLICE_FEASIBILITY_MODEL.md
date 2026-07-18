@@ -2,6 +2,7 @@
 
 **Stage:** Prompt 2 (revised after red-team pass 3, D-042). **Status:** COMPLETE — this document reports the executable model's actual output and is regenerated whenever the model changes. It is the **Slice Feasibility Sketch** promised by D-039/10 §15; 07 §21's exclusive-choice criterion cites it.
 **Artifacts:** `tools/simulate_vertical_slice.py` (deterministic, engine-independent, no dependencies) · `tools/test_simulate_vertical_slice.py` (12 automated checks). Run: `python3 tools/simulate_vertical_slice.py --all` · `python3 tools/test_simulate_vertical_slice.py`.
+**Prompt-3 note (D-043):** the model now also exposes its per-day ledger (pools, spends, completions, run nights) as data; the survival model (`tools/survival_model.py`, 20) **consumes that output as its labor truth** — one shared arithmetic, asserted identical in `tools/test_survival_model.py`. The labor results below are unchanged; the 12-test suite still passes byte-identically.
 
 ---
 

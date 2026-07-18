@@ -102,7 +102,7 @@ Rooms are never passive resource boxes. Every room definition draws from this fu
 
 ## 8. Utility networks: trunks, nodes, and the "why is it offline" answer
 
-Expansion interacts with **electricity, clean water, ventilation, heat, sanitation, structural integrity, and access/travel routes** — without ever asking a phone player to draw individual pipes or wires.
+Expansion interacts with **electricity, clean water, ventilation, heat, sanitation, structural integrity, and access/travel routes** — without ever asking a phone player to draw individual pipes or wires. *(Prompt-3 slice lock, D-043: the slice's live utility families are four — **Power, Air, Water-network, Structure** (18); thermal pressure is a room/incident modifier and sanitation derives from water + cleaning + crowding; both become independent networks in the full game only if testing proves the decisions justify the interface cost — 16 §1.)*
 
 **The model (extends the existing abstract network + charge load-priority board):**
 - **Trunks** run through the station's real cable galleries and duct runs (visible in the architecture, per Pillar 1).

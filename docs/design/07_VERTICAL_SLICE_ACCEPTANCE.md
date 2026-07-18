@@ -20,7 +20,7 @@
 - [ ] Zoom levels (overview ↔ room) transition at ≥ 30 fps with no state desync.
 
 ## 3. Resource production and consumption
-- [ ] All 5 resources (Water, Rations, Charge, Salvage, Meds) have visible per-day trajectory indicators; a tester asked "will water last through Day 3?" answers correctly from the UI alone in ≥ 4 of 5 trials.
+- [ ] All 5 stocks (**Food, Clean Water, Medicine, Materials, Charge** — plain HUD names per 16 §1; *rations/meds/salvage* survive as spoken aliases only) have visible per-day trajectory indicators; a tester asked "will water last through Day 3?" answers correctly from the UI alone in ≥ 4 of 5 trials.
 - [ ] A scripted 2-day water deficit (Day 2–3 tuning) is survivable by at least 2 mechanically distinct plans (e.g. purifier cartridge craft vs. arcade nightrun vs. Sable trade), each verified in playthrough — and no single plan is chosen by more than 70% of the exit-test cohort.
 - [ ] At least two further deficit windows on different resources (Meds after Depot 9; Charge before the storm) occur in a normal playthrough, each with 2+ distinct answers.
 - [ ] Scarcity telemetry: across playtests, the player never simultaneously holds more than X days of buffer in all five resources after Day 1 (X set at systems stage); the R-11 safety valve fires at most once per playthrough, never erases an active deficit, covers **material** deficits only, and its trigger (a Graymorn Day 4–5 deficit forecast crossing a named threshold, at premium prices, excluding scarcity self-inflicted by trade within the previous 48 in-game hours) cannot be farmed.
@@ -38,6 +38,16 @@
 - [ ] Every utility subsystem exhibits all 3 damage stages (failing / jury-rigged / restored) somewhere in a normal 7-day playthrough, each visually and audibly distinct.
 - [ ] A player who ignores a telegraphed utility warning experiences the failure no sooner than the telegraph promised (no untelegraphed catastrophe — quality gate).
 
+## 4b. Survival layer (Prompt 3 — D-043; model evidence in 20, playable verification here)
+- [ ] **Forecast-before-punishment:** every shortage stage, utility failure, and cascade step in a full playthrough is preceded by a logged warning of the correct confidence class (fact / projection / estimate / radio intel / unknown — 18 §8); an automated log audit finds zero unwarned critical states (mirroring the model's structural assertion).
+- [ ] **Cascade bound:** no incident chain ever touches more than 3 systems (19 §3), verified across the test matrix; every active cascade displays cause → effect → possible-next → time → interruption points, and at least one interruption is exercised in normal play.
+- [ ] **Two-tap diagnosis:** for any major shortage or offline room, the main cause is identifiable in ≤ 2 taps (16 §3, 18 §7), verified by tester trials (≥ 4 of 5 correct).
+- [ ] **HIGHBALL ORDER (19 §5):** usable end-to-end in < 20 s; its confirm card shows benefit (fact), costs (fact), and breakdown risk (labeled %, uncertain); a competent playthrough completes the week without ever using it (never mandatory); the anti-spam ladder (one/day, rest debts, consecutive-day refusal, doubled risk at 3+/week) fires as specified in a deliberate-overuse test.
+- [ ] **No-death slice policy (17 §3):** no resident can die in the slice; critical health auto-pauses with its modal; every acquired condition card names urgency, treatment, cost of delay, and carer; treatment doses commit at triage and survive save/reload without double-spend.
+- [ ] **Contamination legibility:** the water-contamination incident names its failing link (source/pumping/purification/delivery/storage — 18 §4) and offers its authored responses; the boil order's Charge cost is visible before commitment.
+- [ ] **Emergency substitutions:** each slice emergency action (16 §4, 19 §4) states immediate benefit, immediate cost, delayed cost, affected residents, and reversibility on its card — audited for all fifteen.
+- [ ] **Anti-death-spiral:** in a scripted late-week food-shortage state, reduced-efficiency work still suffices to recover (the mistake scenarios' short-but-alive shape, 20 §2), and emergency survival work is never barred by need states alone.
+
 ## 5. Survivor assignment
 - [ ] Assigning a survivor against aptitude produces measurably different speed/quality/accident numbers than with-aptitude (tunable constants exist and are logged).
 - [ ] **Strengthened swap test:** for every one of the 6 pairings, the automated sim log shows at least one difference in event availability, event branch, or refusal state traceable to a *non-aptitude* character property (value, Mark, bond, petition) by Day 3. Bark differences and speed/quality deltas explicitly do not satisfy this criterion.
@@ -45,7 +55,7 @@
 - [ ] At least two distinct survivors' value-line refusals are reachable in normal play; each refusal explains itself in one screen.
 
 ## 6. Character condition
-- [ ] All 4 needs (Hunger, Fatigue, Condition, Strain) change from play, are readable on the ledger page, and foreshadow via posture/idle animation — guaranteed at room zoom; at overview zoom, need-state badges on the room's chalk plate are the sanctioned channel, and an explicit overview-distance readability check runs at blockout.
+- [ ] All 4 needs (**Health, Hunger, Fatigue, Stress** — canon names per 17 §1) change from play, are readable on the ledger page, and foreshadow via posture/idle animation — guaranteed at room zoom; at overview zoom, need-state badges on the room's chalk plate are the sanctioned channel, and an explicit overview-distance readability check runs at blockout.
 - [ ] Strain's three named effects are each verified in logs: high-Strain vs. low-Strain assignment of the same survivor to the same job produces measurably different accident odds; delegated-run reliability drops above the Strain threshold; refusal likelihood rises when ordering against a value at high Strain.
 - [ ] Imka's overwork telegraph (event 8) fires when — and only when — the triggering condition is met; ignoring it produces her collapse with the promised timing.
 - [ ] Strain relief mechanics (rest, ember tea, canteen scene) each produce logged, distinct recovery amounts.
@@ -89,7 +99,7 @@
 - [ ] The Marrow Street Clinic encounter offers its 4 resolutions (aid, barter, take, leave) with no forced-combat path, and its opening framing provably differs by D2 monitoring (answered call vs. cold discovery).
 
 ## 12. Return and triage
-- [ ] Every run ends in the Scrubber Gate return scene; injuries acquired on the run arrive as Condition states requiring treatment time + Meds at the station's medical point — the Aid Car when built, else the Camp/Staging bench at Ash's stated speed/quality penalty (10 §15) — with triage choices when two casualties compete for one bed (event 19 path), verified on both routes.
+- [ ] Every run ends in the Scrubber Gate return scene; injuries acquired on the run arrive as condition cards (17 §3) requiring treatment time + Medicine at the station's medical point — the Aid Car when built, else the Camp/Staging bench at Ash's stated speed/quality penalty (10 §15) — with triage choices when two casualties compete for one bed (event 19 path), verified on both routes.
 - [ ] Carried salvage over the commitment weight was genuinely left behind (verifiable against location state on a repeat visit).
 
 ## 13. Event consequence

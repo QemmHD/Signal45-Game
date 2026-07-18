@@ -2,6 +2,7 @@
 
 **Status:** LOCKED. Every feature proposal in later prompts must pass the tests in this document.
 **Revision note (D-038):** the base-building revision added Pillar 6 and Anti-pillar 6. Pillars are co-equal — numbering is referential, not priority order.
+**Revision note (D-043/D-044):** the survival stage locked the slice's utility families at **Power · Air · Water · Structure** (heat is a load/modifier, seals are isolation controls — 18), canonized the four resident needs as **Health · Hunger · Fatigue · Stress** (the concept-stage names "Condition" and "Strain" refer to Health and Stress respectively wherever they appear in earlier text — 17 §1), and confirmed **Anti-pillar 3 as the governing conflict boundary**, superseding the retired absolute no-combat rule (D-006 → D-044, 19 §7).
 
 ---
 
@@ -9,7 +10,7 @@
 
 ### Pillar 1 — One station, every system connected
 
-- **Meaning:** Kestrel Cross is a single legible machine. Power, water, air, heat, and seals are not parallel meters; they are a network in which each subsystem loads the others, and the player can *see the connections* in the cutaway view.
+- **Meaning:** Kestrel Cross is a single legible machine. Power, air, water, and structure (with heat as the standing load and seals as the isolation controls — 18) are not parallel meters; they are a network in which each subsystem loads the others, and the player can *see the connections* in the cutaway view.
 - **Player-facing behavior:** The player learns to read the station like an engineer reads a panel: a browning lamp string means the flywheel is sagging; a sagging flywheel means the cistern pump slows; a slow pump during swelter means rationing tomorrow. Players predict failures before failing, and describe the station causally ("we lost water *because* the scrubbers ate the charge margin").
 - **Supporting mechanics:** A single power budget (charge) drawn on by scrubbers, pumps, lights, and tools; heat load that rises during swelter and degrades machines and people; utility states with three readable stages (failing → jury-rigged → restored); failure cascades that always pass through a visible intermediate warning state; repair as targeted work orders, not tap-to-fix.
 - **Supporting presentation:** Side-cutaway camera with the whole slice station on one screen at overview zoom; animated "vitals" per room (lamp warmth, pipe drip, fan spin) that *are* the telemetry; cable and pipe runs drawn in the architecture so dependency is literally visible; alarm audio that identifies the subsystem by timbre before the player looks.
@@ -18,7 +19,7 @@
 
 ### Pillar 2 — People are machinery that breaks differently
 
-- **Meaning:** The survivors are the second network. They have needs (Hunger, Fatigue, Condition, Strain), aptitudes (Fitter, Medic, Runner, Steward), values, bonds, grudges, and Marks (durable memories of what happened to them and what you decided). They matter *mechanically*, not decoratively — and unlike machines, they remember.
+- **Meaning:** The survivors are the second network. They have needs (Health, Hunger, Fatigue, Stress — canon names per 17 §1), aptitudes (Fitter, Medic, Runner, Steward), values, bonds, grudges, and Marks (durable memories of what happened to them and what you decided). They matter *mechanically*, not decoratively — and unlike machines, they remember.
 - **Player-facing behavior:** Players make assignments as personnel decisions, not slot-filling ("Teo's fast but he's still raw from the refused signal; send Imka, she won't flinch"). Players can narrate each survivor's week afterward. Refusals, requests, and reconciliations feel earned, because their causes are visible in the record.
 - **Supporting mechanics:** Aptitude fit changes work speed, quality, and accident odds; Strain has *named* concrete effects (in the slice: an accident-odds multiplier on work orders, a delegated-run reliability penalty above a threshold, and increased refusal likelihood when ordered against a value while high) and vents through visible behavior (snapping, withdrawal, refusal) before breakdown; values act as hard lines — all four slice residents have one (03 §3.1), each mapped to at least one slice event that can cross it — and ordering a survivor across one costs Accord and creates a grudge; bonds/grudges alter pair efficiency and event branches (the slice ships one systemic instance: the Teo/Imka grudge measurably degrades their joint storm-repair assignment); Marks permanently annotate a survivor's sheet and every Mark carries at least one mechanical field (work, refusal, radio, or ending hook), never text alone.
 - **Supporting presentation:** Survivors visibly perform their assigned work in the cutaway; posture and idle animation encode need states before any icon appears; a per-survivor "ledger page" UI showing needs, Marks, bonds, and outstanding promises; barks that reference actual recent events, not generic mood lines.
@@ -77,7 +78,9 @@ Signal 45 never zooms out past names and faces. **Forbidden feature types:** pop
 
 ### Anti-pillar 3 — Not a combat power fantasy
 
-Violence in Signal 45 is rare, costly, avoidable, and never the reward loop. **Forbidden feature types:** weapon tiers and damage progression; kill-counting or combat XP; encounters that must be won by force; enemy factions that exist to be cleared; loot pinatas guarded by fights. The nightrun verb set is *reach, take, talk, avoid, flee* — a standoff is a dialogue with body language, and hurting someone is a Mark on the survivor who did it, every time.
+*(Conflict boundary correction, D-044: this anti-pillar — not an absolute "no combat" rule — is the governing boundary. The earlier absolute prohibition (D-006, cut C5's original phrasing) is retired: Signal 45's world may contain physical conflict — intrusion, threats, restraint, defensive preparation, last-resort force — as dangerous, brief, avoidable-where-reasonable, consequence-bearing incident content (19 §7). No combat system is designed in the current stage; detailed resolution belongs to a later stage.)*
+
+Violence in Signal 45 is rare, costly, avoidable, and never the reward loop. **Forbidden feature types:** weapon tiers and damage progression; kill-counting or combat XP; encounters that must be won by force; enemy factions that exist to be cleared; loot pinatas guarded by fights; violence as the routinely optimal answer. The nightrun verb set is *reach, take, talk, avoid, flee* — a standoff is a dialogue with body language, and hurting someone is a Mark on the survivor who did it, every time.
 
 ### Anti-pillar 4 — Not a micromanagement treadmill
 

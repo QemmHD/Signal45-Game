@@ -1,0 +1,138 @@
+{
+  "_comment": "SIGNAL 45 canonical stock-resource values (vertical slice). PROVISIONAL until first-playable measurement (D-043). Single source of truth: docs cite this file; survival_model.py loads it.",
+  "stocks": {
+    "food": {
+      "name": "Food",
+      "canon_alias": "Rations",
+      "unit": "person-meals",
+      "start": 34,
+      "storage_cap": 60,
+      "cap_with_cold_store": 90,
+      "meals_per_resident_per_day": 2,
+      "ration_meals_per_day_saving": 2,
+      "sources": {
+        "arcade_run": 16,
+        "sable_trade": 10,
+        "canteen_waste_reduction_per_day": 1
+      },
+      "spoilage": {
+        "rule": "forecast-only in slice: perishables from runs must be eaten within 2 days or convert to 50% stable rations; no silent loss",
+        "slice_active": true
+      }
+    },
+    "clean_water": {
+      "name": "Clean Water",
+      "unit": "person-days",
+      "start": 12,
+      "storage_cap": 20,
+      "cap_with_cistern": 44,
+      "use_per_resident_per_day": 1.0,
+      "works_draw_big_build_day": 1.0,
+      "ration_saving_per_day": 1.5,
+      "sources": {
+        "water_duty_tank_per_day": 4.0,
+        "purifier_bonus_per_day": 1.0,
+        "cistern_online_per_day": 8.0,
+        "arcade_run": 6
+      },
+      "contamination": {
+        "incident": "water_contamination",
+        "effect": "tank flagged: boil order (+2 charge/day) or medicine risk; supply link named in warning"
+      }
+    },
+    "medicine": {
+      "name": "Medicine",
+      "canon_alias": "Meds",
+      "unit": "doses",
+      "start": 4,
+      "storage_cap": 12,
+      "sources": {
+        "clinic_aid_or_barter": 4,
+        "clinic_take": 6,
+        "sable_trade": 2
+      },
+      "sinks": {
+        "triage_event19": 1,
+        "illness_course": 2,
+        "storm_injury_unprepped": 1
+      },
+      "rules": "consumed when treatment begins (committed at triage); never passively lost; no expiration in slice"
+    },
+    "materials": {
+      "name": "Materials",
+      "canon_alias": "Salvage",
+      "unit": "salvage units",
+      "start": 12,
+      "storage_cap": 40,
+      "note": "labor model (simulate_vertical_slice.py) owns the authoritative materials ledger; survival model mirrors it",
+      "reservation": "reserved at project confirmation; consumed at completed stages; unconsumed reserve refunds 100%; deconstruction recovers 50% of consumed materials, once per installed component (no loops)"
+    },
+    "charge": {
+      "name": "Charge",
+      "unit": "cell-hours",
+      "start": 10,
+      "storage_cap": 24,
+      "note": "the Fuel role of the canonical set (D-043): stored energy powering defined equipment; the Flywheel is the producer, the load board names every consumer",
+      "battery_reserve_bridge_phases": 1
+    }
+  },
+  "item_families": {
+    "_comment": "Layer 3 architecture. Detailed recipes are the crafting stage's work; the HUD 'Materials' chip expands to show family availability per project.",
+    "families": [
+      "metal_salvage",
+      "mechanical_parts",
+      "electronics",
+      "filters",
+      "textiles",
+      "chemicals",
+      "cells",
+      "tools",
+      "protective_gear",
+      "food_ingredients",
+      "medical_items",
+      "personal_valuables",
+      "radio_components"
+    ],
+    "slice_tracked_distinctly": [
+      "filters",
+      "tools",
+      "radio_components"
+    ],
+    "slice_folded_into_materials": [
+      "metal_salvage",
+      "mechanical_parts",
+      "textiles"
+    ],
+    "project_block_rule": "a blocked project names the missing family, never just 'not enough Materials'"
+  },
+  "condition_states": [
+    "functional",
+    "worn",
+    "broken"
+  ],
+  "needs": {
+    "scale": "0-100; hunger/fatigue/stress higher is worse; health higher is better",
+    "safe": 40,
+    "strained": 70,
+    "work_efficiency": {
+      "strained": 0.9,
+      "critical": 0.7
+    },
+    "hazard_bar_at_critical": [
+      "fatigue",
+      "health"
+    ],
+    "hunger_step_missed_meal": 18,
+    "hunger_recovery_meal": 25,
+    "fatigue_work_day": 22,
+    "fatigue_overtime": 14,
+    "fatigue_recovery_sleep": 30,
+    "fatigue_recovery_rough_sleep": 20,
+    "stress_event_hit": 12,
+    "stress_rough_sleep": 6,
+    "stress_recovery_good_day": 8,
+    "health_untreated_serious_per_day": -10,
+    "health_treatment_per_day": 12,
+    "death_rule": "slice: no death; critical health auto-pauses and forces the emergency card; full game: death requires an existing serious condition + warning + response window + a deliberate high-risk choice"
+  }
+}

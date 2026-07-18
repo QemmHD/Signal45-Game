@@ -1,0 +1,43 @@
+{
+  "_comment": "SIGNAL 45 slice utility families (four, D-043): capacity/demand/priority/condition — never currencies. PROVISIONAL values; loaded by survival_model.py.",
+  "power": {
+    "producer": "flywheel", "unit": "cell-hours/day",
+    "generation": {"partial": 24, "stabilized": 30},
+    "loads": {"scrubbers": 12, "lights": 6, "pump_rig_west": 8, "hotplate": 4, "radio": 2, "tools": 2, "cistern_pumps": 4},
+    "priority_tiers": ["critical", "essential", "normal", "optional"],
+    "tier_of": {"scrubbers": "critical", "lights": "essential", "radio": "essential", "pump_rig_west": "essential", "cistern_pumps": "essential", "hotplate": "normal", "tools": "normal"},
+    "battery": {"capacity": 10, "bridge": "keeps critical tier alive 1 phase after producer failure"},
+    "overload": {"threshold_headroom": 0, "effect": "sheds optional tier first, then normal, with banner; never silently"}
+  },
+  "air": {
+    "producer": "scrubber_gate", "unit": "occupant-capacity",
+    "filtration_capacity": {"damaged": 3, "repaired": 6, "with_module": 8},
+    "degrade_phases_after_loss": 3,
+    "rule": "air degrades over phases, never instantly; per-section quality (core / east / west); doors and the Level-1 seal isolate sections; exposure without protection = respiratory_exposure condition",
+    "storm_load_extra": 2
+  },
+  "water_network": {
+    "links": ["source", "pumping", "purification", "delivery", "storage"],
+    "warning_rule": "every water warning names the failing link",
+    "east_chain": "emergency tank (source+storage) + transfer pump + purifier cartridge",
+    "west_chain": "cistern main (source) + Pump Room (pumping) + Cistern Works (purification+storage)"
+  },
+  "structure": {
+    "states": ["safe", "strained", "unstable", "critical", "collapsed"],
+    "rule": "structural state is per bay/section, never one global bar; propagation only to adjacent unreinforced bays; reinforcement halts propagation",
+    "slice_hotspots": {"east_canopy_bay": "strained until reinforce_e", "west_gallery_arch": "strained until reinforce_w", "camp_core": "safe"}
+  },
+  "cross_effects": [
+    "power loss stops scrubbers (battery bridges critical 1 phase)",
+    "flooding (unpumped west) threatens the west trunk node if drained-then-neglected",
+    "unstable structure blocks access to the section's utility node",
+    "water shortage halves cleaning effectiveness (sanitation derives from water + cleaning + crowding in the slice)",
+    "overloaded air raises respiratory risk for occupants of the affected section"
+  ],
+  "overlays": {
+    "rule": "one overlay active at a time: Power / Air / Water / Structure; each shows source, connected areas, capacity vs demand, warning, unconnected rooms, time-to-failure, and the most useful response; room panel answers requires/receives/why-impaired/what-restores/what-if-ignored in plain language first",
+    "plain_language_rule": "AIR FILTRATION - SCRUBBER GATE, never raw telemetry; advanced numbers behind an optional inspect layer"
+  },
+  "forecast_classes": ["fact", "projection", "estimate", "radio_intel", "unknown"],
+  "cascade_bounds": {"normal_systems": 1, "escalated": 2, "severe_ignored": 3, "hard_max": 3}
+}

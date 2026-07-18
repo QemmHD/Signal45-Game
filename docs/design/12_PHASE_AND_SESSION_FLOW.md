@@ -44,7 +44,7 @@
 
 - **Fiction:** pre-dawn; the accounting.
 - **Entry:** dawn commit. The return is staged at the Scrubber Gate.
-- **Purpose:** receive the expedition; triage injuries (treatment commits Meds); store recovered goods; resolve landed consequences (arrivals, faction bills, chain events); relationship reactions; the **morning report** (stationmaster's log): what changed, what was deferred, what tomorrow's headline is.
+- **Purpose:** receive the expedition; triage injuries (treatment commits Medicine at triage — 17 §3); store recovered goods; resolve landed consequences (arrivals, faction bills, chain events); relationship reactions; the **morning report** (stationmaster's log): what changed, what was deferred, what tomorrow's headline is.
 - **Available actions:** triage choices, storage decisions, event cards that land at dawn, report review.
 - **Safe stops:** report end is the day's marquee stop — the exhale by design (Pillar 5).
 - **Exit:** confirm the report → autosave → next Day Shift.

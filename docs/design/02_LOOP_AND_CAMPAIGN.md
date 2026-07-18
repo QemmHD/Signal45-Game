@@ -2,6 +2,7 @@
 
 **Status:** LOCKED at structural level. Numeric tuning values are placeholders for the systems stage; structure and phase names are canon.
 **Prompt-2 note (D-040):** the loop and time system are now specified in detail in **11** (loop hierarchy, time rules, resource cadence, work orders) and **12** (phase/session flow); the first session in **13**; the seven-day plan and its executable evidence in **14/15**. Phases carry plain-language labels in UI ("DAY SHIFT — Swelter" etc.); phase durations and session math here are superseded by 12 §1–2's model-validated figures. This document remains the structural canon for the campaign loop, emotional rhythm, and acts.
+**Prompt-3 note (D-043):** the survival layer under this loop is now specified in **16** (stocks: Food · Clean Water · Medicine · Materials · Charge), **17** (needs: Health · Hunger · Fatigue · Stress), **18** (utilities: Power · Air · Water · Structure + forecasts), **19** (weather, incidents, cascades, HIGHBALL ORDER), with executable evidence in **20**. The §9 diagram labels below use the canon names.
 
 ---
 
@@ -113,15 +114,15 @@ The seven registers and where the design deliberately places them:
 ```mermaid
 flowchart TD
     subgraph PHYS["Physical network — the station ledger"]
-        UTIL["Utilities\n(charge / water / air / heat / seals)"]
+        UTIL["Utilities\n(Power / Air / Water / Structure\n+ heat load & seals — 18)"]
         ROOMS["Rooms & construction\n(sections • bays • works orders\nsurvey/clear/build/upgrade/repurpose)"]
-        RES["Resources\n(Water • Rations • Charge • Salvage • Meds)"]
+        RES["Resources\n(Food • Clean Water • Medicine\n• Materials • Charge)"]
         CRAFT["Crafting\n(Fitters' Shop queue)"]
         STORM["Cinderfall storms\n& heat load"]
     end
 
     subgraph HUMAN["Human network — the people ledger"]
-        SURV["Survivors\n(needs: Hunger/Fatigue/Condition/Strain\naptitudes: Fitter/Medic/Runner/Steward)"]
+        SURV["Survivors\n(needs: Health/Hunger/Fatigue/Stress\naptitudes: Fitter/Medic/Runner/Steward)"]
         REL["Bonds • Grudges • Values • Marks"]
         ACC["Accord\n(community trust)"]
     end

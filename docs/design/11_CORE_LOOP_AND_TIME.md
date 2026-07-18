@@ -2,7 +2,7 @@
 
 **Stage:** Prompt 2 — playable rhythm lock.
 **Status:** LOCKED at structural level; numeric values are tuning baselines validated by the feasibility model (15, `tools/simulate_vertical_slice.py`), not final balance.
-**Reading order:** this document owns the loop hierarchy, time rules, resource cadence, the work-order model, and resident behavior. 12 owns the phase-by-phase and session flow. 13 owns the first session. 14/15 own the seven-day plan and its evidence.
+**Reading order:** this document owns the loop hierarchy, time rules, resource cadence, the work-order model, and resident behavior. 12 owns the phase-by-phase and session flow. 13 owns the first session. 14/15 own the seven-day plan and its evidence. **Prompt-3 layer (D-043):** stock specifications in 16, needs/medical in 17, utilities/forecasts in 18, weather/incidents/HIGHBALL in 19, survival-model evidence in 20 — §4 below uses the canon names.
 
 ---
 
@@ -81,29 +81,31 @@ Routine completions never modal-interrupt. **If an auto-pause-tier event fires w
 
 Three categories, three change-rhythms — no hidden formulas:
 
-### 4.1 Stock resources (the 5-item HUD: Water · Rations · Meds · Salvage · Charge*)
-*Charge is a stored buffer (flywheel + cells) fed and drained by the flow layer — it is the one stock with continuous flow coupling.*
+### 4.1 Stock resources (the 5-item HUD: Food · Clean Water · Medicine · Materials · Charge*)
+*Canon plain names per 16 §1 (D-043); residents say "rations," "meds," "salvage" as fiction flavor — the HUD does not. Charge is a stored buffer (flywheel + cells) fed and drained by the flow layer — it is the one stock with continuous flow coupling, and it fills the classic "Fuel" role (16 §1).*
 
 | Stock | Consumed | Produced |
 |---|---|---|
-| Rations | At the two visible meal moments (morning, evening) | Cooking work; nightruns; trade |
-| Water | At meals + a daily works draw (visible line items) | Water duty (tank) or Cistern Works cycle |
-| Meds | When a treatment begins (committed at triage) | Nightruns, trade, later production |
-| Salvage | **Reserved when a project is confirmed, consumed in visible stages** | Clearing/draining yields, nightruns, trade |
+| Food | At the two visible meal moments (morning, evening) | Cooking work; nightruns; trade |
+| Clean Water | At meals + a daily works draw (visible line items) | Water duty (tank) or Cistern Works cycle |
+| Medicine | When a treatment begins (committed at triage) | Nightruns, trade, later production |
+| Materials | **Reserved when a project is confirmed, consumed in visible stages** | Clearing/draining yields, nightruns, trade |
 | Charge | Continuous drain by powered loads (visible on the board) | Flywheel duty cycles, flywheel cells |
 
-**HUD forecast contract (each stock, one tap):** *steady stocks* (Water, Rations, Charge): current amount · net trend arrow · "≈ N days to shortage at current use" · top consumer · top idle/underperforming producer. *Lumpy stocks* (Meds, Salvage — consumed in commitments, not rates): **free vs. reserved** shown on the HUD chip itself ("8 (2 free)"), the list of known upcoming draws (booked treatments, confirmed project stages, queued crafts), and the earliest committed draw that would fail. Shortage diagnosis is a read, never a hunt — including "can I afford to start this project right now?" (07 §3 tests it).
+**HUD forecast contract (each stock, one tap):** *steady stocks* (Clean Water, Food, Charge): current amount · net trend arrow · "≈ N days to shortage at current use" · top consumer · top idle/underperforming producer. *Lumpy stocks* (Medicine, Materials — consumed in commitments, not rates): **free vs. reserved** shown on the HUD chip itself ("8 (2 free)"), the list of known upcoming draws (booked treatments, confirmed project stages, queued crafts), and the earliest committed draw that would fail. Shortage diagnosis is a read, never a hunt — including "can I afford to start this project right now?" (07 §3 tests it). Full stock specifications, shortage stages, and emergency substitutions: **16**.
 
 ### 4.2 Flow / capacity systems (never collectible currencies)
-Electricity, ventilation, heat, water pressure, sanitation, structural support = **production vs. demand vs. capacity vs. priority** on the trunk/node network (10 §8). They update continuously while simulation runs, hold state while paused, and telegraph before failing (Pillar 1). The load-priority board (≤8 load-class rows) is the standing control; per-room shutoffs live on room panels.
+**Power, Air, Water-network, Structure** — the four slice families (D-043, 18) — = **production vs. demand vs. capacity vs. priority** on the trunk/node network (10 §8); heat is a load/modifier and sanitation derives from water + cleaning + crowding (16 §1). They update continuously while simulation runs, hold state while paused, and telegraph before failing (Pillar 1) using the five forecast confidence classes (18 §8). The load-priority board (≤8 load-class rows) is the standing control; per-room shutoffs live on room panels.
 
 ### 4.3 Human conditions
+*(Canon need names per 17 §1, D-043: Health · Hunger · Fatigue · Stress. "Condition" and "Strain" in earlier text refer to Health and Stress.)*
+
 | Condition | Changes |
 |---|---|
 | Hunger | At meal moments (steps, not per-second decay) |
 | Fatigue | Accrues through work blocks; recovers only in simulated rest |
-| Condition (health) | At events, treatment starts/completions, and rest cycles |
-| Strain | At events, refusals, scene beats, and nightly rest quality; vents visibly first |
+| Health | At events, treatment starts/completions, and rest cycles |
+| Stress | At events, refusals, scene beats, and nightly rest quality; vents visibly first |
 | Trust/Accord | At witnessed decisions and scene beats — never silent background drift |
 
 ## 5. The shared work-order model (one system for all labor)
@@ -149,7 +151,7 @@ The runner's absence is real: no construction, repair, guarding, treatment, prod
 
 ## 9. Failure and recovery (process, never surprise)
 
-Failure axes: physical collapse · community fracture · unsustainable population loss · essential-utility loss · legitimacy loss · no viable ending. Every axis walks the same six-step ladder: **Forecast → Warning → Visible deterioration → Emergency options → Serious consequence → Failure only if still unresolved.** Emergency options always include several of: rationing, shutting down rooms (load board), total labor reassignment (Emergency tier), running damaged equipment, burning stored materials, faction help at a price, abandoning a section (bulkheads), evacuating a room, repurposing, cancelling an expedition, accepting a social cost. One bad building decision can never end a campaign (10 §9's two-sided recovery guarantees); the model's mistake scenarios prove the slice absorbs a major error and still lands (15).
+Failure axes: physical collapse · community fracture · unsustainable population loss · essential-utility loss · legitimacy loss · no viable ending. Every axis walks the same six-step ladder: **Forecast → Warning → Visible deterioration → Emergency options → Serious consequence → Failure only if still unresolved.** Emergency options always include several of: rationing, shutting down rooms (load board), total labor reassignment (Emergency tier), running damaged equipment, burning stored materials, faction help at a price, abandoning a section (bulkheads), evacuating a room, repurposing, cancelling an expedition, accepting a social cost — the full fifteen-action vocabulary with per-action cost cards is 19 §4, and the one sanctioned overdrive is the **HIGHBALL ORDER** (one per day, priced in a named resident's fatigue + a promise-of-rest debt + labeled breakdown risk; never mandatory — 19 §5). One bad building decision can never end a campaign (10 §9's two-sided recovery guarantees); the model's mistake scenarios prove the slice absorbs a major error and still lands (15).
 
 ## 10. A complete player day (delegated, mid-slice, ~11 minutes)
 

@@ -65,9 +65,14 @@ JUNA_BUFFER_WU = 4.0        # uncounted Day-7 buffer if her berth landed by Day 
 RESIDENTS = ("Imka", "Ash", "Teo", "Maren")
 DAY1_ORDERABLE = {"gate_repair", "purifier", "survey_east", "survey_west",
                   "survey_lift", "flywheel_stab"}
-RUN_NIGHTS = {2: ("Depot 9 (wire + tools)", ("wire", "tools"), 7),
-              3: ("Marrow Street Clinic (meds)", (), 0),
-              5: ("Fenwick Arcade (food/water/salvage)", (), 5)}
+# Canonical run names — survival_model.py matches against these constants,
+# so a rename here cannot silently break the survival layer's income hooks.
+RUN_DEPOT = "Depot 9 (wire + tools)"
+RUN_CLINIC = "Marrow Street Clinic (meds)"
+RUN_ARCADE = "Fenwick Arcade (food/water/salvage)"
+RUN_NIGHTS = {2: (RUN_DEPOT, ("wire", "tools"), 7),
+              3: (RUN_CLINIC, (), 0),
+              5: (RUN_ARCADE, (), 5)}
 
 
 @dataclass

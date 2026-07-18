@@ -1,5 +1,5 @@
 {
-  "_comment": "SIGNAL 45 slice incident families (six, D-043). Full schema fields per 19; values PROVISIONAL. The scheduler caps stand: 1 major immediate crisis, <=2 minor warnings, queueing for the rest.",
+  "_comment": "SIGNAL 45 slice incident families (six, D-043). Slice subset of the 19 §3 schema — carries family/trigger/warning/severity/pause_tier/escalation_phases/cascade/responses/aftermath; the full schema's remaining fields (cause, location, affected rooms/residents, works generated, materials/equipment, interactions, recovery, delayed consequences, completion/failure, save behavior, test scenario) are the incident-implementation stage's named deliverable (D-045). Values PROVISIONAL. The scheduler caps stand: 1 major immediate crisis, <=2 minor warnings, queueing for the rest.",
   "families": {
     "flywheel_instability": {
       "family": "power", "trigger": "load spike or bearing wear (event 1 chain)",
@@ -43,6 +43,9 @@
       "severity": "major", "pause_tier": "banner_then_modal_at_meal",
       "escalation_phases": 2, "cascade": ["water_unsafe", "illness_risk"],
       "responses": ["boil order (+2 charge/day, 2 days)", "purifier flush (1 materials + 2 WU)", "switch source (west: cistern; east: arcade bottled run)", "ration water"],
+      "boil_order_charge_per_day": 2,
+      "boil_order_days": 2,
+      "flush_water_loss_person_days": 1.0,
       "aftermath_physical": "flushed system; 1 water person-day lost",
       "aftermath_human": "ill resident if ignored (illness course, 2 medicine); trust hit if the warning was dismissed"
     },
@@ -58,17 +61,18 @@
   },
   "slice_conditions": ["minor_injury", "serious_injury", "respiratory_exposure", "exhaustion", "waterborne_illness"],
   "condition_rules": {
-    "minor_injury": {"cause": "run scrapes, work accidents", "restriction": "hazardous work barred 1 day", "treatment": "dressing (0-1 medicine), bench ok", "recovery_days": 1},
-    "serious_injury": {"cause": "escalated accident, unprepped storm, ignored minor", "restriction": "no work; bed + carer", "treatment": "1-2 medicine + treatment days", "recovery_days": 3, "lasting": "possible stiff-limb Mark if untreated 2+ days"},
-    "respiratory_exposure": {"cause": "unprotected time in degraded-air section", "restriction": "no heavy work 1-2 days", "treatment": "clean air + rest; 1 medicine if severe", "recovery_days": 2},
-    "exhaustion": {"cause": "critical fatigue pushed further (overtime, HIGHBALL)", "restriction": "must rest next shift; refuses hazardous work", "treatment": "sleep; ember tea", "recovery_days": 1},
-    "waterborne_illness": {"cause": "ignored contamination", "restriction": "half capacity, no cooking duty", "treatment": "2 medicine course + rest", "recovery_days": 2, "lasting": "none in slice"}
+    "minor_injury": {"cause": "run scrapes, work accidents", "restriction": "hazardous work barred 1 day", "treatment": "dressing (0-1 medicine), bench ok", "recovery_days": 1, "health_hit": 6},
+    "serious_injury": {"cause": "escalated accident, unprepped storm, ignored minor", "restriction": "no work; bed + carer", "treatment": "1-2 medicine + treatment days", "recovery_days": 3, "health_hit": 15, "lasting": "possible stiff-limb Mark if untreated 2+ days"},
+    "respiratory_exposure": {"cause": "unprotected time in degraded-air section", "restriction": "no heavy work 1-2 days", "treatment": "clean air + rest; 1 medicine if severe", "recovery_days": 2, "health_hit": 8},
+    "exhaustion": {"cause": "critical fatigue pushed further (overtime, HIGHBALL)", "restriction": "must rest next shift; refuses hazardous work", "treatment": "sleep; ember tea", "recovery_days": 1, "health_hit": 0},
+    "waterborne_illness": {"cause": "ignored contamination", "restriction": "half capacity, no cooking duty", "treatment": "2 medicine course + rest", "recovery_days": 2, "health_hit": 12, "lasting": "none in slice"}
   },
   "highball": {
     "_comment": "The Redline system, named railway-native: HIGHBALL ORDER (the old all-clear/full-speed signal). One per day; usable <20s; no premium anything.",
     "effect": "one works order gains +50% progress this phase OR one utility runs past rated capacity for one phase",
-    "costs": {"named_resident_overtime_fatigue": 14, "promise_of_rest_debt": true, "breakdown_risk_pct": 15, "breakdown_cost_materials": 1, "breakdown_cost_repair_wu": 2},
-    "anti_spam": "second use same day: unavailable; consecutive-day use of the same resident: refusal + stress; 3+ uses/week: breakdown risk doubles (worn machinery persists)",
+    "effect_model_status": "the +50% labor benefit is NOT modeled in the slice simulation (the labor week is precomputed); the modeled benefit is the cascade bridge; net profitability vs the labor benefit is a first-playable revalidation gate (D-045)",
+    "costs": {"named_resident_overtime_fatigue": 14, "promise_of_rest_debt": true, "rest_debt_recovery_dock": 15, "breakdown_risk_pct": 15, "breakdown_cost_materials": 1, "breakdown_cost_repair_wu": 2},
+    "anti_spam": "second use same day: unavailable; consecutive-day use of the same resident: refusal + stress; critical-fatigue or exhausted resident: refusal (hazard bar); 3+ uses/week: breakdown risk doubles (worn machinery persists)",
     "not_required_rule": "no competent-path milestone may depend on it (asserted in tests)"
   }
 }

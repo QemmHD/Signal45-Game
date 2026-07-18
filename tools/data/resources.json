@@ -1,5 +1,5 @@
 {
-  "_comment": "SIGNAL 45 canonical stock-resource values (vertical slice). PROVISIONAL until first-playable measurement (D-043). Single source of truth: docs cite this file; survival_model.py loads it.",
+  "_comment": "SIGNAL 45 canonical stock-resource and needs values (vertical slice). PROVISIONAL until first-playable measurement (D-043). Single source of truth for stock/needs numbers: docs cite this file; survival_model.py loads it (utility numbers: utilities.json; incident/condition/HIGHBALL numbers: incidents.json). Keys under 'model_unconsumed' annotations are architecture-only and consumed by no slice code (D-045).",
   "stocks": {
     "food": {
       "name": "Food",
@@ -10,6 +10,7 @@
       "cap_with_cold_store": 90,
       "meals_per_resident_per_day": 2,
       "ration_meals_per_day_saving": 2,
+      "warn_meals_factor": 1.5,
       "sources": {
         "arcade_run": 16,
         "sable_trade": 10,
@@ -17,7 +18,8 @@
       },
       "spoilage": {
         "rule": "forecast-only in slice: perishables from runs must be eaten within 2 days or convert to 50% stable rations; no silent loss",
-        "slice_active": true
+        "slice_active": false,
+        "_note": "architecture defined, not modeled in the slice simulation (D-045); slice_active flips at first playable"
       }
     },
     "clean_water": {
@@ -28,16 +30,21 @@
       "cap_with_cistern": 44,
       "use_per_resident_per_day": 1.0,
       "works_draw_big_build_day": 1.0,
+      "works_draw_trigger_wu": 15,
       "ration_saving_per_day": 1.5,
+      "ration_trigger_stock": 4,
+      "valve_mistake_loss": 12,
+      "warn_days_left": 2.0,
       "sources": {
         "water_duty_tank_per_day": 4.0,
         "purifier_bonus_per_day": 1.0,
         "cistern_online_per_day": 8.0,
-        "arcade_run": 6
+        "arcade_run": 6,
+        "hoard_extra_tank_duty_per_day": 2.0
       },
       "contamination": {
         "incident": "water_contamination",
-        "effect": "tank flagged: boil order (+2 charge/day) or medicine risk; supply link named in warning"
+        "effect": "tank flagged: boil order or medicine risk; supply link named in warning (numbers: incidents.json water_contamination)"
       }
     },
     "medicine": {
@@ -46,6 +53,7 @@
       "unit": "doses",
       "start": 4,
       "storage_cap": 12,
+      "warn_free_doses": 2,
       "sources": {
         "clinic_aid_or_barter": 4,
         "clinic_take": 6,
@@ -64,14 +72,16 @@
       "unit": "salvage units",
       "start": 12,
       "storage_cap": 40,
-      "note": "labor model (simulate_vertical_slice.py) owns the authoritative materials ledger; survival model mirrors it",
-      "reservation": "reserved at project confirmation; consumed at completed stages; unconsumed reserve refunds 100%; deconstruction recovers 50% of consumed materials, once per installed component (no loops)"
+      "note": "the labor model (simulate_vertical_slice.py START_SALVAGE) owns the authoritative materials ledger and constant; test_survival_model.py asserts the two 12s agree so they cannot silently diverge",
+      "reservation": "reserved at project confirmation; consumed at completed stages; unconsumed reserve refunds 100%; deconstruction recovers 50% of consumed materials, once per installed component (no loops)",
+      "reservation_model_status": "design rule — stated here, enforced by the reservation system at first playable; the slice simulation does not model cancel/deconstruct arithmetic (D-045)"
     },
     "charge": {
       "name": "Charge",
       "unit": "cell-hours",
       "start": 10,
       "storage_cap": 24,
+      "bank_rate_max_per_day": 4,
       "note": "the Fuel role of the canonical set (D-043): stored energy powering defined equipment; the Flywheel is the producer, the load board names every consumer",
       "battery_reserve_bridge_phases": 1
     }
@@ -94,7 +104,6 @@
       "radio_components"
     ],
     "slice_tracked_distinctly": [
-      "filters",
       "tools",
       "radio_components"
     ],
@@ -103,6 +112,17 @@
       "mechanical_parts",
       "textiles"
     ],
+    "slice_deferred": [
+      "filters",
+      "electronics",
+      "chemicals",
+      "cells",
+      "protective_gear",
+      "food_ingredients",
+      "medical_items",
+      "personal_valuables"
+    ],
+    "slice_deferred_note": "deferred families exist as fiction and loadout flags in the slice (masks/protective gear resolve as run-provisioning flags, not stock); filters gate the full game's replacement orders — the slice's air incidents cost Materials + WU and say so (D-045)",
     "project_block_rule": "a blocked project names the missing family, never just 'not enough Materials'"
   },
   "condition_states": [
@@ -110,8 +130,15 @@
     "worn",
     "broken"
   ],
+  "condition_states_note": "equipment condition vocabulary; filters additionally use 'clogged' as their worn-state name (18 §3)",
   "needs": {
     "scale": "0-100; hunger/fatigue/stress higher is worse; health higher is better",
+    "start": {
+      "hunger": 20,
+      "fatigue": 25,
+      "stress": 25,
+      "health": 90
+    },
     "safe": 40,
     "strained": 70,
     "work_efficiency": {
@@ -125,12 +152,23 @@
     "hunger_step_missed_meal": 18,
     "hunger_recovery_meal": 25,
     "fatigue_work_day": 22,
-    "fatigue_overtime": 14,
+    "fatigue_day_baseline_wu": 7.5,
     "fatigue_recovery_sleep": 30,
     "fatigue_recovery_rough_sleep": 20,
-    "stress_event_hit": 12,
+    "fatigue_recovery_sleeper_bonus": 5,
     "stress_rough_sleep": 6,
     "stress_recovery_good_day": 8,
+    "stress_costs": {
+      "water_rationing": 3,
+      "food_rationing": 3,
+      "dry_taps": 6,
+      "short_meals": 4,
+      "brown_out": 2,
+      "turn_away": 6,
+      "turn_away_ash_extra": 8,
+      "highball_consecutive_refusal": 10
+    },
+    "health_warn_threshold": 55,
     "health_untreated_serious_per_day": -10,
     "health_treatment_per_day": 12,
     "death_rule": "slice: no death; critical health auto-pauses and forces the emergency card; full game: death requires an existing serious condition + warning + response window + a deliberate high-risk choice"

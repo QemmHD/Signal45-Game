@@ -10,7 +10,7 @@ Trunks run through real cable galleries; each **section** has a service node; ea
 
 ## 2. Power
 
-Generation (Flywheel: partial → stabilized) vs. demand (named loads) with **four priority tiers: Critical (scrubbers) · Essential (lights, radio, pumps) · Normal (hotplate, tools) · Optional** — set per load-class on the ≤8-row board, never per appliance. Overload sheds lowest tier first **with a banner**; the battery bridges Critical one phase after producer failure. HUD/board answers: current load, headroom, top consumer, "what turns off next."
+Generation (Flywheel: partial → stabilized) vs. demand (named loads) with **four priority tiers: Critical (scrubbers) · Essential (lights, radio, pumps) · Normal (hotplate, tools) · Optional** — set per load-class on the ≤8-row board, never per appliance. *The slice ships no Optional-tier loads; the lowest occupied tier is Normal (D-045).* Overload sheds the lowest occupied tier first, **load by load, with a banner naming what went dark** — demand actually falls; only a residual deficit draws the cell rack (modeled and asserted). The battery bridges Critical one phase after producer failure, at a real cost (charge spent, the Normal tier dark while bridging). HUD/board answers: current load, headroom, top consumer, "what turns off next."
 
 ## 3. Air
 
@@ -26,11 +26,11 @@ Filtration capacity (Scrubber Gate states: damaged/repaired/+module) vs. occupan
 
 ## 6. Cross-system effects (bounded)
 
-The five canon couplings from config: power→scrubbers (battery-bridged) · flood→west node · structure→node access · water→sanitation effectiveness · air overload→respiratory risk. Cascade depth caps at 3 (19 §3); every link is one of these five, so chains are always readable from known parts.
+The **seven** canon couplings from config (D-045 — the storm chain's two links joined the list rather than living outside it): power→scrubbers (battery-bridged) · **air demand→power** (storm intake clog spikes scrubber draw) · **power→water pumping** (loss past the essential tier stalls pumps) · flood→west node · structure→node access · water→sanitation effectiveness · air overload→respiratory risk. The cascade bound caps **systems touched** at 3 (19 §3 — the four-link storm chain touches three systems: air, power, water); every link is one of these seven, so chains are always readable from known parts.
 
 ## 7. Overlays and diagnosis (mobile readability)
 
-Four overlays — Power / Air / Water / Structure — **one active at a time**, riding the existing engineer's-overlay surface (09 B.7; the build lens force-enables capacity as before). Each shows: source, connected areas, capacity vs. demand, current warning, unconnected/restricted rooms, **likely time-to-failure, and the single most useful response** (the "do this next" line). A selected room answers: requires / receives / why impaired / what restores it / what happens if ignored — plain language first (**"AIR FILTRATION — SCRUBBER GATE"**, never raw telemetry); numbers behind the optional inspect layer. The two-tap diagnosis rule applies to utilities as to stocks.
+Four overlays — Power / Air / Water / Structure — **one active at a time**, riding the existing engineer's-overlay surface (09 B.7). Three rules keep this honest against the chrome budget and the accessibility contract (D-045): **(a)** the persistent toggle (09 A.9's one engineer's-overlay control — unchanged) opens the overlay **pre-selected to the worst-warning-state family**, with an in-overlay four-family selector (contextual UI, not new chrome); this also defines R-16's "overlay default-on" fallback rung. **(b)** Warning-state badges for *all* families stay anchored at overview whatever overlay is open — the shape-coded redundant channel (07 §19) never depends on picking the right family. **(c)** The build lens force-enables the **cross-family node-capacity summary** (per-node capacity vs. demand for every family), riding whichever overlay is active. Each overlay shows: source, connected areas, capacity vs. demand, current warning, unconnected/restricted rooms, **likely time-to-failure, and the single most useful response** (the "do this next" line). A selected room answers: requires / receives / why impaired / what restores it / what happens if ignored — plain language first (**"AIR FILTRATION — SCRUBBER GATE"**, never raw telemetry); numbers behind the optional inspect layer. The two-tap diagnosis rule applies to utilities as to stocks.
 
 ## 8. The forecast framework (one system for everything)
 

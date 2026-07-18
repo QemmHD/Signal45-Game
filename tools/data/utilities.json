@@ -6,8 +6,10 @@
     "loads": {"scrubbers": 12, "lights": 6, "pump_rig_west": 8, "hotplate": 4, "radio": 2, "tools": 2, "cistern_pumps": 4},
     "priority_tiers": ["critical", "essential", "normal", "optional"],
     "tier_of": {"scrubbers": "critical", "lights": "essential", "radio": "essential", "pump_rig_west": "essential", "cistern_pumps": "essential", "hotplate": "normal", "tools": "normal"},
-    "battery": {"capacity": 10, "bridge": "keeps critical tier alive 1 phase after producer failure"},
-    "overload": {"threshold_headroom": 0, "effect": "sheds optional tier first, then normal, with banner; never silently"}
+    "tier_note": "the slice ships no optional-tier loads; the lowest occupied tier is Normal (hotplate/tools) — shedding walks tiers lowest-first (D-045)",
+    "battery": {"capacity": 10, "bridge": "keeps critical tier alive 1 phase after producer failure", "bridge_cost_charge": 5, "bridge_note": "5 cell-hours ≈ one phase of critical+essential load (20/day ÷ 4 phases); the full battery covers ~3 phases at critical-only draw", "bridge_side_effect": "normal tier shed while bridging (cold meal that evening)"},
+    "overload": {"threshold_headroom": 0, "warn_headroom": 4, "effect": "sheds the lowest occupied tier first (Normal in the slice), load by load, with banner; residual deficit draws the battery/cell rack; never silently"},
+    "storm_intake_clog_draw": 4
   },
   "air": {
     "producer": "scrubber_gate", "unit": "occupant-capacity",
@@ -29,15 +31,19 @@
   },
   "cross_effects": [
     "power loss stops scrubbers (battery bridges critical 1 phase)",
+    "storm intake clog spikes scrubber draw, consuming power headroom (air demand -> power)",
+    "power loss past the essential tier stalls pumps (power -> water pumping)",
     "flooding (unpumped west) threatens the west trunk node if drained-then-neglected",
     "unstable structure blocks access to the section's utility node",
     "water shortage halves cleaning effectiveness (sanitation derives from water + cleaning + crowding in the slice)",
     "overloaded air raises respiratory risk for occupants of the affected section"
   ],
   "overlays": {
-    "rule": "one overlay active at a time: Power / Air / Water / Structure; each shows source, connected areas, capacity vs demand, warning, unconnected rooms, time-to-failure, and the most useful response; room panel answers requires/receives/why-impaired/what-restores/what-if-ignored in plain language first",
+    "rule": "one overlay active at a time: Power / Air / Water / Structure; the persistent engineer's-overlay toggle opens pre-selected to the worst-warning-state family, with an in-overlay four-family selector (contextual UI — the 09 A.9 persistent-chrome list is unchanged); each overlay shows source, connected areas, capacity vs demand, warning, unconnected rooms, time-to-failure, and the most useful response; room panel answers requires/receives/why-impaired/what-restores/what-if-ignored in plain language first",
+    "badge_rule": "warning-state badges for ALL families stay anchored at overview regardless of which overlay (if any) is open — the redundant shape-coded channel never depends on correct family selection (07 §19)",
+    "build_lens_rule": "the build lens force-enables the cross-family node-capacity summary (per-node capacity vs demand for every family), riding whichever overlay is active",
     "plain_language_rule": "AIR FILTRATION - SCRUBBER GATE, never raw telemetry; advanced numbers behind an optional inspect layer"
   },
   "forecast_classes": ["fact", "projection", "estimate", "radio_intel", "unknown"],
-  "cascade_bounds": {"normal_systems": 1, "escalated": 2, "severe_ignored": 3, "hard_max": 3}
+  "cascade_bounds": {"normal_systems": 1, "escalated": 2, "severe_ignored": 3, "hard_max": 3, "bound_note": "the bound counts SYSTEMS TOUCHED, not chain links — the four-link storm chain touches 3 systems (air, power, water)"}
 }

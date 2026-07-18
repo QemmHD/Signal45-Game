@@ -36,7 +36,7 @@
 - **Primary goal:** commit the route; push the breakthrough hard (E: clear rubble 12 WU · W: drain via transfer-pump rig 12 WU — the full 12-WU/day project cap; the whole household digs).
 - **Secondary goal:** install the Level-1 seal — **and choose its bulkhead** (Camp core vs. the new wing: the storm-isolation decision).
 - **Construction milestone:** **breakthrough DONE by nightfall** (model: Day 2, both routes, at the daily cap); seal DONE Day 2 (E) / Day 3 (W — the drain eats Day 2's cap).
-- **Utility problem:** the pump rig (W) draws Charge visibly — first load-board pinch, and the hotplate is the shed load (cold meals while the drain runs, roughly Days 2–4: west's priced discomfort, visible as banners — 20 §2); E: none yet (trunk comes Day 3–4).
+- **Utility problem:** the pump rig (W) draws Charge visibly — first load-board pinch, and the hotplate is the shed load (cold meals through the drain week, Days 2–5, one banner per shed — 20 §2; the board sheds the lowest occupied tier load by load, it never silently drains the rack); E: none yet (trunk comes Day 3–4; east's pinch is Day 3).
 - **Resident beat:** the route scene itself (construction posting to the human ledger); Maren discovers the ration skim (event 6 arms).
 - **Listening Post:** full board opens (5 live signals, N2): storm band W2 forming · T1 last night · V1 · D1 Foundry distress · P1 Teo's band. Storm-vs-people tension begins.
 - **Nightrun:** **Depot 9** (wire + tools + 7 salvage) — the week's keystone run; delegated or active.
@@ -55,7 +55,7 @@
 - **Primary goal:** E: **Sleeper Car DONE**; W: **Cistern Works DONE** (+ the west seal lands today). Storm-prep works order (pre-stage covers).
 - **Secondary goal:** reinforcement underway; tomorrow's trunk staged.
 - **Construction milestone:** first new functional room complete (model: Day 3, both routes); storm prep DONE.
-- **Utility problem:** trunk not yet landed — the new room runs on lanterns/manual until Day 4 (visible degraded-operation state).
+- **Utility problem:** trunk not yet landed — the new room runs on lanterns/manual until Day 4 (visible degraded-operation state). **E: the Day-3 charge pinch (D-045):** the new room's lantern draw plus the evening's tool work squeezes headroom for one evening — east's first live load-board lesson (13 §2's "first capacity pinch" teaching moment), deliberately *before* the storm asks for the board in anger. (W learned the board on Day 2's pump rig.)
 - **Resident beat:** triage at the bench (Ash's +1 WU penalty — the Aid Car doesn't exist yet on either route); ration-skim discovery (Maren; the arbitration event arms); **and the week's relationship conflict comes to a head: Teo's petition vs. Imka's forecast demand — the radio-time arbitration is TONIGHT'S slot decision** (grant P1 / hold the storm band / broker the compromise). Its outcome exists before the Day 4–5 storm-repair pairing, so the grudge's documented payoff window (07 §7) is live.
 - **Listening Post (N3, the crowded night):** up to 8 live: W2 final warning · V1 · V2 Magpie · T2 manifest · D1 last night · D2 Marrow Street (weak) · P1. Two slots. What you forfeit tonight shapes Days 5–6.
 - **Nightrun:** **Marrow Street Clinic** (meds) — answered-call or cold-discovery framing per D2; aid/barter/take/leave.
@@ -80,7 +80,7 @@
 - **Nightrun:** none (sealed).
 - **Carried consequence:** seal-bulkhead choice pays or bites; unprepped storms cost double.
 - **Hope beat:** the trunk lands — new-wing lights through the storm dust (floor beat: storm's-end light return queues for Day 5).
-- **Safe stops:** post-cascade-response, post-board; storm day is deliberately the shortest decision day.
+- **Safe stops:** post-cascade-response, post-board; the storm day is deliberately the shortest day in minutes — and the densest in decisions (12 in ≈11 min); the Day-4 load audit (20 §4) classifies its first-time surfaces and confirms the load holds *because* the board was taught on Day 2–3.
 - **Time:** ≈ 11.0 min (12 decisions, no night). **Available WU:** 12.7 E / 10.9 W. **Planned WU:** all of it.
 - **Materials:** trunk 3 (reserved earlier).
 - **Failure recovery:** the R-11 valve is armed (Sable arrives Day 5 with what's scarcest, once, never erasing a deficit); abandoning the unprotected side behind its bulkhead is the emergency option.
@@ -151,7 +151,7 @@
 | | EAST — "Beds first" | WEST — "Water first" |
 |---|---|---|
 | Early gain | Sleeper Car D3 (real rest), Canteen D5, Aid Car D6 (real triage) | Cistern D3, Pump Room D5 (water duty 3→1 WU/day), cheap storm recovery |
-| All-week cost | Tank-water drudgery every day (3 WU/day) | Rough sleeping (Stress), bench triage penalty, cold meals during the drain (Days 2–4) |
+| All-week cost | Tank-water drudgery every day (3 WU/day) | Rough sleeping (Stress), bench triage penalty, cold meals through the drain week (Days 2–5) |
 | Storm | Rides on comfort (the rest bonus is real: +0.75 WU/day) | Rides on infrastructure; the +3 WU recovery refund funds the Day-5 wave |
 | All-week price | Tank water 3 WU/day until the end | Rough sleep −1 WU/day and bench triage until the bunks land |
 | Juna's berth | Sleeper Car berth (D5) | West-bay bunks (D5) |

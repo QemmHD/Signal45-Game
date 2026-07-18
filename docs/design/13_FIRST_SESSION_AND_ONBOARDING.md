@@ -11,7 +11,7 @@
 
 **0:30 — Notice and inspect (teach: tap = inspect; pause chip).** The Scrubber Gate's chalk plate pulses (the one live badge). Tapping opens its panel: *"Intake damaged — Air margin 2 days. Repairable."* The pause chip is pointed out once: the world waits while you read.
 
-**0:50 — First meaningful decision (≤ 60 s ✓).** The panel offers the repair works order — cost quoted in plain language (**2 salvage, about half a shift's work** — WU is design vocabulary and never appears on screen, D-042), two staffing options (Imka alone / Imka + Teo faster). One tap to choose, one to confirm.
+**0:50 — First meaningful decision (≤ 60 s ✓).** The panel offers the repair works order — cost quoted in plain language (**2 materials, about half a shift's work** — WU is design vocabulary and never appears on screen, D-042), two staffing options (Imka alone / Imka + Teo faster). One tap to choose, one to confirm.
 
 **1:20 — First assignment (≤ 90 s ✓).** Confirmation bark ("On it."); Imka walks to the Gate, toolbag visible. The works queue chip appears — one entry, progress ring.
 
@@ -23,7 +23,7 @@
 
 **4:30 — First completed improvement (4–6 min ✓).** The Scrubber Gate repair completes: fans audibly spin up, the Air warning clears, lights steady — a small **light-return moment**. Imka's bark acknowledges it. *"The station breathes."*
 
-**5:00 — First human reaction.** Teo, passing: *"Didn't think it'd sound like that again."* (+small Strain relief, shown as a gentle chip — the human ledger introduced by feeling, not lecture.)
+**5:00 — First human reaction.** Teo, passing: *"Didn't think it'd sound like that again."* (+small Stress relief, shown as a gentle chip — the human ledger introduced by feeling, not lecture.)
 
 **5:30 — Survey one blocked direction (teach: RECLAIM workflow).** The player is invited to survey *either* the east rubble or the west flood (the other stays available tomorrow — Day 1 does not force the route choice). The survey report teaches the one-screen section format: contents, hazards, requirements, and its story hook (the shuttered kiosk stall / the deliberate silt line).
 
@@ -46,9 +46,9 @@
 | Camp cot placement (layout → people) | Railcar-role and seal-bulkhead decisions: with their wings |
 | — | Nightruns: Night 2 (Depot 9, provisioned in Day 2's Slack) |
 | — | Trade screen: Sable's arrival (Day 2–3) |
-| — | Crew-strip ledger deep pages: prompted on first Strain banner |
+| — | Crew-strip ledger deep pages: prompted on first Stress banner |
 
-Five stock resources are visible from the start but only Water and Air are *taught* Day 1; Salvage teaches itself at the first works confirmation, Rations at the first meal moment, Meds at the first triage.
+Five stock resources are visible from the start but only Water and Air are *taught* Day 1; Materials teaches itself at the first works confirmation, Food at the first meal moment, Medicine at the first triage (residents speak the aliases — *salvage*, *rations*, *meds* — the chips show the plain names, 16 §1).
 
 ## 3. Tutorial mechanics
 

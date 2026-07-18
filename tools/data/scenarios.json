@@ -1,19 +1,22 @@
 {
-  "_comment": "SIGNAL 45 survival-simulation scenario matrix (Prompt 3). Each scenario layers survival flags over a labor-model run (route + labor_scenario map to simulate_vertical_slice.py). Seed 45 unless stated.",
+  "_comment": "SIGNAL 45 survival-simulation scenario matrix (Prompt 3, amended by the D-045 red-team pass). Each scenario layers survival flags over a labor-model run (route + labor_scenario map to simulate_vertical_slice.py). Seed 45 unless stated. Notes: storm_prepped carries its distinguishing flag (the prepped path is also the competent default — the flag makes the pre-stage bookkeeping explicit); juna_admitted is the west competent week read through the admission lens (the arrival and demand rise are modeled in every west run with a berth — there is no separate admission flag by design).",
   "scenarios": {
     "east_competent":      {"route": "east", "labor": "competent"},
     "west_competent":      {"route": "west", "labor": "competent"},
     "east_resource_mistake": {"route": "east", "labor": "competent", "flags": ["food_overtrade_day2"]},
-    "west_resource_mistake": {"route": "west", "labor": "competent", "flags": ["water_ration_late"]},
+    "shortage_unrationed": {"route": "east", "labor": "competent", "flags": ["food_overtrade_day2", "no_rationing", "arcade_food_missed"]},
+    "west_resource_mistake": {"route": "west", "labor": "competent", "flags": ["water_valve_open_day3", "water_ration_late"]},
     "injury_absence":      {"route": "east", "labor": "absence"},
     "water_contamination": {"route": "east", "labor": "competent", "flags": ["contamination_day5"]},
+    "contamination_ignored": {"route": "east", "labor": "competent", "flags": ["contamination_day5", "contamination_ignored"]},
     "power_air_cascade":   {"route": "east", "labor": "competent", "flags": ["cascade_day3"]},
     "cascade_ignored":     {"route": "east", "labor": "competent", "flags": ["cascade_day3", "cascade_ignored"]},
-    "storm_prepped":       {"route": "east", "labor": "competent"},
+    "storm_prepped":       {"route": "east", "labor": "competent", "flags": ["storm_prep_staged"]},
     "storm_unprepped":     {"route": "east", "labor": "prep_last"},
+    "storm_unprepped_west": {"route": "west", "labor": "prep_last"},
     "highball_appropriate": {"route": "east", "labor": "competent", "flags": ["cascade_day3", "highball_rescue"]},
     "highball_overused":   {"route": "east", "labor": "competent", "flags": ["highball_spam"]},
-    "juna_admitted":       {"route": "west", "labor": "competent", "flags": ["juna_admit"]},
+    "juna_admitted":       {"route": "west", "labor": "competent"},
     "juna_no_berth":       {"route": "west", "labor": "absence", "absent": ["Imka", 3], "flags": ["juna_refused"]},
     "cancel_after_reserve": {"route": "east", "labor": "competent", "flags": ["cancel_canteen_day4"]},
     "production_room_offline": {"route": "west", "labor": "competent", "flags": ["pump_room_offline"]},
@@ -25,9 +28,9 @@
   "required_pass": [
     "east_competent", "west_competent", "east_resource_mistake", "west_resource_mistake",
     "injury_absence", "water_contamination", "power_air_cascade", "storm_prepped",
-    "storm_unprepped", "highball_appropriate", "juna_admitted", "juna_no_berth",
-    "cancel_after_reserve", "production_room_offline", "essentials_neglected",
-    "reduced_efficiency", "storage_cap_reached", "save_reload_incident"
+    "storm_unprepped", "storm_unprepped_west", "highball_appropriate", "juna_admitted",
+    "juna_no_berth", "cancel_after_reserve", "production_room_offline",
+    "essentials_neglected", "reduced_efficiency", "storage_cap_reached", "save_reload_incident"
   ],
-  "must_show_cost_not_fail": ["cascade_ignored", "highball_overused"]
+  "must_show_cost_not_fail": ["cascade_ignored", "highball_overused", "west_resource_mistake", "contamination_ignored", "shortage_unrationed"]
 }

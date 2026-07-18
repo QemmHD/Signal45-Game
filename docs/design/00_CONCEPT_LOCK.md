@@ -55,7 +55,7 @@ This is not story garnish; it drives ordinary play:
 - **Signal 45 verification is cumulative** — each act of the campaign, invested listening converts rumor into checkable fact, and the endings you can *knowingly* choose depend on what you actually verified.
 - **People petition for radio time** — granting or refusing a survivor's personal signal is a relationship decision with delayed consequences.
 
-Secondary hook, structural: **every major decision posts to two ledgers** — the physical network (power, water, air, heat, seals) and the human network (trust, bonds, grudges, Accord). The physical cost is shown up front; the human cost is discovered, often days later.
+Secondary hook, structural: **every major decision posts to two ledgers** — the physical network (power, air, water, structure — with heat as load and seals as isolation controls; 18) and the human network (trust, bonds, grudges, Accord). The physical cost is shown up front; the human cost is discovered, often days later.
 
 ## 10. Intended audience
 
@@ -82,7 +82,7 @@ Survive and hold the community together until the Signal 45 question is *answere
 
 Two mirrored collapse axes — the two networks failing:
 
-- **The station fails (physical):** cascading utility collapse (air, water, or heat integrity) forces surface exodus during swelter. Telegraphed across multiple days of warnings; never a single unlucky roll.
+- **The station fails (physical):** cascading utility collapse (air, water, or structural failure) forces surface exodus during swelter. Telegraphed across multiple days of warnings; never a single unlucky roll.
 - **The people fail (human):** Accord collapse — through betrayed values, unresolved grudges, starvation politics, or the player's coercion — fractures the community. The station may keep running, but as something the player was warned it could become: the **Toll Gate** state, where Kestrel Cross survives by preying on those who come to it. This is presented as a failure ending with an epilogue, not a game-over screen.
 - **Individual loss** (a death, a departure) is a wound, not a failure state — the campaign continues, changed.
 

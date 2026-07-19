@@ -185,7 +185,7 @@ Four improvised areas, cold darkness, visible rubble/flooding, exposed cables, s
 
 ### Stage 1 — Working refuge (end of slice)
 
-Eight to ten functional areas, one reclaimed wing, separated treatment or food/storage use, extended utilities, a repaired route, stronger task lighting, labeled stores, first permanent partitions, personal berths or water resilience, storm repairs, and evidence of a communal meal.
+Eight to ten functional areas, one reclaimed wing, separated treatment or food/storage use, extended utilities, a repaired route, the restored Platform Work Lamp, labeled stores, first permanent partitions, personal berths or Water resilience, storm repairs, and evidence of a communal meal.
 
 ### Stage 2 — Organized settlement (Act II)
 
@@ -208,4 +208,4 @@ Ending preparations dominate selected spaces: a secured platform and travel stag
 
 ## Prompt 3 survival/building amendment
 
-Room function now depends on section-level Power, Air, Water, and Structure state. Isolation suspends the affected room; evacuation removes resident work; temporary conversion creates treatment/rest/storage capacity only by displacing the original function. Temporary bypasses and inferior substitutions create explicit later repair. Prompt 4 must place utility nodes and safe routes without adding freehand wiring or hidden survival WU.
+Room function now depends on section-level Power, Air, Water, and Structure state. Isolation suspends the affected room; evacuation removes resident work; temporary conversion creates treatment/rest/storage capacity only by displacing the original function. Temporary bypasses and inferior substitutions create explicit later repair. Prompt 4 places utility nodes and safe routes without freehand wiring or hidden survival WU; documents 24–30 and `tools/spatial/` are now authoritative for that geometry.

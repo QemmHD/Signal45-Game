@@ -1,4 +1,4 @@
-# Signal 45 Prompt 3 — Generated Survival Scenario Summary
+# Signal 45 Prompt 4 - Generated Spatially Calibrated Feasibility Summary
 
 > Generated from canonical JSON. Values are provisional; this model does not prove fun, comprehension, or measured pacing.
 

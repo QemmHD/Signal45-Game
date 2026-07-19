@@ -85,3 +85,17 @@
 | D-048: One reusable incident schema; one major/two minor ceiling | bounded mobile pressure and production scope | bespoke incident minigames; uncontrolled stack | six families share stages and saves | family parameters provide enough variety | incidents feel identical or alerts overwhelm |
 | D-049: Highball uses deterministic strain and medical eligibility | timing value without roulette or forced labor | random breakdown; final 35% lock | three candidates remain unselected; repeated use can force recovery | costs are attributable | playable use is always optimal/ignored |
 | D-050: Prompt 4 must remeasure geometry against Day 5 zero slack | travel is still an allowance | silently raising capacity | geometry may force workload/scope correction | authored coordinates can supply stable measurements | either route exceeds allowances |
+
+## Prompt 4 decisions
+
+| Decision | Reason | Alternatives rejected | Consequence | Assumption | Revisit trigger |
+|---|---|---|---|---|---|
+| D-051: Integer section/level/x/lane is spatial authority | one address must serve placement, paths, utilities, incidents and saves | engine transforms; separate grids | rendering is derived; deterministic restore | bounded lanes support needed staging | engine graybox cannot map cleanly |
+| D-052: Physical areas are unique shells | triage/repurpose counters contradicted geometry | handwritten counts | utility connection and treatment room supply distinct increments | ten areas remain legible | graybox shows boundaries unclear |
+| D-053: One `platform_lighting` consumer | Prompt 3 names implied two loads | task + comfort consumers | same lamp sheds/restores/upgrades and anchors hope | one event teaches Power/Charge | tutorial comprehension fails |
+| D-054: Spatial mapping replaces abstract overhead | Day 5 cannot pay travel twice | additive coordinate tax | each work report names one source | proxy factors approximate staged work | measured time exceeds mapping |
+| D-055: Retain conservative West 10% selected travel | coordinate 8% omits damp-floor/congestion measurement | claiming measured gain | prior outcomes stay stable; coordinate fact remains 8% | graybox may reveal added burden | representative path timing exists |
+| D-056: Refuse trapping placement and portal closure | player freedom cannot create unrecoverable accidental state in slice | override warning | structured reasons and recovery suggestions | controlled isolation can wait | full-game emergency design needs it |
+| D-057: Seven reusable room families | area variety need not become system variety | utility-family split; unique prop systems | canonical/alternate layouts share systems | specializations read clearly | players cannot distinguish rooms |
+| D-058: Physical hope anchors reference state | hope cannot remain narration-only | free resource reward | lamp/water/berth/meal state survives save | simple earned use feels credible | narrative graybox feels perfunctory |
+| D-059: Keep vertical route sealed but inspectable | show growth without adding slice scope | hide shaft; implement second level | no path/area, visible selection/story state | future promise is legible | players interpret it as broken content |

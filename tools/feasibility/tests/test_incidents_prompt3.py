@@ -27,7 +27,7 @@ class UtilityIncidentAndHighballTests(unittest.TestCase):
         event = self.run_id("S113")["relay_load_test"]
         self.assertFalse(event["lighting_visible_during"])
         self.assertTrue(event["lighting_restored"])
-        self.assertEqual(event["shed_load"], "task_lighting")
+        self.assertEqual(event["shed_load"], "platform_lighting")
 
     def test_lighting_restore_probe_spans_the_next_stable_phase(self) -> None:
         probe = self.run_id("S117")["prompt3_evidence"]["relay_restore_probe"]
@@ -56,13 +56,13 @@ class UtilityIncidentAndHighballTests(unittest.TestCase):
     def test_power_priority_sheds_optional_before_essential(self) -> None:
         result = model.calculate_power(
             self.config,
-            {"triage_cot_install", "workshop_install", "comfort_lighting"},
+            {"triage_cot_install", "workshop_install", "platform_lighting_upgrade"},
             storm_affected_systems=3,
             demand_multiplier=1.2,
         )
         order = result["shutdown_order_if_uncovered"]
         self.assertTrue(order)
-        self.assertIn("comfort", order[0])
+        self.assertEqual(order[0], "platform_lighting")
         self.assertEqual(result["next_endangered"], "water_pumping")
 
     def test_air_progresses_one_visible_stage_with_warning(self) -> None:

@@ -1,0 +1,2521 @@
+{
+  "deterministic_repeat_equal": true,
+  "logical_distance_notice": "Logical path-cost proxies; not measured real seconds.",
+  "model_stage": "Prompt 4 spatial building",
+  "provisional": true,
+  "results": [
+    {
+      "category": "coordinates",
+      "error": null,
+      "evidence": {
+        "lane": 1,
+        "level": 0,
+        "section_id": "central_platform",
+        "x": 4
+      },
+      "name": "Valid global address",
+      "number": 1,
+      "passed": true,
+      "scenario_id": "P4-001"
+    },
+    {
+      "category": "coordinates",
+      "error": null,
+      "evidence": "invalid section rejected",
+      "name": "Invalid section",
+      "number": 2,
+      "passed": true,
+      "scenario_id": "P4-002"
+    },
+    {
+      "category": "coordinates",
+      "error": null,
+      "evidence": "invalid level rejected",
+      "name": "Invalid level",
+      "number": 3,
+      "passed": true,
+      "scenario_id": "P4-003"
+    },
+    {
+      "category": "coordinates",
+      "error": null,
+      "evidence": "invalid lane rejected",
+      "name": "Invalid depth lane",
+      "number": 4,
+      "passed": true,
+      "scenario_id": "P4-004"
+    },
+    {
+      "category": "coordinates",
+      "error": null,
+      "evidence": {
+        "global": {
+          "lane": 1,
+          "level": 0,
+          "x": 27
+        },
+        "restored": {
+          "lane": 1,
+          "level": 0,
+          "section_id": "east_staff_wing",
+          "x": 3
+        }
+      },
+      "name": "Section-local to global conversion",
+      "number": 5,
+      "passed": true,
+      "scenario_id": "P4-005"
+    },
+    {
+      "category": "coordinates",
+      "error": null,
+      "evidence": [
+        [
+          "central_platform",
+          0,
+          10,
+          0
+        ],
+        [
+          "central_platform",
+          0,
+          10,
+          1
+        ]
+      ],
+      "name": "Rotated footprint",
+      "number": 6,
+      "passed": true,
+      "scenario_id": "P4-006"
+    },
+    {
+      "category": "coordinates",
+      "error": null,
+      "evidence": "coordinate-bearing state round-tripped",
+      "name": "Save and restore coordinate equality",
+      "number": 7,
+      "passed": true,
+      "scenario_id": "P4-007"
+    },
+    {
+      "category": "fixed_architecture",
+      "error": null,
+      "evidence": [
+        "overlaps_fixed_architecture",
+        "outside_buildable_area"
+      ],
+      "name": "Reject column overlap",
+      "number": 8,
+      "passed": true,
+      "scenario_id": "P4-008"
+    },
+    {
+      "category": "fixed_architecture",
+      "error": null,
+      "evidence": [
+        "overlaps_fixed_architecture",
+        "outside_buildable_area"
+      ],
+      "name": "Reject track-edge overlap",
+      "number": 9,
+      "passed": true,
+      "scenario_id": "P4-009"
+    },
+    {
+      "category": "fixed_architecture",
+      "error": null,
+      "evidence": [
+        "outside_buildable_area"
+      ],
+      "name": "Reject outside station shell",
+      "number": 10,
+      "passed": true,
+      "scenario_id": "P4-010"
+    },
+    {
+      "category": "fixed_architecture",
+      "error": null,
+      "evidence": [],
+      "name": "Permit valid convertible shell",
+      "number": 11,
+      "passed": true,
+      "scenario_id": "P4-011"
+    },
+    {
+      "category": "fixed_architecture",
+      "error": null,
+      "evidence": "duplicate fixed feature detected",
+      "name": "Reject duplicate fixed feature",
+      "number": 12,
+      "passed": true,
+      "scenario_id": "P4-012"
+    },
+    {
+      "category": "rooms",
+      "error": null,
+      "evidence": {
+        "reasons": [],
+        "valid": true
+      },
+      "name": "Place valid Rest room",
+      "number": 13,
+      "passed": true,
+      "scenario_id": "P4-013"
+    },
+    {
+      "category": "rooms",
+      "error": null,
+      "evidence": {
+        "reasons": [],
+        "valid": true
+      },
+      "name": "Place valid Medical room",
+      "number": 14,
+      "passed": true,
+      "scenario_id": "P4-014"
+    },
+    {
+      "category": "rooms",
+      "error": null,
+      "evidence": {
+        "reasons": [],
+        "valid": true
+      },
+      "name": "Place valid Utility room",
+      "number": 15,
+      "passed": true,
+      "scenario_id": "P4-015"
+    },
+    {
+      "category": "rooms",
+      "error": null,
+      "evidence": {
+        "reasons": [
+          {
+            "accessible_indicator": "fixed-structure",
+            "code": "overlaps_fixed_architecture",
+            "highlighted_cells": [
+              {
+                "lane": 0,
+                "level": 0,
+                "section_id": "main_gate",
+                "x": 0
+              }
+            ],
+            "message": "This overlaps fixed railway structure.",
+            "suggested_correction": "Move clear of columns, track edges, walls, or machinery."
+          },
+          {
+            "accessible_indicator": "boundary",
+            "code": "outside_buildable_area",
+            "highlighted_cells": [
+              {
+                "lane": 0,
+                "level": 0,
+                "section_id": "main_gate",
+                "x": 0
+              }
+            ],
+            "message": "Outside the authored buildable area.",
+            "suggested_correction": "Move the preview into a highlighted buildable bay."
+          },
+          {
+            "accessible_indicator": "section",
+            "code": "incompatible_section",
+            "highlighted_cells": [
+              {
+                "lane": 0,
+                "level": 0,
+                "section_id": "main_gate",
+                "x": 0
+              }
+            ],
+            "message": "This object cannot be installed in this station section.",
+            "suggested_correction": "Choose a compatible authored section."
+          }
+        ],
+        "valid": false
+      },
+      "name": "Reject invalid room family for section",
+      "number": 16,
+      "passed": true,
+      "scenario_id": "P4-016"
+    },
+    {
+      "category": "rooms",
+      "error": null,
+      "evidence": "repurposed",
+      "name": "Repurpose valid area",
+      "number": 17,
+      "passed": true,
+      "scenario_id": "P4-017"
+    },
+    {
+      "category": "rooms",
+      "error": null,
+      "evidence": "operational",
+      "name": "Reject repurpose during active incident",
+      "number": 18,
+      "passed": true,
+      "scenario_id": "P4-018"
+    },
+    {
+      "category": "rooms",
+      "error": null,
+      "evidence": {
+        "reasons": [],
+        "valid": true
+      },
+      "name": "Apply valid module",
+      "number": 19,
+      "passed": true,
+      "scenario_id": "P4-019"
+    },
+    {
+      "category": "rooms",
+      "error": null,
+      "evidence": {
+        "reasons": [
+          {
+            "accessible_indicator": "module-parent",
+            "code": "module_parent_invalid",
+            "highlighted_cells": [],
+            "message": "This module has no valid operational parent.",
+            "suggested_correction": "Attach it to the required room or object socket."
+          }
+        ],
+        "valid": false
+      },
+      "name": "Reject module chain",
+      "number": 20,
+      "passed": true,
+      "scenario_id": "P4-020"
+    },
+    {
+      "category": "rooms",
+      "error": null,
+      "evidence": {
+        "reasons": [
+          {
+            "accessible_indicator": "module-capacity",
+            "code": "module_capacity_exceeded",
+            "highlighted_cells": [],
+            "message": "That parent has no compatible module capacity left.",
+            "suggested_correction": "Remove another module or select a different parent."
+          },
+          {
+            "accessible_indicator": "module-capacity",
+            "code": "module_capacity_exceeded",
+            "highlighted_cells": [],
+            "message": "That parent has no compatible module capacity left.",
+            "suggested_correction": "Remove another module or select a different parent."
+          }
+        ],
+        "valid": false
+      },
+      "name": "Enforce socket limit",
+      "number": 21,
+      "passed": true,
+      "scenario_id": "P4-021"
+    },
+    {
+      "category": "objects",
+      "error": null,
+      "evidence": {
+        "reasons": [],
+        "valid": true
+      },
+      "name": "Place bed",
+      "number": 22,
+      "passed": true,
+      "scenario_id": "P4-022"
+    },
+    {
+      "category": "objects",
+      "error": null,
+      "evidence": {
+        "reasons": [],
+        "valid": true
+      },
+      "name": "Place cot",
+      "number": 23,
+      "passed": true,
+      "scenario_id": "P4-023"
+    },
+    {
+      "category": "objects",
+      "error": null,
+      "evidence": {
+        "reasons": [],
+        "valid": true
+      },
+      "name": "Place workstation",
+      "number": 24,
+      "passed": true,
+      "scenario_id": "P4-024"
+    },
+    {
+      "category": "objects",
+      "error": null,
+      "evidence": [
+        [
+          "central_platform",
+          0,
+          10,
+          0
+        ],
+        [
+          "central_platform",
+          0,
+          10,
+          1
+        ]
+      ],
+      "name": "Rotate nonsquare object",
+      "number": 25,
+      "passed": true,
+      "scenario_id": "P4-025"
+    },
+    {
+      "category": "objects",
+      "error": null,
+      "evidence": {
+        "reasons": [
+          {
+            "accessible_indicator": "boundary",
+            "code": "outside_buildable_area",
+            "highlighted_cells": [
+              {
+                "lane": 0,
+                "level": 0,
+                "section_id": "central_platform",
+                "x": 12
+              }
+            ],
+            "message": "Outside the authored buildable area.",
+            "suggested_correction": "Move the preview into a highlighted buildable bay."
+          }
+        ],
+        "valid": false
+      },
+      "name": "Reject object outside room",
+      "number": 26,
+      "passed": true,
+      "scenario_id": "P4-026"
+    },
+    {
+      "category": "objects",
+      "error": null,
+      "evidence": {
+        "reasons": [
+          {
+            "accessible_indicator": "interaction",
+            "code": "blocks_interaction_point",
+            "highlighted_cells": [
+              {
+                "lane": 1,
+                "level": 0,
+                "section_id": "central_platform",
+                "x": 10
+              }
+            ],
+            "message": "Every interaction point would be blocked.",
+            "suggested_correction": "Keep at least one highlighted approach cell clear."
+          }
+        ],
+        "valid": false
+      },
+      "name": "Reject blocked interaction point",
+      "number": 27,
+      "passed": true,
+      "scenario_id": "P4-027"
+    },
+    {
+      "category": "objects",
+      "error": null,
+      "evidence": {
+        "lane": 0,
+        "level": 0,
+        "section_id": "central_platform",
+        "x": 11
+      },
+      "name": "Move object",
+      "number": 28,
+      "passed": true,
+      "scenario_id": "P4-028"
+    },
+    {
+      "category": "objects",
+      "error": null,
+      "evidence": "stored",
+      "name": "Store object",
+      "number": 29,
+      "passed": true,
+      "scenario_id": "P4-029"
+    },
+    {
+      "category": "objects",
+      "error": null,
+      "evidence": {
+        "first": 2.0,
+        "second": 0.0,
+        "stock": 2.0
+      },
+      "name": "Deconstruct once",
+      "number": 30,
+      "passed": true,
+      "scenario_id": "P4-030"
+    },
+    {
+      "category": "objects",
+      "error": null,
+      "evidence": {
+        "first": 2.0,
+        "second": 0.0,
+        "stock": 2.0
+      },
+      "name": "Prevent deconstruction profit",
+      "number": 31,
+      "passed": true,
+      "scenario_id": "P4-031"
+    },
+    {
+      "category": "objects",
+      "error": null,
+      "evidence": {
+        "lane": 0,
+        "level": 0,
+        "section_id": "central_platform",
+        "x": 11
+      },
+      "name": "Save/reload moved object",
+      "number": 32,
+      "passed": true,
+      "scenario_id": "P4-032"
+    },
+    {
+      "category": "blueprints",
+      "error": null,
+      "evidence": "preview",
+      "name": "Preview spends nothing",
+      "number": 33,
+      "passed": true,
+      "scenario_id": "P4-033"
+    },
+    {
+      "category": "blueprints",
+      "error": null,
+      "evidence": {
+        "capability_granted": false,
+        "materials_delivered": 0.0,
+        "materials_required": 4.0,
+        "materials_reserved": 0.0,
+        "occupied_cell_keys": [
+          [
+            "central_platform",
+            0,
+            10,
+            0
+          ]
+        ],
+        "project_id": "probe",
+        "refund_claimed": false,
+        "state": "saved_inactive",
+        "transactions": [],
+        "work_applied": 0.0,
+        "work_required": 5.0
+      },
+      "name": "Saved blueprint reserves nothing",
+      "number": 34,
+      "passed": true,
+      "scenario_id": "P4-034"
+    },
+    {
+      "category": "blueprints",
+      "error": null,
+      "evidence": [
+        "probe:activation"
+      ],
+      "name": "Activation reserves once",
+      "number": 35,
+      "passed": true,
+      "scenario_id": "P4-035"
+    },
+    {
+      "category": "blueprints",
+      "error": null,
+      "evidence": {
+        "capability_granted": false,
+        "materials_delivered": 4.0,
+        "materials_required": 4.0,
+        "materials_reserved": 4.0,
+        "occupied_cell_keys": [
+          [
+            "central_platform",
+            0,
+            10,
+            0
+          ]
+        ],
+        "project_id": "probe",
+        "refund_claimed": false,
+        "state": "delivery",
+        "transactions": [
+          "probe:activation",
+          "probe:delivery"
+        ],
+        "work_applied": 0.0,
+        "work_required": 5.0
+      },
+      "name": "Delivery consumes once",
+      "number": 36,
+      "passed": true,
+      "scenario_id": "P4-036"
+    },
+    {
+      "category": "blueprints",
+      "error": null,
+      "evidence": {
+        "capability_granted": false,
+        "materials_delivered": 4.0,
+        "materials_required": 4.0,
+        "materials_reserved": 4.0,
+        "occupied_cell_keys": [
+          [
+            "central_platform",
+            0,
+            10,
+            0
+          ]
+        ],
+        "project_id": "probe",
+        "refund_claimed": false,
+        "state": "under_construction",
+        "transactions": [
+          "probe:activation",
+          "probe:delivery"
+        ],
+        "work_applied": 2.0,
+        "work_required": 5.0
+      },
+      "name": "Partial construction persists",
+      "number": 37,
+      "passed": true,
+      "scenario_id": "P4-037"
+    },
+    {
+      "category": "blueprints",
+      "error": null,
+      "evidence": {
+        "first": 4.0,
+        "second": 0.0
+      },
+      "name": "Cancel refunds once",
+      "number": 38,
+      "passed": true,
+      "scenario_id": "P4-038"
+    },
+    {
+      "category": "blueprints",
+      "error": null,
+      "evidence": [
+        "probe:activation",
+        "probe:delivery",
+        "probe:completion"
+      ],
+      "name": "Completion grants capability once",
+      "number": 39,
+      "passed": true,
+      "scenario_id": "P4-039"
+    },
+    {
+      "category": "routes",
+      "error": null,
+      "evidence": {
+        "areas": 4,
+        "families": 4
+      },
+      "name": "Day 1 essential access",
+      "number": 40,
+      "passed": true,
+      "scenario_id": "P4-040"
+    },
+    {
+      "category": "routes",
+      "error": null,
+      "evidence": {
+        "areas": 10,
+        "families": 7
+      },
+      "name": "East Day 7 essential access",
+      "number": 41,
+      "passed": true,
+      "scenario_id": "P4-041"
+    },
+    {
+      "category": "routes",
+      "error": null,
+      "evidence": {
+        "areas": 10,
+        "families": 7
+      },
+      "name": "West Day 7 essential access",
+      "number": 42,
+      "passed": true,
+      "scenario_id": "P4-042"
+    },
+    {
+      "category": "routes",
+      "error": null,
+      "evidence": {
+        "areas": 10,
+        "families": 7
+      },
+      "name": "East alternate validity",
+      "number": 43,
+      "passed": true,
+      "scenario_id": "P4-043"
+    },
+    {
+      "category": "routes",
+      "error": null,
+      "evidence": {
+        "areas": 10,
+        "families": 7
+      },
+      "name": "West alternate validity",
+      "number": 44,
+      "passed": true,
+      "scenario_id": "P4-044"
+    },
+    {
+      "category": "routes",
+      "error": null,
+      "evidence": {
+        "areas": 10,
+        "families": 7
+      },
+      "name": "Poor-but-valid layout",
+      "number": 45,
+      "passed": true,
+      "scenario_id": "P4-045"
+    },
+    {
+      "category": "routes",
+      "error": null,
+      "evidence": [
+        "blocks_emergency_path",
+        "blocks_only_route",
+        "strands_essential_room"
+      ],
+      "name": "Reject only-route blockage",
+      "number": 46,
+      "passed": true,
+      "scenario_id": "P4-046"
+    },
+    {
+      "category": "routes",
+      "error": null,
+      "evidence": [
+        "strands_essential_room",
+        "strands_resident"
+      ],
+      "name": "Reject stranded resident",
+      "number": 47,
+      "passed": true,
+      "scenario_id": "P4-047"
+    },
+    {
+      "category": "routes",
+      "error": null,
+      "evidence": [
+        "blocks_emergency_path",
+        "blocks_only_route",
+        "strands_essential_room"
+      ],
+      "name": "Reject stranded essential room",
+      "number": 48,
+      "passed": true,
+      "scenario_id": "P4-048"
+    },
+    {
+      "category": "routes",
+      "error": null,
+      "evidence": [
+        "blocks_emergency_path",
+        "blocks_only_route",
+        "strands_essential_room"
+      ],
+      "name": "Reject blocked main gate",
+      "number": 49,
+      "passed": true,
+      "scenario_id": "P4-049"
+    },
+    {
+      "category": "routes",
+      "error": null,
+      "evidence": [
+        "blocks_emergency_path",
+        "blocks_only_route",
+        "strands_essential_room"
+      ],
+      "name": "Reject blocked emergency path",
+      "number": 50,
+      "passed": true,
+      "scenario_id": "P4-050"
+    },
+    {
+      "category": "routes",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 7.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Recover access by removing valid object",
+      "number": 51,
+      "passed": true,
+      "scenario_id": "P4-051"
+    },
+    {
+      "category": "navigation",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 5.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Normal walk",
+      "number": 52,
+      "passed": true,
+      "scenario_id": "P4-052"
+    },
+    {
+      "category": "navigation",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 5.75,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          }
+        ],
+        "path_class": "material_carry",
+        "required_portals": [
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Material carry",
+      "number": 53,
+      "passed": true,
+      "scenario_id": "P4-053"
+    },
+    {
+      "category": "navigation",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 7.25,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          }
+        ],
+        "path_class": "heavy_carry",
+        "required_portals": [
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Heavy carry",
+      "number": 54,
+      "passed": true,
+      "scenario_id": "P4-054"
+    },
+    {
+      "category": "navigation",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 6.25,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          }
+        ],
+        "path_class": "patient_escort",
+        "required_portals": [
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Patient escort",
+      "number": 55,
+      "passed": true,
+      "scenario_id": "P4-055"
+    },
+    {
+      "category": "navigation",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 8.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          }
+        ],
+        "path_class": "patient_carry",
+        "required_portals": [
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Patient carry",
+      "number": 56,
+      "passed": true,
+      "scenario_id": "P4-056"
+    },
+    {
+      "category": "navigation",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 4.5,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          }
+        ],
+        "path_class": "emergency_evacuation",
+        "required_portals": [
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Emergency evacuation",
+      "number": 57,
+      "passed": true,
+      "scenario_id": "P4-057"
+    },
+    {
+      "category": "navigation",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 6.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Utility service",
+      "number": 58,
+      "passed": true,
+      "scenario_id": "P4-058"
+    },
+    {
+      "category": "navigation",
+      "error": null,
+      "evidence": "destination_not_walkable",
+      "name": "Closed portal",
+      "number": 59,
+      "passed": true,
+      "scenario_id": "P4-059"
+    },
+    {
+      "category": "navigation",
+      "error": null,
+      "evidence": "portal_closed_or_isolated",
+      "name": "Isolated section",
+      "number": 60,
+      "passed": true,
+      "scenario_id": "P4-060"
+    },
+    {
+      "category": "navigation",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 7.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Hazard avoidance",
+      "number": 61,
+      "passed": true,
+      "scenario_id": "P4-061"
+    },
+    {
+      "category": "navigation",
+      "error": null,
+      "evidence": "destination_not_walkable",
+      "name": "Future vertical route unavailable",
+      "number": 62,
+      "passed": true,
+      "scenario_id": "P4-062"
+    },
+    {
+      "category": "navigation",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 5.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Repath after portal restoration",
+      "number": 63,
+      "passed": true,
+      "scenario_id": "P4-063"
+    },
+    {
+      "category": "medical_access",
+      "error": null,
+      "evidence": {
+        "gate_to_stabilization_path": 1.25
+      },
+      "name": "East gate-to-stabilization",
+      "number": 64,
+      "passed": true,
+      "scenario_id": "P4-064"
+    },
+    {
+      "category": "medical_access",
+      "error": null,
+      "evidence": {
+        "gate_to_medical_path": 28.8
+      },
+      "name": "East gate-to-primary-Medical",
+      "number": 65,
+      "passed": true,
+      "scenario_id": "P4-065"
+    },
+    {
+      "category": "medical_access",
+      "error": null,
+      "evidence": {
+        "gate_to_stabilization_path": 1.25
+      },
+      "name": "West gate-to-stabilization",
+      "number": 66,
+      "passed": true,
+      "scenario_id": "P4-066"
+    },
+    {
+      "category": "medical_access",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 28.8,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          }
+        ],
+        "path_class": "patient_carry",
+        "required_portals": [
+          "gate_central_primary",
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Patient path during storm warning",
+      "number": 67,
+      "passed": true,
+      "scenario_id": "P4-067"
+    },
+    {
+      "category": "medical_access",
+      "error": null,
+      "evidence": {
+        "fallback": 1.25,
+        "primary": "portal_closed_or_isolated"
+      },
+      "name": "Treatment route blocked and alternate response shown",
+      "number": 68,
+      "passed": true,
+      "scenario_id": "P4-068"
+    },
+    {
+      "category": "utilities",
+      "error": null,
+      "evidence": {
+        "connected": true,
+        "consumer": {
+          "consumer_id": "platform_lighting",
+          "load": 0.75,
+          "node_id": "central_power_bus",
+          "object_instance_id": "platform_work_lamp",
+          "priority": "optional",
+          "state": "operational",
+          "utility": "Power"
+        },
+        "reason": null
+      },
+      "name": "Power connection",
+      "number": 69,
+      "passed": true,
+      "scenario_id": "P4-069"
+    },
+    {
+      "category": "utilities",
+      "error": null,
+      "evidence": {
+        "connected": false,
+        "consumer": {
+          "consumer_id": "platform_lighting",
+          "load": 0.75,
+          "node_id": "central_power_bus",
+          "object_instance_id": "platform_work_lamp",
+          "priority": "optional",
+          "state": "operational",
+          "utility": "Power"
+        },
+        "reason": "disconnected_branch"
+      },
+      "name": "Disconnected branch",
+      "number": 70,
+      "passed": true,
+      "scenario_id": "P4-070"
+    },
+    {
+      "category": "utilities",
+      "error": null,
+      "evidence": {
+        "changed": true,
+        "consumer_id": "platform_lighting",
+        "load_relieved": 0.75
+      },
+      "name": "Platform lighting sheds",
+      "number": 71,
+      "passed": true,
+      "scenario_id": "P4-071"
+    },
+    {
+      "category": "utilities",
+      "error": null,
+      "evidence": {
+        "changed": true,
+        "consumer_id": "platform_lighting"
+      },
+      "name": "Platform lighting restores",
+      "number": 72,
+      "passed": true,
+      "scenario_id": "P4-072"
+    },
+    {
+      "category": "utilities",
+      "error": null,
+      "evidence": "one circuit",
+      "name": "Platform Lighting Upgrade does not create another consumer",
+      "number": 73,
+      "passed": true,
+      "scenario_id": "P4-073"
+    },
+    {
+      "category": "utilities",
+      "error": null,
+      "evidence": "connection-gated backup",
+      "name": "Charge backup requires connection",
+      "number": 74,
+      "passed": true,
+      "scenario_id": "P4-074"
+    },
+    {
+      "category": "utilities",
+      "error": null,
+      "evidence": {
+        "branch_id": "east_air_branch",
+        "consumers_affected": [],
+        "recovery_method": "open East damper or evacuate",
+        "residents_affected": [
+          "Juna"
+        ],
+        "rooms_affected": [
+          "east_treatment_room",
+          "east_quiet_berths"
+        ]
+      },
+      "name": "Air isolation",
+      "number": 75,
+      "passed": true,
+      "scenario_id": "P4-075"
+    },
+    {
+      "category": "utilities",
+      "error": null,
+      "evidence": {
+        "branch_id": "east_water_branch",
+        "consumers_affected": [
+          "water_issue",
+          "east_water_reserve_service"
+        ],
+        "recovery_method": "carry reserve or repair long delivery branch",
+        "residents_affected": [],
+        "rooms_affected": [
+          "east_treatment_room",
+          "east_utility_room"
+        ]
+      },
+      "name": "Water isolation",
+      "number": 76,
+      "passed": true,
+      "scenario_id": "P4-076"
+    },
+    {
+      "category": "utilities",
+      "error": null,
+      "evidence": "destination_not_walkable",
+      "name": "Structure closure",
+      "number": 77,
+      "passed": true,
+      "scenario_id": "P4-077"
+    },
+    {
+      "category": "utilities",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 15.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 2
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [
+          "gate_central_primary",
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Utility service point reachable",
+      "number": 78,
+      "passed": true,
+      "scenario_id": "P4-078"
+    },
+    {
+      "category": "incidents",
+      "error": null,
+      "evidence": {
+        "filter_service_path": 7.2
+      },
+      "name": "Filter service route",
+      "number": 79,
+      "passed": true,
+      "scenario_id": "P4-079"
+    },
+    {
+      "category": "incidents",
+      "error": null,
+      "evidence": {
+        "water_isolation_path": 8.4
+      },
+      "name": "Water isolation route",
+      "number": 80,
+      "passed": true,
+      "scenario_id": "P4-080"
+    },
+    {
+      "category": "incidents",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 12.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          }
+        ],
+        "path_class": "emergency_evacuation",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Structural evacuation",
+      "number": 81,
+      "passed": true,
+      "scenario_id": "P4-081"
+    },
+    {
+      "category": "incidents",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 22.4,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          }
+        ],
+        "path_class": "patient_carry",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Medical evacuation",
+      "number": 82,
+      "passed": true,
+      "scenario_id": "P4-082"
+    },
+    {
+      "category": "incidents",
+      "error": null,
+      "evidence": {
+        "configured_maximum": 1
+      },
+      "name": "Second major incident remains queued",
+      "number": 83,
+      "passed": true,
+      "scenario_id": "P4-083"
+    },
+    {
+      "category": "incidents",
+      "error": null,
+      "evidence": {
+        "configured_maximum": 3
+      },
+      "name": "Cascade adjacency stops at configured limit",
+      "number": 84,
+      "passed": true,
+      "scenario_id": "P4-084"
+    },
+    {
+      "category": "day5",
+      "error": null,
+      "evidence": {
+        "budget": 32.0,
+        "maximum": 21.6
+      },
+      "name": "East prepared response",
+      "number": 85,
+      "passed": true,
+      "scenario_id": "P4-085"
+    },
+    {
+      "category": "day5",
+      "error": null,
+      "evidence": {
+        "budget": 32.0,
+        "maximum": 10.8
+      },
+      "name": "West prepared response",
+      "number": 86,
+      "passed": true,
+      "scenario_id": "P4-086"
+    },
+    {
+      "category": "day5",
+      "error": null,
+      "evidence": {
+        "materials_delivery_path": 11.5
+      },
+      "name": "Filter Materials delivery",
+      "number": 87,
+      "passed": true,
+      "scenario_id": "P4-087"
+    },
+    {
+      "category": "day5",
+      "error": null,
+      "evidence": {
+        "charge_control": 1.2
+      },
+      "name": "Charge-control access",
+      "number": 88,
+      "passed": true,
+      "scenario_id": "P4-088"
+    },
+    {
+      "category": "day5",
+      "error": null,
+      "evidence": {
+        "water_isolation_path": 8.4
+      },
+      "name": "Water-isolation access",
+      "number": 89,
+      "passed": true,
+      "scenario_id": "P4-089"
+    },
+    {
+      "category": "day5",
+      "error": null,
+      "evidence": {
+        "carry_restrictions": [],
+        "cost": 17.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          }
+        ],
+        "path_class": "patient_carry",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      "name": "Medically restricted resident evacuation",
+      "number": 90,
+      "passed": true,
+      "scenario_id": "P4-090"
+    },
+    {
+      "category": "day5",
+      "error": null,
+      "evidence": {
+        "east": 0.08,
+        "west": 0.08
+      },
+      "name": "Coordinate-derived travel fits or produces named failure",
+      "number": 91,
+      "passed": true,
+      "scenario_id": "P4-091"
+    },
+    {
+      "category": "route_identity",
+      "error": null,
+      "evidence": {
+        "east": 7.2,
+        "west": 6.0
+      },
+      "name": "West has shorter Water-service metric",
+      "number": 92,
+      "passed": true,
+      "scenario_id": "P4-092"
+    },
+    {
+      "category": "route_identity",
+      "error": null,
+      "evidence": {
+        "east": 21.6,
+        "west": 8.4
+      },
+      "name": "West has better drain/isolation metric",
+      "number": 93,
+      "passed": true,
+      "scenario_id": "P4-093"
+    },
+    {
+      "category": "route_identity",
+      "error": null,
+      "evidence": {
+        "east": 3.0,
+        "west": 7.0
+      },
+      "name": "East has better Rest-access metric",
+      "number": 94,
+      "passed": true,
+      "scenario_id": "P4-094"
+    },
+    {
+      "category": "route_identity",
+      "error": null,
+      "evidence": {
+        "east": true,
+        "west": false
+      },
+      "name": "East has better quiet-recovery metric",
+      "number": 95,
+      "passed": true,
+      "scenario_id": "P4-095"
+    },
+    {
+      "category": "route_identity",
+      "error": null,
+      "evidence": {
+        "east": 28.8,
+        "west": 4.8
+      },
+      "name": "East has longer gate-Medical metric",
+      "number": 96,
+      "passed": true,
+      "scenario_id": "P4-096"
+    },
+    {
+      "category": "route_identity",
+      "error": null,
+      "evidence": {
+        "east_rest": true,
+        "west_water": true
+      },
+      "name": "Neither route dominates every metric",
+      "number": 97,
+      "passed": true,
+      "scenario_id": "P4-097"
+    },
+    {
+      "category": "hope",
+      "error": null,
+      "evidence": [
+        "east_minimal_lamp",
+        "east_minimal_quiet_berth"
+      ],
+      "name": "East minimal hope anchor",
+      "number": 98,
+      "passed": true,
+      "scenario_id": "P4-098"
+    },
+    {
+      "category": "hope",
+      "error": null,
+      "evidence": [
+        "west_minimal_lamp",
+        "west_minimal_clean_water"
+      ],
+      "name": "West minimal hope anchor",
+      "number": 99,
+      "passed": true,
+      "scenario_id": "P4-099"
+    },
+    {
+      "category": "hope",
+      "error": null,
+      "evidence": [
+        "east_full_communal_meal"
+      ],
+      "name": "Full hope setup",
+      "number": 100,
+      "passed": true,
+      "scenario_id": "P4-100"
+    },
+    {
+      "category": "hope",
+      "error": null,
+      "evidence": "hope anchors round-tripped",
+      "name": "Hope anchor survives reload",
+      "number": 101,
+      "passed": true,
+      "scenario_id": "P4-101"
+    },
+    {
+      "category": "hope",
+      "error": null,
+      "evidence": "all anchors grant zero stock",
+      "name": "Hope grants no stock",
+      "number": 102,
+      "passed": true,
+      "scenario_id": "P4-102"
+    },
+    {
+      "category": "feasibility_integration",
+      "error": null,
+      "evidence": {
+        "mapping": {
+          "coordinate_hauling_factor": 0.04,
+          "coordinate_travel_factor": 0.08,
+          "hauling_factor": 0.04,
+          "layout_id": "east_day7",
+          "provisional": true,
+          "replaces_abstract": true,
+          "selection_reason": "coordinate result replaces compact abstract allowance",
+          "travel_factor": 0.08
+        },
+        "sources": [
+          "spatial:east_day7"
+        ]
+      },
+      "name": "Replace East travel allowance without double counting",
+      "number": 103,
+      "passed": true,
+      "scenario_id": "P4-103"
+    },
+    {
+      "category": "feasibility_integration",
+      "error": null,
+      "evidence": {
+        "mapping": {
+          "coordinate_hauling_factor": 0.04,
+          "coordinate_travel_factor": 0.08,
+          "hauling_factor": 0.04,
+          "layout_id": "west_day7",
+          "provisional": true,
+          "replaces_abstract": true,
+          "selection_reason": "coordinate result fits within the existing typical allowance; conservative 0.10 retained until damp-floor and congestion graybox measurement",
+          "travel_factor": 0.1
+        },
+        "sources": [
+          "spatial:west_day7"
+        ]
+      },
+      "name": "Replace West travel allowance without double counting",
+      "number": 104,
+      "passed": true,
+      "scenario_id": "P4-104"
+    },
+    {
+      "category": "feasibility_integration",
+      "error": null,
+      "evidence": {
+        "outcome": "FULL_PROOF",
+        "scenario": "S01"
+      },
+      "name": "Re-run Full East proof",
+      "number": 105,
+      "passed": true,
+      "scenario_id": "P4-105"
+    },
+    {
+      "category": "feasibility_integration",
+      "error": null,
+      "evidence": {
+        "outcome": "FULL_PROOF",
+        "scenario": "S02"
+      },
+      "name": "Re-run Full West proof",
+      "number": 106,
+      "passed": true,
+      "scenario_id": "P4-106"
+    },
+    {
+      "category": "feasibility_integration",
+      "error": null,
+      "evidence": {
+        "outcome": "FULL_PROOF",
+        "scenario": "S09"
+      },
+      "name": "Re-run East mistake",
+      "number": 107,
+      "passed": true,
+      "scenario_id": "P4-107"
+    },
+    {
+      "category": "feasibility_integration",
+      "error": null,
+      "evidence": {
+        "outcome": "FULL_PROOF",
+        "scenario": "S10"
+      },
+      "name": "Re-run West mistake",
+      "number": 108,
+      "passed": true,
+      "scenario_id": "P4-108"
+    },
+    {
+      "category": "feasibility_integration",
+      "error": null,
+      "evidence": {
+        "outcome": "FULL_PROOF",
+        "scenario": "S18"
+      },
+      "name": "Re-run prepared storm",
+      "number": 109,
+      "passed": true,
+      "scenario_id": "P4-109"
+    },
+    {
+      "category": "feasibility_integration",
+      "error": null,
+      "evidence": {
+        "S37": "FULL_PROOF",
+        "S38": "FULL_PROOF",
+        "S39": "FULL_PROOF",
+        "S40": "FULL_PROOF",
+        "S41": "FULL_PROOF",
+        "S42": "FULL_PROOF",
+        "S43": "FULL_PROOF",
+        "S44": "FULL_PROOF"
+      },
+      "name": "Re-run Juna cases",
+      "number": 110,
+      "passed": true,
+      "scenario_id": "P4-110"
+    },
+    {
+      "category": "feasibility_integration",
+      "error": null,
+      "evidence": {
+        "expectations_met": 176,
+        "mandatory": 176
+      },
+      "name": "Re-run all Prompt 2 and Prompt 3 mandatory scenarios",
+      "number": 111,
+      "passed": true,
+      "scenario_id": "P4-111"
+    }
+  ],
+  "schema_version": 1,
+  "summary": {
+    "failed": 0,
+    "passed": 111,
+    "scenarios": 111
+  }
+}

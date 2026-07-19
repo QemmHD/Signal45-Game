@@ -31,7 +31,7 @@ Prompt 2 uses only bounded task-fit tags: Strong 1.15, Capable 1.00, Poor 0.75, 
 
 ## Travel, delivery, setup, and observation
 
-Work performed is separate from travel and hauling. East uses an 8% compact-layout travel allowance; West uses a 10% typical-layout allowance. A poor-but-valid layout test uses 16%. Hauling reserves another 4% of gross capacity. A sensitivity multiplier tests higher overhead without pretending exact path lengths are known.
+Work performed is separate from travel and hauling. Prompt 4 replaces the abstract calculation with one selected spatial mapping per route. East selects 8% travel/4% hauling from coordinates. West coordinates calculate 8%/4%, while the feasibility model conservatively retains its prior 10% travel/4% hauling until wet-floor and congestion graybox measurement. The poor-valid coordinate layout calculates 12%/7%. The old and new factors are never added together.
 
 Setup is represented by project activation and material reservation, not by visible construction work. Material delivery is a committed stage. Observation animation consumes player-facing time but not extra WU. A resident walking animation never decides whether progress was committed.
 
@@ -96,7 +96,7 @@ Target day is the desired beat. Hard day is the last viable completion checkpoin
 | Relay upgrade | Optional ending preparation | 8 | 4 Materials + radio component | Strengthen Relay eligibility | never required for slice survival |
 | Visitor screen | Optional | 6 | 2 Materials | one temporary rest place | useful for prepared West admission, not required to survive or refuse |
 
-No optional project is included in the required-project set. Starting and cancelling Comfort Lighting scenarios remain viable.
+No optional project is included in the required-project set. Starting and cancelling the Platform Lighting Upgrade remains viable; it modifies the one lamp/circuit and adds no second load.
 
 ## Partial work, interruption, cancellation, and recovery
 
@@ -125,3 +125,7 @@ The emotional Stress and refusal effects are explicit Prompt 5 placeholders. The
 ## Feasibility result
 
 Prompt 3 keeps the 12-WU base and project schedule. The old ten-WU daily survival allowance is now eight essential WU plus two explicit incident-reserve WU, with no capacity increase. East and West still end at ten areas without Highball. Aggregate unused project WU is 36.788 East and 27.108 West, but both have **zero daily/phase slack on Day 5** after the prepared storm response; this replaces the earlier practice of presenting one weekly percentage as the full margin. A 10% global work loss or 15% construction increase remains a high-severity revalidation case.
+
+## Prompt 4 spatial amendment
+
+Temporary triage and concession repurpose no longer add phantom physical areas. Route utility connection and the permanent treatment area supply the two distinct spatial increments instead; workload and deadlines are unchanged. Coordinate-derived overhead replaces the previous allowance branch, and every work report names its spatial source plus `travel_double_counted: false`. All 176 mandatory scenarios retain their expected semantics.

@@ -101,7 +101,7 @@ The outputs differ, but all four pass. No signal automatically selects its match
 
 - East construction rework: viable, 12.1% buffer.
 - West construction rework: viable, 11.3% buffer.
-- Starting and later cancelling Comfort Lighting: viable on both routes; its cost is visible and it never enters mandatory dependencies.
+- Starting and later cancelling the Platform Lighting Upgrade: viable on both routes; its cost is visible, it adds no second consumer, and it never enters mandatory dependencies.
 - Teo absent half of Day 4: viable, 18.2% East buffer.
 - Ash unavailable during structural work, Imka during treatment, or Maren during logistics: each changes modeled work and remains viable.
 - Teo's respiratory limitation and delayed treatment both consume real capacity and Medicine; neither is an unseen death roll.
@@ -145,3 +145,7 @@ The Prompt 3 generated report contains **176 scenarios**, all matching expectati
 The full day/phase results are in `tools/feasibility/reports/scenario_results.json`; the concise matrix is in `tools/feasibility/reports/scenario_summary.md`.
 
 Prompt 3 also adds the Day 4 Relay Load Test, explicit condition/medical restrictions, incident scheduling, deterministic Highball strain, and the earned minimal hope fallback. See `22_SURVIVAL_SIMULATION_RESULTS.md` for current evidence.
+
+## Prompt 4 spatial rerun
+
+Machine-derived Day 1/East/West area counts are 4/10/10. The triage cot and concession repurpose no longer increment physical count. Coordinate factors replace the old allowance rather than stacking on it; 176/176 mandatory scenarios still match, including Full Proof routes, mistake recovery, storm and Juna cases. Day 5 remains zero-slack and receives no hidden spatial WU.

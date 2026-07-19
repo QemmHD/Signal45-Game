@@ -257,3 +257,7 @@ The slice passes only when:
 - Critical medical incapacity supplies zero productive WU; Teo’s exposure preserves the no-injury tutorial path.
 - Day 7 may produce Full Proof, Recover First, Proof Incomplete, or Shelter Failure for distinct causes.
 - Missing only the five-WU authored hope setup uses an earned zero-to-two-WU fallback and cannot create stock.
+
+### Prompt 4 spatial proof
+
+Day 1, canonical/alternate East, canonical/alternate West, and a poor-valid layout are machine-readable. Counts derive as 4/10/10 for Day 1/East/West; temporary triage does not inflate count. West has shorter Pump, isolation, and Water-parts paths; East has better Rest/quiet recovery and a longer but valid gate-to-Medical transfer with gate stabilization. All essential interactions, service nodes, patient paths, Day 5 responses, evacuation and hope anchors are placed and save-stable.

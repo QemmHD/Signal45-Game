@@ -98,7 +98,7 @@ East response does not become better than West Water security.
 All three Day 4 choices pass:
 
 - Charge S112 covers the 0.7 live deficit and draws 1.111 reserve after loss; final Charge is 22.889.
-- Shed S113 visibly dims task lighting, spends no Charge, and restores the lamp automatically.
+- Shed S113 visibly dims the canonical Platform Work Lamp, spends no Charge, and restores that same consumer automatically.
 - Delay S114 spends no stock but reduces warning lead by one stage.
 
 Save/reload preserves the Power/Charge distinction and cannot repeat the debit.
@@ -188,4 +188,4 @@ Refuted: the 35% candidate is not a selected production value; it remains only o
 
 This model proves arithmetic consistency, bounded causality, explicit outcome meaning, recovery logic, and serialization. It does not prove comprehension, emotional credibility, tension, tactility, camera readability, or actual pacing.
 
-Prompt 4 must revalidate average/vertical travel, material trips, congestion, access, evacuation, and utility-node location against coordinates. Any Day 5 geometry overhead above the existing allowance must reduce another workload, move a target, or change proof scope; resident base capacity may not be inflated silently.
+Prompt 4 revalidated average/essential travel, material and heavy carry, congestion proxy, access, evacuation, and utility-node location. Coordinate factors replace the abstract branch; no extra Day 5 work or resident capacity was added. Actual seconds, animation and congestion still require a graybox, and any measured overrun must improve siting/staging or reduce/split work before changing the 12-WU base.

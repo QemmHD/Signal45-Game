@@ -133,8 +133,8 @@ class CoreModelTests(unittest.TestCase):
         self.assertEqual(state.stocks["Materials"], after_first)
 
     def test_cancellation_refunds_once(self) -> None:
-        _, selected, state = self.fresh_state(optional="comfort_lighting")
-        project = selected["comfort_lighting"]
+        _, selected, state = self.fresh_state(optional="platform_lighting_upgrade")
+        project = selected["platform_lighting_upgrade"]
         progress = state.projects[project["id"]]
         model._reserve_project(state, self.config, project, progress)
         first = model.cancel_project(state, self.config, selected, project["id"])

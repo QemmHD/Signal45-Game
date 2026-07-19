@@ -82,7 +82,7 @@ Force termination before and after every transaction in `15_FIRST_SESSION_AND_SA
 
 ## What the simulation does not prove
 
-It does not prove enjoyment, balance, comprehension, tactile construction, emotional investment, camera comfort, readable 2.5D staging, animation quality, actual device performance, or final session pacing. It uses a travel allowance instead of pathfinding, four conditions instead of full resident behavior, bounded authored incidents instead of a complete weather architecture, and a graph abstraction instead of final nightrun presentation.
+It does not prove enjoyment, balance, comprehension, tactile construction, emotional investment, camera comfort, readable 2.5D staging, animation quality, actual device performance, or final session pacing. Prompt 4 now uses logical pathfinding and coordinate-derived factors, but those costs are still proxies rather than measured seconds. It still uses four conditions instead of full resident behavior, bounded authored incidents instead of a complete weather architecture, and a graph abstraction instead of final nightrun presentation.
 
 Passing scenarios authorizes a prototype; it does not authorize production-scale content expansion.
 
@@ -100,4 +100,4 @@ Additional retuning triggers:
 - a Highball candidate becomes mandatory, repeat-profitable, or medically applicable;
 - a save/reload changes treatment, incident, strain, promise, or outcome class.
 
-Required Prompt 4 measurements are horizontal/vertical travel, carrying, material trips, congestion, evacuation, isolation reachability, and path failure. Prompt 5 must measure promise/refusal consequences; neither may silently increase the 12-WU resident base.
+Prompt 4 now reports horizontal travel, carrying, material trips, evacuation, isolation reachability, path failure and a provisional congestion proxy. Graybox measurements must replace proxy-to-time assumptions, especially East patient carry and West wet-floor/congestion behavior. Prompt 5 must measure promise/refusal consequences; neither stage may silently increase the 12-WU resident base.

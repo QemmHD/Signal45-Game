@@ -1,0 +1,161 @@
+{
+  "extends": "day1",
+  "set": {
+    "schema_version": 1,
+    "display_name": "East Day 7 — Quiet Staff Wing",
+    "route": "east",
+    "day": 7,
+    "description": "Ten physical areas emphasize quiet berths and stable treatment while Water reserve service remains physically remote.",
+    "section_states": {
+      "west_pump_gallery": {"access": "unreclaimed", "discovered": true, "hazard": "flooded", "blocked_cells": []},
+      "main_gate": {"access": "operational", "discovered": true, "hazard": "none", "blocked_cells": []},
+      "central_platform": {"access": "operational", "discovered": true, "hazard": "repaired", "blocked_cells": []},
+      "east_staff_wing": {"access": "operational", "discovered": true, "hazard": "cleared", "blocked_cells": []},
+      "vertical_shaft": {"access": "sealed", "discovered": true, "hazard": "jammed", "blocked_cells": []}
+    },
+    "portal_states": {
+      "west_gate_primary": "blocked", "west_gate_service": "blocked",
+      "gate_central_primary": "open", "gate_central_service": "open",
+      "central_east_primary": "open", "central_east_service": "open",
+      "east_vertical_link": "sealed", "future_upper_link": "blocked"
+    },
+    "incident_spatial_targets": {
+      "power_instability": {"section_id": "central_platform", "service_node": "central_power_bus", "safe_section": "main_gate"},
+      "air_contamination": {"section_id": "east_staff_wing", "service_node": "central_air_filter", "safe_section": "central_platform"},
+      "water_contamination": {"section_id": "east_staff_wing", "service_node": "east_water_reserve", "safe_section": "central_platform"},
+      "structural_instability": {"section_id": "east_staff_wing", "service_node": "east_support_zone", "safe_section": "central_platform"},
+      "equipment_breakdown": {"section_id": "central_platform", "service_node": "central_power_source", "safe_section": "central_platform"},
+      "medical_emergency": {"section_id": "east_staff_wing", "service_node": "east_air_node", "medical_interaction": {"section_id": "east_staff_wing", "level": 0, "x": 2, "lane": 1}, "safe_section": "central_platform"}
+    },
+    "project_targets": {
+      "platform_lamp_install": {"type": "object", "target_id": "platform_work_lamp"},
+      "triage_cot_install": {"type": "temporary_object", "target_id": "gate_triage_cot"},
+      "route_survey": {"type": "reclamation", "target_id": "central_stabilization"},
+      "east_reclaim": {"type": "reclamation", "target_id": "east_obstruction"},
+      "east_utility_connection": {"type": "room", "target_id": "east_utility_room"},
+      "east_quiet_berths": {"type": "room", "target_id": "east_quiet_berths"},
+      "concession_repurpose": {"type": "room", "target_id": "concession_cage"},
+      "storm_filter_prep": {"type": "module", "target_id": "service_air_filter"},
+      "east_water_reserve": {"type": "object", "target_id": "east_reserve_tank"},
+      "workshop_install": {"type": "room", "target_id": "central_workshop"},
+      "storage_fitout": {"type": "room", "target_id": "central_stores"},
+      "triage_upgrade": {"type": "room", "target_id": "east_treatment_room"},
+      "forecast_board": {"type": "object", "target_id": "forecast_board"},
+      "storm_recovery_repairs": {"type": "repair_state", "target_id": "central_storm_repair"},
+      "hope_beat_setup": {"type": "object", "target_id": "communal_meal_point"},
+      "platform_lighting_upgrade": {"type": "module", "target_id": "platform_lighting_upgrade"},
+      "relay_upgrade": {"type": "object", "target_id": "relay_console"},
+      "visitor_screen": {"type": "temporary_zone", "target_id": "gate_stabilization_zone"}
+    },
+    "safety_checks": {
+      "main_gate": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1},
+      "safe_area": {"section_id": "central_platform", "level": 0, "x": 5, "lane": 1},
+      "gate_stabilization": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 1},
+      "primary_medical": {"section_id": "east_staff_wing", "level": 0, "x": 2, "lane": 1},
+      "essential_interactions": [
+        {"section_id": "central_platform", "level": 0, "x": 4, "lane": 1},
+        {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1},
+        {"section_id": "central_platform", "level": 0, "x": 10, "lane": 1},
+        {"section_id": "central_platform", "level": 0, "x": 12, "lane": 1},
+        {"section_id": "east_staff_wing", "level": 0, "x": 2, "lane": 1},
+        {"section_id": "east_staff_wing", "level": 0, "x": 8, "lane": 1}
+      ]
+    },
+    "metric_paths": [
+      {"name": "ordinary_gate_to_relay", "path_class": "normal_walk", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 4, "lane": 1}},
+      {"name": "ordinary_relay_to_medical", "path_class": "normal_walk", "start": {"section_id": "central_platform", "level": 0, "x": 4, "lane": 1}, "end": {"section_id": "east_staff_wing", "level": 0, "x": 2, "lane": 1}},
+      {"name": "ordinary_rest_to_food", "path_class": "normal_walk", "start": {"section_id": "east_staff_wing", "level": 0, "x": 5, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 8, "lane": 1}},
+      {"name": "ordinary_rest_to_medical", "path_class": "normal_walk", "start": {"section_id": "east_staff_wing", "level": 0, "x": 5, "lane": 1}, "end": {"section_id": "east_staff_wing", "level": 0, "x": 2, "lane": 1}},
+      {"name": "materials_delivery", "path_class": "material_carry", "start": {"section_id": "central_platform", "level": 0, "x": 12, "lane": 1}, "end": {"section_id": "east_staff_wing", "level": 0, "x": 8, "lane": 1}},
+      {"name": "heavy_carry", "path_class": "heavy_carry", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "east_staff_wing", "level": 0, "x": 8, "lane": 1}},
+      {"name": "gate_to_medical", "path_class": "patient_carry", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "east_staff_wing", "level": 0, "x": 2, "lane": 1}},
+      {"name": "gate_to_stabilization", "path_class": "patient_escort", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 1}},
+      {"name": "storage_to_workshop", "path_class": "material_carry", "start": {"section_id": "central_platform", "level": 0, "x": 12, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 10, "lane": 1}},
+      {"name": "rest_to_work", "path_class": "normal_walk", "start": {"section_id": "east_staff_wing", "level": 0, "x": 5, "lane": 1}, "end": {"section_id": "east_staff_wing", "level": 0, "x": 8, "lane": 1}},
+      {"name": "filter_service", "path_class": "utility_service", "start": {"section_id": "central_platform", "level": 0, "x": 12, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}},
+      {"name": "pump_service", "path_class": "utility_service", "start": {"section_id": "central_platform", "level": 0, "x": 12, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}},
+      {"name": "water_isolation", "path_class": "utility_service", "start": {"section_id": "central_platform", "level": 0, "x": 5, "lane": 1}, "end": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 1}},
+      {"name": "charge_control", "path_class": "utility_service", "start": {"section_id": "central_platform", "level": 0, "x": 5, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}},
+      {"name": "evacuation", "path_class": "emergency_evacuation", "start": {"section_id": "east_staff_wing", "level": 0, "x": 2, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 5, "lane": 1}}
+    ],
+    "essential_metric_names": ["gate_to_medical", "materials_delivery", "filter_service", "evacuation"],
+    "day5_metric_names": ["filter_service", "water_isolation", "charge_control", "evacuation"],
+    "day5_response_budget": 32.0,
+    "comparison_allowance": {"profile": "compact", "travel_factor": 0.08, "hauling_factor": 0.04},
+    "presentation_state": {"camera_mode": "shelter_overview", "focused_room": null, "occlusion_preference": "fade", "reduced_motion": false},
+    "camera_overview_bounds": {"min_x": 0, "max_x": 36, "min_level": 0, "max_level": 1, "min_lane": 0, "max_lane": 2},
+    "occlusion_groups": ["gate_foreground_grille", "platform_foreground_columns", "platform_ceiling_cables", "east_foreground_wall", "east_staff_door_frames", "shaft_foreground_gate"],
+    "selection_regions": ["main_gate", "platform_camp", "relay_kiosk", "service_alcove", "concession_cage", "central_workshop", "central_stores", "east_entry_store", "east_treatment_room", "east_quiet_berths", "east_utility_room", "vertical_route_jam"]
+  },
+  "remove": {
+    "objects": ["day1_bedroll", "triage_cot", "cold_ration_table", "starting_storage"],
+    "hazards": ["central_strained_support"],
+    "resident_locations": ["Ash", "Imka", "Teo", "Maren"]
+  },
+  "upsert": {
+    "rooms": [
+      {"instance_id": "platform_camp", "physical_area_id": "central_camp", "family_id": "rest", "form": "permanent", "section_id": "central_platform", "footprint": {"level": 0, "x_start": 0, "x_end": 2, "lanes": [0]}, "state": "upgraded", "counts_as_area": true, "temporary_zone": false, "essential": true, "project_id": null, "specialization": "gate_recovery_overflow", "noise": "medium", "comfort": "medium", "environment": "dry", "primary_interaction": {"section_id": "central_platform", "level": 0, "x": 0, "lane": 1}, "camera": {"focus_target": {"section_id": "central_platform", "level": 0, "x": 1, "lane": 0}, "minimum_focus_bounds": [0, 2, 0, 1], "maximum_focus_bounds": [0, 3, 0, 2], "allowed_pan_range": 1, "occlusion_group": "platform_foreground_columns", "foreground_fade_targets": ["platform_ceiling_cables"], "default_selection_target": "central_bunk", "return_framing": "shelter_overview"}},
+      {"instance_id": "relay_kiosk", "physical_area_id": "central_relay", "family_id": "operations", "form": "permanent", "section_id": "central_platform", "footprint": {"level": 0, "x_start": 4, "x_end": 5, "lanes": [0]}, "state": "upgraded", "counts_as_area": true, "temporary_zone": false, "essential": true, "project_id": "forecast_board", "specialization": "weather_forecast", "noise": "low", "comfort": "medium", "environment": "dry", "primary_interaction": {"section_id": "central_platform", "level": 0, "x": 4, "lane": 1}, "camera": {"focus_target": {"section_id": "central_platform", "level": 0, "x": 4, "lane": 0}, "minimum_focus_bounds": [4, 5, 0, 1], "maximum_focus_bounds": [3, 6, 0, 2], "allowed_pan_range": 1, "occlusion_group": "platform_ceiling_cables", "foreground_fade_targets": ["platform_foreground_columns"], "default_selection_target": "forecast_board", "return_framing": "shelter_overview"}},
+      {"instance_id": "service_alcove", "physical_area_id": "central_service", "family_id": "utility", "form": "permanent", "section_id": "central_platform", "footprint": {"level": 0, "x_start": 6, "x_end": 7, "lanes": [0]}, "state": "under_repair", "counts_as_area": true, "temporary_zone": false, "essential": true, "project_id": "storm_recovery_repairs", "specialization": "power_air_source", "noise": "high", "comfort": "negative", "environment": "repaired_cinder", "primary_interaction": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}, "camera": {"focus_target": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 0}, "minimum_focus_bounds": [6, 7, 0, 1], "maximum_focus_bounds": [5, 8, 0, 2], "allowed_pan_range": 1, "occlusion_group": "platform_ceiling_cables", "foreground_fade_targets": ["platform_foreground_columns"], "default_selection_target": "service_rack", "return_framing": "shelter_overview"}},
+      {"instance_id": "concession_cage", "physical_area_id": "central_concession", "family_id": "food", "form": "permanent", "section_id": "central_platform", "footprint": {"level": 0, "x_start": 8, "x_end": 9, "lanes": [0]}, "state": "repurposed", "counts_as_area": true, "temporary_zone": false, "essential": true, "project_id": "concession_repurpose", "specialization": "communal_meal", "noise": "medium", "comfort": "warm", "environment": "dry", "primary_interaction": {"section_id": "central_platform", "level": 0, "x": 8, "lane": 1}, "camera": {"focus_target": {"section_id": "central_platform", "level": 0, "x": 8, "lane": 0}, "minimum_focus_bounds": [8, 9, 0, 1], "maximum_focus_bounds": [7, 10, 0, 2], "allowed_pan_range": 1, "occlusion_group": "platform_foreground_columns", "foreground_fade_targets": ["platform_track_guard"], "default_selection_target": "communal_meal_point", "return_framing": "shelter_overview"}},
+      {"instance_id": "central_workshop", "physical_area_id": "central_workshop", "family_id": "workshop", "form": "permanent", "section_id": "central_platform", "footprint": {"level": 0, "x_start": 10, "x_end": 11, "lanes": [0]}, "state": "operational", "counts_as_area": true, "temporary_zone": false, "essential": true, "project_id": "workshop_install", "specialization": "mechanical", "noise": "high", "comfort": "negative", "environment": "dry", "primary_interaction": {"section_id": "central_platform", "level": 0, "x": 10, "lane": 1}, "camera": {"focus_target": {"section_id": "central_platform", "level": 0, "x": 10, "lane": 0}, "minimum_focus_bounds": [10, 11, 0, 1], "maximum_focus_bounds": [9, 12, 0, 2], "allowed_pan_range": 1, "occlusion_group": "platform_foreground_columns", "foreground_fade_targets": ["platform_track_guard"], "default_selection_target": "central_workbench", "return_framing": "shelter_overview"}},
+      {"instance_id": "central_stores", "physical_area_id": "central_stores", "family_id": "storage", "form": "permanent", "section_id": "central_platform", "footprint": {"level": 0, "x_start": 12, "x_end": 13, "lanes": [0]}, "state": "operational", "counts_as_area": true, "temporary_zone": false, "essential": true, "project_id": "storage_fitout", "specialization": "components_and_emergency", "noise": "low", "comfort": "neutral", "environment": "dry", "primary_interaction": {"section_id": "central_platform", "level": 0, "x": 12, "lane": 1}, "camera": {"focus_target": {"section_id": "central_platform", "level": 0, "x": 12, "lane": 0}, "minimum_focus_bounds": [12, 13, 0, 1], "maximum_focus_bounds": [11, 13, 0, 2], "allowed_pan_range": 1, "occlusion_group": "platform_foreground_columns", "foreground_fade_targets": ["platform_track_guard"], "default_selection_target": "central_storage_cabinet", "return_framing": "shelter_overview"}},
+      {"instance_id": "gate_stabilization_zone", "physical_area_id": "gate_threshold", "family_id": "medical", "form": "temporary", "section_id": "main_gate", "footprint": {"level": 0, "x_start": 1, "x_end": 1, "lanes": [0]}, "state": "operational", "counts_as_area": false, "temporary_zone": true, "essential": false, "project_id": null, "specialization": "arrival_stabilization", "noise": "medium", "comfort": "low", "environment": "surface_adjacent", "primary_interaction": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 1}, "camera": {"focus_target": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 0}, "minimum_focus_bounds": [0, 1, 0, 1], "maximum_focus_bounds": [0, 2, 0, 1], "allowed_pan_range": 0, "occlusion_group": "gate_foreground_grille", "foreground_fade_targets": ["gate_foreground_grille"], "default_selection_target": "gate_triage_cot", "return_framing": "shelter_overview"}},
+      {"instance_id": "east_entry_store", "physical_area_id": "east_reclaimed_entry", "family_id": "storage", "form": "permanent", "section_id": "east_staff_wing", "footprint": {"level": 0, "x_start": 0, "x_end": 1, "lanes": [0]}, "state": "operational", "counts_as_area": true, "temporary_zone": false, "essential": false, "project_id": "east_reclaim", "specialization": "medical_staging", "noise": "low", "comfort": "neutral", "environment": "dry", "primary_interaction": {"section_id": "east_staff_wing", "level": 0, "x": 0, "lane": 1}, "camera": {"focus_target": {"section_id": "east_staff_wing", "level": 0, "x": 0, "lane": 0}, "minimum_focus_bounds": [0, 1, 0, 1], "maximum_focus_bounds": [0, 2, 0, 1], "allowed_pan_range": 1, "occlusion_group": "east_foreground_wall", "foreground_fade_targets": ["east_staff_door_frames"], "default_selection_target": "east_entry_cabinet", "return_framing": "east_section_focus"}},
+      {"instance_id": "east_treatment_room", "physical_area_id": "east_treatment", "family_id": "medical", "form": "permanent", "section_id": "east_staff_wing", "footprint": {"level": 0, "x_start": 2, "x_end": 4, "lanes": [0]}, "state": "upgraded", "counts_as_area": true, "temporary_zone": false, "essential": true, "project_id": "triage_upgrade", "specialization": "respiratory_and_quiet", "noise": "low", "comfort": "high", "environment": "clean", "primary_interaction": {"section_id": "east_staff_wing", "level": 0, "x": 2, "lane": 1}, "camera": {"focus_target": {"section_id": "east_staff_wing", "level": 0, "x": 3, "lane": 0}, "minimum_focus_bounds": [2, 4, 0, 1], "maximum_focus_bounds": [1, 5, 0, 1], "allowed_pan_range": 1, "occlusion_group": "east_foreground_wall", "foreground_fade_targets": ["east_staff_door_frames"], "default_selection_target": "east_medical_bench", "return_framing": "east_section_focus"}},
+      {"instance_id": "east_quiet_berths", "physical_area_id": "east_quiet_berths", "family_id": "rest", "form": "permanent", "section_id": "east_staff_wing", "footprint": {"level": 0, "x_start": 5, "x_end": 7, "lanes": [0]}, "state": "upgraded", "counts_as_area": true, "temporary_zone": false, "essential": true, "project_id": "east_quiet_berths", "specialization": "quiet_recovery", "noise": "low", "comfort": "high", "environment": "dry", "primary_interaction": {"section_id": "east_staff_wing", "level": 0, "x": 5, "lane": 1}, "camera": {"focus_target": {"section_id": "east_staff_wing", "level": 0, "x": 6, "lane": 0}, "minimum_focus_bounds": [5, 7, 0, 1], "maximum_focus_bounds": [4, 8, 0, 1], "allowed_pan_range": 1, "occlusion_group": "east_foreground_wall", "foreground_fade_targets": ["east_staff_door_frames"], "default_selection_target": "east_quiet_bunk_1", "return_framing": "east_section_focus"}},
+      {"instance_id": "east_utility_room", "physical_area_id": "east_utility", "family_id": "utility", "form": "permanent", "section_id": "east_staff_wing", "footprint": {"level": 0, "x_start": 8, "x_end": 9, "lanes": [0]}, "state": "operational", "counts_as_area": true, "temporary_zone": false, "essential": true, "project_id": "east_utility_connection", "specialization": "water_reserve_and_isolation", "noise": "medium", "comfort": "neutral", "environment": "dry", "primary_interaction": {"section_id": "east_staff_wing", "level": 0, "x": 8, "lane": 1}, "camera": {"focus_target": {"section_id": "east_staff_wing", "level": 0, "x": 8, "lane": 0}, "minimum_focus_bounds": [8, 9, 0, 1], "maximum_focus_bounds": [7, 9, 0, 1], "allowed_pan_range": 1, "occlusion_group": "east_foreground_wall", "foreground_fade_targets": ["shaft_foreground_gate"], "default_selection_target": "east_reserve_tank", "return_framing": "east_section_focus"}}
+    ],
+    "objects": [
+      {"instance_id": "main_gate_control", "object_id": "main_gate_control", "section_id": "main_gate", "anchor": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": null, "project_id": null, "utility_connection": "gate_power_control", "authored_fixed": true},
+      {"instance_id": "gate_triage_cot", "object_id": "triage_cot", "section_id": "main_gate", "anchor": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "gate_stabilization_zone", "project_id": "triage_cot_install", "utility_connection": null, "temporary_function": "medical", "counts_as_area": false},
+      {"instance_id": "central_bunk", "object_id": "quiet_bunk", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 0, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "platform_camp", "project_id": null, "utility_connection": "central_air_node"},
+      {"instance_id": "repaired_station_sign", "object_id": "repaired_station_sign", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 1, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "platform_camp", "project_id": "storm_recovery_repairs", "utility_connection": null, "hope_eligible": true},
+      {"instance_id": "forecast_board", "object_id": "forecast_board", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 5, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "relay_kiosk", "project_id": "forecast_board", "utility_connection": "central_power_bus"},
+      {"instance_id": "communal_meal_point", "object_id": "communal_meal_point", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 8, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "concession_cage", "project_id": "hope_beat_setup", "utility_connection": null, "hope_eligible": true},
+      {"instance_id": "east_ration_table", "object_id": "cold_ration_table", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 9, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "concession_cage", "project_id": "concession_repurpose", "utility_connection": null},
+      {"instance_id": "central_workbench", "object_id": "workbench", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 10, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "central_workshop", "project_id": "workshop_install", "utility_connection": "central_power_bus"},
+      {"instance_id": "central_storage_cabinet", "object_id": "storage_cabinet", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 12, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "central_stores", "project_id": "storage_fitout", "utility_connection": null},
+      {"instance_id": "central_emergency_cabinet", "object_id": "emergency_cabinet", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 13, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "central_stores", "project_id": "storm_filter_prep", "utility_connection": null},
+      {"instance_id": "east_entry_cabinet", "object_id": "storage_cabinet", "section_id": "east_staff_wing", "anchor": {"section_id": "east_staff_wing", "level": 0, "x": 0, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "east_entry_store", "project_id": "east_reclaim", "utility_connection": null},
+      {"instance_id": "east_medical_bench", "object_id": "medical_bench", "section_id": "east_staff_wing", "anchor": {"section_id": "east_staff_wing", "level": 0, "x": 2, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "east_treatment_room", "project_id": "triage_upgrade", "utility_connection": "east_air_node"},
+      {"instance_id": "east_quiet_bunk_1", "object_id": "quiet_bunk", "section_id": "east_staff_wing", "anchor": {"section_id": "east_staff_wing", "level": 0, "x": 5, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "east_quiet_berths", "project_id": "east_quiet_berths", "utility_connection": "east_air_node"},
+      {"instance_id": "east_quiet_bunk_2", "object_id": "quiet_bunk", "section_id": "east_staff_wing", "anchor": {"section_id": "east_staff_wing", "level": 0, "x": 6, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "east_quiet_berths", "project_id": "east_quiet_berths", "utility_connection": "east_air_node"},
+      {"instance_id": "juna_quiet_bunk", "object_id": "quiet_bunk", "section_id": "east_staff_wing", "anchor": {"section_id": "east_staff_wing", "level": 0, "x": 7, "lane": 0}, "rotation": 0, "state": "reserved_or_available", "room_instance_id": "east_quiet_berths", "project_id": "east_quiet_berths", "utility_connection": "east_air_node", "juna_berth_state": "prepared"},
+      {"instance_id": "east_reserve_tank", "object_id": "east_reserve_tank", "section_id": "east_staff_wing", "anchor": {"section_id": "east_staff_wing", "level": 0, "x": 8, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "east_utility_room", "project_id": "east_water_reserve", "utility_connection": "east_water_reserve"},
+      {"instance_id": "east_branch_isolation", "object_id": "branch_isolation_control", "section_id": "east_staff_wing", "anchor": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "east_utility_room", "project_id": "east_utility_connection", "utility_connection": "east_water_reserve"}
+    ],
+    "utility_nodes": [
+      {"node_id": "east_power_bus", "utility": "Power", "node_type": "distribution", "section_id": "east_staff_wing", "address": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 0}, "service_point": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 1}, "state": "live", "charge_backup_compatible": true},
+      {"node_id": "east_air_node", "utility": "Air", "node_type": "distribution", "section_id": "east_staff_wing", "address": {"section_id": "east_staff_wing", "level": 0, "x": 8, "lane": 0}, "service_point": {"section_id": "east_staff_wing", "level": 0, "x": 8, "lane": 1}, "state": "live", "charge_backup_compatible": false},
+      {"node_id": "east_water_reserve", "utility": "Water", "node_type": "storage_source", "section_id": "east_staff_wing", "address": {"section_id": "east_staff_wing", "level": 0, "x": 8, "lane": 0}, "service_point": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 1}, "state": "live", "charge_backup_compatible": false},
+      {"node_id": "east_support_zone", "utility": "Structure", "node_type": "support_source", "section_id": "east_staff_wing", "address": {"section_id": "east_staff_wing", "level": 0, "x": 4, "lane": 0}, "service_point": {"section_id": "east_staff_wing", "level": 0, "x": 4, "lane": 1}, "state": "live", "charge_backup_compatible": false}
+    ],
+    "utility_branches": [
+      {"branch_id": "east_power_branch", "utility": "Power", "source_node": "central_power_bus", "target_node": "east_power_bus", "live": true, "isolated": false, "rooms_affected": ["east_treatment_room", "east_quiet_berths", "east_utility_room"], "residents_affected": [], "recovery_method": "service East distribution cabinet"},
+      {"branch_id": "east_air_branch", "utility": "Air", "source_node": "central_air_node", "target_node": "east_air_node", "live": true, "isolated": false, "rooms_affected": ["east_treatment_room", "east_quiet_berths"], "residents_affected": ["Juna"], "recovery_method": "open East damper or evacuate"},
+      {"branch_id": "east_water_branch", "utility": "Water", "source_node": "central_water_storage", "target_node": "east_water_reserve", "live": true, "isolated": false, "rooms_affected": ["east_treatment_room", "east_utility_room"], "residents_affected": [], "recovery_method": "carry reserve or repair long delivery branch"},
+      {"branch_id": "east_structure_branch", "utility": "Structure", "source_node": "central_support_zone", "target_node": "east_support_zone", "live": true, "isolated": false, "rooms_affected": ["east_entry_store", "east_treatment_room", "east_quiet_berths", "east_utility_room"], "residents_affected": [], "recovery_method": "reinforce East staff arch"}
+    ],
+    "utility_consumers": [
+      {"consumer_id": "workshop", "utility": "Power", "node_id": "central_power_bus", "object_instance_id": "central_workbench", "priority": "normal", "load": 1.5, "state": "operational"},
+      {"consumer_id": "medical_equipment", "utility": "Power", "node_id": "east_power_bus", "object_instance_id": "east_medical_bench", "priority": "critical", "load": 0.75, "state": "operational"},
+      {"consumer_id": "east_water_reserve_service", "utility": "Water", "node_id": "east_water_reserve", "object_instance_id": "east_reserve_tank", "priority": "essential", "load": 0.0, "state": "operational"}
+    ],
+    "hazards": [
+      {"hazard_id": "central_storm_repair", "family": "Structure", "state": "resolved", "path_severity": 0, "cells": [{"section_id": "central_platform", "level": 0, "x": 7, "lane": 0}]}
+    ],
+    "resident_locations": [
+      {"resident_id": "Ash", "address": {"section_id": "central_platform", "level": 0, "x": 10, "lane": 1}},
+      {"resident_id": "Imka", "address": {"section_id": "east_staff_wing", "level": 0, "x": 2, "lane": 1}},
+      {"resident_id": "Teo", "address": {"section_id": "east_staff_wing", "level": 0, "x": 5, "lane": 1}},
+      {"resident_id": "Maren", "address": {"section_id": "central_platform", "level": 0, "x": 12, "lane": 1}},
+      {"resident_id": "Juna", "address": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 1}, "state": "admission_choice_or_recovering"}
+    ],
+    "hope_anchors": [
+      {"anchor_id": "east_minimal_lamp", "reference_type": "object", "reference_id": "platform_work_lamp", "required_state": "operational", "earned_through": "platform_lamp_install", "grants_stock": false, "clears_consequences": false, "tier": "minimal"},
+      {"anchor_id": "east_minimal_quiet_berth", "reference_type": "room", "reference_id": "east_quiet_berths", "required_state": "upgraded", "earned_through": "east_quiet_berths", "grants_stock": false, "clears_consequences": false, "tier": "minimal"},
+      {"anchor_id": "east_full_communal_meal", "reference_type": "object", "reference_id": "communal_meal_point", "required_state": "operational", "earned_through": "hope_beat_setup", "grants_stock": false, "clears_consequences": false, "tier": "full"}
+    ]
+  }
+}

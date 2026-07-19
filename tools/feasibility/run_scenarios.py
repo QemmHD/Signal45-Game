@@ -103,7 +103,7 @@ def _payload(
     )
     return {
         "schema_version": 2,
-        "model_stage": "Prompt 3 survival systems",
+        "model_stage": config["metadata"]["stage"],
         "generated_from_source_commit": config["metadata"]["source_commit"],
         "provisional": True,
         "deterministic_repeat_equal": deterministic,
@@ -114,6 +114,7 @@ def _payload(
             "outcome classification",
             "resource arithmetic",
             "utility causality",
+            "spatial travel-factor integration",
             "save idempotency",
         ],
         "model_does_not_claim": [
@@ -123,6 +124,7 @@ def _payload(
             "forecast readability",
             "camera readability",
             "incident tension",
+            "measured spatial travel time",
             "measured player-session pacing",
         ],
         "summary": {
@@ -142,7 +144,7 @@ def _payload(
 def _markdown_summary(payload: dict[str, Any]) -> str:
     summary = payload["summary"]
     lines = [
-        "# Signal 45 Prompt 3 — Generated Survival Scenario Summary",
+        "# Signal 45 Prompt 4 - Generated Spatially Calibrated Feasibility Summary",
         "",
         "> Generated from canonical JSON. Values are provisional; this model does not prove fun, comprehension, or measured pacing.",
         "",

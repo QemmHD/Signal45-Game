@@ -67,10 +67,9 @@ The damaged source supplies 12 nominal Power at 90% condition, or 10.8 usable ca
 | Relay Kiosk | 1.00 |
 | Medical equipment | 0.75 |
 | Workshop | 1.50 |
-| Task lighting | 0.75 |
-| Optional comfort lighting | 1.00 |
+| Platform Work Lamp (`platform_lighting`) | 0.75 |
 
-Priority protects Air, Water, Medical, Relay, and the Service Alcove before task lighting, Workshop, and comfort. A forecast displays current capacity, demand, margin, the first shed load, Charge duration under deficit, and the next endangered branch. Charge discharges by stage and is capped at 3 units per affected storm stage. It cannot repair a disconnected branch or sustain all loads indefinitely.
+Priority protects Air, Water, Medical, Relay, and the Service Alcove before the Optional Platform Work Lamp. Workshop remains Normal priority. A forecast displays current capacity, demand, margin, the first shed load, Charge duration under deficit, and the next endangered branch. Charge discharges by stage and is capped at 3 units per affected storm stage. It cannot repair a disconnected branch or sustain all loads indefinitely. The Platform Lighting Upgrade changes the same fixture/circuit and adds no load.
 
 Prepared play remains viable with Charge capacity halved to 15 on both routes, but this does not validate the final discharge rate. The relevant prototype must make Power margin and Charge duration visibly different concepts.
 

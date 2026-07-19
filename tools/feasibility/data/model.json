@@ -2,12 +2,12 @@
   "schema_version": 1,
   "metadata": {
     "title": "Signal 45",
-    "stage": "Prompt 3",
-    "model_name": "The First Count survival feasibility model",
+    "stage": "Prompt 4 spatially calibrated survival model",
+    "model_name": "The First Count survival and spatial feasibility model",
     "provisional": true,
     "canonical_balance_source": "tools/feasibility/data/model.json",
-    "source_commit": "3243aff8f86baeffa32875d161a86354ce9ee42b",
-    "notes": "This model tests internal consistency, survival causality, schedule resilience, outcome classification, and save idempotency. It cannot prove fun, comprehension, camera comfort, emotional impact, forecast readability, or measured runtime pacing."
+    "source_commit": "8f8ded4cc3969eccb4968e63a615a4cb5a0007b6",
+    "notes": "This model tests internal consistency, survival causality, spatially calibrated schedule resilience, outcome classification, and save idempotency. It cannot prove fun, comprehension, camera comfort, emotional impact, forecast readability, build tactility, device performance, or measured runtime pacing."
   },
   "time": {
     "interaction_seconds": {
@@ -330,16 +330,15 @@
         "relay_kiosk": 1.0,
         "medical_equipment": 0.75,
         "workshop": 1.5,
-        "task_lighting": 0.75,
-        "comfort_lighting": 1.0
+        "platform_lighting": 0.75
       },
       "priority_tiers": {
         "critical": ["air_filtration", "medical_equipment"],
         "essential": ["water_pumping", "relay_kiosk", "service_alcove"],
         "normal": ["workshop"],
-        "optional": ["task_lighting", "comfort_lighting"]
+        "optional": ["platform_lighting"]
       },
-      "shed_order": ["comfort_lighting", "task_lighting", "workshop", "service_alcove", "relay_kiosk", "water_pumping", "medical_equipment", "air_filtration"]
+      "shed_order": ["platform_lighting", "workshop", "service_alcove", "relay_kiosk", "water_pumping", "medical_equipment", "air_filtration"]
     },
     "air": {
       "nominal_capacity": 12.0,
@@ -481,7 +480,7 @@
     "ordinary_demand": 8.0,
     "temporary_demand": 3.5,
     "charge_delivery": 1.0,
-    "shed_load": "task_lighting",
+    "shed_load": "platform_lighting",
     "shed_amount": 0.75,
     "responses": ["charge", "shed_lighting", "delay"],
     "introduced_after_first_session": true,
@@ -553,6 +552,7 @@
     "east": {
       "label": "East — Staff & First-Aid Wing",
       "travel_profile": "compact",
+      "spatial_mapping": {"layout_id": "east_day7", "coordinate_travel_factor": 0.08, "coordinate_hauling_factor": 0.04, "travel_factor": 0.08, "hauling_factor": 0.04, "replaces_abstract": true, "selection_reason": "coordinate result replaces compact abstract allowance", "provisional": true},
       "work_capacity_multiplier_after_day_3": 1.01,
       "treatment_work_modifier": -1.0,
       "daily_water_production_after_signature_room": 0.0,
@@ -566,6 +566,7 @@
     "west": {
       "label": "West — Pump & Service Gallery",
       "travel_profile": "typical",
+      "spatial_mapping": {"layout_id": "west_day7", "coordinate_travel_factor": 0.08, "coordinate_hauling_factor": 0.04, "travel_factor": 0.10, "hauling_factor": 0.04, "replaces_abstract": true, "selection_reason": "coordinate result fits within the existing typical allowance; conservative 0.10 retained until damp-floor and congestion graybox measurement", "provisional": true},
       "work_capacity_multiplier_after_day_3": 0.98,
       "treatment_work_modifier": 1.0,
       "daily_water_production_after_signature_room": 1.5,
@@ -580,7 +581,7 @@
   "projects": [
     {
       "id": "platform_lamp_install",
-      "name": "Install platform task lamp",
+      "name": "Install Platform Work Lamp",
       "route": "all",
       "tier": "mandatory",
       "class": "short_install",
@@ -615,8 +616,8 @@
       "max_workers": 1,
       "utility_requirement": "Clean Water forecast visible; no powered equipment required",
       "dependencies": [],
-      "benefits": {"functional_areas": 1, "medical_tutorial": 1},
-      "failure_effect": "Medical tutorial and fifth functional area fail",
+      "benefits": {"medical_tutorial": 1, "temporary_medical_function": 1},
+      "failure_effect": "Medical tutorial and temporary stabilization function fail",
       "highball_eligible": false,
       "save_checkpoints": ["activation", "delivery", "partial", "completion"]
     },
@@ -634,7 +635,7 @@
       "role": "structure",
       "min_workers": 1,
       "max_workers": 1,
-      "utility_requirement": "Task lighting",
+      "utility_requirement": "Platform Work Lamp",
       "dependencies": ["platform_lamp_install"],
       "benefits": {"risk_warning": 1},
       "failure_effect": "Route work remains unsafe and Day 2 risk cannot be accepted knowingly",
@@ -656,7 +657,7 @@
       "role": "structure",
       "min_workers": 1,
       "max_workers": 3,
-      "utility_requirement": "Task lighting; section remains isolated during clearing",
+      "utility_requirement": "Platform Work Lamp or equivalent project illumination; section remains isolated during clearing",
       "dependencies": ["route_survey"],
       "benefits": {"functional_areas": 1, "route_open": 1},
       "failure_effect": "East route cannot connect or reach ending area count",
@@ -678,7 +679,7 @@
       "role": "structure",
       "min_workers": 1,
       "max_workers": 3,
-      "utility_requirement": "Task lighting; pump branch isolated",
+      "utility_requirement": "Platform Work Lamp or equivalent project illumination; pump branch isolated",
       "dependencies": ["route_survey"],
       "benefits": {"functional_areas": 1, "route_open": 1, "route_salvage": 1},
       "failure_effect": "West route cannot connect or reach ending area count",
@@ -702,7 +703,7 @@
       "max_workers": 2,
       "utility_requirement": "Main Power branch stable",
       "dependencies": ["east_reclaim"],
-      "benefits": {"utility_extended": 1},
+      "benefits": {"utility_extended": 1, "functional_areas": 1},
       "failure_effect": "East signature room and storm preparation cannot operate",
       "highball_eligible": true,
       "save_checkpoints": ["activation", "delivery", "partial", "completion"]
@@ -724,7 +725,7 @@
       "max_workers": 2,
       "utility_requirement": "Main Power branch stable",
       "dependencies": ["west_reclaim"],
-      "benefits": {"utility_extended": 1},
+      "benefits": {"utility_extended": 1, "functional_areas": 1},
       "failure_effect": "West signature room and storm preparation cannot operate",
       "highball_eligible": true,
       "save_checkpoints": ["activation", "delivery", "partial", "completion"]
@@ -788,10 +789,10 @@
       "role": "logistics",
       "min_workers": 1,
       "max_workers": 2,
-      "utility_requirement": "None beyond task lighting",
+      "utility_requirement": "None beyond the Platform Work Lamp",
       "dependencies": ["route_survey"],
-      "benefits": {"functional_areas": 1, "repurpose_proof": 1},
-      "failure_effect": "Repurpose proof and area target fail",
+      "benefits": {"repurpose_proof": 1},
+      "failure_effect": "Repurpose proof fails; the existing area remains counted once",
       "highball_eligible": false,
       "save_checkpoints": ["preview", "activation", "delivery", "partial", "completion"]
     },
@@ -898,7 +899,7 @@
       "role": "logistics",
       "min_workers": 1,
       "max_workers": 2,
-      "utility_requirement": "None beyond task lighting",
+      "utility_requirement": "None beyond the Platform Work Lamp",
       "dependencies": ["concession_repurpose"],
       "benefits": {"functional_areas": 1, "storage_proof": 1},
       "failure_effect": "Ten-area target and separate storage proof fail",
@@ -920,9 +921,9 @@
       "role": "medical",
       "min_workers": 1,
       "max_workers": 2,
-      "utility_requirement": "Clean Water and task lighting",
+      "utility_requirement": "Clean Water and the Platform Work Lamp circuit",
       "dependencies": ["triage_cot_install"],
-      "benefits": {"treatment_efficiency": 1},
+      "benefits": {"treatment_efficiency": 1, "functional_areas": 1},
       "failure_effect": "Treatment recovery proof is incomplete",
       "highball_eligible": true,
       "save_checkpoints": ["activation", "delivery", "partial", "completion"]
@@ -994,8 +995,8 @@
       "save_checkpoints": ["activation", "delivery", "completion"]
     },
     {
-      "id": "comfort_lighting",
-      "name": "Install optional comfort lighting",
+      "id": "platform_lighting_upgrade",
+      "name": "Upgrade Platform Work Lamp",
       "route": "all",
       "tier": "optional",
       "class": "standard",
@@ -1007,9 +1008,9 @@
       "role": "utility",
       "min_workers": 1,
       "max_workers": 2,
-      "utility_requirement": "Adds optional low-priority Power load",
+      "utility_requirement": "Modifies the existing platform_lighting circuit without adding a second Power consumer",
       "dependencies": ["platform_lamp_install"],
-      "benefits": {"comfort": 1, "optional_power_load": 1},
+      "benefits": {"comfort": 1, "platform_lighting_visual_upgrade": 1},
       "failure_effect": "No mandatory effect",
       "highball_eligible": false,
       "save_checkpoints": ["activation", "delivery", "partial", "cancellation", "completion"]

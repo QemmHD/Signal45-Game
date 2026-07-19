@@ -171,3 +171,7 @@ Prompt 4 may define station geometry only while preserving:
 10. the existing save boundaries for placement, connection, isolation, closure, and room conversion.
 
 Prompt 4 must not expand survival values, resident AI, full crafting, conflict, expeditions, factions, additional maps, or final assets. Its mandatory output is a spatial revalidation input, not a replacement economy.
+
+## Prompt 4 completion amendment
+
+Prompt 4 preserves the survival ceiling while correcting spatial contradictions: one Platform Work Lamp consumer, physical area counting, and exclusive spatial travel mapping. All 176 mandatory Prompt 2/3 scenarios still match. Documents 24–30 and `tools/spatial/` supersede this entry section for current geometry; Prompt 5 is now the next boundary.

@@ -99,7 +99,7 @@ The first simulator implementation accelerated repeated uses but charged only fi
 - Highball as a mandatory deadline tool or unbounded throughput multiplier.
 - Juna as an instant Water specialist or free fifth worker.
 - Unlimited storm propagation or simultaneous major crises.
-- Treating optional Comfort Lighting, Visitor Screen, or Relay Upgrade as hidden mandatory work.
+- Treating the optional Platform Lighting Upgrade, Visitor Screen, or Relay Upgrade as hidden mandatory work.
 - Eight to ten unique room systems for eight to ten functional areas.
 
 ## Red-team findings and resolutions
@@ -147,4 +147,4 @@ Prompt 3 must not yet expand full resident AI, final art, campaign content beyon
 
 Prompt 3 has now executed these entry requirements without changing the 12-WU resident base or adding stocks, primary conditions, utilities, room families, maps, combat, or resident AI. It split the existing ten-WU daily allowance into eight essential plus two incident reserve; replaced the per-person emergency floor with a shelter-pool rule; added five outcome classes, an earned hope fallback, explicit resource responses, the Relay Load Test, named treatment, reusable incidents, and deterministic Highball strain.
 
-Current evidence is 176/176 matched scenarios and 144 passing local tests. Documents 18–23 and canonical/generated data supersede Prompt 2 wherever survival semantics or current result counts differ. Prompt 4, not Prompt 3, is the next entry boundary.
+Current survival evidence remains 176/176 matched scenarios and 144 passing feasibility tests. Prompt 4 adds 111/111 spatial scenarios and 71 spatial tests, unifies the Platform Work Lamp, corrects physical area counting, and supplies coordinate travel without changing the 12-WU base. Documents 24–30 supersede this handoff for geometry; Prompt 5 is the next entry boundary.

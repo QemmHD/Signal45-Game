@@ -18,8 +18,8 @@ Power is live operating capacity. A section or device must be connected to a hea
 |---|---|
 | Critical | Air protection in an occupied section, essential medical stabilization, emergency controls |
 | Essential | Water pumping/treatment, committed Relay operation, core service controls |
-| Normal | Workshop, task lighting, routine equipment |
-| Optional | repaired platform comfort lamp |
+| Normal | Workshop and routine equipment |
+| Optional | Platform Work Lamp (`platform_lighting`) |
 
 When margin becomes negative, optional lighting sheds before normal or essential systems. The forecast shows current capacity, demand, margin, first shed load, and next endangered load. A faulted or disconnected branch is not repaired by spending Charge.
 
@@ -47,7 +47,7 @@ Temporary demand is 11.5 against 10.8 live Power, creating a visible 0.7 deficit
 | Response | Immediate result | Cost and later effect |
 |---|---|---|
 | Discharge Charge | connected deficit is covered | draws 1.111 Charge after conversion loss; less storm reserve |
-| Shed task lighting | platform/task lamp visibly dims; calibration continues | no Charge; temporary light loss; lamp restores when margin returns |
+| Shed Platform Work Lamp | the same Day 1 lamp visibly dims; calibration continues | no Charge; temporary light loss; lamp restores when margin returns |
 | Delay calibration | no stock spent | one stage less warning lead/forecast confidence |
 
 All three remain feasible. The game autosaves before confirmation and after the committed response. No injury or campaign-ending consequence exists. The event teaches one distinction: **Power is live capacity; Charge is finite stored backup.**
@@ -178,5 +178,5 @@ Power priority, branch connection, isolated state, Charge consumer/draw/loss, Ai
 - Validate Power-versus-Charge comprehension in the Relay Load Test.
 - Validate two-tap Water-link diagnosis on a small landscape phone.
 - Measure overlay readability with large text and color-vision settings.
-- Revalidate branch/node placement, isolation, evacuation, and vertical travel after Prompt 4 coordinates exist.
+- Prompt 4 now validates branch/node placement, service access, isolation, evacuation, and sealed vertical travel. Revalidate logical cost against a mobile 3D graybox before production tuning.
 - Test whether Air progression feels fair without becoming a meter wall.

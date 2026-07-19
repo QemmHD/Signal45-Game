@@ -1,0 +1,39 @@
+{
+  "extends": "east_day7_alternate",
+  "set": {
+    "schema_version": 1,
+    "display_name": "Poor but Valid — Long Haul East",
+    "description": "A deliberately inefficient layout swaps the East emergency nook and Stores. It preserves all access and proofs while exposing long Materials trips.",
+    "comparison_allowance": {"profile": "poor_valid", "travel_factor": 0.16, "hauling_factor": 0.07, "source": "Prompt 2 comparison only; replaced by coordinates when integrated"},
+    "metric_paths": [
+      {"name": "ordinary_gate_to_relay", "path_class": "normal_walk", "start": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 4, "lane": 1}},
+      {"name": "ordinary_rest_to_meal", "path_class": "normal_walk", "start": {"section_id": "east_staff_wing", "level": 0, "x": 3, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 8, "lane": 1}},
+      {"name": "ordinary_storage_to_relay", "path_class": "normal_walk", "start": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 4, "lane": 1}},
+      {"name": "materials_delivery", "path_class": "material_carry", "start": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}},
+      {"name": "heavy_carry", "path_class": "heavy_carry", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "east_staff_wing", "level": 0, "x": 1, "lane": 1}},
+      {"name": "gate_to_medical", "path_class": "patient_carry", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "east_staff_wing", "level": 0, "x": 5, "lane": 1}},
+      {"name": "gate_to_stabilization", "path_class": "patient_escort", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 1}},
+      {"name": "storage_to_workshop", "path_class": "material_carry", "start": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 1}, "end": {"section_id": "east_staff_wing", "level": 0, "x": 1, "lane": 1}},
+      {"name": "rest_to_work", "path_class": "normal_walk", "start": {"section_id": "east_staff_wing", "level": 0, "x": 3, "lane": 1}, "end": {"section_id": "east_staff_wing", "level": 0, "x": 1, "lane": 1}},
+      {"name": "filter_service", "path_class": "utility_service", "start": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}},
+      {"name": "pump_service", "path_class": "utility_service", "start": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 7, "lane": 1}},
+      {"name": "water_isolation", "path_class": "utility_service", "start": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 1}, "end": {"section_id": "east_staff_wing", "level": 0, "x": 7, "lane": 1}},
+      {"name": "charge_control", "path_class": "utility_service", "start": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 7, "lane": 1}},
+      {"name": "evacuation", "path_class": "emergency_evacuation", "start": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 0, "lane": 1}}
+    ]
+  },
+  "remove": {
+    "rooms": ["east_entry_store", "east_reclaimed_nook"],
+    "objects": ["east_entry_cabinet", "east_emergency_cabinet"]
+  },
+  "upsert": {
+    "rooms": [
+      {"instance_id": "east_reclaimed_nook", "physical_area_id": "east_reclaimed_nook", "family_id": "storage", "form": "temporary", "section_id": "east_staff_wing", "footprint": {"level": 0, "x_start": 0, "x_end": 0, "lanes": [0]}, "state": "operational", "counts_as_area": true, "temporary_zone": false, "essential": false, "project_id": "east_reclaim", "specialization": "emergency_staging", "noise": "medium", "comfort": "low", "environment": "dusty", "primary_interaction": {"section_id": "east_staff_wing", "level": 0, "x": 0, "lane": 1}, "camera": {"focus_target": {"section_id": "east_staff_wing", "level": 0, "x": 0, "lane": 0}, "minimum_focus_bounds": [0, 0, 0, 1], "maximum_focus_bounds": [0, 1, 0, 1], "allowed_pan_range": 1, "occlusion_group": "east_foreground_lockers", "foreground_fade_targets": ["east_foreground_lockers"], "default_selection_target": "east_emergency_cabinet", "return_framing": "east_section_focus"}},
+      {"instance_id": "east_entry_store", "physical_area_id": "east_storage", "family_id": "storage", "form": "permanent", "section_id": "east_staff_wing", "footprint": {"level": 0, "x_start": 9, "x_end": 9, "lanes": [0]}, "state": "operational", "counts_as_area": true, "temporary_zone": false, "essential": true, "project_id": "storage_fitout", "specialization": "general", "noise": "low", "comfort": "low", "environment": "dry", "primary_interaction": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 1}, "camera": {"focus_target": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 0}, "minimum_focus_bounds": [9, 9, 0, 1], "maximum_focus_bounds": [8, 9, 0, 1], "allowed_pan_range": 1, "occlusion_group": "east_foreground_lockers", "foreground_fade_targets": ["east_foreground_lockers"], "default_selection_target": "east_entry_cabinet", "return_framing": "east_section_focus"}}
+    ],
+    "objects": [
+      {"instance_id": "east_emergency_cabinet", "object_id": "emergency_cabinet", "section_id": "east_staff_wing", "anchor": {"section_id": "east_staff_wing", "level": 0, "x": 0, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "east_reclaimed_nook", "project_id": "east_reclaim", "utility_connection": null},
+      {"instance_id": "east_entry_cabinet", "object_id": "storage_cabinet", "section_id": "east_staff_wing", "anchor": {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "east_entry_store", "project_id": "storage_fitout", "utility_connection": null}
+    ]
+  }
+}

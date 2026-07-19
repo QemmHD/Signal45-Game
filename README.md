@@ -4,7 +4,7 @@ Mobile-first survival management, railway shelter construction, community simula
 
 ## Development status
 
-Prompt 3 refines the deterministic seven-day model with five-stock behavior, four resident conditions, named medical treatment, section-level utilities, forecasts, bounded incidents, emergency actions, explicit outcome classes, and deterministic Highball strain. At provisional inputs, both routes still reach Full Proof without Highball; adverse and response cases retain meaningful failure. This is not evidence that the game is fun, balanced in play, production-ready, comprehensible on devices, medically authoritative, or legally cleared.
+Prompt 4 adds an engine-independent station grid, machine-readable Day 1/East/West layouts, room/object footprints, reclamation, portals, utility nodes, placement safety, navigation, evacuation, Room Focus bounds, spatial travel proxies, and cross-model validation. Both competent routes still reach Full Proof without Highball. This is not evidence that building is fun, camera/touch controls are comfortable, travel timing is measured, the game is production-ready, or the project is legally cleared.
 
 ## Design foundation
 
@@ -32,6 +32,13 @@ Prompt 3 refines the deterministic seven-day model with five-stock behavior, fou
 22. [Weather, Incidents, Emergency Actions, and Highball](docs/design/21_WEATHER_INCIDENTS_AND_EMERGENCY_ACTIONS.md)
 23. [Survival Simulation Results](docs/design/22_SURVIVAL_SIMULATION_RESULTS.md)
 24. [Prompt 3 Decisions](docs/design/23_PROMPT_3_DECISIONS.md)
+25. [Spatial Model and Coordinates](docs/design/24_SPATIAL_MODEL_AND_COORDINATES.md)
+26. [Room Families and Placeable Objects](docs/design/25_ROOM_FAMILIES_AND_PLACEABLE_OBJECTS.md)
+27. [Reclamation, Construction, and Placement](docs/design/26_RECLAMATION_CONSTRUCTION_AND_PLACEMENT.md)
+28. [Mobile Build Mode and Camera](docs/design/27_MOBILE_BUILD_MODE_AND_CAMERA.md)
+29. [Navigation, Utilities, and Evacuation](docs/design/28_NAVIGATION_UTILITIES_AND_EVACUATION.md)
+30. [Vertical-Slice Layouts and Spatial Results](docs/design/29_VERTICAL_SLICE_LAYOUTS_AND_SPATIAL_RESULTS.md)
+31. [Prompt 4 Decisions](docs/design/30_PROMPT_4_DECISIONS.md)
 
 ## Feasibility model
 
@@ -41,8 +48,12 @@ Python 3.12 and the standard library are sufficient.
 python tools/feasibility/validate_data.py
 python -m unittest discover -s tools/feasibility/tests -v
 python tools/feasibility/run_scenarios.py --mandatory --check-determinism
+python tools/spatial/validate_layouts.py --write-reports
+python -m unittest discover -s tools/spatial/tests -v
+python tools/spatial/run_spatial_scenarios.py --check-determinism
+python tools/spatial/generate_diagrams.py --check
 ```
 
-`tools/feasibility/data/model.json` is the single canonical numerical source. `tools/feasibility/reports/scenario_results.json` contains day/phase-level machine-readable survival, utility, treatment, incident, save, and outcome results; `scenario_summary.md` is the concise matrix. The CI workflow validates data, runs all Prompt 2 and Prompt 3 tests, repeats every mandatory scenario for determinism, rejects unexpected invariants, and verifies that reports are current.
+`tools/feasibility/data/model.json` remains the canonical survival/work source. `tools/spatial/data/` is authoritative for coordinates, shells, rooms, objects, reclamation, and layouts. Generated feasibility and spatial reports are checked for deterministic cleanliness in CI.
 
-The model distinguishes Full Proof, Recover First, Proof Incomplete, Shelter Failure, and Invariant Error. Its convenience viability flag is derived from those classes. Prompt 4 is deliberately not started.
+Current evidence: 176/176 mandatory feasibility scenarios, 111/111 spatial scenarios, 144 feasibility tests, and 71 spatial tests pass locally. Prompt 5 is the next boundary; it must not reinterpret logical paths as full resident AI.

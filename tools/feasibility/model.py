@@ -313,15 +313,14 @@ def calculate_power(
             "air_filtration",
             "water_pumping",
             "relay_kiosk",
-            "task_lighting",
+            "platform_lighting",
         ]
     }
     if "triage_cot_install" in completed_projects:
         active_loads["medical_equipment"] = power["loads"]["medical_equipment"]
     if "workshop_install" in completed_projects:
         active_loads["workshop"] = power["loads"]["workshop"]
-    if "comfort_lighting" in completed_projects:
-        active_loads["comfort_lighting"] = power["loads"]["comfort_lighting"]
+    # The optional upgrade modifies the same lamp/circuit; it never adds a load.
     if storm_affected_systems >= 1:
         active_loads["storm_air_overdraw"] = 1.5 * storm_affected_systems
     demand = sum(active_loads.values()) * demand_multiplier
@@ -1294,7 +1293,7 @@ def _allocate_project_work(
     work_log: list[dict[str, Any]] = []
     remaining_capacity = max(0.0, capacity)
     optional_id = options.get("optional_project")
-    force_optional = optional_id == "comfort_lighting" and state.day == 2
+    force_optional = optional_id == "platform_lighting_upgrade" and state.day == 2
     priority_optional = optional_id == "visitor_screen" and state.day == 5
     forced_optional_budget = min(5.0, remaining_capacity) if force_optional else remaining_capacity
 
@@ -1782,10 +1781,19 @@ def _daily_capacity(
         gross += juna_work
     available_equivalents = sum(availability.values()) + (0.25 if juna_work > 0 else 0.0)
     personal = work["personal_overhead_per_available_resident"] * available_equivalents
-    travel_profile = config["routes"][route]["travel_profile"]
     travel_multiplier = modifiers.get("travel_overhead_multiplier", 1.0)
-    travel = gross * work["travel_profiles"][travel_profile] * travel_multiplier
-    hauling = gross * work["hauling_rate"] * travel_multiplier
+    spatial_mapping = config["routes"][route].get("spatial_mapping")
+    if spatial_mapping and spatial_mapping.get("replaces_abstract"):
+        travel_factor = float(spatial_mapping["travel_factor"])
+        hauling_factor = float(spatial_mapping["hauling_factor"])
+        travel_source = f"spatial:{spatial_mapping['layout_id']}"
+    else:
+        travel_profile = config["routes"][route]["travel_profile"]
+        travel_factor = float(work["travel_profiles"][travel_profile])
+        hauling_factor = float(work["hauling_rate"])
+        travel_source = f"abstract:{travel_profile}"
+    travel = gross * travel_factor * travel_multiplier
+    hauling = gross * hauling_factor * travel_multiplier
     emergency = survival.shelter_emergency_capacity(
         list(resident_profiles.values()),
         work["minimum_emergency_shelter_capacity"],
@@ -1815,6 +1823,10 @@ def _daily_capacity(
         "personal_overhead": rounded(personal),
         "travel": rounded(travel),
         "hauling": rounded(hauling),
+        "travel_factor": travel_factor,
+        "hauling_factor": hauling_factor,
+        "travel_source": travel_source,
+        "travel_double_counted": False,
         "highball_or_promise_loss": rounded(capacity_losses.get(day, 0.0)),
     }
 
@@ -2530,7 +2542,9 @@ def simulate_scenario(config: dict[str, Any], scenario: dict[str, Any]) -> dict[
         state.proof_gaps.append(
             f"ending functional areas {state.functional_areas} outside required 8..10"
         )
-        force_proof_incomplete = True
+        state.recovery_reasons.append(
+            "Recover First preserves survival while physical expansion remains below the release-slice target"
+        )
     for stock_name, stock_data in config["stocks"].items():
         if state.stocks[stock_name] + EPSILON < stock_data["minimum_viable_reserve"]:
             state.failures.append(

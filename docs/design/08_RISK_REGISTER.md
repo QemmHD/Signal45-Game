@@ -74,4 +74,16 @@ Prompt 2 reduces uncertainty but does not close prototype-dependent risks:
 4. R-09 save/offline interruption correctness.
 5. R-03/R-04 mobile visual performance and production cost.
 
+## Prompt 4 spatial risk amendments
+
+| Risk | Probability | Impact | Warning signs | Prevention | Contingency | Decision deadline | Prototype required |
+|---|---|---|---|---|---|---|---|
+| Logical proxy mispredicts actual travel | High | High | East carry or West service takes >25% longer than factor | instrument path/animation time by class; pre-position Materials | move interaction/room, split delivery, or permit Recover First | first playable graybox | phone graybox with carrying |
+| Mobile placement feels imprecise | High | Critical | misselection >5%; accidental camera/object drag; safe-area conflict | 9–12 mm targets, chooser/cycling, explicit confirm | simplify placement steps and increase snap zones | first landscape-phone build-mode test | touch telemetry on small/large phones |
+| East gate Medical becomes hidden wrong route | Medium | High | stabilization misunderstood; patient transfer feels punitive | gate stabilization, forecasted long route, valid stretcher path | move treatment interaction or strengthen gate equipment without erasing identity | first patient incident playtest | timed patient route |
+| Starting gate has one usable safe passage | Medium | Critical | isolation requested while service lane blocked | closure refusal and path preview | authored camp-clearing action before controlled isolation | before lockdown feature | portal fault injection |
+| Object/catalog scope grows | High | High | each room adds unique behavior/animation/UI | behavior families and justification gate | cut decorative simulation; reuse sockets/states | every content review | asset-hour sample |
+| True 3D shelter exceeds mobile budget | High | Critical | Room Focus or overview misses frame/memory target | modular kit, LOD/occlusion, bounded population/rooms | reduce prop density/effects before visual fidelity | engine/graybox selection | representative device profile |
+| Save geometry drifts from runtime | Low after validator | Critical | moved object/portal/node reload differs | logical-only save, schema/version validation, idempotent transactions | reject/migrate incompatible save | first runtime persistence build | fault-injected save suite |
+
 These priorities keep production focused on the game’s proof rather than final graphics or content breadth.

@@ -1,15 +1,17 @@
-name: Prompt 3 survival feasibility
+name: Prompt 4 feasibility and spatial validation
 
 on:
   pull_request:
     paths:
       - ".github/workflows/feasibility.yml"
       - "tools/feasibility/**"
+      - "tools/spatial/**"
       - "docs/design/**"
   push:
     branches:
       - agent/prompt-2-feasibility
       - agent/prompt-3-survival-systems
+      - agent/prompt-4-spatial-building
 
 permissions:
   contents: read
@@ -30,11 +32,26 @@ jobs:
       - name: Validate canonical data
         run: python tools/feasibility/validate_data.py
 
+      - name: Validate authoritative spatial data and cross-model links
+        run: python tools/spatial/validate_layouts.py --write-reports
+
       - name: Run unit tests
         run: python -m unittest discover -s tools/feasibility/tests -v
+
+      - name: Run spatial unit tests
+        run: python -m unittest discover -s tools/spatial/tests -v
 
       - name: Run mandatory deterministic scenarios and generate outcome report
         run: python tools/feasibility/run_scenarios.py --mandatory --check-determinism --quiet
 
+      - name: Run mandatory spatial scenarios
+        run: python tools/spatial/run_spatial_scenarios.py --check-determinism --quiet
+
+      - name: Generate authoritative layout diagrams
+        run: python tools/spatial/generate_diagrams.py
+
+      - name: Verify layout diagrams are deterministic and current
+        run: python tools/spatial/generate_diagrams.py --check
+
       - name: Verify generated reports are current
-        run: git diff --exit-code -- tools/feasibility/reports
+        run: git diff --exit-code -- tools/feasibility/reports tools/spatial/reports

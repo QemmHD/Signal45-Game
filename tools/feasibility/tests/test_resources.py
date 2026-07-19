@@ -50,7 +50,7 @@ class ResourceAndUtilityTests(unittest.TestCase):
     def test_power_shortfall_names_shutdown_and_next_risk(self) -> None:
         result = model.calculate_power(
             self.config,
-            {"triage_cot_install", "workshop_install", "comfort_lighting"},
+            {"triage_cot_install", "workshop_install", "platform_lighting_upgrade"},
             storm_affected_systems=3,
             demand_multiplier=1.2,
         )

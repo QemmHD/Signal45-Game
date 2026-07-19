@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "layout_id": "day1",
+  "display_name": "Day 1 — Damaged Central Refuge",
+  "route": "none",
+  "day": 1,
+  "description": "Four physical areas operate on the Central Platform while both horizontal wings and the vertical shaft remain blocked.",
+  "section_states": {
+    "west_pump_gallery": {"access": "unreclaimed", "discovered": false, "hazard": "flooded", "blocked_cells": []},
+    "main_gate": {"access": "operational", "discovered": true, "hazard": "none", "blocked_cells": []},
+    "central_platform": {"access": "operational", "discovered": true, "hazard": "strained", "blocked_cells": []},
+    "east_staff_wing": {"access": "unreclaimed", "discovered": false, "hazard": "rubble", "blocked_cells": []},
+    "vertical_shaft": {"access": "sealed", "discovered": true, "hazard": "jammed", "blocked_cells": []}
+  },
+  "portal_states": {
+    "west_gate_primary": "blocked", "west_gate_service": "blocked",
+    "gate_central_primary": "open", "gate_central_service": "open",
+    "central_east_primary": "blocked", "central_east_service": "blocked",
+    "east_vertical_link": "sealed", "future_upper_link": "blocked"
+  },
+  "rooms": [
+    {
+      "instance_id": "platform_camp", "physical_area_id": "central_camp", "family_id": "rest", "form": "temporary", "section_id": "central_platform",
+      "footprint": {"level": 0, "x_start": 0, "x_end": 2, "lanes": [0]}, "state": "operational", "counts_as_area": true, "temporary_zone": false, "essential": true,
+      "project_id": null, "specialization": "emergency_capacity", "noise": "medium", "comfort": "low", "environment": "damp",
+      "primary_interaction": {"section_id": "central_platform", "level": 0, "x": 0, "lane": 1},
+      "camera": {"focus_target": {"section_id": "central_platform", "level": 0, "x": 1, "lane": 0}, "minimum_focus_bounds": [0, 2, 0, 1], "maximum_focus_bounds": [0, 3, 0, 2], "allowed_pan_range": 1, "occlusion_group": "platform_foreground_columns", "foreground_fade_targets": ["platform_ceiling_cables"], "default_selection_target": "day1_bedroll", "return_framing": "shelter_overview"}
+    },
+    {
+      "instance_id": "relay_kiosk", "physical_area_id": "central_relay", "family_id": "operations", "form": "temporary", "section_id": "central_platform",
+      "footprint": {"level": 0, "x_start": 4, "x_end": 5, "lanes": [0]}, "state": "operational", "counts_as_area": true, "temporary_zone": false, "essential": true,
+      "project_id": null, "specialization": "listening", "noise": "low", "comfort": "low", "environment": "dry",
+      "primary_interaction": {"section_id": "central_platform", "level": 0, "x": 4, "lane": 1},
+      "camera": {"focus_target": {"section_id": "central_platform", "level": 0, "x": 4, "lane": 0}, "minimum_focus_bounds": [4, 5, 0, 1], "maximum_focus_bounds": [3, 6, 0, 2], "allowed_pan_range": 1, "occlusion_group": "platform_ceiling_cables", "foreground_fade_targets": ["platform_foreground_columns"], "default_selection_target": "relay_console", "return_framing": "shelter_overview"}
+    },
+    {
+      "instance_id": "service_alcove", "physical_area_id": "central_service", "family_id": "utility", "form": "temporary", "section_id": "central_platform",
+      "footprint": {"level": 0, "x_start": 6, "x_end": 7, "lanes": [0]}, "state": "impaired", "counts_as_area": true, "temporary_zone": false, "essential": true,
+      "project_id": null, "specialization": "shared_power_air_water", "noise": "high", "comfort": "negative", "environment": "damp",
+      "primary_interaction": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1},
+      "camera": {"focus_target": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 0}, "minimum_focus_bounds": [6, 7, 0, 1], "maximum_focus_bounds": [5, 8, 0, 2], "allowed_pan_range": 1, "occlusion_group": "platform_ceiling_cables", "foreground_fade_targets": ["platform_foreground_columns"], "default_selection_target": "service_rack", "return_framing": "shelter_overview"}
+    },
+    {
+      "instance_id": "concession_cage", "physical_area_id": "central_concession", "family_id": "storage", "form": "temporary", "section_id": "central_platform",
+      "footprint": {"level": 0, "x_start": 8, "x_end": 9, "lanes": [0]}, "state": "operational", "counts_as_area": true, "temporary_zone": false, "essential": true,
+      "project_id": null, "specialization": "mixed_food_and_materials", "noise": "low", "comfort": "low", "environment": "damp",
+      "primary_interaction": {"section_id": "central_platform", "level": 0, "x": 9, "lane": 1},
+      "camera": {"focus_target": {"section_id": "central_platform", "level": 0, "x": 8, "lane": 0}, "minimum_focus_bounds": [8, 9, 0, 1], "maximum_focus_bounds": [7, 10, 0, 2], "allowed_pan_range": 1, "occlusion_group": "platform_foreground_columns", "foreground_fade_targets": ["platform_track_guard"], "default_selection_target": "starting_storage", "return_framing": "shelter_overview"}
+    }
+  ],
+  "objects": [
+    {"instance_id": "day1_bedroll", "object_id": "bedroll", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 0, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "platform_camp", "project_id": null, "utility_connection": "central_air_node"},
+    {"instance_id": "triage_cot", "object_id": "triage_cot", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 1, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "platform_camp", "project_id": "triage_cot_install", "utility_connection": null, "temporary_function": "medical", "counts_as_area": false},
+    {"instance_id": "platform_work_lamp", "object_id": "platform_work_lamp", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 2, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "platform_camp", "project_id": "platform_lamp_install", "utility_connection": "central_power_bus", "hope_eligible": true},
+    {"instance_id": "relay_console", "object_id": "relay_console", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 4, "lane": 0}, "rotation": 0, "state": "impaired", "room_instance_id": "relay_kiosk", "project_id": null, "utility_connection": "central_power_bus"},
+    {"instance_id": "service_rack", "object_id": "service_rack", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 0}, "rotation": 0, "state": "impaired", "room_instance_id": "service_alcove", "project_id": null, "utility_connection": "central_support_zone"},
+    {"instance_id": "water_tap", "object_id": "water_tap", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 7, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "service_alcove", "project_id": null, "utility_connection": "central_water_storage", "hope_eligible": true},
+    {"instance_id": "cold_ration_table", "object_id": "cold_ration_table", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 8, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "concession_cage", "project_id": null, "utility_connection": null},
+    {"instance_id": "starting_storage", "object_id": "storage_cabinet", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 9, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "concession_cage", "project_id": null, "utility_connection": null},
+    {"instance_id": "main_gate_control", "object_id": "main_gate_control", "section_id": "main_gate", "anchor": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": null, "project_id": null, "utility_connection": "gate_power_control"}
+  ],
+  "modules": [
+    {"instance_id": "service_air_filter", "module_id": "air_filter_module", "parent_type": "object", "parent_instance_id": "service_rack", "socket_type": "air_module", "state": "operational", "unique": true},
+    {"instance_id": "service_water_pump", "module_id": "water_pump_head", "parent_type": "object", "parent_instance_id": "service_rack", "socket_type": "water_module", "state": "operational", "unique": true},
+    {"instance_id": "service_battery_rack", "module_id": "battery_rack", "parent_type": "object", "parent_instance_id": "service_rack", "socket_type": "power_backup", "state": "operational", "unique": true}
+  ],
+  "blueprints": [],
+  "utility_nodes": [
+    {"node_id": "central_power_source", "utility": "Power", "node_type": "source", "section_id": "central_platform", "address": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 0}, "service_point": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}, "state": "live", "charge_backup_compatible": true},
+    {"node_id": "central_power_bus", "utility": "Power", "node_type": "distribution", "section_id": "central_platform", "address": {"section_id": "central_platform", "level": 0, "x": 5, "lane": 0}, "service_point": {"section_id": "central_platform", "level": 0, "x": 5, "lane": 1}, "state": "live", "charge_backup_compatible": true},
+    {"node_id": "gate_power_control", "utility": "Power", "node_type": "distribution", "section_id": "main_gate", "address": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 0}, "service_point": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 1}, "state": "live", "charge_backup_compatible": true},
+    {"node_id": "central_air_filter", "utility": "Air", "node_type": "source", "section_id": "central_platform", "address": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 0}, "service_point": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}, "state": "live", "charge_backup_compatible": true},
+    {"node_id": "central_air_node", "utility": "Air", "node_type": "distribution", "section_id": "central_platform", "address": {"section_id": "central_platform", "level": 0, "x": 5, "lane": 0}, "service_point": {"section_id": "central_platform", "level": 0, "x": 5, "lane": 1}, "state": "live", "charge_backup_compatible": false},
+    {"node_id": "gate_air_node", "utility": "Air", "node_type": "distribution", "section_id": "main_gate", "address": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 0}, "service_point": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 1}, "state": "live", "charge_backup_compatible": false},
+    {"node_id": "central_water_source", "utility": "Water", "node_type": "source", "section_id": "central_platform", "address": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 0}, "service_point": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}, "state": "live", "charge_backup_compatible": true},
+    {"node_id": "central_water_storage", "utility": "Water", "node_type": "storage_source", "section_id": "central_platform", "address": {"section_id": "central_platform", "level": 0, "x": 7, "lane": 0}, "service_point": {"section_id": "central_platform", "level": 0, "x": 7, "lane": 1}, "state": "live", "charge_backup_compatible": false},
+    {"node_id": "central_support_zone", "utility": "Structure", "node_type": "support_source", "section_id": "central_platform", "address": {"section_id": "central_platform", "level": 0, "x": 3, "lane": 0}, "service_point": {"section_id": "central_platform", "level": 0, "x": 2, "lane": 1}, "state": "live", "charge_backup_compatible": false},
+    {"node_id": "gate_support_zone", "utility": "Structure", "node_type": "support_source", "section_id": "main_gate", "address": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 0}, "service_point": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "state": "live", "charge_backup_compatible": false}
+  ],
+  "utility_branches": [
+    {"branch_id": "central_power_main", "utility": "Power", "source_node": "central_power_source", "target_node": "central_power_bus", "live": true, "isolated": false, "rooms_affected": ["platform_camp", "relay_kiosk", "service_alcove", "concession_cage"], "residents_affected": [], "recovery_method": "service Central breaker"},
+    {"branch_id": "gate_power_branch", "utility": "Power", "source_node": "central_power_bus", "target_node": "gate_power_control", "live": true, "isolated": false, "rooms_affected": [], "residents_affected": [], "recovery_method": "reconnect gate branch"},
+    {"branch_id": "central_air_main", "utility": "Air", "source_node": "central_air_filter", "target_node": "central_air_node", "live": true, "isolated": false, "rooms_affected": ["platform_camp", "relay_kiosk", "service_alcove", "concession_cage"], "residents_affected": ["Ash", "Imka", "Teo", "Maren"], "recovery_method": "service filter or restore Power"},
+    {"branch_id": "gate_air_branch", "utility": "Air", "source_node": "central_air_node", "target_node": "gate_air_node", "live": true, "isolated": false, "rooms_affected": [], "residents_affected": [], "recovery_method": "open gate damper"},
+    {"branch_id": "central_water_main", "utility": "Water", "source_node": "central_water_source", "target_node": "central_water_storage", "live": true, "isolated": false, "rooms_affected": ["service_alcove", "concession_cage"], "residents_affected": [], "recovery_method": "repair manual pump and treatment"},
+    {"branch_id": "central_structure_main", "utility": "Structure", "source_node": "central_support_zone", "target_node": "gate_support_zone", "live": true, "isolated": false, "rooms_affected": ["platform_camp"], "residents_affected": [], "recovery_method": "reinforce Central support"}
+  ],
+  "utility_consumers": [
+    {"consumer_id": "platform_lighting", "utility": "Power", "node_id": "central_power_bus", "object_instance_id": "platform_work_lamp", "priority": "optional", "load": 0.75, "state": "operational"},
+    {"consumer_id": "relay_kiosk", "utility": "Power", "node_id": "central_power_bus", "object_instance_id": "relay_console", "priority": "essential", "load": 1.0, "state": "operational"},
+    {"consumer_id": "air_filtration", "utility": "Power", "node_id": "central_power_bus", "object_instance_id": "service_rack", "priority": "critical", "load": 2.5, "state": "operational"},
+    {"consumer_id": "water_pumping", "utility": "Power", "node_id": "central_power_bus", "object_instance_id": "service_rack", "priority": "essential", "load": 1.5, "state": "operational"},
+    {"consumer_id": "water_issue", "utility": "Water", "node_id": "central_water_storage", "object_instance_id": "water_tap", "priority": "essential", "load": 0.0, "state": "operational"}
+  ],
+  "hazards": [
+    {"hazard_id": "central_strained_support", "family": "Structure", "state": "warning", "path_severity": 0, "cells": [{"section_id": "central_platform", "level": 0, "x": 3, "lane": 0}]}
+  ],
+  "incident_spatial_targets": {
+    "power_instability": {"section_id": "central_platform", "service_node": "central_power_bus", "safe_section": "main_gate"},
+    "air_contamination": {"section_id": "central_platform", "service_node": "central_air_filter", "safe_section": "main_gate"},
+    "water_contamination": {"section_id": "central_platform", "service_node": "central_water_storage", "safe_section": "main_gate"},
+    "structural_instability": {"section_id": "central_platform", "service_node": "central_support_zone", "safe_section": "main_gate"},
+    "equipment_breakdown": {"section_id": "central_platform", "service_node": "central_power_source", "safe_section": "main_gate"},
+    "medical_emergency": {"section_id": "central_platform", "service_node": "central_air_node", "medical_interaction": {"section_id": "central_platform", "level": 0, "x": 1, "lane": 1}, "safe_section": "main_gate"}
+  },
+  "project_targets": {
+    "platform_lamp_install": {"type": "object", "target_id": "platform_work_lamp"},
+    "triage_cot_install": {"type": "object", "target_id": "triage_cot"},
+    "route_survey": {"type": "reclamation", "target_id": "central_stabilization"}
+  },
+  "resident_locations": [
+    {"resident_id": "Ash", "address": {"section_id": "central_platform", "level": 0, "x": 0, "lane": 1}},
+    {"resident_id": "Imka", "address": {"section_id": "central_platform", "level": 0, "x": 4, "lane": 1}},
+    {"resident_id": "Teo", "address": {"section_id": "central_platform", "level": 0, "x": 1, "lane": 1}},
+    {"resident_id": "Maren", "address": {"section_id": "central_platform", "level": 0, "x": 8, "lane": 1}}
+  ],
+  "hope_anchors": [],
+  "safety_checks": {
+    "main_gate": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1},
+    "safe_area": {"section_id": "central_platform", "level": 0, "x": 5, "lane": 1},
+    "gate_stabilization": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 1},
+    "primary_medical": {"section_id": "central_platform", "level": 0, "x": 1, "lane": 1},
+    "essential_interactions": [
+      {"section_id": "central_platform", "level": 0, "x": 0, "lane": 1},
+      {"section_id": "central_platform", "level": 0, "x": 1, "lane": 1},
+      {"section_id": "central_platform", "level": 0, "x": 4, "lane": 1},
+      {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1},
+      {"section_id": "central_platform", "level": 0, "x": 7, "lane": 1}
+    ]
+  },
+  "metric_paths": [
+    {"name": "ordinary_gate_to_relay", "path_class": "normal_walk", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 4, "lane": 1}},
+    {"name": "ordinary_gate_to_service", "path_class": "normal_walk", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}},
+    {"name": "ordinary_camp_to_food", "path_class": "normal_walk", "start": {"section_id": "central_platform", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 8, "lane": 1}},
+    {"name": "materials_delivery", "path_class": "material_carry", "start": {"section_id": "central_platform", "level": 0, "x": 9, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}},
+    {"name": "heavy_carry", "path_class": "heavy_carry", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}},
+    {"name": "gate_to_medical", "path_class": "patient_carry", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 1, "lane": 1}},
+    {"name": "gate_to_stabilization", "path_class": "patient_escort", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 1}},
+    {"name": "storage_to_workshop", "path_class": "material_carry", "start": {"section_id": "central_platform", "level": 0, "x": 9, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 10, "lane": 1}},
+    {"name": "rest_to_work", "path_class": "normal_walk", "start": {"section_id": "central_platform", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}},
+    {"name": "filter_service", "path_class": "utility_service", "start": {"section_id": "central_platform", "level": 0, "x": 9, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}},
+    {"name": "pump_service", "path_class": "utility_service", "start": {"section_id": "central_platform", "level": 0, "x": 9, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}},
+    {"name": "water_isolation", "path_class": "utility_service", "start": {"section_id": "central_platform", "level": 0, "x": 5, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 7, "lane": 1}},
+    {"name": "charge_control", "path_class": "utility_service", "start": {"section_id": "central_platform", "level": 0, "x": 5, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}},
+    {"name": "evacuation", "path_class": "emergency_evacuation", "start": {"section_id": "central_platform", "level": 0, "x": 9, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 5, "lane": 1}}
+  ],
+  "essential_metric_names": ["gate_to_medical", "materials_delivery", "filter_service", "evacuation"],
+  "day5_metric_names": ["filter_service", "water_isolation", "charge_control", "evacuation"],
+  "day5_response_budget": 18.0,
+  "comparison_allowance": {"profile": "compact", "travel_factor": 0.08, "hauling_factor": 0.04},
+  "presentation_state": {"camera_mode": "shelter_overview", "focused_room": null, "occlusion_preference": "fade", "reduced_motion": false},
+  "camera_overview_bounds": {"min_x": 0, "max_x": 36, "min_level": 0, "max_level": 1, "min_lane": 0, "max_lane": 2},
+  "occlusion_groups": ["gate_foreground_grille", "platform_foreground_columns", "platform_ceiling_cables", "platform_track_guard"],
+  "selection_regions": ["main_gate", "platform_camp", "relay_kiosk", "service_alcove", "concession_cage", "east_obstruction", "west_flooded_access", "vertical_route_jam"]
+}

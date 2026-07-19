@@ -181,8 +181,8 @@ Completed artifacts:
 10. safe-save transaction matrix;
 11. sensitivity analysis and revised risk/decision entries.
 
-## Prompt 4 entry boundary
+## Prompt 4 completion and Prompt 5 boundary
 
-Prompt 4 must define authoritative station coordinates, reclamation geometry, seven-family footprints, equipment and utility nodes, navigation, access/evacuation, mobile build mode, and machine-readable Day 1/East Day 7/West Day 7 layouts. It must remeasure travel, hauling, vertical access, congestion, isolation, and evacuation against Prompt 3’s schedule—especially Day 5 zero uncommitted WU.
+Prompt 4 now defines authoritative station coordinates, reclamation, seven-family footprints, objects/modules, utility nodes, navigation, access/evacuation, mobile build/camera contracts, and machine-readable Day 1/East/West/alternate layouts. Coordinate travel replaces the abstract calculation without adding Day 5 work. See documents 24–30 and `tools/spatial/`.
 
-Prompt 4 must not retune survival, expand resident AI/crafting/conflict/expeditions/factions, add maps, or create final assets. Do not begin Prompt 4 until explicitly requested.
+Prompt 5 must define the resident roster, aptitudes, traits, assignment/task reservations, schedules, refusal, emergency orders, promises, memories, sparse relationships, training, recruitment, Juna consequences and population growth. It must consume Prompt 3 work eligibility and Prompt 4 paths without implementing final AI, collision avoidance, animation, art, combat, factions, extra maps, or a new economy. Do not begin Prompt 5 until explicitly requested.

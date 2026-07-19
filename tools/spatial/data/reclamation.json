@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "allowed_stages": ["survey", "clear", "drain", "reinforce", "remove_hazard", "connect", "inspect", "activate"],
+  "targets": {
+    "central_stabilization": {
+      "feature_id": "central_stabilization", "section_id": "central_platform",
+      "occupied_cells": [{"section_id": "central_platform", "level": 0, "x": 3, "lane": 0}],
+      "visual_obstacle": "spalled column and loose platform-edge tile", "current_access_state": "accessible_with_warning", "survey_state": "known",
+      "hazard": "strained support", "work_order_ids": ["platform_lamp_install", "route_survey"], "materials": 1.0, "component_blocker": null,
+      "resident_access_requirement": "normal_walk", "equipment_requirement": "hand tools", "utility_requirement": "Platform Work Lamp for inspection",
+      "stage_sequence": ["inspect", "reinforce"], "state_changes": ["warning marked", "support stable"], "cells_unlocked": [], "portals_unlocked": [], "utility_nodes_exposed": ["central_support_zone"], "salvage_result": {},
+      "possible_injury_path": "risk only if the declared strained support is worked without inspection or protection", "preventable_risk_responses": ["inspect", "brace", "delay", "use protection"],
+      "save_boundaries": ["inspection", "reinforcement"], "acceptance_condition": "Support is stable and the warning route remains open."
+    },
+    "east_obstruction": {
+      "feature_id": "east_obstruction", "section_id": "east_staff_wing",
+      "occupied_cells": [{"section_id": "east_staff_wing", "level": 0, "x": 0, "lane": 0}, {"section_id": "east_staff_wing", "level": 0, "x": 0, "lane": 1}],
+      "visual_obstacle": "collapsed staff-room partition and dust-packed fire door", "current_access_state": "blocked", "survey_state": "unknown_until_route_survey",
+      "hazard": "dust and visible unstable masonry", "work_order_ids": ["route_survey", "east_reclaim"], "materials": 5.0, "component_blocker": "structural_brace",
+      "resident_access_requirement": "normal_walk from Central Platform", "equipment_requirement": "masks, pry tools, and brace", "utility_requirement": "Platform Work Lamp and isolated East branch",
+      "stage_sequence": ["survey", "clear", "reinforce", "inspect"], "state_changes": ["surveyed", "cleared", "reclaimed"],
+      "cells_unlocked": [{"section_id": "east_staff_wing", "level": 0, "x_start": 0, "x_end": 9, "lanes": [0, 1]}],
+      "portals_unlocked": ["central_east_primary", "central_east_service"], "utility_nodes_exposed": ["east_power_bus", "east_air_node", "east_support_zone"], "salvage_result": {"Materials": 2.0},
+      "possible_injury_path": "minor or serious injury only after accepting the visible unstable-masonry risk without inspection or protection", "preventable_risk_responses": ["survey", "install brace", "use protection", "decline Highball"],
+      "save_boundaries": ["survey", "clear", "reinforce", "completion"], "acceptance_condition": "Both East portals and the staff corridor are navigable without an active hazard."
+    },
+    "west_flooded_access": {
+      "feature_id": "west_flooded_access", "section_id": "west_pump_gallery",
+      "occupied_cells": [{"section_id": "west_pump_gallery", "level": 0, "x": 7, "lane": 0}, {"section_id": "west_pump_gallery", "level": 0, "x": 7, "lane": 1}],
+      "visual_obstacle": "floodwater, jammed drain grate, and isolated pump branch", "current_access_state": "blocked", "survey_state": "unknown_until_route_survey",
+      "hazard": "standing contaminated water and isolated electrical branch", "work_order_ids": ["route_survey", "west_reclaim"], "materials": 5.0, "component_blocker": "structural_brace",
+      "resident_access_requirement": "utility_service from Main Gate", "equipment_requirement": "manual drain tool, masks, brace", "utility_requirement": "pump branch remains isolated while draining",
+      "stage_sequence": ["survey", "drain", "clear", "reinforce", "inspect"], "state_changes": ["surveyed", "drained", "cleared", "reclaimed"],
+      "cells_unlocked": [{"section_id": "west_pump_gallery", "level": 0, "x_start": 0, "x_end": 7, "lanes": [0, 1]}],
+      "portals_unlocked": ["west_gate_primary", "west_gate_service"], "utility_nodes_exposed": ["west_pump", "west_drain_control", "west_support_zone"], "salvage_result": {"Materials": 6.0},
+      "possible_injury_path": "injury only after entering known water/electrical risk without isolation", "preventable_risk_responses": ["survey", "isolate branch", "drain manually", "use protection"],
+      "save_boundaries": ["survey", "drain", "clear", "reinforce", "completion"], "acceptance_condition": "Gallery is drained, both Gate portals are navigable, and the pump service point is reachable."
+    },
+    "east_utility_connection": {
+      "feature_id": "east_utility_connection", "section_id": "east_staff_wing",
+      "occupied_cells": [{"section_id": "east_staff_wing", "level": 0, "x": 8, "lane": 0}, {"section_id": "east_staff_wing", "level": 0, "x": 9, "lane": 0}],
+      "visual_obstacle": "dead staff-wing distribution cabinet", "current_access_state": "exposed_after_reclaim", "survey_state": "known_after_east_reclaim",
+      "hazard": "disconnected Power/Air/Water branch", "work_order_ids": ["east_utility_connection"], "materials": 4.0, "component_blocker": "electrical_relay",
+      "resident_access_requirement": "utility_service", "equipment_requirement": "electrical tools", "utility_requirement": "Central branch isolated during connection",
+      "stage_sequence": ["connect", "inspect", "activate"], "state_changes": ["connected", "tested", "operational"], "cells_unlocked": [], "portals_unlocked": [], "utility_nodes_exposed": ["east_power_bus", "east_air_node", "east_water_reserve"], "salvage_result": {},
+      "possible_injury_path": "none when isolation is respected", "preventable_risk_responses": ["isolate", "inspect"], "save_boundaries": ["connection", "inspection", "activation"], "acceptance_condition": "East utility room is a distinct operational area with a reachable service point."
+    },
+    "west_utility_connection": {
+      "feature_id": "west_utility_connection", "section_id": "west_pump_gallery",
+      "occupied_cells": [{"section_id": "west_pump_gallery", "level": 0, "x": 2, "lane": 0}, {"section_id": "west_pump_gallery", "level": 0, "x": 3, "lane": 0}],
+      "visual_obstacle": "isolated pump switchgear and damaged seal housing", "current_access_state": "exposed_after_reclaim", "survey_state": "known_after_west_reclaim",
+      "hazard": "isolated pump and treatment branch", "work_order_ids": ["west_utility_connection"], "materials": 4.0, "component_blocker": "pump_seal",
+      "resident_access_requirement": "utility_service and heavy_carry", "equipment_requirement": "pump tools and service key", "utility_requirement": "Central Power available; Water remains isolated during work",
+      "stage_sequence": ["connect", "inspect", "activate"], "state_changes": ["seal installed", "branch tested", "operational"], "cells_unlocked": [], "portals_unlocked": [], "utility_nodes_exposed": ["west_power_bus", "west_pump", "west_treatment"], "salvage_result": {},
+      "possible_injury_path": "none when drain and Power isolation are respected", "preventable_risk_responses": ["isolate", "drain", "inspect"], "save_boundaries": ["connection", "inspection", "activation"], "acceptance_condition": "West utility room is a distinct operational area with direct pump service access."
+    },
+    "vertical_route_jam": {
+      "feature_id": "vertical_route_jam", "section_id": "vertical_shaft",
+      "occupied_cells": [{"section_id": "vertical_shaft", "level": 0, "x": 0, "lane": 0}, {"section_id": "vertical_shaft", "level": 1, "x": 2, "lane": 0}],
+      "visual_obstacle": "sealed hatch, collapsed stair, and jammed lift", "current_access_state": "sealed_inspectable", "survey_state": "visible_not_restorable_in_slice",
+      "hazard": "unknown upper load", "work_order_ids": [], "materials": 0.0, "component_blocker": null,
+      "resident_access_requirement": "inspection only from East", "equipment_requirement": "future survey equipment", "utility_requirement": "future vertical trunk",
+      "stage_sequence": ["survey"], "state_changes": ["inspected_only"], "cells_unlocked": [], "portals_unlocked": [], "utility_nodes_exposed": [], "salvage_result": {},
+      "possible_injury_path": "none; entry is refused", "preventable_risk_responses": ["do not enter"], "save_boundaries": ["inspection"], "acceptance_condition": "The shaft is visible and inspectable but neither portal becomes navigable or counts as an area."
+    },
+    "optional_service_clearance": {
+      "feature_id": "optional_service_clearance", "section_id": "central_platform",
+      "occupied_cells": [{"section_id": "central_platform", "level": 0, "x": 10, "lane": 0}, {"section_id": "central_platform", "level": 0, "x": 11, "lane": 0}, {"section_id": "central_platform", "level": 0, "x": 12, "lane": 0}, {"section_id": "central_platform", "level": 0, "x": 13, "lane": 0}],
+      "visual_obstacle": "stored debris and disused platform fittings", "current_access_state": "visible_unusable", "survey_state": "known",
+      "hazard": "minor trip and carrying obstruction", "work_order_ids": ["workshop_install", "storage_fitout"], "materials": 0.0, "component_blocker": null,
+      "resident_access_requirement": "material_carry", "equipment_requirement": "hand cart", "utility_requirement": "none for clearance",
+      "stage_sequence": ["clear", "inspect"], "state_changes": ["cleared", "buildable"], "cells_unlocked": [{"section_id": "central_platform", "level": 0, "x_start": 10, "x_end": 13, "lane": 0}], "portals_unlocked": [], "utility_nodes_exposed": [], "salvage_result": {},
+      "possible_injury_path": "minor only after ignoring marked carrying clearance", "preventable_risk_responses": ["clear route", "use cart", "slow handling"], "save_boundaries": ["clearance", "inspection"], "acceptance_condition": "Workshop and Stores bays can be fitted without blocking the platform route."
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "extends": "west_day7",
+  "set": {
+    "schema_version": 1,
+    "display_name": "West Day 7 — Split Care Layout",
+    "description": "A valid but less efficient West interior keeps primary Medical on the central platform, moves Storage beside the pump gallery, and places the Workshop at the gallery entrance.",
+    "comparison_allowance": {"profile": "poor_valid", "travel_factor": 0.16, "hauling_factor": 0.07, "source": "Prompt 2 comparison only; replaced by coordinates when integrated"},
+    "metric_paths": [
+      {"name": "ordinary_gate_to_relay", "path_class": "normal_walk", "start": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 4, "lane": 1}},
+      {"name": "ordinary_rest_to_meal", "path_class": "normal_walk", "start": {"section_id": "central_platform", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 8, "lane": 1}},
+      {"name": "ordinary_pump_to_care", "path_class": "normal_walk", "start": {"section_id": "west_pump_gallery", "level": 0, "x": 2, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 10, "lane": 1}},
+      {"name": "materials_delivery", "path_class": "material_carry", "start": {"section_id": "west_pump_gallery", "level": 0, "x": 5, "lane": 1}, "end": {"section_id": "west_pump_gallery", "level": 0, "x": 2, "lane": 1}},
+      {"name": "heavy_carry", "path_class": "heavy_carry", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "west_pump_gallery", "level": 0, "x": 3, "lane": 1}},
+      {"name": "gate_to_medical", "path_class": "patient_carry", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 10, "lane": 1}},
+      {"name": "gate_to_stabilization", "path_class": "patient_escort", "start": {"section_id": "main_gate", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "main_gate", "level": 0, "x": 1, "lane": 1}},
+      {"name": "storage_to_workshop", "path_class": "material_carry", "start": {"section_id": "west_pump_gallery", "level": 0, "x": 5, "lane": 1}, "end": {"section_id": "west_pump_gallery", "level": 0, "x": 6, "lane": 1}},
+      {"name": "rest_to_work", "path_class": "normal_walk", "start": {"section_id": "central_platform", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "west_pump_gallery", "level": 0, "x": 6, "lane": 1}},
+      {"name": "filter_service", "path_class": "utility_service", "start": {"section_id": "west_pump_gallery", "level": 0, "x": 5, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 6, "lane": 1}},
+      {"name": "pump_service", "path_class": "utility_service", "start": {"section_id": "west_pump_gallery", "level": 0, "x": 5, "lane": 1}, "end": {"section_id": "west_pump_gallery", "level": 0, "x": 2, "lane": 1}},
+      {"name": "water_isolation", "path_class": "utility_service", "start": {"section_id": "west_pump_gallery", "level": 0, "x": 5, "lane": 1}, "end": {"section_id": "west_pump_gallery", "level": 0, "x": 0, "lane": 1}},
+      {"name": "charge_control", "path_class": "utility_service", "start": {"section_id": "west_pump_gallery", "level": 0, "x": 5, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 7, "lane": 1}},
+      {"name": "evacuation", "path_class": "emergency_evacuation", "start": {"section_id": "west_pump_gallery", "level": 0, "x": 0, "lane": 1}, "end": {"section_id": "central_platform", "level": 0, "x": 0, "lane": 1}}
+    ],
+    "selection_regions": ["west_drained_access", "west_pump_room", "west_water_treatment", "west_service_stores", "west_gallery_workshop", "central_medical", "main_gate", "platform_camp", "relay_kiosk", "service_alcove", "concession_cage", "vertical_route_jam"]
+  },
+  "remove": {
+    "rooms": ["central_workshop", "west_treatment_room", "west_stores"],
+    "objects": ["central_workbench", "west_medical_bench", "west_storage_cabinet"],
+    "utility_consumers": ["workshop", "medical_equipment"],
+    "resident_locations": ["Ash", "Imka", "Maren"]
+  },
+  "merge": {
+    "project_targets": {
+      "workshop_install": {"type": "room", "target_id": "west_gallery_workshop"},
+      "storage_fitout": {"type": "room", "target_id": "west_service_stores"},
+      "triage_upgrade": {"type": "room", "target_id": "central_medical"}
+    }
+  },
+  "upsert": {
+    "rooms": [
+      {"instance_id": "central_medical", "physical_area_id": "central_medical", "family_id": "medical", "form": "permanent", "section_id": "central_platform", "footprint": {"level": 0, "x_start": 10, "x_end": 11, "lanes": [0]}, "state": "operational", "counts_as_area": true, "temporary_zone": false, "essential": true, "project_id": "triage_upgrade", "specialization": "platform_treatment", "noise": "medium", "comfort": "low", "environment": "dry", "primary_interaction": {"section_id": "central_platform", "level": 0, "x": 10, "lane": 1}, "camera": {"focus_target": {"section_id": "central_platform", "level": 0, "x": 10, "lane": 0}, "minimum_focus_bounds": [10, 11, 0, 1], "maximum_focus_bounds": [9, 12, 0, 2], "allowed_pan_range": 1, "occlusion_group": "platform_foreground_columns", "foreground_fade_targets": ["platform_track_guard"], "default_selection_target": "central_medical_bench", "return_framing": "shelter_overview"}},
+      {"instance_id": "west_service_stores", "physical_area_id": "west_service_stores", "family_id": "storage", "form": "permanent", "section_id": "west_pump_gallery", "footprint": {"level": 0, "x_start": 5, "x_end": 5, "lanes": [0]}, "state": "operational", "counts_as_area": true, "temporary_zone": false, "essential": true, "project_id": "storage_fitout", "specialization": "water_service_parts", "noise": "medium", "comfort": "low", "environment": "dry_locker", "primary_interaction": {"section_id": "west_pump_gallery", "level": 0, "x": 5, "lane": 1}, "camera": {"focus_target": {"section_id": "west_pump_gallery", "level": 0, "x": 5, "lane": 0}, "minimum_focus_bounds": [5, 5, 0, 1], "maximum_focus_bounds": [4, 6, 0, 1], "allowed_pan_range": 1, "occlusion_group": "west_foreground_pipe", "foreground_fade_targets": ["west_drain_guard"], "default_selection_target": "west_service_storage", "return_framing": "west_section_focus"}},
+      {"instance_id": "west_gallery_workshop", "physical_area_id": "west_gallery_workshop", "family_id": "workshop", "form": "permanent", "section_id": "west_pump_gallery", "footprint": {"level": 0, "x_start": 6, "x_end": 7, "lanes": [0]}, "state": "operational", "counts_as_area": true, "temporary_zone": false, "essential": true, "project_id": "workshop_install", "specialization": "pump_service", "noise": "high", "comfort": "negative", "environment": "damp", "primary_interaction": {"section_id": "west_pump_gallery", "level": 0, "x": 6, "lane": 1}, "camera": {"focus_target": {"section_id": "west_pump_gallery", "level": 0, "x": 6, "lane": 0}, "minimum_focus_bounds": [6, 7, 0, 1], "maximum_focus_bounds": [5, 7, 0, 1], "allowed_pan_range": 1, "occlusion_group": "west_foreground_pipe", "foreground_fade_targets": ["west_drain_guard"], "default_selection_target": "west_gallery_workbench", "return_framing": "west_section_focus"}}
+    ],
+    "objects": [
+      {"instance_id": "central_medical_bench", "object_id": "medical_bench", "section_id": "central_platform", "anchor": {"section_id": "central_platform", "level": 0, "x": 10, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "central_medical", "project_id": "triage_upgrade", "utility_connection": "central_air_node"},
+      {"instance_id": "west_service_storage", "object_id": "storage_cabinet", "section_id": "west_pump_gallery", "anchor": {"section_id": "west_pump_gallery", "level": 0, "x": 5, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "west_service_stores", "project_id": "storage_fitout", "utility_connection": null},
+      {"instance_id": "west_gallery_workbench", "object_id": "workbench", "section_id": "west_pump_gallery", "anchor": {"section_id": "west_pump_gallery", "level": 0, "x": 6, "lane": 0}, "rotation": 0, "state": "operational", "room_instance_id": "west_gallery_workshop", "project_id": "workshop_install", "utility_connection": "west_power_bus"}
+    ],
+    "utility_consumers": [
+      {"consumer_id": "workshop", "utility": "Power", "node_id": "west_power_bus", "object_instance_id": "west_gallery_workbench", "priority": "normal", "load": 1.5, "state": "operational"},
+      {"consumer_id": "medical_equipment", "utility": "Power", "node_id": "central_power_bus", "object_instance_id": "central_medical_bench", "priority": "critical", "load": 0.75, "state": "operational"}
+    ],
+    "resident_locations": [
+      {"resident_id": "Ash", "address": {"section_id": "west_pump_gallery", "level": 0, "x": 6, "lane": 1}},
+      {"resident_id": "Imka", "address": {"section_id": "central_platform", "level": 0, "x": 10, "lane": 1}},
+      {"resident_id": "Maren", "address": {"section_id": "west_pump_gallery", "level": 0, "x": 5, "lane": 1}}
+    ]
+  }
+}

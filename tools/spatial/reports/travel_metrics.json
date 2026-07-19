@@ -1,0 +1,6082 @@
+{
+  "day1": {
+    "alternate_route_count": 0,
+    "congestion_proxy": 0.714,
+    "coordinate_hauling_factor": 0.04,
+    "coordinate_travel_factor": 0.08,
+    "day5_max_response_path": 3.6,
+    "day5_response_budget": 18.0,
+    "double_counted": false,
+    "evacuation_path": 3.6,
+    "existing_abstract_hauling_factor": 0.04,
+    "existing_abstract_travel_factor": 0.08,
+    "filter_service_path": 3.6,
+    "gate_to_medical_path": 4.8,
+    "gate_to_stabilization_path": 1.25,
+    "hauling_factor_difference": 0.0,
+    "heavy_carry_path": 11.6,
+    "layout_id": "day1",
+    "layout_validity_input": true,
+    "logical_distance_notice": "Logical path-cost proxies; not measured real seconds.",
+    "longest_essential_path": 4.8,
+    "materials_delivery_path": 3.45,
+    "named_paths": [
+      {
+        "cost": 6.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_gate_to_relay",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 8.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_gate_to_service",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 8.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_camp_to_food",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 3.45,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "materials_delivery",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "material_carry",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 11.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "heavy_carry",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "heavy_carry",
+        "required_portals": [
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 4.8,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "gate_to_medical",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          }
+        ],
+        "path_class": "patient_carry",
+        "required_portals": [
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 1.25,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "gate_to_stabilization",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          }
+        ],
+        "path_class": "patient_escort",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 1.15,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "storage_to_workshop",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          }
+        ],
+        "path_class": "material_carry",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 6.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "rest_to_work",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 3.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "filter_service",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 3.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "pump_service",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 2.4,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "water_isolation",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 1.2,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "charge_control",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 3.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "evacuation",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          }
+        ],
+        "path_class": "emergency_evacuation",
+        "required_portals": [],
+        "vertical_transitions": 0
+      }
+    ],
+    "ordinary_average_path": 7.0,
+    "ordinary_p95_path": 8.0,
+    "portal_delay_proxy": 0.286,
+    "pump_service_path": 3.6,
+    "rest_to_work_path": 6.0,
+    "single_point_of_failure_count": 1,
+    "single_points_of_failure": [
+      "gate_central_primary"
+    ],
+    "storage_to_workshop_path": 1.15,
+    "travel_factor_difference": 0.0,
+    "vertical_transitions": 0,
+    "water_isolation_path": 2.4,
+    "weighted_travel_score": 6.249
+  },
+  "east_day7": {
+    "alternate_route_count": 0,
+    "congestion_proxy": 0.667,
+    "coordinate_hauling_factor": 0.04,
+    "coordinate_travel_factor": 0.08,
+    "day5_max_response_path": 21.6,
+    "day5_response_budget": 32.0,
+    "double_counted": false,
+    "evacuation_path": 9.9,
+    "existing_abstract_hauling_factor": 0.04,
+    "existing_abstract_travel_factor": 0.08,
+    "filter_service_path": 7.2,
+    "gate_to_medical_path": 28.8,
+    "gate_to_stabilization_path": 1.25,
+    "hauling_factor_difference": 0.0,
+    "heavy_carry_path": 34.8,
+    "layout_id": "east_day7",
+    "layout_validity_input": true,
+    "logical_distance_notice": "Logical path-cost proxies; not measured real seconds.",
+    "longest_essential_path": 28.8,
+    "materials_delivery_path": 11.5,
+    "named_paths": [
+      {
+        "cost": 6.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_gate_to_relay",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 12.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_relay_to_medical",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 11.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_rest_to_food",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 3.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_rest_to_medical",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 11.5,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "materials_delivery",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          }
+        ],
+        "path_class": "material_carry",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 34.8,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "heavy_carry",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          }
+        ],
+        "path_class": "heavy_carry",
+        "required_portals": [
+          "gate_central_primary",
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 28.8,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "gate_to_medical",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          }
+        ],
+        "path_class": "patient_carry",
+        "required_portals": [
+          "gate_central_primary",
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 1.25,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "gate_to_stabilization",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          }
+        ],
+        "path_class": "patient_escort",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 2.3,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "storage_to_workshop",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          }
+        ],
+        "path_class": "material_carry",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 3.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "rest_to_work",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 7.2,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "filter_service",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 7.2,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "pump_service",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 21.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "water_isolation",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 9
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 1.2,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "charge_control",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 9.9,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "evacuation",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          }
+        ],
+        "path_class": "emergency_evacuation",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      }
+    ],
+    "ordinary_average_path": 7.0,
+    "ordinary_p95_path": 12.0,
+    "portal_delay_proxy": 0.667,
+    "pump_service_path": 7.2,
+    "rest_to_work_path": 3.0,
+    "single_point_of_failure_count": 1,
+    "single_points_of_failure": [
+      "gate_central_primary"
+    ],
+    "storage_to_workshop_path": 2.3,
+    "travel_factor_difference": 0.0,
+    "vertical_transitions": 0,
+    "water_isolation_path": 21.6,
+    "weighted_travel_score": 10.887
+  },
+  "east_day7_alternate": {
+    "alternate_route_count": 0,
+    "congestion_proxy": 0.667,
+    "coordinate_hauling_factor": 0.04,
+    "coordinate_travel_factor": 0.1,
+    "day5_max_response_path": 20.4,
+    "day5_response_budget": 36.0,
+    "double_counted": false,
+    "evacuation_path": 12.6,
+    "existing_abstract_hauling_factor": 0.07,
+    "existing_abstract_travel_factor": 0.16,
+    "filter_service_path": 20.4,
+    "gate_to_medical_path": 33.6,
+    "gate_to_stabilization_path": 1.25,
+    "hauling_factor_difference": -0.03,
+    "heavy_carry_path": 24.65,
+    "layout_id": "east_day7_alternate",
+    "layout_validity_input": true,
+    "logical_distance_notice": "Logical path-cost proxies; not measured real seconds.",
+    "longest_essential_path": 33.6,
+    "materials_delivery_path": 8.05,
+    "named_paths": [
+      {
+        "cost": 6.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_gate_to_relay",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 15.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_relay_to_medical",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 9.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_rest_to_food",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 2.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_rest_to_medical",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 8.05,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "materials_delivery",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          }
+        ],
+        "path_class": "material_carry",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 24.65,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "heavy_carry",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          }
+        ],
+        "path_class": "heavy_carry",
+        "required_portals": [
+          "gate_central_primary",
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 33.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "gate_to_medical",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          }
+        ],
+        "path_class": "patient_carry",
+        "required_portals": [
+          "gate_central_primary",
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 1.25,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "gate_to_stabilization",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          }
+        ],
+        "path_class": "patient_escort",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 1.15,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "storage_to_workshop",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          }
+        ],
+        "path_class": "material_carry",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 2.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "rest_to_work",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 20.4,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "filter_service",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 9.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "pump_service",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 9.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "water_isolation",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 1.2,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "charge_control",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 12.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "evacuation",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          }
+        ],
+        "path_class": "emergency_evacuation",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      }
+    ],
+    "ordinary_average_path": 6.8,
+    "ordinary_p95_path": 15.0,
+    "portal_delay_proxy": 0.667,
+    "pump_service_path": 9.6,
+    "rest_to_work_path": 2.0,
+    "single_point_of_failure_count": 1,
+    "single_points_of_failure": [
+      "gate_central_primary"
+    ],
+    "storage_to_workshop_path": 1.15,
+    "travel_factor_difference": -0.06,
+    "vertical_transitions": 0,
+    "water_isolation_path": 9.6,
+    "weighted_travel_score": 12.257
+  },
+  "poor_valid": {
+    "alternate_route_count": 0,
+    "congestion_proxy": 0.786,
+    "coordinate_hauling_factor": 0.07,
+    "coordinate_travel_factor": 0.12,
+    "day5_max_response_path": 20.7,
+    "day5_response_budget": 36.0,
+    "double_counted": false,
+    "evacuation_path": 20.7,
+    "existing_abstract_hauling_factor": 0.07,
+    "existing_abstract_travel_factor": 0.16,
+    "filter_service_path": 20.4,
+    "gate_to_medical_path": 33.6,
+    "gate_to_stabilization_path": 1.25,
+    "hauling_factor_difference": 0.0,
+    "heavy_carry_path": 24.65,
+    "layout_id": "poor_valid",
+    "layout_validity_input": true,
+    "logical_distance_notice": "Logical path-cost proxies; not measured real seconds.",
+    "longest_essential_path": 33.6,
+    "materials_delivery_path": 19.55,
+    "named_paths": [
+      {
+        "cost": 5.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_gate_to_relay",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 9.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_rest_to_meal",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 19.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_storage_to_relay",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 19.55,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "materials_delivery",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "material_carry",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 24.65,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "heavy_carry",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          }
+        ],
+        "path_class": "heavy_carry",
+        "required_portals": [
+          "gate_central_primary",
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 33.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "gate_to_medical",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          }
+        ],
+        "path_class": "patient_carry",
+        "required_portals": [
+          "gate_central_primary",
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 1.25,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "gate_to_stabilization",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          }
+        ],
+        "path_class": "patient_escort",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 9.2,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "storage_to_workshop",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          }
+        ],
+        "path_class": "material_carry",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 2.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "rest_to_work",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 20.4,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "filter_service",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 19.2,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "pump_service",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 2.4,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "water_isolation",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 19.2,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "charge_control",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 20.7,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "evacuation",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "east_staff_wing",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 13
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 12
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 11
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          }
+        ],
+        "path_class": "emergency_evacuation",
+        "required_portals": [
+          "central_east_primary"
+        ],
+        "vertical_transitions": 0
+      }
+    ],
+    "ordinary_average_path": 8.75,
+    "ordinary_p95_path": 19.0,
+    "portal_delay_proxy": 0.857,
+    "pump_service_path": 19.2,
+    "rest_to_work_path": 2.0,
+    "single_point_of_failure_count": 1,
+    "single_points_of_failure": [
+      "gate_central_primary"
+    ],
+    "storage_to_workshop_path": 9.2,
+    "travel_factor_difference": -0.04,
+    "vertical_transitions": 0,
+    "water_isolation_path": 2.4,
+    "weighted_travel_score": 14.251
+  },
+  "west_day7": {
+    "alternate_route_count": 0,
+    "congestion_proxy": 0.867,
+    "coordinate_hauling_factor": 0.04,
+    "coordinate_travel_factor": 0.08,
+    "day5_max_response_path": 10.8,
+    "day5_response_budget": 32.0,
+    "double_counted": false,
+    "evacuation_path": 9.0,
+    "existing_abstract_hauling_factor": 0.04,
+    "existing_abstract_travel_factor": 0.1,
+    "filter_service_path": 10.8,
+    "gate_to_medical_path": 4.8,
+    "gate_to_stabilization_path": 1.25,
+    "hauling_factor_difference": 0.0,
+    "heavy_carry_path": 8.7,
+    "layout_id": "west_day7",
+    "layout_validity_input": true,
+    "logical_distance_notice": "Logical path-cost proxies; not measured real seconds.",
+    "longest_essential_path": 10.8,
+    "materials_delivery_path": 5.75,
+    "named_paths": [
+      {
+        "cost": 6.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_gate_to_relay",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 5.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_gate_to_water",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 7.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_rest_to_water",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "gate_central_primary",
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 13.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_medical_to_food",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "west_gate_primary",
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 5.75,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "materials_delivery",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 2
+          }
+        ],
+        "path_class": "material_carry",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 8.7,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "heavy_carry",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 2
+          }
+        ],
+        "path_class": "heavy_carry",
+        "required_portals": [
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 4.8,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "gate_to_medical",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          }
+        ],
+        "path_class": "patient_carry",
+        "required_portals": [
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 1.25,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "gate_to_stabilization",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          }
+        ],
+        "path_class": "patient_escort",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 14.95,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "storage_to_workshop",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          }
+        ],
+        "path_class": "material_carry",
+        "required_portals": [
+          "west_gate_primary",
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 7.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "rest_to_work",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "gate_central_primary",
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 10.8,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "filter_service",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [
+          "west_gate_primary",
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 6.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "pump_service",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 2
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 8.4,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "water_isolation",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 0
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 10.8,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "charge_control",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [
+          "west_gate_primary",
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 9.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "evacuation",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          }
+        ],
+        "path_class": "emergency_evacuation",
+        "required_portals": [
+          "west_gate_primary",
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      }
+    ],
+    "ordinary_average_path": 7.6,
+    "ordinary_p95_path": 13.0,
+    "portal_delay_proxy": 1.2,
+    "pump_service_path": 6.0,
+    "rest_to_work_path": 7.0,
+    "single_point_of_failure_count": 1,
+    "single_points_of_failure": [
+      "gate_central_primary"
+    ],
+    "storage_to_workshop_path": 14.95,
+    "travel_factor_difference": -0.02,
+    "vertical_transitions": 0,
+    "water_isolation_path": 8.4,
+    "weighted_travel_score": 8.79
+  },
+  "west_day7_alternate": {
+    "alternate_route_count": 0,
+    "congestion_proxy": 0.643,
+    "coordinate_hauling_factor": 0.04,
+    "coordinate_travel_factor": 0.08,
+    "day5_max_response_path": 14.4,
+    "day5_response_budget": 32.0,
+    "double_counted": false,
+    "evacuation_path": 9.0,
+    "existing_abstract_hauling_factor": 0.07,
+    "existing_abstract_travel_factor": 0.16,
+    "filter_service_path": 13.2,
+    "gate_to_medical_path": 19.2,
+    "gate_to_stabilization_path": 1.25,
+    "hauling_factor_difference": -0.03,
+    "heavy_carry_path": 7.25,
+    "layout_id": "west_day7_alternate",
+    "layout_validity_input": true,
+    "logical_distance_notice": "Logical path-cost proxies; not measured real seconds.",
+    "longest_essential_path": 19.2,
+    "materials_delivery_path": 3.45,
+    "named_paths": [
+      {
+        "cost": 5.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_gate_to_relay",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 8.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_rest_to_meal",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 18.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "ordinary_pump_to_care",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "west_gate_primary",
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 3.45,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "materials_delivery",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 2
+          }
+        ],
+        "path_class": "material_carry",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 7.25,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "heavy_carry",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          }
+        ],
+        "path_class": "heavy_carry",
+        "required_portals": [
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 19.2,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "gate_to_medical",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 8
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 9
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 10
+          }
+        ],
+        "path_class": "patient_carry",
+        "required_portals": [
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 1.25,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "gate_to_stabilization",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          }
+        ],
+        "path_class": "patient_escort",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 1.15,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "storage_to_workshop",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          }
+        ],
+        "path_class": "material_carry",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 4.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "rest_to_work",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          }
+        ],
+        "path_class": "normal_walk",
+        "required_portals": [
+          "gate_central_primary",
+          "west_gate_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 13.2,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "filter_service",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [
+          "west_gate_primary",
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 3.6,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "pump_service",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 2
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 6.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "water_isolation",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 0
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 14.4,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "charge_control",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 7
+          }
+        ],
+        "path_class": "utility_service",
+        "required_portals": [
+          "west_gate_primary",
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      },
+      {
+        "cost": 9.0,
+        "failure_reason": null,
+        "found": true,
+        "hazard_exposure": 0,
+        "name": "evacuation",
+        "path": [
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 2
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 3
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 4
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 5
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 6
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "west_pump_gallery",
+            "x": 7
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 0
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "main_gate",
+            "x": 1
+          },
+          {
+            "lane": 1,
+            "level": 0,
+            "section_id": "central_platform",
+            "x": 0
+          }
+        ],
+        "path_class": "emergency_evacuation",
+        "required_portals": [
+          "west_gate_primary",
+          "gate_central_primary"
+        ],
+        "vertical_transitions": 0
+      }
+    ],
+    "ordinary_average_path": 8.75,
+    "ordinary_p95_path": 18.0,
+    "portal_delay_proxy": 0.929,
+    "pump_service_path": 3.6,
+    "rest_to_work_path": 4.0,
+    "single_point_of_failure_count": 1,
+    "single_points_of_failure": [
+      "gate_central_primary"
+    ],
+    "storage_to_workshop_path": 1.15,
+    "travel_factor_difference": -0.08,
+    "vertical_transitions": 0,
+    "water_isolation_path": 6.0,
+    "weighted_travel_score": 11.848
+  }
+}

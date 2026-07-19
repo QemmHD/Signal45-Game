@@ -185,4 +185,4 @@ Before final graphics production, a graybox build must show four adjacent functi
 
 ## Prompt 3 physical-state amendment
 
-The graybox must also distinguish powered/shed/disconnected equipment; the five Air stages; clean/suspect/contaminated/isolated Water; Safe through Closed Structure; treatment occupancy; evacuation; and incident recovery aftermath. The Day 4 Relay Load Test must visibly dim and restore task lighting. These are presentation requirements for one camera-independent simulation, not authorization for final assets.
+The graybox must also distinguish powered/shed/disconnected equipment; the five Air stages; clean/suspect/contaminated/isolated Water; Safe through Closed Structure; treatment occupancy; evacuation; and incident recovery aftermath. The Day 4 Relay Load Test must visibly dim and restore the canonical Platform Work Lamp. Prompt 4 now supplies machine-readable Overview/Room Focus bounds and occlusion groups; camera state remains non-authoritative. These are presentation requirements for one camera-independent simulation, not authorization for final assets.

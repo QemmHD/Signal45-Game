@@ -102,5 +102,9 @@ Post-launch possibility is not a promise or roadmap commitment.
 6. **Content gate — deterministic portion passed:** East and West finish Day 7 at ten areas without Highball. Aggregate unused WU is reported separately from daily/phase slack; Day 5 has zero uncommitted WU and remains a spatial revalidation risk.
 
 Prompt 3 adds no new production-scale feature tier. Medical, forecast, utility, incident, and emergency-action detail is bounded to reusable slice architecture. Conflict resolution, extra weather families, individual networks, and extra need bars remain deferred.
+
+## Prompt 4 scope gate — passed provisionally
+
+One station shell, six machine-readable layouts, seven room families, reusable object behaviors, portals, four section-level utility topologies, seven path classes, placement safety, and generated diagrams are in Vertical Slice scope. The coordinate model validates 111/111 spatial scenarios and 71 tests while all prior mandatory cases pass. Freehand construction, individual pipes/wires, procedural stations, extra maps, final engine code, final art, full collision avoidance, resident AI, combat pathfinding and advanced decoration remain Cut or Deferred.
 7. **Production gate:** measured art/animation/content time supports a credible schedule before Act II content expands.
 8. **Full-game gate:** do not approve more maps, endless mode, or post-launch systems before one 45-day campaign is coherent and tested.
